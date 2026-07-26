@@ -142,8 +142,15 @@
             margin-bottom: 4px;
         }
         .form-group label .required { color: #ff5f56; }
+        .form-group label .important {
+            color: #f0b90b;
+            font-size: 12px;
+            font-weight: 400;
+            margin-left: 4px;
+        }
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 13px 16px;
             border-radius: 12px;
@@ -154,7 +161,8 @@
             transition: border-color 0.3s;
         }
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #4d96ff;
         }
@@ -163,6 +171,10 @@
             color: #64748b;
             font-size: 13px;
             margin-top: 3px;
+        }
+        .form-group .hint .important-text {
+            color: #f0b90b;
+            font-weight: 600;
         }
         .form-group .info-box {
             background: rgba(16,185,129,0.08);
@@ -331,21 +343,39 @@
         </div>
         <div class="form-group">
             <label>🌍 Pays <span class="required">*</span></label>
-            <input type="text" id="pays" placeholder="France" required>
+            <select id="pays" required>
+                <option value="">Sélectionnez votre pays</option>
+                <option value="France">France</option>
+                <option value="Belgique">Belgique</option>
+                <option value="Suisse">Suisse</option>
+                <option value="Canada">Canada</option>
+                <option value="Sénégal">Sénégal</option>
+                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                <option value="Cameroun">Cameroun</option>
+                <option value="Maroc">Maroc</option>
+                <option value="Algérie">Algérie</option>
+                <option value="Tunisie">Tunisie</option>
+                <option value="Autre">Autre</option>
+            </select>
         </div>
         <div class="form-group">
             <label>🏙️ Ville <span class="required">*</span></label>
             <input type="text" id="ville" placeholder="Paris" required>
         </div>
         <div class="form-group">
-            <label>📱 WhatsApp / Téléphone <span class="required">*</span></label>
-            <input type="text" id="whatsapp" placeholder="+33612345678" required>
-            <div class="hint">📌 Très important pour vous recontacter rapidement.</div>
+            <label>📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important">(⚠️ OBLIGATOIRE et fonctionnel)</span></label>
+            <input type="tel" id="whatsapp" placeholder="+33612345678" required>
+            <div class="hint">📌 <span class="important-text">Très important :</span> Nous vous recontacterons sur ce numéro. Assurez-vous qu'il est valide.</div>
         </div>
         <div class="form-group">
-            <label>📧 Email <span class="required">*</span></label>
+            <label>📧 Email <span class="required">*</span> <span class="important">(⚠️ OBLIGATOIRE et fonctionnel)</span></label>
             <input type="email" id="email" placeholder="jean.dupont@email.com" required>
-            <div class="hint">📌 Très important pour vous recontacter.</div>
+            <div class="hint">📌 <span class="important-text">Très important :</span> Nous vous enverrons une copie de votre message sur cet email. Vérifiez qu'il est valide.</div>
+        </div>
+        <div class="form-group">
+            <label>📅 Âge <span class="required">*</span></label>
+            <input type="number" id="age" placeholder="25" min="18" max="99" required>
+            <div class="hint">📌 Minimum 18 ans.</div>
         </div>
         <div class="form-group">
             <label>🔗 Réseaux sociaux (optionnel)</label>
@@ -428,16 +458,23 @@
             showToast('Veuillez sélectionner un service.', 'error');
             return;
         }
+
         const nom = document.getElementById('nom').value.trim();
-        const pays = document.getElementById('pays').value.trim();
+        const pays = document.getElementById('pays').value;
         const ville = document.getElementById('ville').value.trim();
         const whatsapp = document.getElementById('whatsapp').value.trim();
         const email = document.getElementById('email').value.trim();
+        const age = document.getElementById('age').value.trim();
         const reseau = document.getElementById('reseau').value.trim();
         const message = document.getElementById('message').value.trim();
 
-        if (!nom || !pays || !ville || !whatsapp || !email || !message) {
+        if (!nom || !pays || !ville || !whatsapp || !email || !age || !message) {
             showToast('Tous les champs obligatoires doivent être remplis.', 'error');
+            return;
+        }
+
+        if (parseInt(age) < 18) {
+            showToast('❌ Vous devez avoir au moins 18 ans.', 'error');
             return;
         }
 
@@ -449,10 +486,13 @@
         const terminal = document.getElementById('terminalContent');
         terminal.innerHTML += `<div class="line"><span class="prompt">➜</span> <span class="info">📤 Envoi en cours...</span></div>`;
 
-        fetch('https://site-messag-api.onrender.com/api/send', {
+        fetch('https://sitmessag-api.onrender.com/api/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ service: selectedService, nom, pays, ville, whatsapp, email, reseau, message })
+            body: JSON.stringify({ 
+                service: selectedService, 
+                nom, pays, ville, whatsapp, email, age, reseau, message 
+            })
         })
         .then(res => res.json())
         .then(data => {
@@ -465,6 +505,7 @@
                 document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
                 selectedService = null;
                 document.getElementById('robotInfo').style.display = 'none';
+                document.getElementById('pays').value = '';
             } else {
                 terminal.innerHTML += `<div class="line"><span class="prompt">➜</span> <span style="color:#ff5f56;">❌ Erreur : ${data.error || 'Inconnue'}</span></div>`;
                 showToast('❌ Erreur : ' + (data.error || 'Inconnue'), 'error');
