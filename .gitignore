@@ -1,0 +1,16 @@
+# Données sensibles
+messages.json
+*.json
+*.backup
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+
+# Environnement
+.env
+*.env
+
+# Sauvegardes
+*.backup

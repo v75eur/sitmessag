@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 Admin - Boîte de réception</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 35px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+        h1 { color: #4d96ff; text-align: center; font-size: 28px; margin-bottom: 20px; }
+        .login-box { max-width: 400px; margin: 0 auto; }
+        .login-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 2px solid #334155;
+            background: rgba(0,0,0,0.3);
+            color: #ffffff;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .login-box input:focus { outline: none; border-color: #4d96ff; }
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4d96ff, #6366f1);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .login-box button:hover { transform: scale(1.02); }
+        .lock-msg { color: #ff5f56; text-align: center; margin-top: 10px; font-size: 14px; }
+        .admin-content { display: none; }
+        .stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .stats .card {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .stats .card .number { font-size: 30px; font-weight: 900; color: #4d96ff; }
+        .stats .card .label { color: #94a3b8; font-size: 13px; }
+
+        /* Messages style mail */
+        .mail-item {
+            background: rgba(255,255,255,0.04);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-left: 4px solid #4d96ff;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .mail-item:hover { background: rgba(255,255,255,0.07); }
+        .mail-item.unread { border-left-color: #f59e0b; background: rgba(245,158,11,0.04); }
+        .mail-item .mail-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .mail-item .mail-from { color: #ffffff; font-weight: 700; font-size: 16px; }
+        .mail-item .mail-service {
+            color: #4d96ff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .mail-item .mail-date {
+            color: #64748b;
+            font-size: 13px;
+        }
+        .mail-item .mail-subject {
+            color: #94a3b8;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        .mail-item .mail-body {
+            display: none;
+            padding: 14px 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            margin-top: 10px;
+            color: #e2e8f0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .mail-item .mail-body.open { display: block; }
+        .mail-item .mail-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .mail-item .mail-actions button {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-read { background: #10b981; color: #fff; }
+        .btn-read:hover { background: #059669; }
+        .btn-delete { background: #ef4444; color: #fff; }
+        .btn-delete:hover { background: #dc2626; }
+
+        .empty { text-align: center; color: #64748b; padding: 30px 0; font-size: 16px; }
+        .footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 20px;
+            border-top: 1px solid #1e293b;
+            padding-top: 14px;
+        }
+        .footer a { color: #4d96ff; text-decoration: none; }
+        .btn-back {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #334155;
+            color: #fff;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .btn-back:hover { background: #475569; }
+        @media (max-width: 600px) { .container { padding: 18px; } .stats { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+    <h1>🔒 Admin — Boîte de réception</h1>
+
+    <!-- Login -->
+    <div id="loginBox" class="login-box">
+        <input type="password" id="passInput" placeholder="Mot de passe admin" onkeypress="if(event.key==='Enter') login()">
+        <button onclick="login()">🔓 Accéder</button>
+        <div id="lockMsg" class="lock-msg"></div>
+    </div>
+
+    <!-- Admin content -->
+    <div id="adminContent" class="admin-content">
+        <div class="stats">
+            <div class="card"><div class="number" id="totalMessages">0</div><div class="label">📩 Total</div></div>
+            <div class="card"><div class="number" id="unreadMessages">0</div><div class="label">🆕 Non lus</div></div>
+            <div class="card"><div class="number" id="expiringSoon">0</div><div class="label">⏳ Expire bientôt</div></div>
+        </div>
+
+        <div id="messagesList"></div>
+
+        <div style="text-align:center;margin-top:15px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+            <button class="btn-back" onclick="refreshMessages()">🔄 Rafraîchir</button>
+            <button class="btn-back" onclick="logout()">🚪 Déconnexion</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        🔒 Accès sécurisé • <a href="index.html">⬅ Retour au site</a>
+    </div>
+</div>
+
+<script>
+    const ADMIN_PASS = 'RickRoss1994@';
+    const UNLOCK_PASS = 'RickRoss1994';
+    let attempts = 0;
+    let locked = false;
+    let isLoggedIn = false;
+
+    function login() {
+        if (locked) {
+            const input = document.getElementById('passInput').value;
+            if (input === UNLOCK_PASS) {
+                locked = false;
+                attempts = 0;
+                document.getElementById('lockMsg').textContent = '✅ Déverrouillé !';
+                document.getElementById('passInput').value = '';
+                setTimeout(() => { document.getElementById('lockMsg').textContent = ''; }, 2000);
+                return;
+            } else {
+                document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Entrez le code de déverrouillage.';
+                return;
+            }
+        }
+
+        const pwd = document.getElementById('passInput').value;
+        if (pwd === ADMIN_PASS) {
+            isLoggedIn = true;
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+            document.getElementById('passInput').value = '';
+            loadMessages();
+        } else {
+            attempts++;
+            if (attempts >= 3) {
+                locked = true;
+                document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Utilisez le code de déverrouillage.';
+            } else {
+                document.getElementById('lockMsg').textContent = '❌ Mot de passe incorrect (' + attempts + '/3)';
+            }
+        }
+    }
+
+    function logout() {
+        isLoggedIn = false;
+        document.getElementById('loginBox').style.display = 'block';
+        document.getElementById('adminContent').style.display = 'none';
+        document.getElementById('passInput').value = '';
+        document.getElementById('lockMsg').textContent = '';
+    }
+
+    function refreshMessages() { if (isLoggedIn) loadMessages(); }
+
+    function loadMessages() {
+        fetch('https://site-messag-api.onrender.com/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: ADMIN_PASS })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                renderMessages(data.messages || []);
+            } else {
+                document.getElementById('messagesList').innerHTML = '<div class="empty">❌ ' + (data.error || 'Erreur') + '</div>';
+            }
+        })
+        .catch(() => {
+            document.getElementById('messagesList').innerHTML = '<div class="empty">❌ Erreur de connexion.</div>';
+        });
+    }
+
+    function renderMessages(messages) {
+        const container = document.getElementById('messagesList');
+        const total = messages.length;
+        const unread = messages.filter(m => !m.vu).length;
+        const expiring = messages.filter(m => {
+            const daysLeft = (new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24);
+            return daysLeft <= 3 && daysLeft > 0;
+        }).length;
+
+        document.getElementById('totalMessages').textContent = total;
+        document.getElementById('unreadMessages').textContent = unread;
+        document.getElementById('expiringSoon').textContent = expiring;
+
+        if (messages.length === 0) {
+            container.innerHTML = '<div class="empty">📭 Aucun message reçu.</div>';
+            return;
+        }
+
+        // Trier par date (du plus récent au plus ancien)
+        messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        let html = '';
+        messages.forEach((m) => {
+            const isUnread = !m.vu;
+            const daysLeft = Math.ceil((new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24));
+            const expireMsg = daysLeft > 0 ? `⏳ ${daysLeft}j` : '⚠️ Expiré';
+
+            html += `
+                <div class="mail-item ${isUnread ? 'unread' : ''}">
+                    <div class="mail-header">
+                        <span class="mail-from">${m.nom || 'Anonyme'}</span>
+                        <span>
+                            <span class="mail-service">${m.service || 'Service'}</span>
+                            <span class="mail-date">📅 ${m.date}</span>
+                            <span style="color:#64748b;font-size:12px;margin-left:8px;">${expireMsg}</span>
+                        </span>
+                    </div>
+                    <div class="mail-header" style="font-size:13px;color:#94a3b8;">
+                        <span>📧 ${m.email || '-'} • 📱 ${m.whatsapp || '-'}</span>
+                        <span>🌍 ${m.pays || '-'} • 🏙️ ${m.ville || '-'}</span>
+                    </div>
+                    <div class="mail-subject" onclick="toggleBody('${m.id}')">
+                        📩 ${m.message ? m.message.substring(0, 60) + (m.message.length > 60 ? '...' : '') : 'Aucun message'}
+                    </div>
+                    <div class="mail-body" id="body_${m.id}">
+                        <div style="margin-bottom:6px;"><b>Message complet :</b></div>
+                        ${m.message || 'Aucun message'}
+                        ${m.reseau ? `<div style="margin-top:6px;"><b>Réseaux :</b> ${m.reseau}</div>` : ''}
+                    </div>
+                    <div class="mail-actions">
+                        ${isUnread ? `<button class="btn-read" onclick="markAsRead('${m.id}')">✅ Marquer comme lu</button>` : ''}
+                        <button class="btn-delete" onclick="deleteMessage('${m.id}')">🗑️ Supprimer</button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+    function toggleBody(id) {
+        const body = document.getElementById('body_' + id);
+        if (body) body.classList.toggle('open');
+    }
+
+    function deleteMessage(id) {
+        if (!confirm('Supprimer ce message ?')) return;
+        fetch('https://site-messag-api.onrender.com/api/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, password: ADMIN_PASS })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') loadMessages();
+            else alert('❌ Erreur lors de la suppression.');
+        });
+    }
+
+    function markAsRead(id) {
+        fetch('https://site-messag-api.onrender.com/api/read', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, password: ADMIN_PASS })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') loadMessages();
+        });
+    }
+</script>
+</body>
+</html>
