@@ -2,15 +2,17 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>📨 MESSAGERIE - Contactez-moi</title>
     <style>
+        /* ===== RESET ET BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            padding: 20px;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,23 +22,27 @@
             width: 100%;
             background: rgba(255,255,255,0.06);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 40px;
+            padding: 32px 28px;
             border: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-            animation: slideUp 0.8s ease-out;
+            animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all 0.3s ease;
         }
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* ===== LOGO ===== */
         .logo {
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Courier New', monospace;
             color: #4d96ff;
-            line-height: 1.4;
-            margin-bottom: 6px;
+            line-height: 1.3;
+            margin-bottom: 4px;
             animation: blueToPurple 4s infinite alternate;
         }
         @keyframes blueToPurple {
@@ -45,139 +51,156 @@
         }
         .logo-sub {
             text-align: center;
-            font-size: 18px;
+            font-size: 17px;
             color: #4d96ff;
-            letter-spacing: 8px;
+            letter-spacing: 7px;
             margin-top: -6px;
             font-weight: 700;
         }
         h1 {
             text-align: center;
-            font-size: 32px;
+            font-size: 30px;
             color: #ffffff;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
         .subtitle {
             text-align: center;
             color: #94a3b8;
-            font-size: 17px;
-            margin-bottom: 20px;
+            font-size: 16px;
+            margin-bottom: 18px;
         }
 
+        /* ===== TERMINAL ===== */
         .terminal {
             background: #0a0a1a;
             border-radius: 14px;
             border: 1px solid #22c55e;
-            padding: 16px 18px;
-            margin-bottom: 20px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
+            font-size: 13px;
             color: #22c55e;
-            min-height: 110px;
-            max-height: 160px;
+            min-height: 100px;
+            max-height: 150px;
             overflow-y: auto;
             box-shadow: 0 0 30px rgba(34,197,94,0.05);
+            transition: all 0.3s ease;
         }
         .terminal .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: #22c55e;
-            font-size: 13px;
-            margin-bottom: 6px;
-            border-bottom: 1px solid rgba(34,197,94,0.15);
-            padding-bottom: 4px;
+            font-size: 12px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(34,197,94,0.12);
+            padding-bottom: 3px;
         }
-        .terminal .header .dots { display: flex; gap: 6px; }
+        .terminal .header .dots { display: flex; gap: 5px; }
         .terminal .header .dots span {
-            width: 10px;
-            height: 10px;
+            width: 9px; height: 9px;
             border-radius: 50%;
             display: inline-block;
         }
         .terminal .header .dots .red { background: #ff5f56; }
         .terminal .header .dots .yellow { background: #ffbd2e; }
         .terminal .header .dots .green { background: #27c93f; }
-        .terminal .line { margin: 2px 0; white-space: pre-wrap; }
+        .terminal .line { margin: 2px 0; white-space: pre-wrap; word-break: break-word; }
         .terminal .line .prompt { color: #f0b90b; }
         .terminal .line .info { color: #4d96ff; }
         .terminal .line .success { color: #22c55e; }
         .terminal .line .highlight { color: #f0b90b; }
 
+        /* ===== SERVICES ===== */
         .services {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 18px;
         }
         .service-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.04);
             border: 2px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 16px 12px;
+            border-radius: 14px;
+            padding: 14px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
         .service-card:hover {
             transform: translateY(-4px);
             border-color: #4d96ff;
-            box-shadow: 0 8px 30px rgba(77,150,255,0.15);
+            box-shadow: 0 8px 30px rgba(77,150,255,0.12);
         }
+        .service-card:active { transform: scale(0.97); }
         .service-card.selected {
             border-color: #10b981;
             background: rgba(16,185,129,0.08);
         }
-        .service-card .icon { font-size: 28px; display: block; margin-bottom: 3px; }
-        .service-card .name { color: #ffffff; font-size: 15px; font-weight: 700; }
-        .service-card .desc { color: #94a3b8; font-size: 13px; margin-top: 2px; }
+        .service-card .icon { font-size: 26px; display: block; margin-bottom: 2px; }
+        .service-card .name { color: #ffffff; font-size: 14px; font-weight: 700; }
+        .service-card .desc { color: #94a3b8; font-size: 12px; margin-top: 1px; }
 
-        .form-group { margin-bottom: 14px; }
+        /* ===== FORMULAIRE ===== */
+        .form-group { margin-bottom: 13px; }
         .form-group label {
             display: block;
             color: #cbd5e1;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .form-group label .required { color: #ff5f56; }
-        .form-group label .important {
-            color: #f0b90b;
-            font-size: 12px;
-            font-weight: 400;
-            margin-left: 4px;
+        .form-group label .important-badge {
+            display: inline-block;
+            background: #f0b90b;
+            color: #0a0a1a;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 1px 10px;
+            border-radius: 20px;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 13px 16px;
+            padding: 12px 15px;
             border-radius: 12px;
             border: 2px solid #334155;
             background: rgba(0,0,0,0.3);
             color: #ffffff;
-            font-size: 16px;
-            transition: border-color 0.3s;
+            font-size: 15px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
         }
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
             border-color: #4d96ff;
+            box-shadow: 0 0 0 3px rgba(77,150,255,0.15);
         }
-        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-group textarea { min-height: 90px; resize: vertical; }
         .form-group .hint {
             color: #64748b;
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 3px;
+            line-height: 1.4;
         }
-        .form-group .hint .important-text {
+        .form-group .hint .highlight-text {
             color: #f0b90b;
             font-weight: 600;
         }
         .form-group .info-box {
-            background: rgba(16,185,129,0.08);
+            background: rgba(16,185,129,0.07);
             border-left: 4px solid #10b981;
             padding: 12px 14px;
             border-radius: 10px;
@@ -185,9 +208,53 @@
             font-size: 14px;
             margin-top: 6px;
             display: none;
+            line-height: 1.5;
         }
         .form-group .info-box b { color: #ffffff; }
+        .form-group .info-box .highlight-gold { color: #f0b90b; font-weight: 700; }
 
+        /* ===== BANNIÈRE ROBOT ===== */
+        .robot-banner {
+            background: linear-gradient(135deg, rgba(240,185,11,0.08), rgba(240,185,11,0.02));
+            border: 2px solid rgba(240,185,11,0.2);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { border-color: rgba(240,185,11,0.2); box-shadow: 0 0 20px rgba(240,185,11,0.03); }
+            50% { border-color: rgba(240,185,11,0.5); box-shadow: 0 0 40px rgba(240,185,11,0.08); }
+        }
+        .robot-banner .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 18px;
+            font-weight: 700;
+            color: #f0b90b;
+            margin-bottom: 6px;
+        }
+        .robot-banner .title .icon { font-size: 28px; }
+        .robot-banner .content {
+            color: #cbd5e1;
+            font-size: 15px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .robot-banner .content .highlight {
+            color: #f0b90b;
+            font-weight: 700;
+        }
+        .robot-banner .content .highlight-green {
+            color: #22c55e;
+            font-weight: 700;
+        }
+
+        /* ===== BOUTON ===== */
         .btn {
             width: 100%;
             padding: 16px;
@@ -195,40 +262,43 @@
             border-radius: 14px;
             background: linear-gradient(135deg, #10b981, #059669);
             color: #ffffff;
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 6px;
+            transition: all 0.3s ease;
+            margin-top: 4px;
+            -webkit-tap-highlight-color: transparent;
+            letter-spacing: 0.5px;
         }
         .btn:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(16,185,129,0.3); }
+        .btn:active { transform: scale(0.97); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
         .toast {
             display: none;
-            padding: 12px 18px;
+            padding: 12px 16px;
             border-radius: 14px;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             margin-top: 12px;
             text-align: center;
         }
-        .toast.success { display: block; background: rgba(16,185,129,0.15); border: 1px solid #10b981; color: #10b981; }
-        .toast.error { display: block; background: rgba(255,87,87,0.15); border: 1px solid #ff5f56; color: #ff5f56; }
+        .toast.success { display: block; background: rgba(16,185,129,0.12); border: 1px solid #10b981; color: #10b981; }
+        .toast.error { display: block; background: rgba(255,87,87,0.12); border: 1px solid #ff5f56; color: #ff5f56; }
 
         .footer {
             text-align: center;
             color: #64748b;
-            font-size: 13px;
-            margin-top: 18px;
+            font-size: 12px;
+            margin-top: 16px;
             border-top: 1px solid #1e293b;
-            padding-top: 14px;
+            padding-top: 12px;
         }
         .footer .gear {
             cursor: pointer;
             color: #64748b;
-            font-size: 20px;
-            transition: color 0.3s;
+            font-size: 18px;
+            transition: color 0.3s ease;
         }
         .footer .gear:hover { color: #4d96ff; }
         .footer a { color: #4d96ff; text-decoration: none; }
@@ -258,19 +328,51 @@
             display: none;
             text-align: center;
             color: #4d96ff;
-            font-size: 15px;
-            margin-top: 8px;
+            font-size: 14px;
+            margin-top: 6px;
         }
         .loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        @media (max-width: 600px) {
-            .container { padding: 20px; }
-            .services { grid-template-columns: 1fr 1fr; }
-            .logo { font-size: 9px; }
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body { padding: 12px; }
+            .container { padding: 20px 16px; border-radius: 24px; }
+            .logo { font-size: 10px; }
+            .logo-sub { font-size: 14px; letter-spacing: 5px; margin-top: -4px; }
             h1 { font-size: 24px; }
-            .terminal { font-size: 12px; padding: 12px 14px; min-height: 90px; }
-            .form-group input, .form-group textarea { font-size: 14px; padding: 11px 14px; }
+            .subtitle { font-size: 14px; }
+            .terminal { font-size: 12px; padding: 12px 14px; min-height: 80px; max-height: 130px; }
+            .services { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .service-card { padding: 12px 8px; }
+            .service-card .icon { font-size: 22px; }
+            .service-card .name { font-size: 13px; }
+            .service-card .desc { font-size: 11px; }
+            .form-group { margin-bottom: 11px; }
+            .form-group label { font-size: 13px; }
+            .form-group input, .form-group textarea, .form-group select { padding: 11px 13px; font-size: 14px; }
+            .robot-banner { padding: 14px 16px; }
+            .robot-banner .title { font-size: 16px; }
+            .robot-banner .content { font-size: 14px; }
+            .btn { padding: 14px; font-size: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 16px 12px; border-radius: 20px; }
+            .services { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .service-card .icon { font-size: 20px; }
+            .service-card .name { font-size: 12px; }
+            .service-card .desc { font-size: 10px; }
+            .terminal { font-size: 11px; padding: 10px 12px; min-height: 70px; max-height: 110px; }
+            .form-group input, .form-group textarea, .form-group select { padding: 10px 12px; font-size: 13px; }
+            .robot-banner .title { font-size: 14px; }
+            .robot-banner .content { font-size: 13px; }
+            .btn { padding: 13px; font-size: 15px; }
+            .footer { font-size: 11px; }
+        }
+
+        @media (max-width: 400px) {
+            .services { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -279,6 +381,7 @@
 <div class="confetti-container" id="confettiContainer"></div>
 
 <div class="container">
+    <!-- Logo -->
     <div class="logo">
         <pre>
   ███╗   ███╗███████╗███████╗███████╗ █████╗  ██████╗ ███████╗██████╗ ██╗███████╗
@@ -294,7 +397,7 @@
     <h1>📨 Je vous écoute</h1>
     <p class="subtitle">Choisissez un service, laissez vos coordonnées et décrivez votre demande en détail.</p>
 
-    <!-- TERMINAL -->
+    <!-- Terminal -->
     <div class="terminal" id="terminal">
         <div class="header">
             <span>📟 TERMINAL MESSAGERIE</span>
@@ -335,6 +438,19 @@
         </div>
     </div>
 
+    <!-- BANNIÈRE ROBOT ALERTE (visible toujours) -->
+    <div class="robot-banner">
+        <div class="title">
+            <span class="icon">🤖</span>
+            <span>ROBOT ALERTE — STRATÉGIE AUTOMATISÉE</span>
+        </div>
+        <div class="content">
+            💡 Vous avez une stratégie de trading ? <span class="highlight">Je peux la programmer</span> en un <span class="highlight-green">robot d'alertes en temps réel</span>.<br>
+            🎯 <span class="highlight">Testez-la gratuitement pendant 1 jour</span> — si elle vous convient, nous pourrons en discuter plus en détail.<br>
+            📩 Remplissez simplement le formulaire ci-dessous en décrivant votre stratégie, et je vous recontacterai.
+        </div>
+    </div>
+
     <!-- Formulaire -->
     <form id="messageForm" onsubmit="sendMessage(event)">
         <div class="form-group">
@@ -363,14 +479,14 @@
             <input type="text" id="ville" placeholder="Paris" required>
         </div>
         <div class="form-group">
-            <label>📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important">(⚠️ OBLIGATOIRE et fonctionnel)</span></label>
+            <label>📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE & FONCTIONNEL</span></label>
             <input type="tel" id="whatsapp" placeholder="+33612345678" required>
-            <div class="hint">📌 <span class="important-text">Très important :</span> Nous vous recontacterons sur ce numéro. Assurez-vous qu'il est valide.</div>
+            <div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous recontacterons sur ce numéro. Assurez-vous qu'il est valide.</div>
         </div>
         <div class="form-group">
-            <label>📧 Email <span class="required">*</span> <span class="important">(⚠️ OBLIGATOIRE et fonctionnel)</span></label>
+            <label>📧 Email <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE & FONCTIONNEL</span></label>
             <input type="email" id="email" placeholder="jean.dupont@email.com" required>
-            <div class="hint">📌 <span class="important-text">Très important :</span> Nous vous enverrons une copie de votre message sur cet email. Vérifiez qu'il est valide.</div>
+            <div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous enverrons une copie de votre message sur cet email.</div>
         </div>
         <div class="form-group">
             <label>📅 Âge <span class="required">*</span></label>
@@ -387,7 +503,7 @@
             <textarea id="message" placeholder="Décrivez votre projet, votre stratégie, ou votre besoin de manière détaillée..." required></textarea>
             <div class="info-box" id="robotInfo">
                 🤖 <b>Pour le service ROBOT ALERTE :</b> Décrivez votre stratégie en détail.<br>
-                📅 Je la programme en robot, vous pourrez l'utiliser pendant <b>1 jour gratuitement</b>.
+                📅 Je la programme en robot, vous pourrez l'utiliser pendant <b>1 jour gratuitement</b>, puis nous discuterons de la suite.
             </div>
             <div class="hint">📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.</div>
         </div>
@@ -429,6 +545,7 @@
         infoBox.style.display = selectedService === 'ROBOT ALERTE' ? 'block' : 'none';
     }
 
+    // ===== CONFETTIS =====
     function launchConfetti() {
         const container = document.getElementById('confettiContainer');
         const colors = ['#4d96ff', '#10b981', '#a855f7', '#f59e0b', '#ef4444', '#ec4899'];
@@ -452,6 +569,7 @@
         setInterval(launchConfetti, 12000);
     };
 
+    // ===== ENVOI DU MESSAGE =====
     function sendMessage(e) {
         e.preventDefault();
         if (!selectedService) {
