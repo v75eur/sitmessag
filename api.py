@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'RickRoss1994@')
+ADMIN_DEVERROUILLE = os.environ.get('ADMIN_DEVERROUILLE', 'RickRoss1994')
 MESSAGES_FILE = 'messages.json'
 
 def load_messages():
@@ -20,7 +21,6 @@ def save_messages(messages):
     with open(MESSAGES_FILE, 'w') as f:
         json.dump(messages, f, indent=2)
 
-# Nettoyer les messages expirés (> 12 jours)
 def clean_expired():
     messages = load_messages()
     now = datetime.now()
@@ -28,6 +28,10 @@ def clean_expired():
     if len(new_messages) != len(messages):
         save_messages(new_messages)
     return new_messages
+
+@app.route('/')
+def home():
+    return "OK"
 
 @app.route('/api/send', methods=['POST'])
 def send():

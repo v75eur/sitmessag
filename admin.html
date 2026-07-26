@@ -65,8 +65,6 @@
         }
         .stats .card .number { font-size: 30px; font-weight: 900; color: #4d96ff; }
         .stats .card .label { color: #94a3b8; font-size: 13px; }
-
-        /* Messages style mail */
         .mail-item {
             background: rgba(255,255,255,0.04);
             border-radius: 14px;
@@ -86,20 +84,9 @@
             margin-bottom: 4px;
         }
         .mail-item .mail-from { color: #ffffff; font-weight: 700; font-size: 16px; }
-        .mail-item .mail-service {
-            color: #4d96ff;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .mail-item .mail-date {
-            color: #64748b;
-            font-size: 13px;
-        }
-        .mail-item .mail-subject {
-            color: #94a3b8;
-            font-size: 14px;
-            margin: 4px 0;
-        }
+        .mail-item .mail-service { color: #4d96ff; font-size: 13px; font-weight: 600; }
+        .mail-item .mail-date { color: #64748b; font-size: 13px; }
+        .mail-item .mail-subject { color: #94a3b8; font-size: 14px; margin: 4px 0; }
         .mail-item .mail-body {
             display: none;
             padding: 14px 16px;
@@ -129,7 +116,6 @@
         .btn-read:hover { background: #059669; }
         .btn-delete { background: #ef4444; color: #fff; }
         .btn-delete:hover { background: #dc2626; }
-
         .empty { text-align: center; color: #64748b; padding: 30px 0; font-size: 16px; }
         .footer {
             text-align: center;
@@ -158,23 +144,19 @@
 <div class="container" id="app">
     <h1>🔒 Admin — Boîte de réception</h1>
 
-    <!-- Login -->
     <div id="loginBox" class="login-box">
         <input type="password" id="passInput" placeholder="Mot de passe admin" onkeypress="if(event.key==='Enter') login()">
         <button onclick="login()">🔓 Accéder</button>
         <div id="lockMsg" class="lock-msg"></div>
     </div>
 
-    <!-- Admin content -->
     <div id="adminContent" class="admin-content">
         <div class="stats">
             <div class="card"><div class="number" id="totalMessages">0</div><div class="label">📩 Total</div></div>
             <div class="card"><div class="number" id="unreadMessages">0</div><div class="label">🆕 Non lus</div></div>
             <div class="card"><div class="number" id="expiringSoon">0</div><div class="label">⏳ Expire bientôt</div></div>
         </div>
-
         <div id="messagesList"></div>
-
         <div style="text-align:center;margin-top:15px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
             <button class="btn-back" onclick="refreshMessages()">🔄 Rafraîchir</button>
             <button class="btn-back" onclick="logout()">🚪 Déconnexion</button>
@@ -238,7 +220,7 @@
     function refreshMessages() { if (isLoggedIn) loadMessages(); }
 
     function loadMessages() {
-        fetch('https://site-messag-api.onrender.com/api/messages', {
+        fetch('https://sitmessag-api.onrender.com/api/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: ADMIN_PASS })
@@ -274,7 +256,6 @@
             return;
         }
 
-        // Trier par date (du plus récent au plus ancien)
         messages.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         let html = '';
@@ -322,7 +303,7 @@
 
     function deleteMessage(id) {
         if (!confirm('Supprimer ce message ?')) return;
-        fetch('https://site-messag-api.onrender.com/api/delete', {
+        fetch('https://sitmessag-api.onrender.com/api/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id, password: ADMIN_PASS })
@@ -335,7 +316,7 @@
     }
 
     function markAsRead(id) {
-        fetch('https://site-messag-api.onrender.com/api/read', {
+        fetch('https://sitmessag-api.onrender.com/api/read', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id, password: ADMIN_PASS })
