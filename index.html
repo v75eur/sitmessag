@@ -12,7 +12,7 @@
             min-height: 100vh;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            padding: 16px;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,7 +24,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 32px 28px;
+            padding: 36px 32px;
             border: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1);
@@ -38,11 +38,11 @@
         /* ===== LOGO ===== */
         .logo {
             text-align: center;
-            font-size: 13px;
+            font-size: 16px;
             font-family: 'Courier New', monospace;
             color: #4d96ff;
-            line-height: 1.3;
-            margin-bottom: 4px;
+            line-height: 1.4;
+            margin-bottom: 6px;
             animation: blueToPurple 4s infinite alternate;
         }
         @keyframes blueToPurple {
@@ -51,25 +51,25 @@
         }
         .logo-sub {
             text-align: center;
-            font-size: 17px;
+            font-size: 20px;
             color: #4d96ff;
-            letter-spacing: 7px;
+            letter-spacing: 8px;
             margin-top: -6px;
             font-weight: 700;
         }
         h1 {
             text-align: center;
-            font-size: 30px;
+            font-size: 36px;
             color: #ffffff;
-            margin-bottom: 3px;
+            margin-bottom: 6px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
         .subtitle {
             text-align: center;
             color: #94a3b8;
-            font-size: 16px;
-            margin-bottom: 18px;
+            font-size: 19px;
+            margin-bottom: 20px;
         }
 
         /* ===== TERMINAL ===== */
@@ -77,13 +77,13 @@
             background: #0a0a1a;
             border-radius: 14px;
             border: 1px solid #22c55e;
-            padding: 14px 16px;
-            margin-bottom: 18px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
             font-family: 'Courier New', monospace;
-            font-size: 13px;
+            font-size: 16px;
             color: #22c55e;
-            min-height: 100px;
-            max-height: 150px;
+            min-height: 120px;
+            max-height: 180px;
             overflow-y: auto;
             box-shadow: 0 0 30px rgba(34,197,94,0.05);
             transition: all 0.3s ease;
@@ -93,21 +93,21 @@
             justify-content: space-between;
             align-items: center;
             color: #22c55e;
-            font-size: 12px;
-            margin-bottom: 5px;
+            font-size: 15px;
+            margin-bottom: 8px;
             border-bottom: 1px solid rgba(34,197,94,0.12);
-            padding-bottom: 3px;
+            padding-bottom: 6px;
         }
-        .terminal .header .dots { display: flex; gap: 5px; }
+        .terminal .header .dots { display: flex; gap: 6px; }
         .terminal .header .dots span {
-            width: 9px; height: 9px;
+            width: 12px; height: 12px;
             border-radius: 50%;
             display: inline-block;
         }
         .terminal .header .dots .red { background: #ff5f56; }
         .terminal .header .dots .yellow { background: #ffbd2e; }
         .terminal .header .dots .green { background: #27c93f; }
-        .terminal .line { margin: 2px 0; white-space: pre-wrap; word-break: break-word; }
+        .terminal .line { margin: 3px 0; white-space: pre-wrap; word-break: break-word; font-size: 16px; }
         .terminal .line .prompt { color: #f0b90b; }
         .terminal .line .info { color: #4d96ff; }
         .terminal .line .success { color: #22c55e; }
@@ -117,14 +117,14 @@
         .services {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
         .service-card {
             background: rgba(255,255,255,0.04);
             border: 2px solid rgba(255,255,255,0.06);
             border-radius: 14px;
-            padding: 14px 10px;
+            padding: 16px 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -140,29 +140,29 @@
             border-color: #10b981;
             background: rgba(16,185,129,0.08);
         }
-        .service-card .icon { font-size: 26px; display: block; margin-bottom: 2px; }
-        .service-card .name { color: #ffffff; font-size: 14px; font-weight: 700; }
-        .service-card .desc { color: #94a3b8; font-size: 12px; margin-top: 1px; }
+        .service-card .icon { font-size: 30px; display: block; margin-bottom: 4px; }
+        .service-card .name { color: #ffffff; font-size: 17px; font-weight: 700; }
+        .service-card .desc { color: #94a3b8; font-size: 15px; margin-top: 2px; }
 
         /* ===== FORMULAIRE ===== */
-        .form-group { margin-bottom: 13px; }
+        .form-group { margin-bottom: 16px; }
         .form-group label {
             display: block;
             color: #cbd5e1;
-            font-size: 14px;
+            font-size: 17px;
             font-weight: 600;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .form-group label .required { color: #ff5f56; }
         .form-group label .important-badge {
             display: inline-block;
             background: #f0b90b;
             color: #0a0a1a;
-            font-size: 10px;
+            font-size: 13px;
             font-weight: 700;
-            padding: 1px 10px;
+            padding: 2px 12px;
             border-radius: 20px;
-            margin-left: 6px;
+            margin-left: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -170,12 +170,12 @@
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border-radius: 12px;
             border: 2px solid #334155;
             background: rgba(0,0,0,0.3);
             color: #ffffff;
-            font-size: 15px;
+            font-size: 18px;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             font-family: inherit;
             -webkit-appearance: none;
@@ -188,12 +188,12 @@
             border-color: #4d96ff;
             box-shadow: 0 0 0 3px rgba(77,150,255,0.15);
         }
-        .form-group textarea { min-height: 90px; resize: vertical; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
         .form-group .hint {
             color: #64748b;
-            font-size: 12px;
-            margin-top: 3px;
-            line-height: 1.4;
+            font-size: 15px;
+            margin-top: 4px;
+            line-height: 1.5;
         }
         .form-group .hint .highlight-text {
             color: #f0b90b;
@@ -202,13 +202,13 @@
         .form-group .info-box {
             background: rgba(16,185,129,0.07);
             border-left: 4px solid #10b981;
-            padding: 12px 14px;
+            padding: 14px 16px;
             border-radius: 10px;
             color: #94a3b8;
-            font-size: 14px;
-            margin-top: 6px;
+            font-size: 16px;
+            margin-top: 8px;
             display: none;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         .form-group .info-box b { color: #ffffff; }
         .form-group .info-box .highlight-gold { color: #f0b90b; font-weight: 700; }
@@ -218,8 +218,8 @@
             background: linear-gradient(135deg, rgba(240,185,11,0.08), rgba(240,185,11,0.02));
             border: 2px solid rgba(240,185,11,0.2);
             border-radius: 16px;
-            padding: 18px 20px;
-            margin-bottom: 18px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
             transition: all 0.3s ease;
             animation: pulseGlow 3s infinite ease-in-out;
         }
@@ -231,19 +231,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 700;
             color: #f0b90b;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
-        .robot-banner .title .icon { font-size: 28px; }
+        .robot-banner .title .icon { font-size: 32px; }
         .robot-banner .content {
             color: #cbd5e1;
-            font-size: 15px;
+            font-size: 18px;
             text-align: center;
-            line-height: 1.6;
+            line-height: 1.7;
         }
         .robot-banner .content .highlight {
             color: #f0b90b;
@@ -257,16 +257,16 @@
         /* ===== BOUTON ===== */
         .btn {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             border: none;
             border-radius: 14px;
             background: linear-gradient(135deg, #10b981, #059669);
             color: #ffffff;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 4px;
+            margin-top: 6px;
             -webkit-tap-highlight-color: transparent;
             letter-spacing: 0.5px;
         }
@@ -276,11 +276,11 @@
 
         .toast {
             display: none;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 14px;
             font-weight: 600;
-            font-size: 14px;
-            margin-top: 12px;
+            font-size: 17px;
+            margin-top: 14px;
             text-align: center;
         }
         .toast.success { display: block; background: rgba(16,185,129,0.12); border: 1px solid #10b981; color: #10b981; }
@@ -289,15 +289,15 @@
         .footer {
             text-align: center;
             color: #64748b;
-            font-size: 12px;
-            margin-top: 16px;
+            font-size: 15px;
+            margin-top: 18px;
             border-top: 1px solid #1e293b;
-            padding-top: 12px;
+            padding-top: 14px;
         }
         .footer .gear {
             cursor: pointer;
             color: #64748b;
-            font-size: 18px;
+            font-size: 22px;
             transition: color 0.3s ease;
         }
         .footer .gear:hover { color: #4d96ff; }
@@ -315,8 +315,8 @@
         }
         .confetti-piece {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             top: -20px;
             animation: confettiFall linear forwards;
         }
@@ -328,46 +328,66 @@
             display: none;
             text-align: center;
             color: #4d96ff;
-            font-size: 14px;
-            margin-top: 6px;
+            font-size: 17px;
+            margin-top: 8px;
         }
         .loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            body { padding: 16px; }
+            .container { padding: 24px 20px; border-radius: 24px; }
+            .logo { font-size: 13px; }
+            .logo-sub { font-size: 17px; letter-spacing: 5px; margin-top: -4px; }
+            h1 { font-size: 28px; }
+            .subtitle { font-size: 17px; }
+            .terminal { font-size: 14px; padding: 14px 16px; min-height: 100px; max-height: 160px; }
+            .terminal .line { font-size: 14px; }
+            .terminal .header { font-size: 13px; }
+            .services { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .service-card { padding: 14px 10px; }
+            .service-card .icon { font-size: 26px; }
+            .service-card .name { font-size: 15px; }
+            .service-card .desc { font-size: 13px; }
+            .form-group { margin-bottom: 14px; }
+            .form-group label { font-size: 15px; }
+            .form-group input, .form-group textarea, .form-group select { padding: 12px 15px; font-size: 16px; }
+            .robot-banner { padding: 16px 18px; }
+            .robot-banner .title { font-size: 18px; }
+            .robot-banner .content { font-size: 16px; }
+            .btn { padding: 16px; font-size: 19px; }
+            .form-group .hint { font-size: 14px; }
+            .form-group .info-box { font-size: 14px; }
+            .toast { font-size: 15px; }
+            .footer { font-size: 13px; }
+        }
+
+        @media (max-width: 480px) {
             body { padding: 12px; }
-            .container { padding: 20px 16px; border-radius: 24px; }
+            .container { padding: 18px 14px; border-radius: 20px; }
             .logo { font-size: 10px; }
-            .logo-sub { font-size: 14px; letter-spacing: 5px; margin-top: -4px; }
-            h1 { font-size: 24px; }
+            .logo-sub { font-size: 14px; letter-spacing: 4px; }
+            h1 { font-size: 22px; }
             .subtitle { font-size: 14px; }
             .terminal { font-size: 12px; padding: 12px 14px; min-height: 80px; max-height: 130px; }
+            .terminal .line { font-size: 12px; }
+            .terminal .header { font-size: 11px; }
             .services { grid-template-columns: 1fr 1fr; gap: 8px; }
             .service-card { padding: 12px 8px; }
             .service-card .icon { font-size: 22px; }
             .service-card .name { font-size: 13px; }
             .service-card .desc { font-size: 11px; }
-            .form-group { margin-bottom: 11px; }
-            .form-group label { font-size: 13px; }
-            .form-group input, .form-group textarea, .form-group select { padding: 11px 13px; font-size: 14px; }
-            .robot-banner { padding: 14px 16px; }
-            .robot-banner .title { font-size: 16px; }
+            .form-group { margin-bottom: 12px; }
+            .form-group label { font-size: 14px; }
+            .form-group input, .form-group textarea, .form-group select { padding: 10px 13px; font-size: 14px; }
+            .robot-banner { padding: 12px 14px; }
+            .robot-banner .title { font-size: 15px; }
             .robot-banner .content { font-size: 14px; }
-            .btn { padding: 14px; font-size: 16px; }
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: 16px 12px; border-radius: 20px; }
-            .services { grid-template-columns: 1fr 1fr; gap: 6px; }
-            .service-card .icon { font-size: 20px; }
-            .service-card .name { font-size: 12px; }
-            .service-card .desc { font-size: 10px; }
-            .terminal { font-size: 11px; padding: 10px 12px; min-height: 70px; max-height: 110px; }
-            .form-group input, .form-group textarea, .form-group select { padding: 10px 12px; font-size: 13px; }
-            .robot-banner .title { font-size: 14px; }
-            .robot-banner .content { font-size: 13px; }
-            .btn { padding: 13px; font-size: 15px; }
+            .btn { padding: 14px; font-size: 17px; }
+            .form-group .hint { font-size: 12px; }
+            .form-group .info-box { font-size: 13px; }
+            .toast { font-size: 13px; }
             .footer { font-size: 11px; }
         }
 
@@ -438,7 +458,7 @@
         </div>
     </div>
 
-    <!-- BANNIÈRE ROBOT ALERTE (visible toujours) -->
+    <!-- BANNIÈRE ROBOT -->
     <div class="robot-banner">
         <div class="title">
             <span class="icon">🤖</span>
@@ -557,7 +577,7 @@
                 piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
                 piece.style.left = Math.random() * 100 + '%';
                 piece.style.color = colors[Math.floor(Math.random() * colors.length)];
-                piece.style.fontSize = (Math.random() * 18 + 12) + 'px';
+                piece.style.fontSize = (Math.random() * 20 + 14) + 'px';
                 piece.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 container.appendChild(piece);
                 setTimeout(() => piece.remove(), 5000);
@@ -569,7 +589,7 @@
         setInterval(launchConfetti, 12000);
     };
 
-    // ===== ENVOI DU MESSAGE =====
+    // ===== ENVOI =====
     function sendMessage(e) {
         e.preventDefault();
         if (!selectedService) {
