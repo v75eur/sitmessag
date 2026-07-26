@@ -21,6 +21,11 @@
             padding: 35px;
             border: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            animation: slideUp 0.6s ease-out;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h1 { color: #4d96ff; text-align: center; font-size: 28px; margin-bottom: 20px; }
         .login-box { max-width: 400px; margin: 0 auto; }
@@ -33,8 +38,9 @@
             color: #ffffff;
             font-size: 16px;
             margin-bottom: 12px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .login-box input:focus { outline: none; border-color: #4d96ff; }
+        .login-box input:focus { outline: none; border-color: #4d96ff; box-shadow: 0 0 20px rgba(77,150,255,0.1); }
         .login-box button {
             width: 100%;
             padding: 14px;
@@ -45,8 +51,9 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .login-box button:hover { transform: scale(1.02); }
+        .login-box button:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(77,150,255,0.3); }
         .lock-msg { color: #ff5f56; text-align: center; margin-top: 10px; font-size: 14px; }
         .admin-content { display: none; }
         .stats {
@@ -62,20 +69,35 @@
             padding: 16px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        .stats .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
         .stats .card .number { font-size: 30px; font-weight: 900; color: #4d96ff; }
         .stats .card .label { color: #94a3b8; font-size: 13px; }
+
         .mail-item {
             background: rgba(255,255,255,0.04);
             border-radius: 14px;
             padding: 16px 20px;
             margin-bottom: 12px;
             border-left: 4px solid #4d96ff;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             cursor: pointer;
+            animation: fadeIn 0.5s ease-out;
         }
-        .mail-item:hover { background: rgba(255,255,255,0.07); }
-        .mail-item.unread { border-left-color: #f59e0b; background: rgba(245,158,11,0.04); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .mail-item:hover { 
+            background: rgba(255,255,255,0.07);
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .mail-item.unread { 
+            border-left-color: #f59e0b; 
+            background: rgba(245,158,11,0.04);
+        }
         .mail-item .mail-header {
             display: flex;
             justify-content: space-between;
@@ -96,6 +118,11 @@
             color: #e2e8f0;
             font-size: 14px;
             line-height: 1.6;
+            animation: expand 0.4s ease-out;
+        }
+        @keyframes expand {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         .mail-item .mail-body.open { display: block; }
         .mail-item .mail-actions {
@@ -111,11 +138,13 @@
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        .mail-item .mail-actions button:hover { transform: scale(1.05); }
         .btn-read { background: #10b981; color: #fff; }
-        .btn-read:hover { background: #059669; }
+        .btn-read:hover { background: #059669; box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
         .btn-delete { background: #ef4444; color: #fff; }
-        .btn-delete:hover { background: #dc2626; }
+        .btn-delete:hover { background: #dc2626; box-shadow: 0 4px 15px rgba(239,68,68,0.4); }
         .empty { text-align: center; color: #64748b; padding: 30px 0; font-size: 16px; }
         .footer {
             text-align: center;
@@ -134,9 +163,31 @@
             color: #fff;
             cursor: pointer;
             font-size: 13px;
+            transition: transform 0.3s, background 0.3s;
         }
-        .btn-back:hover { background: #475569; }
-        @media (max-width: 600px) { .container { padding: 18px; } .stats { flex-direction: column; } }
+        .btn-back:hover { background: #475569; transform: scale(1.02); }
+        .badge-expire {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .badge-expire.urgent { background: rgba(239,68,68,0.2); color: #ef4444; }
+        .badge-expire.normal { background: rgba(100,116,139,0.2); color: #94a3b8; }
+        .refresh-spin {
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) { 
+            .container { padding: 18px; } 
+            .stats { flex-direction: column; }
+            .mail-item .mail-header { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -144,19 +195,23 @@
 <div class="container" id="app">
     <h1>🔒 Admin — Boîte de réception</h1>
 
+    <!-- Login -->
     <div id="loginBox" class="login-box">
         <input type="password" id="passInput" placeholder="Mot de passe admin" onkeypress="if(event.key==='Enter') login()">
         <button onclick="login()">🔓 Accéder</button>
         <div id="lockMsg" class="lock-msg"></div>
     </div>
 
+    <!-- Admin content -->
     <div id="adminContent" class="admin-content">
         <div class="stats">
             <div class="card"><div class="number" id="totalMessages">0</div><div class="label">📩 Total</div></div>
             <div class="card"><div class="number" id="unreadMessages">0</div><div class="label">🆕 Non lus</div></div>
             <div class="card"><div class="number" id="expiringSoon">0</div><div class="label">⏳ Expire bientôt</div></div>
         </div>
+
         <div id="messagesList"></div>
+
         <div style="text-align:center;margin-top:15px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
             <button class="btn-back" onclick="refreshMessages()">🔄 Rafraîchir</button>
             <button class="btn-back" onclick="logout()">🚪 Déconnexion</button>
@@ -183,10 +238,12 @@
                 attempts = 0;
                 document.getElementById('lockMsg').textContent = '✅ Déverrouillé !';
                 document.getElementById('passInput').value = '';
+                document.getElementById('lockMsg').style.color = '#22c55e';
                 setTimeout(() => { document.getElementById('lockMsg').textContent = ''; }, 2000);
                 return;
             } else {
                 document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Entrez le code de déverrouillage.';
+                document.getElementById('lockMsg').style.color = '#ff5f56';
                 return;
             }
         }
@@ -197,14 +254,17 @@
             document.getElementById('loginBox').style.display = 'none';
             document.getElementById('adminContent').style.display = 'block';
             document.getElementById('passInput').value = '';
+            document.getElementById('lockMsg').textContent = '';
             loadMessages();
         } else {
             attempts++;
             if (attempts >= 3) {
                 locked = true;
                 document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Utilisez le code de déverrouillage.';
+                document.getElementById('lockMsg').style.color = '#ff5f56';
             } else {
                 document.getElementById('lockMsg').textContent = '❌ Mot de passe incorrect (' + attempts + '/3)';
+                document.getElementById('lockMsg').style.color = '#ff5f56';
             }
         }
     }
@@ -220,6 +280,8 @@
     function refreshMessages() { if (isLoggedIn) loadMessages(); }
 
     function loadMessages() {
+        const list = document.getElementById('messagesList');
+        list.innerHTML = '<div class="empty">⏳ Chargement...</div>';
         fetch('https://sitmessag-api.onrender.com/api/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -230,11 +292,11 @@
             if (data.status === 'ok') {
                 renderMessages(data.messages || []);
             } else {
-                document.getElementById('messagesList').innerHTML = '<div class="empty">❌ ' + (data.error || 'Erreur') + '</div>';
+                list.innerHTML = '<div class="empty">❌ ' + (data.error || 'Erreur') + '</div>';
             }
         })
         .catch(() => {
-            document.getElementById('messagesList').innerHTML = '<div class="empty">❌ Erreur de connexion.</div>';
+            list.innerHTML = '<div class="empty">❌ Erreur de connexion.</div>';
         });
     }
 
@@ -262,16 +324,21 @@
         messages.forEach((m) => {
             const isUnread = !m.vu;
             const daysLeft = Math.ceil((new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24));
+            const expireClass = daysLeft <= 3 ? 'urgent' : 'normal';
             const expireMsg = daysLeft > 0 ? `⏳ ${daysLeft}j` : '⚠️ Expiré';
+            const dateFormatted = new Date(m.date).toLocaleString('fr-FR', {
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
 
             html += `
                 <div class="mail-item ${isUnread ? 'unread' : ''}">
                     <div class="mail-header">
-                        <span class="mail-from">${m.nom || 'Anonyme'}</span>
+                        <span class="mail-from">📩 ${m.nom || 'Anonyme'}</span>
                         <span>
                             <span class="mail-service">${m.service || 'Service'}</span>
-                            <span class="mail-date">📅 ${m.date}</span>
-                            <span style="color:#64748b;font-size:12px;margin-left:8px;">${expireMsg}</span>
+                            <span class="mail-date">📅 ${dateFormatted}</span>
+                            <span class="badge-expire ${expireClass}" style="margin-left:8px;">${expireMsg}</span>
                         </span>
                     </div>
                     <div class="mail-header" style="font-size:13px;color:#94a3b8;">
@@ -282,9 +349,12 @@
                         📩 ${m.message ? m.message.substring(0, 60) + (m.message.length > 60 ? '...' : '') : 'Aucun message'}
                     </div>
                     <div class="mail-body" id="body_${m.id}">
-                        <div style="margin-bottom:6px;"><b>Message complet :</b></div>
+                        <div style="margin-bottom:6px;"><b>💬 Message complet :</b></div>
                         ${m.message || 'Aucun message'}
-                        ${m.reseau ? `<div style="margin-top:6px;"><b>Réseaux :</b> ${m.reseau}</div>` : ''}
+                        ${m.reseau ? `<div style="margin-top:6px;"><b>🔗 Réseaux :</b> ${m.reseau}</div>` : ''}
+                        <div style="margin-top:6px;font-size:12px;color:#64748b;">
+                            📅 Expire le : ${new Date(m.expire).toLocaleDateString('fr-FR')} à ${new Date(m.expire).toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}
+                        </div>
                     </div>
                     <div class="mail-actions">
                         ${isUnread ? `<button class="btn-read" onclick="markAsRead('${m.id}')">✅ Marquer comme lu</button>` : ''}
@@ -302,7 +372,7 @@
     }
 
     function deleteMessage(id) {
-        if (!confirm('Supprimer ce message ?')) return;
+        if (!confirm('🗑️ Supprimer ce message définitivement ?')) return;
         fetch('https://sitmessag-api.onrender.com/api/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
