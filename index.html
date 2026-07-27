@@ -454,7 +454,7 @@
         const terminal = document.getElementById('terminalContent');
         terminal.innerHTML += `<div class="line"><span class="prompt">➜</span> <span class="info">📤 Envoi en cours...</span></div>`;
 
-        fetch('https://sitmessag-api.onrender.com/api/send', {
+        fetch('https://sitmessag.onrender.com/api/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
