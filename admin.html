@@ -282,7 +282,7 @@
     function loadMessages() {
         const list = document.getElementById('messagesList');
         list.innerHTML = '<div class="empty">⏳ Chargement...</div>';
-        fetch('https://sitmessag-api.onrender.com/api/messages', {
+        fetch('https://sitmessag.onrender.com/api/messages', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: ADMIN_PASS })
@@ -373,7 +373,7 @@
 
     function deleteMessage(id) {
         if (!confirm('🗑️ Supprimer ce message définitivement ?')) return;
-        fetch('https://sitmessag-api.onrender.com/api/delete', {
+        fetch('https://sitmessag.onrender.com/api/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id, password: ADMIN_PASS })
@@ -386,7 +386,7 @@
     }
 
     function markAsRead(id) {
-        fetch('https://sitmessag-api.onrender.com/api/read', {
+        fetch('https://sitmessag.onrender.com/api/read', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id, password: ADMIN_PASS })
