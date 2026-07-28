@@ -138,7 +138,8 @@
             text-transform: uppercase;
         }
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 11px 14px;
             border-radius: 10px;
@@ -149,7 +150,8 @@
             font-family: inherit;
         }
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #4d96ff;
         }
@@ -317,6 +319,11 @@
             <div class="name">🌐 CRÉATION DE SITES</div>
             <div class="desc">Sites vitrines, e-commerce, landing pages sur mesure.</div>
         </div>
+        <div class="service-card" data-service="ASSISTANT NUMÉRIQUE" onclick="selectService(this, '🤖 Assistant Numérique')">
+            <span class="icon">🧠</span>
+            <div class="name">🤖 ASSISTANT NUMÉRIQUE</div>
+            <div class="desc">Un agent IA pour gérer vos affaires, répondre à vos clients, automatiser vos tâches.</div>
+        </div>
         <div class="service-card" data-service="AUTRES SERVICES" onclick="selectService(this, '🛠️ Autres services')">
             <span class="icon">🛠️</span>
             <div class="name">🛠️ AUTRES SERVICES</div>
@@ -332,12 +339,13 @@
     <!-- BANNIÈRE ROBOT -->
     <div class="robot-banner">
         <div class="title">
-            <span class="icon">🤖</span>
-            <span>ROBOT ALERTE — STRATÉGIE AUTOMATISÉE</span>
+            <span class="icon">🧠</span>
+            <span>ASSISTANT NUMÉRIQUE — IA POUR VOTRE BUSINESS</span>
         </div>
         <div class="content">
-            💡 Vous avez une stratégie de trading ? <span class="highlight">Je peux la programmer</span> en un <span class="highlight-green">robot d'alertes en temps réel</span>.<br>
-            🎯 <span class="highlight">Testez-la gratuitement pendant 1 jour</span> — si elle vous convient, nous pourrons en discuter plus en détail.
+            💡 Vous avez un site, un service ou une activité ? <span class="highlight">Je peux créer un assistant virtuel</span> pour gérer vos affaires à votre place.<br>
+            🤖 <span class="highlight-green">Chatbot intelligent</span> • Réponse aux clients • Automatisation des tâches • Gestion des demandes<br>
+            🎯 <span class="highlight">Testez-le gratuitement pendant 1 semaine</span> — personnalisé selon vos besoins.
         </div>
     </div>
 
@@ -382,6 +390,10 @@
                 🤖 <b>Pour le service ROBOT ALERTE :</b> Décrivez votre stratégie en détail.<br>
                 📅 Je la programme en robot, vous pourrez l'utiliser pendant <b>1 jour gratuitement</b>.
             </div>
+            <div class="info-box" id="assistantInfo" style="display:none;">
+                🧠 <b>Pour le service ASSISTANT NUMÉRIQUE :</b> Décrivez votre activité, vos besoins et vos objectifs.<br>
+                🤖 Je crée un assistant virtuel personnalisé avec <b>1 semaine d'essai gratuit</b>.
+            </div>
             <div class="hint">📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.</div>
         </div>
 
@@ -416,8 +428,11 @@
         el.classList.add('selected');
         selectedService = el.dataset.service;
         updateTerminal(serviceName);
-        const infoBox = document.getElementById('robotInfo');
-        infoBox.style.display = selectedService === 'ROBOT ALERTE' ? 'block' : 'none';
+        
+        const robotInfo = document.getElementById('robotInfo');
+        const assistantInfo = document.getElementById('assistantInfo');
+        robotInfo.style.display = selectedService === 'ROBOT ALERTE' ? 'block' : 'none';
+        assistantInfo.style.display = selectedService === 'ASSISTANT NUMÉRIQUE' ? 'block' : 'none';
     }
 
     function sendMessage(e) {
@@ -473,6 +488,7 @@
                 document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
                 selectedService = null;
                 document.getElementById('robotInfo').style.display = 'none';
+                document.getElementById('assistantInfo').style.display = 'none';
             } else {
                 terminal.innerHTML += `<div class="line"><span class="prompt">➜</span> <span style="color:#ff5f56;">❌ Erreur : ${data.error || 'Inconnue'}</span></div>`;
                 showToast('❌ Erreur : ' + (data.error || 'Inconnue'), 'error');
