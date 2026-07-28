@@ -182,3 +182,97 @@ def stats_visiteurs():
     online = get_online_count()
     total = get_total_count()
     return jsonify({"online": online, "total": total})
+
+# ===== COMPTEURS PERSISTANTS =====
+# Les données sont stockées dans des fichiers sur Render
+# Ils survivent aux redémarrages
+
+VISITEURS_FILE = "visiteurs.json"
+TOTAL_FILE = "total_visiteurs.json"
+HISTORIQUE_IPS = "historique_ips.txt"
+
+def init_files():
+    """Crée les fichiers s'ils n'existent pas"""
+    if not os.path.exists(VISITEURS_FILE):
+        with open(VISITEURS_FILE, 'w') as f:
+            json.dump({}, f)
+    if not os.path.exists(TOTAL_FILE):
+        with open(TOTAL_FILE, 'w') as f:
+            json.dump({"total": 0}, f)
+    if not os.path.exists(HISTORIQUE_IPS):
+        with open(HISTORIQUE_IPS, 'w') as f:
+            f.write("")
+
+def get_online_count():
+    """Nombre de visiteurs actifs (dernières 5 min)"""
+    init_files()
+    try:
+        with open(VISITEURS_FILE, 'r') as f:
+            data = json.load(f)
+        now = datetime.now().timestamp()
+        active = {ip: ts for ip, ts in data.items() if now - ts < 300}
+        return len(active)
+    except:
+        return 0
+
+def get_total_count():
+    """Nombre total de visiteurs uniques (PERSISTANT)"""
+    init_files()
+    try:
+        with open(TOTAL_FILE, 'r') as f:
+            data = json.load(f)
+        return data.get("total", 0)
+    except:
+        return 0
+
+@app.route('/api/visiteur', methods=['POST'])
+def enregistrer_visiteur():
+    data = request.json
+    ip = data.get('ip', '')
+    if not ip:
+        return jsonify({"error": "IP manquante"}), 400
+    
+    init_files()
+    
+    # 1. Mettre à jour les visiteurs en ligne
+    with open(VISITEURS_FILE, 'r') as f:
+        visiteurs = json.load(f)
+    now = datetime.now().timestamp()
+    visiteurs[ip] = now
+    with open(VISITEURS_FILE, 'w') as f:
+        json.dump(visiteurs, f)
+    
+    # 2. Mettre à jour le total (PERSISTANT)
+    is_new = False
+    with open(HISTORIQUE_IPS, 'r') as f:
+        ips = f.read().splitlines()
+        if ip not in ips:
+            is_new = True
+    
+    if is_new:
+        with open(TOTAL_FILE, 'r') as f:
+            total_data = json.load(f)
+        total_data["total"] = total_data.get("total", 0) + 1
+        with open(TOTAL_FILE, 'w') as f:
+            json.dump(total_data, f)
+        with open(HISTORIQUE_IPS, 'a') as f:
+            f.write(ip + "\n")
+    
+    online = get_online_count()
+    total = get_total_count()
+    
+    return jsonify({
+        "status": "ok",
+        "online": online,
+        "total": total
+    })
+
+@app.route('/api/stats/visiteurs', methods=['GET'])
+def stats_visiteurs():
+    online = get_online_count()
+    total = get_total_count()
+    return jsonify({
+        "online": online,
+        "total": total,
+        "persistant": True
+    })
