@@ -511,3 +511,62 @@
 </script>
 </body>
 </html>
+<!-- ===== COMPTEURS DE VISITEURS ===== -->
+<div style="
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+">
+    <div style="text-align: center;">
+        <div style="font-size: 20px; font-weight: 700; color: #22c55e;" id="onlineCount">...</div>
+        <div style="font-size: 11px; color: #64748b;">👥 En ligne</div>
+    </div>
+    <div style="text-align: center;">
+        <div style="font-size: 20px; font-weight: 700; color: #f0b90b;" id="totalCount">...</div>
+        <div style="font-size: 11px; color: #64748b;">📊 Visiteurs total</div>
+    </div>
+</div>
+
+<script>
+// ===== COMPTEURS DE VISITEURS =====
+function getIP() {
+    return new Promise((resolve) => {
+        fetch('https://api.ipify.org?format=json')
+            .then(r => r.json())
+            .then(data => resolve(data.ip))
+            .catch(() => resolve('unknown'));
+    });
+}
+
+function updateCounters() {
+    getIP().then(ip => {
+        fetch('https://sitmessag.onrender.com/api/visiteur', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ip: ip })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.online !== undefined) {
+                document.getElementById('onlineCount').textContent = data.online;
+            }
+            if (data.total !== undefined) {
+                document.getElementById('totalCount').textContent = data.total;
+            }
+        })
+        .catch(() => {
+            document.getElementById('onlineCount').textContent = '?';
+            document.getElementById('totalCount').textContent = '?';
+        });
+    });
+}
+
+// Mettre à jour toutes les 30 secondes
+updateCounters();
+setInterval(updateCounters, 30000);
+</script>
