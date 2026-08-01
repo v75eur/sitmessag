@@ -152,6 +152,11 @@
             color: #0a0a1a;
             line-height: 1.5;
             transition: all 0.3s;
+            animation: itemGlow 2s infinite;
+        }
+        @keyframes itemGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(240,185,11,0); }
+            50% { box-shadow: 0 0 15px rgba(240,185,11,0.08); }
         }
         .faq-top .item:hover { border-color: #f0b90b; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
         .faq-top .item strong { color: #f0b90b; }
@@ -477,22 +482,22 @@
     <div class="live-stats" id="liveStats">
         <div class="item">
             <div class="number gold" id="totalClients">147</div>
-            <div class="label">👥 Clients satisfaits</div>
+            <div class="label" id="statClients">👥 Clients satisfaits</div>
             <div class="sub">Depuis 2022</div>
         </div>
         <div class="item">
             <div class="number green" id="todayRequests">0</div>
-            <div class="label">📩 Demandes aujourd'hui</div>
+            <div class="label" id="statToday">📩 Demandes aujourd'hui</div>
             <div class="sub" id="todayStatus">🔵 En direct</div>
         </div>
         <div class="item">
             <div class="number blue" id="onlineCount">...</div>
-            <div class="label">👤 En ligne</div>
+            <div class="label" id="statOnline">👤 En ligne</div>
             <div class="sub">Sur le site</div>
         </div>
         <div class="item">
             <div class="number" id="totalVisits">...</div>
-            <div class="label">📊 Visites totales</div>
+            <div class="label" id="statVisits">📊 Visites totales</div>
             <div class="sub">Depuis le lancement</div>
         </div>
     </div>
@@ -509,23 +514,23 @@
     
     <!-- ===== FAQ EN HAUT - CLIGNOTANT ===== -->
     <div class="faq-top">
-        <h3><span class="icon">💡</span> Comprendre en 2 minutes — Exemples concrets</h3>
+        <h3><span class="icon">💡</span> <span id="faqTopTitle">Comprendre en 2 minutes — Exemples concrets</span></h3>
         <div class="grid">
             <div class="item">
-                <strong>🤖 Bot Telegram</strong> — Tu as un groupe avec 500 membres ?<br>
-                <span class="ex">📌 Exemple : "Je veux un bot qui accueille les nouveaux, supprime les spams et envoie des messages automatiques chaque matin à 8h."</span>
+                <strong id="faqTop1">🤖 Bot Telegram</strong> — <span id="faqTop1b">Tu as un groupe avec 500 membres ?</span><br>
+                <span class="ex" id="faqTop1ex">📌 Exemple : "Je veux un bot qui accueille les nouveaux, supprime les spams et envoie des messages automatiques chaque matin à 8h."</span>
             </div>
             <div class="item">
-                <strong>🧠 Assistant IA</strong> — Tu reçois 50 messages par jour et tu n'arrives pas à répondre ?<br>
-                <span class="ex">📌 Exemple : "Je veux un chatbot sur mon site qui répond aux clients, prend des rendez-vous et envoie des devis automatiquement."</span>
+                <strong id="faqTop2">🧠 Assistant IA</strong> — <span id="faqTop2b">Tu reçois 50 messages par jour et tu n'arrives pas à répondre ?</span><br>
+                <span class="ex" id="faqTop2ex">📌 Exemple : "Je veux un chatbot sur mon site qui répond aux clients, prend des rendez-vous et envoie des devis automatiquement."</span>
             </div>
             <div class="item">
-                <strong>📊 Bot Trading</strong> — Tu passes 4h par jour devant les graphiques ?<br>
-                <span class="ex">📌 Exemple : "Je veux un bot qui surveille le Bitcoin et m'alerte quand il dépasse 65000$ avec des signaux précis."</span>
+                <strong id="faqTop3">📊 Bot Trading</strong> — <span id="faqTop3b">Tu passes 4h par jour devant les graphiques ?</span><br>
+                <span class="ex" id="faqTop3ex">📌 Exemple : "Je veux un bot qui surveille le Bitcoin et m'alerte quand il dépasse 65000$ avec des signaux précis."</span>
             </div>
             <div class="item">
-                <strong>📧 Pack Mails</strong> — Tu veux contourner TikTok/Facebook sans payer des pubs ?<br>
-                <span class="ex">📌 Exemple : "Je veux 500 emails vérifiés pour lancer ma campagne sur TikTok sans être bloqué."</span>
+                <strong id="faqTop4">📧 Pack Mails</strong> — <span id="faqTop4b">Tu veux contourner TikTok/Facebook sans payer des pubs ?</span><br>
+                <span class="ex" id="faqTop4ex">📌 Exemple : "Je veux 500 emails vérifiés pour lancer ma campagne sur TikTok sans être bloqué."</span>
             </div>
         </div>
     </div>
@@ -544,36 +549,36 @@
     <div class="services">
         <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'telegram')">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.05-.2-.06-.06-.16-.04-.22-.02-.09.02-1.52.96-4.28 2.83-.41.28-.78.42-1.11.41-.36-.01-1.07-.21-1.59-.38-.64-.22-1.15-.34-1.1-.72.03-.2.29-.4.8-.61 3.13-1.36 5.22-2.26 6.27-2.69 2.99-1.22 3.61-1.43 4.01-1.44.09 0 .29.02.42.13.11.09.14.21.15.33-.01.09 0 .33-.07.75z"/></svg>
-            <div class="name">BOT TELEGRAM</div>
+            <div class="name" id="srv1">BOT TELEGRAM</div>
             <div class="desc" id="d1">Automatisation complète de votre groupe</div>
             <span class="badge" id="b1">Populaire</span>
         </div>
         <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'ia')">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-13h-2v6l5.25 3.15L17 12.23l-4-2.37V7z"/></svg>
-            <div class="name">ASSISTANT IA</div>
+            <div class="name" id="srv2">ASSISTANT IA</div>
             <div class="desc" id="d2">Agent intelligent pour vos clients</div>
             <span class="badge" id="b2">Nouveau</span>
         </div>
         <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'trading')">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4-3h2v13h-2z"/></svg>
-            <div class="name">BOT TRADING</div>
+            <div class="name" id="srv3">BOT TRADING</div>
             <div class="desc" id="d3">Automatisation de votre stratégie</div>
             <span class="badge" id="b3">Top</span>
         </div>
         <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'mails')">
             <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            <div class="name">PACK MAILS</div>
+            <div class="name" id="srv4">PACK MAILS</div>
             <div class="desc" id="d4">Emails vérifiés DNS+SMTP</div>
             <span class="badge" id="b4">Exclusif</span>
         </div>
         <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'sites')">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            <div class="name">CRÉATION SITES</div>
+            <div class="name" id="srv5">CRÉATION SITES</div>
             <div class="desc" id="d5">Vitrines • E-commerce • SEO</div>
         </div>
         <div class="service-card" data-service="AUTRES" onclick="selectService(this,'autres')">
             <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            <div class="name">AUTRES SERVICES</div>
+            <div class="name" id="srv6">AUTRES SERVICES</div>
             <div class="desc" id="d6">Programmation • Automatisation</div>
         </div>
     </div>
@@ -669,9 +674,9 @@
     
     <!-- ===== COMING SOON ===== -->
     <div id="comingSoon" class="coming-soon">
-        <div class="label">✦ Prochainement ✦</div>
-        <div class="title">ASSISTANT IA</div>
-        <div class="desc">Un agent intelligent pour répondre à vos questions 24h/24.<br><span style="color:#f0b90b;font-weight:600;">Lien disponible très bientôt</span></div>
+        <div class="label" id="csLabel">✦ Prochainement ✦</div>
+        <div class="title" id="csTitle">ASSISTANT IA</div>
+        <div class="desc" id="csDesc">Un agent intelligent pour répondre à vos questions 24h/24.<br><span style="color:#f0b90b;font-weight:600;" id="csLink">Lien disponible très bientôt</span></div>
         <div class="tags">
             <span>⚡ 24h/24</span>
             <span>🧠 IA avancée</span>
@@ -712,22 +717,22 @@
     <div class="stats-bottom">
         <div class="item"><div class="number" id="onlineCount2">...</div><div class="label" id="onlineLabel">En ligne</div></div>
         <div class="item"><div class="number total" id="totalCount">...</div><div class="label" id="totalLabel">Visites totales</div></div>
-        <div class="item"><div class="number total" id="totalClients2">147</div><div class="label">👥 Clients satisfaits</div></div>
+        <div class="item"><div class="number total" id="totalClients2">147</div><div class="label" id="clientsLabel">👥 Clients satisfaits</div></div>
     </div>
     
     <!-- ===== FOOTER ===== -->
     <div class="footer">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;text-align:left;">
             <div>
-                <strong style="color:#0a0a1a;">Sécurité</strong>
+                <strong style="color:#0a0a1a;" id="fSec">Sécurité</strong>
                 <p>✓ <span id="f1a">SSL sécurisé</span><br>✓ <span id="f1b">Données cryptées</span><br>✓ <span id="f1c">RGPD conforme</span></p>
             </div>
             <div>
-                <strong style="color:#0a0a1a;">Légal</strong>
+                <strong style="color:#0a0a1a;" id="fLeg">Légal</strong>
                 <p><a href="#" id="f2a">Mentions légales</a><br><a href="#" id="f2b">Politique confidentialité</a><br><a href="#" id="f2c">CGV</a></p>
             </div>
             <div>
-                <strong style="color:#0a0a1a;">Contact</strong>
+                <strong style="color:#0a0a1a;" id="fCont">Contact</strong>
                 <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#25D366;">+229 60 31 54 58</a><br>🕐 <span id="f3a">9h-18h (Lun-Ven)</span></p>
             </div>
         </div>
@@ -742,32 +747,30 @@
 
 <script>
 // ============================================================
-// 1. COMPTEUR DE DEMANDES - CROISSANT RÉALISTE
+// 1. COMPTEUR DE DEMANDES - CROISSANT RÉALISTE (jamais en baisse)
 // ============================================================
-let todayRequests = parseInt(localStorage.getItem('todayRequests'));
-let requestHistory = JSON.parse(localStorage.getItem('requestHistory')) || [];
+let todayRequests = parseInt(localStorage.getItem('todayRequests')) || 0;
+let lastDate = localStorage.getItem('lastDate');
 
 function generateRealisticRequests() {
     const today = new Date().toDateString();
-    const lastDate = localStorage.getItem('lastDate');
     
+    // Nouveau jour - réinitialiser avec une valeur de base
     if (lastDate !== today) {
         localStorage.setItem('lastDate', today);
         const dayOfWeek = new Date().getDay();
         let base = 0;
-        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-            base = Math.floor(Math.random() * 6) + 2;
-        } else {
-            base = Math.floor(Math.random() * 4);
+        if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Lundi à Vendredi
+            base = Math.floor(Math.random() * 6) + 2; // 2 à 7
+        } else { // Week-end
+            base = Math.floor(Math.random() * 3); // 0 à 2
         }
         todayRequests = Math.min(base + Math.floor(Math.random() * 3), 10);
         localStorage.setItem('todayRequests', todayRequests);
-        requestHistory.push({ date: today, value: todayRequests });
-        if (requestHistory.length > 30) requestHistory.shift();
-        localStorage.setItem('requestHistory', JSON.stringify(requestHistory));
     } else {
-        const variation = Math.random() > 0.7 ? (Math.random() > 0.5 ? 1 : -1) : 0;
-        todayRequests = Math.min(Math.max(todayRequests + variation, 0), 10);
+        // Même jour - ne diminue jamais, seulement stable ou augmente
+        const increase = Math.random() > 0.6 ? Math.floor(Math.random() * 2) + 1 : 0;
+        todayRequests = Math.min(todayRequests + increase, 10);
         localStorage.setItem('todayRequests', todayRequests);
     }
     return todayRequests;
@@ -801,11 +804,30 @@ updateTodayRequests();
 setInterval(updateTodayRequests, 30000);
 
 // ============================================================
-// 2. TRADUCTIONS COMPLÈTES
+// 2. TRADUCTIONS COMPLÈTES - TOUS LES ÉLÉMENTS
 // ============================================================
 const T = {
     fr: {
+        statClients: '👥 Clients satisfaits',
+        statToday: '📩 Demandes aujourd\'hui',
+        statOnline: '👤 En ligne',
+        statVisits: '📊 Visites totales',
+        faqTopTitle: 'Comprendre en 2 minutes — Exemples concrets',
+        faqTop1: '🤖 Bot Telegram',
+        faqTop1b: 'Tu as un groupe avec 500 membres ?',
+        faqTop1ex: '📌 Exemple : "Je veux un bot qui accueille les nouveaux, supprime les spams et envoie des messages automatiques chaque matin à 8h."',
+        faqTop2: '🧠 Assistant IA',
+        faqTop2b: 'Tu reçois 50 messages par jour et tu n\'arrives pas à répondre ?',
+        faqTop2ex: '📌 Exemple : "Je veux un chatbot sur mon site qui répond aux clients, prend des rendez-vous et envoie des devis automatiquement."',
+        faqTop3: '📊 Bot Trading',
+        faqTop3b: 'Tu passes 4h par jour devant les graphiques ?',
+        faqTop3ex: '📌 Exemple : "Je veux un bot qui surveille le Bitcoin et m\'alerte quand il dépasse 65000$ avec des signaux précis."',
+        faqTop4: '📧 Pack Mails',
+        faqTop4b: 'Tu veux contourner TikTok/Facebook sans payer des pubs ?',
+        faqTop4ex: '📌 Exemple : "Je veux 500 emails vérifiés pour lancer ma campagne sur TikTok sans être bloqué."',
         t1: 'SSL', t2: '<24h', t3: 'Garantie 30j', t4: 'RGPD', t5: 'Mondial', t6: 'Expertise',
+        srv1: 'BOT TELEGRAM', srv2: 'ASSISTANT IA', srv3: 'BOT TRADING',
+        srv4: 'PACK MAILS', srv5: 'CRÉATION SITES', srv6: 'AUTRES SERVICES',
         d1: 'Automatisation complète de votre groupe', d2: 'Agent intelligent pour vos clients',
         d3: 'Automatisation de votre stratégie', d4: 'Emails vérifiés DNS+SMTP',
         d5: 'Vitrines • E-commerce • SEO', d6: 'Programmation • Automatisation',
@@ -839,13 +861,36 @@ const T = {
         fa5: 'Délais selon le service : Bot Telegram (48h), Assistant IA (5-7 jours), Bot Trading (72h), Pack Mails (24h), Création de sites (3-5 jours). <strong>Exemple :</strong> Vous commandez un Pack Mails aujourd\'hui, vous le recevez demain.',
         fq6: '💰 Comment se passe le paiement ?',
         fa6: 'Nous discutons d\'abord de votre projet, puis nous vous faisons un devis personnalisé. Le paiement se fait après validation du devis, avant le début du travail. <strong>Exemple :</strong> Vous validez le devis de 150€ pour un Bot Telegram, vous payez et nous commençons le lendemain.',
-        online: 'En ligne', total: 'Visites totales',
+        online: 'En ligne', total: 'Visites totales', clients: '👥 Clients satisfaits',
+        csLabel: '✦ Prochainement ✦', csTitle: 'ASSISTANT IA',
+        csDesc: 'Un agent intelligent pour répondre à vos questions 24h/24.',
+        csLink: 'Lien disponible très bientôt',
+        fSec: 'Sécurité', fLeg: 'Légal', fCont: 'Contact',
         f1a: 'SSL sécurisé', f1b: 'Données cryptées', f1c: 'RGPD conforme',
         f2a: 'Mentions légales', f2b: 'Politique confidentialité', f2c: 'CGV',
         f3a: '9h-18h (Lun-Ven)', fb1: 'Tous droits réservés', fb2: 'Dernière mise à jour'
     },
     en: {
+        statClients: '👥 Happy Clients',
+        statToday: '📩 Today\'s requests',
+        statOnline: '👤 Online',
+        statVisits: '📊 Total visits',
+        faqTopTitle: 'Understand in 2 minutes — Concrete examples',
+        faqTop1: '🤖 Telegram Bot',
+        faqTop1b: 'You have a group with 500 members?',
+        faqTop1ex: '📌 Example: "I want a bot that welcomes new members, removes spam and sends automatic messages every morning at 8am."',
+        faqTop2: '🧠 AI Assistant',
+        faqTop2b: 'You receive 50 messages a day and can\'t keep up?',
+        faqTop2ex: '📌 Example: "I want a chatbot on my site that answers clients, takes appointments and sends quotes automatically."',
+        faqTop3: '📊 Trading Bot',
+        faqTop3b: 'You spend 4 hours a day in front of charts?',
+        faqTop3ex: '📌 Example: "I want a bot that monitors Bitcoin and alerts me when it exceeds $65,000 with precise signals."',
+        faqTop4: '📧 Email Packs',
+        faqTop4b: 'You want to bypass TikTok/Facebook without paying for ads?',
+        faqTop4ex: '📌 Example: "I want 500 verified emails to launch my campaign on TikTok without being blocked."',
         t1: 'SSL', t2: '<24h', t3: '30 Days Guarantee', t4: 'GDPR', t5: 'Worldwide', t6: 'Expertise',
+        srv1: 'TELEGRAM BOT', srv2: 'AI ASSISTANT', srv3: 'TRADING BOT',
+        srv4: 'EMAIL PACKS', srv5: 'WEBSITE CREATION', srv6: 'OTHER SERVICES',
         d1: 'Full group automation', d2: 'Intelligent agent for your clients',
         d3: 'Strategy automation', d4: 'DNS+SMTP verified emails',
         d5: 'Showcases • E-commerce • SEO', d6: 'Programming • Automation',
@@ -879,13 +924,36 @@ const T = {
         fa5: 'Delivery times by service: Telegram Bot (48h), AI Assistant (5-7 days), Trading Bot (72h), Email Pack (24h), Website Creation (3-5 days). <strong>Example:</strong> You order an Email Pack today, you receive it tomorrow.',
         fq6: '💰 How does payment work?',
         fa6: 'We first discuss your project, then we give you a personalized quote. Payment is made after validation of the quote, before work begins. <strong>Example:</strong> You validate the quote of 150€ for a Telegram Bot, you pay and we start the next day.',
-        online: 'Online', total: 'Total visits',
+        online: 'Online', total: 'Total visits', clients: '👥 Happy Clients',
+        csLabel: '✦ Coming soon ✦', csTitle: 'AI ASSISTANT',
+        csDesc: 'An intelligent agent to answer your questions 24/7.',
+        csLink: 'Link available very soon',
+        fSec: 'Security', fLeg: 'Legal', fCont: 'Contact',
         f1a: 'SSL secured', f1b: 'Encrypted data', f1c: 'GDPR compliant',
         f2a: 'Legal notices', f2b: 'Privacy policy', f2c: 'Terms',
         f3a: '9am-6pm (Mon-Fri)', fb1: 'All rights reserved', fb2: 'Last update'
     },
     es: {
+        statClients: '👥 Clientes satisfechos',
+        statToday: '📩 Solicitudes hoy',
+        statOnline: '👤 En línea',
+        statVisits: '📊 Visitas totales',
+        faqTopTitle: 'Comprender en 2 minutos — Ejemplos concretos',
+        faqTop1: '🤖 Bot Telegram',
+        faqTop1b: '¿Tienes un grupo con 500 miembros?',
+        faqTop1ex: '📌 Ejemplo: "Quiero un bot que reciba a los nuevos, elimine spam y envíe mensajes automáticos cada mañana a las 8h."',
+        faqTop2: '🧠 Asistente IA',
+        faqTop2b: '¿Recibes 50 mensajes al día y no puedes responder?',
+        faqTop2ex: '📌 Ejemplo: "Quiero un chatbot en mi sitio que responda a clientes, tome citas y envíe presupuestos automáticamente."',
+        faqTop3: '📊 Bot Trading',
+        faqTop3b: '¿Pasas 4h al día frente a gráficos?',
+        faqTop3ex: '📌 Ejemplo: "Quiero un bot que monitoree Bitcoin y me alerte cuando supere los 65000$ con señales precisas."',
+        faqTop4: '📧 Packs Emails',
+        faqTop4b: '¿Quieres evitar TikTok/Facebook sin pagar anuncios?',
+        faqTop4ex: '📌 Ejemplo: "Quiero 500 emails verificados para lanzar mi campaña en TikTok sin ser bloqueado."',
         t1: 'SSL', t2: '<24h', t3: 'Garantía 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiencia',
+        srv1: 'BOT TELEGRAM', srv2: 'ASISTENTE IA', srv3: 'BOT TRADING',
+        srv4: 'PACKS EMAILS', srv5: 'CREACIÓN DE SITIOS', srv6: 'OTROS SERVICIOS',
         d1: 'Automatización completa de tu grupo', d2: 'Agente inteligente para tus clientes',
         d3: 'Automatización de tu estrategia', d4: 'Emails verificados DNS+SMTP',
         d5: 'Vitrinas • E-commerce • SEO', d6: 'Programación • Automatización',
@@ -919,13 +987,36 @@ const T = {
         fa5: 'Plazos según el servicio: Bot Telegram (48h), Asistente IA (5-7 días), Bot Trading (72h), Pack Emails (24h), Creación de sitios (3-5 días). <strong>Ejemplo:</strong> Pides un Pack Emails hoy, lo recibes mañana.',
         fq6: '💰 ¿Cómo funciona el pago?',
         fa6: 'Primero discutimos tu proyecto, luego te hacemos un presupuesto personalizado. El pago se realiza después de la validación del presupuesto, antes de comenzar el trabajo. <strong>Ejemplo:</strong> Validas el presupuesto de 150€ para un Bot Telegram, pagas y comenzamos al día siguiente.',
-        online: 'En línea', total: 'Visitas totales',
+        online: 'En línea', total: 'Visitas totales', clients: '👥 Clientes satisfechos',
+        csLabel: '✦ Próximamente ✦', csTitle: 'ASISTENTE IA',
+        csDesc: 'Un agente inteligente para responder tus preguntas 24/7.',
+        csLink: 'Enlace disponible muy pronto',
+        fSec: 'Seguridad', fLeg: 'Legal', fCont: 'Contacto',
         f1a: 'SSL seguro', f1b: 'Datos encriptados', f1c: 'Cumple RGPD',
         f2a: 'Aviso legal', f2b: 'Política privacidad', f2c: 'Condiciones',
         f3a: '9h-18h (Lun-Vie)', fb1: 'Todos los derechos reservados', fb2: 'Última actualización'
     },
     de: {
+        statClients: '👥 Zufriedene Kunden',
+        statToday: '📩 Anfragen heute',
+        statOnline: '👤 Online',
+        statVisits: '📊 Besuche gesamt',
+        faqTopTitle: 'In 2 Minuten verstehen — Konkrete Beispiele',
+        faqTop1: '🤖 Telegram Bot',
+        faqTop1b: 'Du hast eine Gruppe mit 500 Mitgliedern?',
+        faqTop1ex: '📌 Beispiel: "Ich möchte einen Bot, der neue Mitglieder begrüßt, Spam entfernt und jeden Morgen um 8 Uhr automatische Nachrichten sendet."',
+        faqTop2: '🧠 KI-Assistent',
+        faqTop2b: 'Du erhältst 50 Nachrichten pro Tag und kannst nicht antworten?',
+        faqTop2ex: '📌 Beispiel: "Ich möchte einen Chatbot auf meiner Website, der Kunden antwortet, Termine vereinbart und automatisch Angebote versendet."',
+        faqTop3: '📊 Trading Bot',
+        faqTop3b: 'Du verbringst 4 Stunden am Tag vor Charts?',
+        faqTop3ex: '📌 Beispiel: "Ich möchte einen Bot, der Bitcoin überwacht und mich warnt, wenn er 65000$ übersteigt, mit präzisen Signalen."',
+        faqTop4: '📧 Email-Packs',
+        faqTop4b: 'Du möchtest TikTok/Facebook umgehen, ohne für Werbung zu zahlen?',
+        faqTop4ex: '📌 Beispiel: "Ich möchte 500 verifizierte Emails, um meine Kampagne auf TikTok zu starten, ohne blockiert zu werden."',
         t1: 'SSL', t2: '<24h', t3: 'Garantie 30d', t4: 'DSGVO', t5: 'Weltweit', t6: 'Expertise',
+        srv1: 'TELEGRAM BOT', srv2: 'KI-ASSISTENT', srv3: 'TRADING BOT',
+        srv4: 'EMAIL-PACKS', srv5: 'WEBSITE-ERSTELLUNG', srv6: 'ANDERE DIENSTE',
         d1: 'Vollautomatisierung deiner Gruppe', d2: 'Intelligenter Agent für deine Kunden',
         d3: 'Automatisierung deiner Strategie', d4: 'DNS+SMTP verifizierte Emails',
         d5: 'Schaufenster • E-Commerce • SEO', d6: 'Programmierung • Automatisierung',
@@ -959,13 +1050,36 @@ const T = {
         fa5: 'Lieferzeiten nach Service: Telegram Bot (48h), KI-Assistent (5-7 Tage), Trading Bot (72h), Email-Pack (24h), Website-Erstellung (3-5 Tage). <strong>Beispiel:</strong> Du bestellst heute ein Email-Pack, du erhältst es morgen.',
         fq6: '💰 Wie läuft die Zahlung ab?',
         fa6: 'Wir besprechen zuerst dein Projekt, dann erstellen wir ein persönliches Angebot. Die Zahlung erfolgt nach der Bestätigung des Angebots, vor Arbeitsbeginn. <strong>Beispiel:</strong> Du bestätigst das Angebot von 150€ für einen Telegram Bot, du zahlst und wir beginnen am nächsten Tag.',
-        online: 'Online', total: 'Besuche gesamt',
+        online: 'Online', total: 'Besuche gesamt', clients: '👥 Zufriedene Kunden',
+        csLabel: '✦ Demnächst ✦', csTitle: 'KI-ASSISTENT',
+        csDesc: 'Ein intelligenter Agent, der 24/7 deine Fragen beantwortet.',
+        csLink: 'Link in Kürze verfügbar',
+        fSec: 'Sicherheit', fLeg: 'Rechtliches', fCont: 'Kontakt',
         f1a: 'SSL-gesichert', f1b: 'Verschlüsselte Daten', f1c: 'DSGVO-konform',
         f2a: 'Impressum', f2b: 'Datenschutz', f2c: 'AGB',
         f3a: '9-18 Uhr (Mo-Fr)', fb1: 'Alle Rechte vorbehalten', fb2: 'Letzte Aktualisierung'
     },
     pt: {
+        statClients: '👥 Clientes satisfeitos',
+        statToday: '📩 Solicitações hoje',
+        statOnline: '👤 Online',
+        statVisits: '📊 Visitas totais',
+        faqTopTitle: 'Entender em 2 minutos — Exemplos concretos',
+        faqTop1: '🤖 Bot Telegram',
+        faqTop1b: 'Você tem um grupo com 500 membros?',
+        faqTop1ex: '📌 Exemplo: "Quero um bot que receba os novos, remova spam e envie mensagens automáticas toda manhã às 8h."',
+        faqTop2: '🧠 Assistente IA',
+        faqTop2b: 'Você recebe 50 mensagens por dia e não consegue responder?',
+        faqTop2ex: '📌 Exemplo: "Quero um chatbot no meu site que responda clientes, agende compromissos e envie orçamentos automaticamente."',
+        faqTop3: '📊 Bot Trading',
+        faqTop3b: 'Você passa 4h por dia em frente a gráficos?',
+        faqTop3ex: '📌 Exemplo: "Quero um bot que monitore o Bitcoin e me alerte quando ultrapassar 65000$ com sinais precisos."',
+        faqTop4: '📧 Pacotes Emails',
+        faqTop4b: 'Quer contornar TikTok/Facebook sem pagar anúncios?',
+        faqTop4ex: '📌 Exemplo: "Quero 500 emails verificados para lançar minha campanha no TikTok sem ser bloqueado."',
         t1: 'SSL', t2: '<24h', t3: 'Garantia 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiência',
+        srv1: 'BOT TELEGRAM', srv2: 'ASSISTENTE IA', srv3: 'BOT TRADING',
+        srv4: 'PACOTES EMAILS', srv5: 'CRIAÇÃO DE SITES', srv6: 'OUTROS SERVIÇOS',
         d1: 'Automatização completa do seu grupo', d2: 'Agente inteligente para seus clientes',
         d3: 'Automatização da sua estratégia', d4: 'Emails verificados DNS+SMTP',
         d5: 'Vitrines • E-commerce • SEO', d6: 'Programação • Automação',
@@ -999,50 +1113,14 @@ const T = {
         fa5: 'Prazos por serviço: Bot Telegram (48h), Assistente IA (5-7 dias), Bot Trading (72h), Pacote Emails (24h), Criação de sites (3-5 dias). <strong>Exemplo:</strong> Você pede um Pacote Emails hoje, recebe amanhã.',
         fq6: '💰 Como funciona o pagamento?',
         fa6: 'Primeiro discutimos seu projeto, depois fazemos um orçamento personalizado. O pagamento é feito após a validação do orçamento, antes do início do trabalho. <strong>Exemplo:</strong> Você valida o orçamento de 150€ para um Bot Telegram, paga e começamos no dia seguinte.',
-        online: 'Online', total: 'Visitas totais',
+        online: 'Online', total: 'Visitas totais', clients: '👥 Clientes satisfeitos',
+        csLabel: '✦ Em breve ✦', csTitle: 'ASSISTENTE IA',
+        csDesc: 'Um agente inteligente para responder suas perguntas 24/7.',
+        csLink: 'Link disponível muito em breve',
+        fSec: 'Segurança', fLeg: 'Legal', fCont: 'Contato',
         f1a: 'SSL seguro', f1b: 'Dados criptografados', f1c: 'RGPD conforme',
         f2a: 'Aviso legal', f2b: 'Política privacidade', f2c: 'Condições',
         f3a: '9h-18h (Seg-Sex)', fb1: 'Todos os direitos reservados', fb2: 'Última atualização'
-    },
-    ar: {
-        t1: 'SSL', t2: '<24h', t3: 'ضَمَان 30ي', t4: 'RGPD', t5: 'عَالَمِي', t6: 'خِبْرَة',
-        d1: 'أَتْمَتَةُ مَجْمُوعَتِكَ كَامِلَةً', d2: 'وَكِيلٌ ذَكِيٌّ لِعُمَلَائِكَ',
-        d3: 'أَتْمَتَةُ إِسْتِرَاتِيجِيَّتِكَ', d4: 'بَرِيدٌ مُؤَكَّدٌ DNS+SMTP',
-        d5: 'وَاجِهَات • تِجَارَة إِلِكْتْرُونِيَّة • سِيُو', d6: 'بَرْمَجَة • أَتْمَتَة',
-        b1: 'شَائِع', b2: 'جَدِيد', b3: 'أَفْضَل', b4: 'حَصْرِيّ',
-        dt1: 'بُوت تِلِغْرَام', dt2: 'مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', dt3: 'بُوت التَّدَاوُلِ',
-        dt4: 'حُزَمُ الْبَرِيدِ', dt5: 'إِنْشَاءُ مَوَاقِعَ', dt6: 'خِدْمَاتٌ أُخْرَى',
-        dc1: 'لَدَيْكَ مَجْمُوعَةُ تِلِغْرَامَ وَأَنْتَ تَعِبْتَ مِنَ الْوُجُودِ دَائِمًا؟ <span class="hl">نُهَيِّئُ بُوتًا يَدِيرُ كُلَّ شَيْءٍ مِثْلَكَ</span>.<br>✅ <span class="ok">رَقَابَة تِلْقَائِيَّة</span><br>✅ <span class="ok">رُدُود تِلْقَائِيَّة</span><br>✅ <span class="ok">إِدَارَة الْأَعْضَاء</span><br>🎯 <span class="hl">لَا حَاجَةَ لِلِاتِّصَالِ 24/7</span>',
-        dc2: 'تُرِيدُ أَنْ تَكُونَ مُسْتَقِلًّا؟ <span class="hl">نُنْشِئُ مُسَاعِدًا افْتِرَاضِيًّا يَعْمَلُ لَكَ 24/7</span>.<br>✅ <span class="ok">رَبُوت مُحَادَثَة ذَكِيّ</span><br>✅ <span class="ok">حَجْز مَوَاعِيد تِلْقَائِيّ</span><br>✅ <span class="ok">إِنْشَاء تَسْعِيرَات</span><br>🎯 <span class="hl">تَجْرِبَة مَجَّانِيَّة أُسْبُوع</span>',
-        dc3: 'تَتَعَامَلُ مَعَ التَّدَاوُلِ وَيَسْتَغْرِقُ الْوَقْتَ؟ <span class="hl">نُنْشِئُ بُوتًا عَلَى إِسْتِرَاتِيجِيَّتِكَ بِدِقَّةٍ</span>.<br>✅ <span class="ok">تَنْبِيهَاتٌ فِي الْوَقْتِ الْمُنَاسِبِ</span><br>✅ <span class="ok">مُتَابَعَة تِلْقَائِيَّة</span><br>✅ <span class="ok">إِشَارَاتٌ فِي الْوَقْتِ الْفِعْلِيّ</span><br>🎯 <span class="hl">الْبُوتُ يَرْقُبُ لَكَ</span>',
-        dc4: 'لَدَيْكَ مَتْجَرٌ إِلِكْتْرُونِيّ؟ <span class="hl">نَبِيعُكَ حُزَمَ بَرِيدٍ مُؤَكَّدَةٍ</span>.<br>✅ <span class="ok">بَرِيدٌ مُؤَكَّدٌ 100%</span> (DNS+SMTP)<br>✅ <span class="ok">حُزَمٌ مِنْ 100 إِلَى 1000</span><br>✅ <span class="ok">تَجَاوُز تِيك توك، فَيْس بُوك</span><br>🎯 <span class="hl">إِسْتِرَاتِيجِيَّة سِرِّيَّة مُضَمَّنَة</span>',
-        dc5: 'تُرِيدُ مَوْقِعًا يَبِيعُ؟ <span class="hl">نُنْشِئُ مَوَاقِعَ حَسَبَ الطَّلَبِ</span>.<br>✅ <span class="ok">تَصْمِيم حَدِيث</span><br>✅ <span class="ok">تَحْسِين سِيُو</span><br>✅ <span class="ok">اسْتِضَافَة مُضَمَّنَة</span><br>🎯 <span class="hl">مَوْقِعٌ يُشْبِهُكَ</span>',
-        dc6: 'لَدَيْكَ مَشْرُوعٌ مُحَدَّدٌ؟ <span class="hl">أَخْبِرْنَا بِمَا تَحْتَاجُ</span>.<br>✅ <span class="ok">بَرْمَجَة حَسَبَ الطَّلَبِ</span><br>✅ <span class="ok">أَتْمَتَة</span><br>✅ <span class="ok">اسْتِشَارَة وَتَدْرِيب</span><br>🎯 <span class="hl">إِنِ اسْتَطَعْتَ تَخَيُّلَهُ، نَسْتَطِيعُ إِنْشَاؤُهُ</span>',
-        whatsappLabel: 'وَاتْسَاب مُبَاشِر', whatsappSub: 'رَدٌّ فِي 5 دَقَائِق',
-        assistantLabel: 'مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', assistantSub: 'قَرِيبًا',
-        gtext: 'رِضًا مَضْمُونٌ 100% أَوِ اسْتِرْدَادُ الْمَالِ',
-        gsub: 'إِذَا لَمْ تَكُنْ رَاضِيًا، سَنُعِيدُ لَكَ الْمَبْلَغَ كَامِلًا.',
-        l1: 'الِاسْمُ وَاللَّقَبُ', l2: 'الْبَلَدُ', l3: 'الْمَدِينَةُ', l4: 'رَقْمُ وَاتْسَاب',
-        l5: 'الْبَرِيدُ الإِلِكْتْرُونِيّ', l6: 'الْعُمْرُ', l7: 'شَبَكَاتٌ اجْتِمَاعِيَّة (اخْتِيَارِيّ)', l8: 'طَلَبُكَ',
-        h3: 'الْحَدُّ الْأَدْنَى 18 سَنَةً', h4: 'هَذِهِ الْمَعْلُومَاتُ تُسَاعِدُنَا عَلَى مُسَاعَدَتِكَ بِشَكْلٍ أَفْضَل',
-        btn: 'أَرْسِلْ طَلَبِي', loading: 'جَارِي الْإِرْسَالُ...',
-        faqTitle: '❓ أَسْئِلَةٌ شَائِعَةٌ — تَفَاصِيل',
-        fq1: '🤖 كَيْفَ يَعْمَلُ بُوتُ تِلِغْرَامَ؟',
-        fa1: 'نُهَيِّئُ بُوتًا يَدِيرُ مَجْمُوعَتَكَ مِثْلَكَ. يَرَاقِبُ الرَّسَائِلَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يُرَحِّبُ بِالْأَعْضَاءِ الْجُدُدِ وَيَتَفَاعَلُ مَعَ مُسَاعِدِكَ الذَّكِيّ. <strong>مِثَال:</strong> بُوتٌ يُزِيلُ الرَّسَائِلَ الْمُزْعِجَةَ، يُرْسِلُ رِسَالَةَ تَرْحِيبٍ وَيُجِيبُ تِلْقَائِيًّا عَلَى الْأَسْئِلَةِ الْأَكْثَرِ طَرْحًا.',
-        fq2: '🧠 كَيْفَ يَعْمَلُ مُسَاعِدُ الذَّكَاءِ الاصْطِنَاعِيّ؟',
-        fa2: 'نُنْشِئُ مَوْقِعًا مَعَ رَبُوتِ مُحَادَثَةٍ ذَكِيّ يُدِيرُ عُمَلَاءَكَ تِلْقَائِيًّا. يَعْرِضُ خِدْمَاتِكَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يَحْجِزُ الْمَوَاعِيدَ وَيُنْشِئُ التَّسْعِيرَاتِ. <strong>مِثَال:</strong> رَبُوتُ مُحَادَثَةٍ عَلَى مَوْقِعِكَ يُجِيبُ الْعُمَلَاءَ لَيْلًا وَيَأْخُذُ بَيَانَاتِهِمْ.',
-        fq3: '📊 كَيْفَ يَعْمَلُ بُوتُ التَّدَاوُلِ؟',
-        fa3: 'تُعْطِينَا إِسْتِرَاتِيجِيَّتَكَ، نُبَرْمِجُ بُوتًا يُرَاقِبُ الرُّسُومَ الْبَيَانِيَّةَ. يُرْسِلُ لَكَ تَنْبِيهَاتٍ دَقِيقَةً فِي الْوَقْتِ الْمُنَاسِبِ لِاتِّخَاذِ الْوُضُوعَاتِ. <strong>مِثَال:</strong> بُوتٌ يُرَاقِبُ سِعْرَ الذَّهَبِ وَيُنَبِّهُكَ عِنْدَمَا يَصِلُ إِلَى حَدٍّ مُحَدَّدٍ.',
-        fq4: '📧 مَا هِيَ حُزَمُ الْبَرِيدِ الْمُؤَكَّدَةُ؟',
-        fa4: 'بَرِيدٌ مُؤَكَّدٌ 100% (DNS+SMTP) يُؤَكِّدُ الْوُجُودَ الْحَقِيقِيَّ لِصُنْدُوقِ بَرِيدٍ. بِهَذِهِ الْحُزَمِ، يُمْكِنُكَ تَجَاوُزُ تِيك توك، فَيْس بُوك وَإِنْسْتْغْرَام بِدَلَ الْإِعْلَانَاتِ. <strong>مِثَال:</strong> 500 بَرِيدًا مُؤَكَّدًا لِإِطْلَاقِ حَمْلَتِكَ عَلَى تِيك توك دُونَ أَنْ تَكُونَ مَحْظُورًا.',
-        fq5: '⏱️ مَا هِيَ مُدَدُ التَّسْلِيمِ؟',
-        fa5: 'مُدَدُ التَّسْلِيمِ حَسَبَ الْخِدْمَةِ: بُوت تِلِغْرَام (48 سَاعَة)، مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ (5-7 أَيَّام)، بُوت التَّدَاوُلِ (72 سَاعَة)، حُزَم الْبَرِيدِ (24 سَاعَة)، إِنْشَاء الْمَوَاقِع (3-5 أَيَّام). <strong>مِثَال:</strong> تَطْلُبُ حُزْمَةَ بَرِيدٍ الْيَوْمَ، تَسْتَقْبِلُهَا غَدًا.',
-        fq6: '💰 كَيْفَ يَتِمُّ الدَّفْعُ؟',
-        fa6: 'نُنَاقِشُ مَشْرُوعَكَ أَوَّلًا، ثُمَّ نُعِدُّ لَكَ عَرْضَ سِعْرٍ مُخَصَّصًا. يَتِمُّ الدَّفْعُ بَعْدَ مُصَادَقَةِ الْعَرْضِ، قَبْلَ بَدْءِ الْعَمَلِ. <strong>مِثَال:</strong> تُصَادِقُ عَلَى عَرْضِ 150 يورو لِبُوت تِلِغْرَام، تَدْفَعُ وَنَبْدَأُ فِي الْيَوْمِ التَّالِي.',
-        online: 'مُتَّصِل', total: 'الزِّيَارَاتُ الْإِجْمَالِيَّة',
-        f1a: 'SSL مُؤَمَّن', f1b: 'بَيَانَاتٌ مُشَفَّرَةٌ', f1c: 'مُتَوَافِقٌ مَعَ RGPD',
-        f2a: 'إِشْعَارَاتٌ قَانُونِيَّة', f2b: 'سِيَاسَةُ الْخُصُوصِيَّةِ', f2c: 'شُرُوط الْخِدْمَة',
-        f3a: '9-18 (الإثْنَيْن-الْجُمُعَة)', fb1: 'جَمِيعُ الْحُقُوقِ مَحْفُوظَةٌ', fb2: 'آخِرُ تَحْدِيثٍ'
     }
 };
 
@@ -1057,12 +1135,42 @@ function switchLang(lang) {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
     
+    // Stats
+    document.getElementById('statClients').textContent = t.statClients;
+    document.getElementById('statToday').textContent = t.statToday;
+    document.getElementById('statOnline').textContent = t.statOnline;
+    document.getElementById('statVisits').textContent = t.statVisits;
+    
+    // FAQ Top
+    document.getElementById('faqTopTitle').textContent = t.faqTopTitle;
+    document.getElementById('faqTop1').textContent = t.faqTop1;
+    document.getElementById('faqTop1b').textContent = t.faqTop1b;
+    document.getElementById('faqTop1ex').textContent = t.faqTop1ex;
+    document.getElementById('faqTop2').textContent = t.faqTop2;
+    document.getElementById('faqTop2b').textContent = t.faqTop2b;
+    document.getElementById('faqTop2ex').textContent = t.faqTop2ex;
+    document.getElementById('faqTop3').textContent = t.faqTop3;
+    document.getElementById('faqTop3b').textContent = t.faqTop3b;
+    document.getElementById('faqTop3ex').textContent = t.faqTop3ex;
+    document.getElementById('faqTop4').textContent = t.faqTop4;
+    document.getElementById('faqTop4b').textContent = t.faqTop4b;
+    document.getElementById('faqTop4ex').textContent = t.faqTop4ex;
+    
+    // Trust
     document.getElementById('t1').textContent = t.t1;
     document.getElementById('t2').textContent = t.t2;
     document.getElementById('t3').textContent = t.t3;
     document.getElementById('t4').textContent = t.t4;
     document.getElementById('t5').textContent = t.t5;
     document.getElementById('t6').textContent = t.t6;
+    
+    // Services
+    document.getElementById('srv1').textContent = t.srv1;
+    document.getElementById('srv2').textContent = t.srv2;
+    document.getElementById('srv3').textContent = t.srv3;
+    document.getElementById('srv4').textContent = t.srv4;
+    document.getElementById('srv5').textContent = t.srv5;
+    document.getElementById('srv6').textContent = t.srv6;
     document.getElementById('d1').textContent = t.d1;
     document.getElementById('d2').textContent = t.d2;
     document.getElementById('d3').textContent = t.d3;
@@ -1073,6 +1181,8 @@ function switchLang(lang) {
     document.getElementById('b2').textContent = t.b2;
     document.getElementById('b3').textContent = t.b3;
     document.getElementById('b4').textContent = t.b4;
+    
+    // Detail boxes
     document.getElementById('dt1').textContent = t.dt1;
     document.getElementById('dt2').textContent = t.dt2;
     document.getElementById('dt3').textContent = t.dt3;
@@ -1085,12 +1195,18 @@ function switchLang(lang) {
     document.getElementById('dc4').innerHTML = t.dc4;
     document.getElementById('dc5').innerHTML = t.dc5;
     document.getElementById('dc6').innerHTML = t.dc6;
+    
+    // Contact
     document.getElementById('whatsappLabel').textContent = t.whatsappLabel;
     document.getElementById('whatsappSub').textContent = t.whatsappSub;
     document.getElementById('assistantLabel').textContent = t.assistantLabel;
     document.getElementById('assistantSub').textContent = t.assistantSub;
+    
+    // Guarantee
     document.getElementById('gtext').textContent = t.gtext;
     document.getElementById('gsub').textContent = t.gsub;
+    
+    // Form
     document.getElementById('l1').innerHTML = t.l1 + ' <span class="required">*</span>';
     document.getElementById('l2').innerHTML = t.l2 + ' <span class="required">*</span>';
     document.getElementById('l3').innerHTML = t.l3 + ' <span class="required">*</span>';
@@ -1103,6 +1219,13 @@ function switchLang(lang) {
     document.getElementById('h4').textContent = t.h4;
     document.getElementById('sendBtn').textContent = t.btn;
     document.getElementById('loadingText').textContent = t.loading;
+    
+    // Coming soon
+    document.getElementById('csLabel').textContent = t.csLabel;
+    document.getElementById('csTitle').textContent = t.csTitle;
+    document.getElementById('csDesc').innerHTML = t.csDesc + '<br><span style="color:#f0b90b;font-weight:600;" id="csLink">' + t.csLink + '</span>';
+    
+    // FAQ bottom
     document.getElementById('faqTitle').textContent = t.faqTitle;
     document.getElementById('fq1').textContent = t.fq1;
     document.getElementById('fa1').textContent = t.fa1;
@@ -1116,8 +1239,16 @@ function switchLang(lang) {
     document.getElementById('fa5').textContent = t.fa5;
     document.getElementById('fq6').textContent = t.fq6;
     document.getElementById('fa6').textContent = t.fa6;
+    
+    // Stats bottom
     document.getElementById('onlineLabel').textContent = t.online;
     document.getElementById('totalLabel').textContent = t.total;
+    document.getElementById('clientsLabel').textContent = t.clients;
+    
+    // Footer
+    document.getElementById('fSec').textContent = t.fSec;
+    document.getElementById('fLeg').textContent = t.fLeg;
+    document.getElementById('fCont').textContent = t.fCont;
     document.getElementById('f1a').textContent = t.f1a;
     document.getElementById('f1b').textContent = t.f1b;
     document.getElementById('f1c').textContent = t.f1c;
