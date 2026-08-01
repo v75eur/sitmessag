@@ -107,13 +107,20 @@
         .pyfiglet {
             text-align: center;
             font-family: 'Courier New', monospace;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 900;
             line-height: 1.15;
             color: #ffffff;
             margin-bottom: 4px;
             letter-spacing: 4px;
+            animation: pyfigletGlow 2s ease-in-out infinite;
         }
+        
+        @keyframes pyfigletGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(240,185,11,0.1); }
+            50% { text-shadow: 0 0 40px rgba(240,185,11,0.3), 0 0 60px rgba(240,185,11,0.1); }
+        }
+        
         .pyfiglet .line1 { color: #f0b90b; }
         .pyfiglet .line2 { color: #4d96ff; }
         .pyfiglet .line3 { color: #22c55e; }
@@ -910,6 +917,27 @@
         </div>
     </div>
     
+    <!-- ===== FAQ EN HAUT ===== -->
+    <div class="faq" style="margin-top:0; border-top:none; padding-top:0;">
+        <h3 id="faqTitle">Questions fréquentes</h3>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq1">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa1">Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq2">Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa2">Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq3">Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa3">Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq4">C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa4">Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
+        </div>
+    </div>
+    
     <div class="lang-selector">
         <button class="active" data-lang="fr" onclick="switchLang('fr')">FR</button>
         <button data-lang="en" onclick="switchLang('en')">EN</button>
@@ -1048,26 +1076,6 @@
             <span>24h/24</span>
             <span>IA avancée</span>
             <span>Multi-langues</span>
-        </div>
-    </div>
-    
-    <div class="faq">
-        <h3 id="faqTitle">Questions fréquentes</h3>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq1">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa1">Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq2">Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa2">Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq3">Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa3">Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq4">C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa4">Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
         </div>
     </div>
     
