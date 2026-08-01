@@ -111,15 +111,15 @@
         .lang-selector button.active { border-color: #f0b90b; background: #f0b90b; color: #0a0a1a; }
         
         /* ===== FAQ EN HAUT ===== */
-        .faq-top {
+        . faq-top { animation: blinkBorder 1.5s infinite; 
             background: #fffbeb;
             border-radius: 16px;
             padding: 20px 24px;
             margin-bottom: 20px;
-            border: 2px solid #fde68a;
+            border: 2px solid #fde68a; animation: blinkBorder 1.5s infinite;
             animation: blinkBorder 2s infinite;
         }
-        @keyframes blinkBorder {
+         @keyframes blinkBorder {
             0%, 100% { border-color: #fde68a; }
             50% { border-color: #f0b90b; box-shadow: 0 0 20px rgba(240,185,11,0.15); }
         }
