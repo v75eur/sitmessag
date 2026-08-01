@@ -366,7 +366,6 @@
         .detail-box .content .hl { color: #f0b90b; font-weight: 600; }
         .detail-box .content .ok { color: #22c55e; font-weight: 600; }
         
-        /* ===== GARANTIE CLIGNOTANTE ===== */
         .guarantee {
             background: rgba(240,185,11,0.02);
             border-radius: 18px;
@@ -397,7 +396,54 @@
         
         .guarantee .sub .hl { color: #f0b90b; font-weight: 600; }
         
-        /* ===== FORM ===== */
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        
+        .contact a {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 18px;
+            padding: 20px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.4s ease;
+        }
+        
+        .contact a:hover {
+            border-color: #f0b90b;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+        
+        .contact a .icon {
+            font-size: 34px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .contact a .label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .contact a .sub {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        .contact .whatsapp {
+            border-color: rgba(34,197,94,0.08);
+        }
+        
+        .contact .whatsapp:hover {
+            border-color: #22c55e;
+        }
+        
         .form-group {
             margin-bottom: 14px;
         }
@@ -696,7 +742,7 @@
             margin-bottom: 14px;
         }
         
-.faq-item {
+        .faq-item {
             background: rgba(255,255,255,0.02);
             border-radius: 14px;
             padding: 14px 20px;
@@ -712,7 +758,7 @@
             50% { border-color: rgba(240,185,11,0.2); box-shadow: 0 0 25px rgba(240,185,11,0.04); }
         }
         
-.faq-item:hover {
+        .faq-item:hover {
             background: rgba(255,255,255,0.03);
             border-color: rgba(240,185,11,0.15);
         }
@@ -817,7 +863,6 @@
 </head>
 <body>
 
-<!-- ===== ANIMATIONS ARRIÈRE-PLAN ===== -->
 <div class="bg-animation">
     <div class="orb"></div>
     <div class="orb"></div>
@@ -826,7 +871,6 @@
 
 <div class="bg-animation" id="particles"></div>
 
-<!-- ===== POPUP ENVOI ===== -->
 <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box" id="popupBox">
         <div id="popupContent">
@@ -836,10 +880,8 @@
     </div>
 </div>
 
-<!-- ===== CONTENU PRINCIPAL ===== -->
 <div class="container">
     
-    <!-- ===== PYFIGLET QWANTUM ===== -->
     <div class="pyfiglet">
         <div class="line1">
             <span style="--i:0">Q</span><span style="--i:1">W</span><span style="--i:2">A</span><span style="--i:3">N</span><span style="--i:4">T</span><span style="--i:5">U</span><span style="--i:6">M</span>
@@ -851,118 +893,111 @@
             <span style="--i:14">S</span><span style="--i:15">O</span><span style="--i:16">L</span><span style="--i:17">U</span><span style="--i:18">T</span><span style="--i:19">I</span><span style="--i:20">O</span><span style="--i:21">N</span><span style="--i:22">S</span>
         </div>
     </div>
-    <div class="pyfiglet-sub">✦ SOLUTIONS DIGITALES SUR MESURE ✦</div>
+    <div class="pyfiglet-sub">SOLUTIONS DIGITALES SUR MESURE</div>
     
-    <!-- ===== BANNIÈRE RÊVE ===== -->
     <div class="dream-banner">
-        <span class="big-icon">🚀</span>
+        <span class="big-icon">✦</span>
         <div class="title">Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span></div>
         <div class="sub">
             <span class="hl">QWANTUM</span> c'est l'allié de votre transformation digitale.<br>
             Des solutions sur mesure pour <span class="hl">automatiser</span>, <span class="hl">optimiser</span> et <span class="hl">révolutionner</span> votre activité.
         </div>
         <div class="tags">
-            <span>⚡ Innovation</span>
-            <span>🧠 Intelligence Artificielle</span>
-            <span>🚀 Performance</span>
-            <span>💎 Excellence</span>
+            <span>Innovation</span>
+            <span>Intelligence Artificielle</span>
+            <span>Performance</span>
+            <span>Excellence</span>
         </div>
     </div>
     
-    <!-- ===== LANGUES ===== -->
     <div class="lang-selector">
         <button class="active" data-lang="fr" onclick="switchLang('fr')">FR</button>
         <button data-lang="en" onclick="switchLang('en')">EN</button>
     </div>
     
-    <!-- ===== SERVICES ===== -->
     <div class="services">
         <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'telegram')">
-            <span class="icon">🤖</span>
+            <span class="icon">◈</span>
             <div class="name" id="srv1">BOT TELEGRAM</div>
             <div class="desc" id="d1">Automatisation complète de votre groupe</div>
             <span class="badge" id="b1">Populaire</span>
         </div>
         <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'ia')">
-            <span class="icon">🧠</span>
+            <span class="icon">◇</span>
             <div class="name" id="srv2">ASSISTANT IA</div>
             <div class="desc" id="d2">Agent intelligent pour vos clients</div>
             <span class="badge" id="b2">Nouveau</span>
         </div>
         <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'trading')">
-            <span class="icon">📊</span>
+            <span class="icon">◆</span>
             <div class="name" id="srv3">BOT TRADING</div>
             <div class="desc" id="d3">Automatisation de votre stratégie</div>
             <span class="badge" id="b3">Top</span>
         </div>
         <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'mails')">
-            <span class="icon">📧</span>
+            <span class="icon">◈</span>
             <div class="name" id="srv4">PACK MAILS</div>
             <div class="desc" id="d4">Emails vérifiés DNS+SMTP</div>
             <span class="badge" id="b4">Exclusif</span>
         </div>
         <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'sites')">
-            <span class="icon">🌐</span>
+            <span class="icon">◇</span>
             <div class="name" id="srv5">CRÉATION SITES</div>
             <div class="desc" id="d5">Vitrines • E-commerce • SEO</div>
         </div>
         <div class="service-card" data-service="AUTRES" onclick="selectService(this,'autres')">
-            <span class="icon">🛠️</span>
+            <span class="icon">◆</span>
             <div class="name" id="srv6">AUTRES SERVICES</div>
             <div class="desc" id="d6">Programmation • Automatisation</div>
         </div>
     </div>
     
-    <!-- ===== DETAIL ===== -->
     <div class="detail-box" id="detail-telegram">
-        <div class="title" id="dt1">🤖 BOT TELEGRAM</div>
-        <div class="content" id="dc1">Vous avez un groupe Telegram et vous en avez marre d'être toujours là ? <span class="hl">Nous configurons un bot qui gère tout comme vous</span>.<br>✅ <span class="ok">Modération automatique</span> des messages<br>✅ <span class="ok">Réponses automatiques</span> aux questions<br>✅ <span class="ok">Gestion des membres</span><br>🎯 <span class="hl">Plus besoin d'être connecté 24h/24</span></div>
+        <div class="title" id="dt1">BOT TELEGRAM</div>
+        <div class="content" id="dc1">Vous avez un groupe Telegram et vous en avez marre d'être toujours là ? <span class="hl">Nous configurons un bot qui gère tout comme vous</span>.<br><span class="ok">Modération automatique</span> des messages<br><span class="ok">Réponses automatiques</span> aux questions<br><span class="ok">Gestion des membres</span><br><span class="hl">Plus besoin d'être connecté 24h/24</span></div>
     </div>
     <div class="detail-box" id="detail-ia">
-        <div class="title" id="dt2">🧠 ASSISTANT IA</div>
-        <div class="content" id="dc2">Vous voulez être indépendant ? <span class="hl">Nous créons un assistant virtuel qui travaille pour vous 24h/24</span>.<br>✅ <span class="ok">Chatbot intelligent</span> pour vos clients<br>✅ <span class="ok">Prise de rendez-vous</span> automatique<br>✅ <span class="ok">Génération de devis</span><br>🎯 <span class="hl">Test gratuit 1 semaine</span></div>
+        <div class="title" id="dt2">ASSISTANT IA</div>
+        <div class="content" id="dc2">Vous voulez être indépendant ? <span class="hl">Nous créons un assistant virtuel qui travaille pour vous 24h/24</span>.<br><span class="ok">Chatbot intelligent</span> pour vos clients<br><span class="ok">Prise de rendez-vous</span> automatique<br><span class="ok">Génération de devis</span><br><span class="hl">Test gratuit 1 semaine</span></div>
     </div>
     <div class="detail-box" id="detail-trading">
-        <div class="title" id="dt3">📊 BOT TRADING</div>
-        <div class="content" id="dc3">Vous faites du trading et ça prend du temps ? <span class="hl">Nous créons un bot sur votre stratégie avec précision</span>.<br>✅ <span class="ok">Alertes au bon moment</span><br>✅ <span class="ok">Suivi automatique</span> des graphiques<br>✅ <span class="ok">Signaux en temps réel</span><br>🎯 <span class="hl">Le bot veille pour vous</span></div>
+        <div class="title" id="dt3">BOT TRADING</div>
+        <div class="content" id="dc3">Vous faites du trading et ça prend du temps ? <span class="hl">Nous créons un bot sur votre stratégie avec précision</span>.<br><span class="ok">Alertes au bon moment</span><br><span class="ok">Suivi automatique</span> des graphiques<br><span class="ok">Signaux en temps réel</span><br><span class="hl">Le bot veille pour vous</span></div>
     </div>
     <div class="detail-box" id="detail-mails">
-        <div class="title" id="dt4">📧 PACK MAILS</div>
-        <div class="content" id="dc4">Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br>✅ <span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 à 1000</span> emails<br>✅ <span class="ok">Contourne TikTok, Facebook</span><br>🎯 <span class="hl">Stratégie secrète incluse</span></div>
+        <div class="title" id="dt4">PACK MAILS</div>
+        <div class="content" id="dc4">Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br><span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br><span class="ok">Packs de 100 à 1000</span> emails<br><span class="ok">Contourne TikTok, Facebook</span><br><span class="hl">Stratégie secrète incluse</span></div>
     </div>
     <div class="detail-box" id="detail-sites">
-        <div class="title" id="dt5">🌐 CRÉATION DE SITES</div>
-        <div class="content" id="dc5">Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br>✅ <span class="ok">Design moderne</span><br>✅ <span class="ok">Optimisation SEO</span><br>✅ <span class="ok">Hébergement inclus</span><br>🎯 <span class="hl">Un site qui vous ressemble</span></div>
+        <div class="title" id="dt5">CRÉATION DE SITES</div>
+        <div class="content" id="dc5">Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br><span class="ok">Design moderne</span><br><span class="ok">Optimisation SEO</span><br><span class="ok">Hébergement inclus</span><br><span class="hl">Un site qui vous ressemble</span></div>
     </div>
     <div class="detail-box" id="detail-autres">
-        <div class="title" id="dt6">🛠️ AUTRES SERVICES</div>
-        <div class="content" id="dc6">Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span></div>
+        <div class="title" id="dt6">AUTRES SERVICES</div>
+        <div class="content" id="dc6">Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br><span class="ok">Programmation sur mesure</span><br><span class="ok">Automatisation</span><br><span class="ok">Conseil et formation</span><br><span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span></div>
     </div>
     
-    <!-- ===== CONTACT ===== -->
     <div class="contact">
         <a href="https://wa.me/22960315458" target="_blank" class="whatsapp">
-            <span class="icon">💬</span>
+            <span class="icon">◈</span>
             <div class="label" id="whatsappLabel">WhatsApp Direct</div>
             <div class="sub">+229 60 31 54 58 • <span id="whatsappSub">Réponse en 5min</span></div>
         </a>
         <a href="#" onclick="event.preventDefault(); document.getElementById('comingSoon').scrollIntoView({behavior:'smooth'});">
-            <span class="icon">🤖</span>
+            <span class="icon">◇</span>
             <div class="label" id="assistantLabel">Assistant IA</div>
             <div class="sub" id="assistantSub">Bientôt disponible</div>
         </a>
     </div>
     
-    <!-- ===== GARANTIE CLIGNOTANTE ===== -->
     <div class="guarantee">
-        <div class="text" id="gtext">💎 Satisfaction 100% garantie ou remboursé</div>
+        <div class="text" id="gtext">Satisfaction 100% garantie ou remboursé</div>
         <div class="sub" id="gsub">Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
         <div class="sub" style="margin-top:8px; font-size:13px; color:#64748b; border-top:1px solid rgba(255,255,255,0.03); padding-top:8px;">
             Remplissez le formulaire, exposez votre problème, <span class="hl">nous verrons ce qu'il est possible de faire</span>.
         </div>
     </div>
     
-    <!-- ===== FORMULAIRE ===== -->
     <form id="messageForm" onsubmit="sendMessage(event)">
         <div class="form-group">
             <label id="l1">Nom et prénom <span class="required">*</span></label>
@@ -1001,25 +1036,23 @@
             <div class="hint" id="h4">Ces informations nous permettent de vous aider au mieux</div>
         </div>
         <button type="submit" class="btn" id="sendBtn">Envoyer ma demande</button>
-        <div class="loading" id="loading"><span class="spinner">⏳</span> <span id="loadingText">Envoi en cours...</span></div>
+        <div class="loading" id="loading"><span class="spinner">◈</span> <span id="loadingText">Envoi en cours...</span></div>
     </form>
     <div id="toast" class="toast"></div>
     
-    <!-- ===== COMING SOON ===== -->
     <div id="comingSoon" class="coming-soon">
-        <div class="label" id="csLabel">✦ Prochainement ✦</div>
+        <div class="label" id="csLabel">Prochainement</div>
         <div class="title" id="csTitle">ASSISTANT IA</div>
         <div class="desc" id="csDesc">Un agent intelligent pour répondre à vos questions 24h/24.<br><span style="color:#f0b90b;font-weight:600;" id="csLink">Lien disponible très bientôt</span></div>
         <div class="tags">
-            <span>⚡ 24h/24</span>
-            <span>🧠 IA avancée</span>
-            <span>💬 Multi-langues</span>
+            <span>24h/24</span>
+            <span>IA avancée</span>
+            <span>Multi-langues</span>
         </div>
     </div>
     
-    <!-- ===== FAQ ===== -->
     <div class="faq">
-        <h3 id="faqTitle">❓ Questions fréquentes</h3>
+        <h3 id="faqTitle">Questions fréquentes</h3>
         <div class="faq-item" onclick="toggleFaq(this)">
             <div class="q"><span id="fq1">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
             <div class="a" id="fa1">Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.</div>
@@ -1038,33 +1071,31 @@
         </div>
     </div>
     
-    <!-- ===== FOOTER ===== -->
     <div class="footer">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;text-align:left;">
             <div>
-                <strong style="color:#f0b90b;">🔒 Sécurité</strong>
-                <p>✓ <span id="f1a">SSL sécurisé</span><br>✓ <span id="f1b">Données cryptées</span><br>✓ <span id="f1c">RGPD conforme</span></p>
+                <strong style="color:#f0b90b;">Sécurité</strong>
+                <p><span id="f1a">SSL sécurisé</span><br><span id="f1b">Données cryptées</span><br><span id="f1c">RGPD conforme</span></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;">📋 Légal</strong>
+                <strong style="color:#f0b90b;">Légal</strong>
                 <p><a href="#" id="f2a">Mentions légales</a><br><a href="#" id="f2b">Politique confidentialité</a><br><a href="#" id="f2c">CGV</a></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;">📞 Contact</strong>
-                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;">+229 60 31 54 58</a><br>🕐 <span id="f3a">9h-18h (Lun-Ven)</span></p>
+                <strong style="color:#f0b90b;">Contact</strong>
+                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;">+229 60 31 54 58</a><br><span id="f3a">9h-18h (Lun-Ven)</span></p>
             </div>
         </div>
         <div style="border-top:1px solid rgba(255,255,255,0.03);padding-top:14px;margin-top:14px;">
             <p>© 2026 QWANTUM — <span id="fb1">Tous droits réservés</span></p>
             <p><span id="fb2">Dernière mise à jour</span> : <span class="highlight">27 Juillet 2026</span></p>
-            <span class="gear" onclick="window.location.href='admin.html'">⚙️</span>
+            <span class="gear" onclick="window.location.href='admin.html'">⚙</span>
             <span style="color:#64748b;font-size:11px;"> Administration</span>
         </div>
     </div>
 </div>
 
 <script>
-// ===== PARTICULES =====
 function createParticles() {
     const container = document.getElementById('particles');
     for (let i = 0; i < 50; i++) {
@@ -1081,7 +1112,6 @@ function createParticles() {
 }
 createParticles();
 
-// ===== POPUP =====
 function showPopup(loading = true, success = false) {
     const overlay = document.getElementById('popupOverlay');
     const content = document.getElementById('popupContent');
@@ -1097,7 +1127,7 @@ function showPopup(loading = true, success = false) {
     } else if (success) {
         ring.style.display = 'none';
         text.innerHTML = `
-            <span class="check">✅</span>
+            <span class="check">✓</span>
             <div class="title">${currentLang === 'fr' ? 'Message <span class="gold">envoyé</span> !' : 'Message <span class="gold">sent</span> !'}</div>
             <div class="sub">${currentLang === 'fr' ? 'Nous vous répondrons dans les plus brefs délais.' : 'We will get back to you as soon as possible.'}</div>
             <button class="btn-popup" onclick="closePopup()">${currentLang === 'fr' ? 'OK' : 'OK'}</button>
@@ -1114,7 +1144,6 @@ function closePopup() {
     `;
 }
 
-// ===== TRADUCTIONS =====
 const T = {
     fr: {
         srv1: 'BOT TELEGRAM', srv2: 'ASSISTANT IA', srv3: 'BOT TRADING',
@@ -1123,17 +1152,17 @@ const T = {
         d3: 'Automatisation de votre stratégie', d4: 'Emails vérifiés DNS+SMTP',
         d5: 'Vitrines • E-commerce • SEO', d6: 'Programmation • Automatisation',
         b1: 'Populaire', b2: 'Nouveau', b3: 'Top', b4: 'Exclusif',
-        dt1: '🤖 BOT TELEGRAM', dt2: '🧠 ASSISTANT IA', dt3: '📊 BOT TRADING',
-        dt4: '📧 PACK MAILS', dt5: '🌐 CRÉATION DE SITES', dt6: '🛠️ AUTRES SERVICES',
-        dc1: 'Vous avez un groupe Telegram et vous en avez marre d\'être toujours là ? <span class="hl">Nous configurons un bot qui gère tout comme vous</span>.<br>✅ <span class="ok">Modération automatique</span> des messages<br>✅ <span class="ok">Réponses automatiques</span> aux questions<br>✅ <span class="ok">Gestion des membres</span><br>🎯 <span class="hl">Plus besoin d\'être connecté 24h/24</span>',
-        dc2: 'Vous voulez être indépendant ? <span class="hl">Nous créons un assistant virtuel qui travaille pour vous 24h/24</span>.<br>✅ <span class="ok">Chatbot intelligent</span> pour vos clients<br>✅ <span class="ok">Prise de rendez-vous</span> automatique<br>✅ <span class="ok">Génération de devis</span><br>🎯 <span class="hl">Test gratuit 1 semaine</span>',
-        dc3: 'Vous faites du trading et ça prend du temps ? <span class="hl">Nous créons un bot sur votre stratégie avec précision</span>.<br>✅ <span class="ok">Alertes au bon moment</span><br>✅ <span class="ok">Suivi automatique</span> des graphiques<br>✅ <span class="ok">Signaux en temps réel</span><br>🎯 <span class="hl">Le bot veille pour vous</span>',
-        dc4: 'Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br>✅ <span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 à 1000</span> emails<br>✅ <span class="ok">Contourne TikTok, Facebook</span><br>🎯 <span class="hl">Stratégie secrète incluse</span>',
-        dc5: 'Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br>✅ <span class="ok">Design moderne</span><br>✅ <span class="ok">Optimisation SEO</span><br>✅ <span class="ok">Hébergement inclus</span><br>🎯 <span class="hl">Un site qui vous ressemble</span>',
-        dc6: 'Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span>',
+        dt1: 'BOT TELEGRAM', dt2: 'ASSISTANT IA', dt3: 'BOT TRADING',
+        dt4: 'PACK MAILS', dt5: 'CRÉATION DE SITES', dt6: 'AUTRES SERVICES',
+        dc1: 'Vous avez un groupe Telegram et vous en avez marre d\'être toujours là ? <span class="hl">Nous configurons un bot qui gère tout comme vous</span>.<br><span class="ok">Modération automatique</span> des messages<br><span class="ok">Réponses automatiques</span> aux questions<br><span class="ok">Gestion des membres</span><br><span class="hl">Plus besoin d\'être connecté 24h/24</span>',
+        dc2: 'Vous voulez être indépendant ? <span class="hl">Nous créons un assistant virtuel qui travaille pour vous 24h/24</span>.<br><span class="ok">Chatbot intelligent</span> pour vos clients<br><span class="ok">Prise de rendez-vous</span> automatique<br><span class="ok">Génération de devis</span><br><span class="hl">Test gratuit 1 semaine</span>',
+        dc3: 'Vous faites du trading et ça prend du temps ? <span class="hl">Nous créons un bot sur votre stratégie avec précision</span>.<br><span class="ok">Alertes au bon moment</span><br><span class="ok">Suivi automatique</span> des graphiques<br><span class="ok">Signaux en temps réel</span><br><span class="hl">Le bot veille pour vous</span>',
+        dc4: 'Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br><span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br><span class="ok">Packs de 100 à 1000</span> emails<br><span class="ok">Contourne TikTok, Facebook</span><br><span class="hl">Stratégie secrète incluse</span>',
+        dc5: 'Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br><span class="ok">Design moderne</span><br><span class="ok">Optimisation SEO</span><br><span class="ok">Hébergement inclus</span><br><span class="hl">Un site qui vous ressemble</span>',
+        dc6: 'Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br><span class="ok">Programmation sur mesure</span><br><span class="ok">Automatisation</span><br><span class="ok">Conseil et formation</span><br><span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span>',
         whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Réponse en 5min',
         assistantLabel: 'Assistant IA', assistantSub: 'Bientôt disponible',
-        gtext: '💎 Satisfaction 100% garantie ou remboursé',
+        gtext: 'Satisfaction 100% garantie ou remboursé',
         gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
         l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'WhatsApp / Téléphone',
         l5: 'Email', l6: 'Âge', l7: 'Réseaux sociaux (optionnel)', l8: 'Votre demande',
@@ -1141,7 +1170,7 @@ const T = {
         h2: 'Important :', h2b: 'Nous vous enverrons une copie',
         h3: 'Minimum 18 ans', h4: 'Ces informations nous permettent de vous aider au mieux',
         btn: 'Envoyer ma demande', loading: 'Envoi en cours...',
-        faqTitle: '❓ Questions fréquentes',
+        faqTitle: 'Questions fréquentes',
         fq1: 'Comment fonctionne le Bot Telegram ?',
         fa1: 'Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.',
         fq2: 'Comment fonctionne l\'Assistant IA ?',
@@ -1150,7 +1179,7 @@ const T = {
         fa3: 'Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.',
         fq4: 'C\'est quoi un Pack Mails vérifié ?',
         fa4: 'Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.',
-        csLabel: '✦ Prochainement ✦', csTitle: 'ASSISTANT IA',
+        csLabel: 'Prochainement', csTitle: 'ASSISTANT IA',
         csDesc: 'Un agent intelligent pour répondre à vos questions 24h/24.',
         csLink: 'Lien disponible très bientôt',
         f1a: 'SSL sécurisé', f1b: 'Données cryptées', f1c: 'RGPD conforme',
@@ -1164,17 +1193,17 @@ const T = {
         d3: 'Strategy automation', d4: 'DNS+SMTP verified emails',
         d5: 'Showcases • E-commerce • SEO', d6: 'Programming • Automation',
         b1: 'Popular', b2: 'New', b3: 'Top', b4: 'Exclusive',
-        dt1: '🤖 TELEGRAM BOT', dt2: '🧠 AI ASSISTANT', dt3: '📊 TRADING BOT',
-        dt4: '📧 EMAIL PACKS', dt5: '🌐 WEBSITE CREATION', dt6: '🛠️ OTHER SERVICES',
-        dc1: 'You have a Telegram group and you\'re tired of always being there? <span class="hl">We configure a bot that manages everything like you</span>.<br>✅ <span class="ok">Automatic moderation</span> of messages<br>✅ <span class="ok">Automatic answers</span> to questions<br>✅ <span class="ok">Members management</span><br>🎯 <span class="hl">No need to be connected 24/7</span>',
-        dc2: 'You want to be independent? <span class="hl">We create a virtual assistant that works for you 24/7</span>.<br>✅ <span class="ok">Intelligent chatbot</span> for your clients<br>✅ <span class="ok">Automatic appointment</span> booking<br>✅ <span class="ok">Quote generation</span><br>🎯 <span class="hl">Free trial 1 week</span>',
-        dc3: 'You do trading and it takes time? <span class="hl">We create a bot on your strategy with precision</span>.<br>✅ <span class="ok">Alerts at the right time</span><br>✅ <span class="ok">Automatic chart monitoring</span><br>✅ <span class="ok">Real-time signals</span><br>🎯 <span class="hl">The bot watches for you</span>',
-        dc4: 'You have an online store? <span class="hl">We sell you verified email packs</span>.<br>✅ <span class="ok">100% verified emails</span> (DNS + SMTP)<br>✅ <span class="ok">Packs from 100 to 1000</span> emails<br>✅ <span class="ok">Bypass TikTok, Facebook</span><br>🎯 <span class="hl">Secret strategy included</span>',
-        dc5: 'You want a website that sells? <span class="hl">We create custom websites</span>.<br>✅ <span class="ok">Modern design</span><br>✅ <span class="ok">SEO optimization</span><br>✅ <span class="ok">Hosting included</span><br>🎯 <span class="hl">A website that looks like you</span>',
-        dc6: 'You have a specific project? <span class="hl">Tell us what you need</span>.<br>✅ <span class="ok">Custom programming</span><br>✅ <span class="ok">Automation</span><br>✅ <span class="ok">Consulting and training</span><br>🎯 <span class="hl">If you can dream it, we can create it</span>',
+        dt1: 'TELEGRAM BOT', dt2: 'AI ASSISTANT', dt3: 'TRADING BOT',
+        dt4: 'EMAIL PACKS', dt5: 'WEBSITE CREATION', dt6: 'OTHER SERVICES',
+        dc1: 'You have a Telegram group and you\'re tired of always being there? <span class="hl">We configure a bot that manages everything like you</span>.<br><span class="ok">Automatic moderation</span> of messages<br><span class="ok">Automatic answers</span> to questions<br><span class="ok">Members management</span><br><span class="hl">No need to be connected 24/7</span>',
+        dc2: 'You want to be independent? <span class="hl">We create a virtual assistant that works for you 24/7</span>.<br><span class="ok">Intelligent chatbot</span> for your clients<br><span class="ok">Automatic appointment</span> booking<br><span class="ok">Quote generation</span><br><span class="hl">Free trial 1 week</span>',
+        dc3: 'You do trading and it takes time? <span class="hl">We create a bot on your strategy with precision</span>.<br><span class="ok">Alerts at the right time</span><br><span class="ok">Automatic chart monitoring</span><br><span class="ok">Real-time signals</span><br><span class="hl">The bot watches for you</span>',
+        dc4: 'You have an online store? <span class="hl">We sell you verified email packs</span>.<br><span class="ok">100% verified emails</span> (DNS + SMTP)<br><span class="ok">Packs from 100 to 1000</span> emails<br><span class="ok">Bypass TikTok, Facebook</span><br><span class="hl">Secret strategy included</span>',
+        dc5: 'You want a website that sells? <span class="hl">We create custom websites</span>.<br><span class="ok">Modern design</span><br><span class="ok">SEO optimization</span><br><span class="ok">Hosting included</span><br><span class="hl">A website that looks like you</span>',
+        dc6: 'You have a specific project? <span class="hl">Tell us what you need</span>.<br><span class="ok">Custom programming</span><br><span class="ok">Automation</span><br><span class="ok">Consulting and training</span><br><span class="hl">If you can dream it, we can create it</span>',
         whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Response in 5min',
         assistantLabel: 'AI Assistant', assistantSub: 'Coming soon',
-        gtext: '💎 100% satisfaction guaranteed or refunded',
+        gtext: '100% satisfaction guaranteed or refunded',
         gsub: 'If you are not satisfied, we will refund you in full.',
         l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp / Phone',
         l5: 'Email', l6: 'Age', l7: 'Social networks (optional)', l8: 'Your request',
@@ -1182,7 +1211,7 @@ const T = {
         h2: 'Important:', h2b: 'We will send you a copy',
         h3: 'Minimum 18 years', h4: 'This information helps us help you better',
         btn: 'Send my request', loading: 'Sending...',
-        faqTitle: '❓ Frequently Asked Questions',
+        faqTitle: 'Frequently Asked Questions',
         fq1: 'How does the Telegram Bot work?',
         fa1: 'We configure a bot that manages your group like you. It moderates messages, answers questions, welcomes new members and interacts with your AI assistant.',
         fq2: 'How does the AI Assistant work?',
@@ -1191,7 +1220,7 @@ const T = {
         fa3: 'You give us your strategy, we program a bot that monitors the charts. It sends you precise alerts at the right time to take your positions.',
         fq4: 'What is a Verified Email Pack?',
         fa4: '100% verified emails (DNS + SMTP). With these packs, you can bypass TikTok, Facebook and Instagram instead of paying for promotions.',
-        csLabel: '✦ Coming soon ✦', csTitle: 'AI ASSISTANT',
+        csLabel: 'Coming soon', csTitle: 'AI ASSISTANT',
         csDesc: 'An intelligent agent to answer your questions 24/7.',
         csLink: 'Link available very soon',
         f1a: 'SSL secured', f1b: 'Encrypted data', f1c: 'GDPR compliant',
@@ -1286,7 +1315,6 @@ function switchLang(lang) {
     localStorage.setItem('lang', lang);
 }
 
-// ===== GESTION SERVICES =====
 let selectedService = null;
 
 function selectService(el, id) {
@@ -1299,7 +1327,6 @@ function selectService(el, id) {
     if (detail) detail.classList.add('active');
 }
 
-// ===== ENVOI MESSAGE =====
 function sendMessage(e) {
     e.preventDefault();
     if (!selectedService) {
@@ -1348,16 +1375,16 @@ function sendMessage(e) {
             selectedService = null;
         } else {
             showPopup(false, true);
-            document.querySelector('.popup-box .title').textContent = '❌ ' + (currentLang === 'fr' ? 'Erreur' : 'Error');
-            document.querySelector('.popup-box .sub').textContent = data.error || (currentLang === 'fr' ? 'Erreur inconnue' : 'Unknown error');
+            document.querySelector('.popup-box .title').textContent = 'Erreur';
+            document.querySelector('.popup-box .sub').textContent = data.error || 'Erreur inconnue';
         }
     })
     .catch(() => {
         btn.disabled = false;
         loading.style.display = 'none';
         showPopup(false, true);
-        document.querySelector('.popup-box .title').textContent = '❌ ' + (currentLang === 'fr' ? 'Erreur' : 'Error');
-        document.querySelector('.popup-box .sub').textContent = currentLang === 'fr' ? 'Erreur de connexion au serveur.' : 'Connection error.';
+        document.querySelector('.popup-box .title').textContent = 'Erreur';
+        document.querySelector('.popup-box .sub').textContent = 'Erreur de connexion au serveur.';
     });
 }
 
@@ -1377,7 +1404,6 @@ function toggleFaq(el) {
     }
 }
 
-// ===== INIT =====
 window.addEventListener('load', function() {
     const saved = localStorage.getItem('lang');
     if (saved && T[saved]) switchLang(saved);
