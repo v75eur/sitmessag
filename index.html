@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MESSAGERIE PRO</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             min-height: 100vh;
@@ -27,7 +26,6 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* ===== HEADER ===== */
         .header { text-align: center; margin-bottom: 28px; }
         .header .brand {
             display: inline-block;
@@ -55,13 +53,48 @@
             font-weight: 400;
         }
         
+        /* ===== STATS LIVE ===== */
+        .live-stats {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .live-stats .item {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid #f3f4f6;
+            transition: all 0.3s;
+        }
+        .live-stats .item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .live-stats .item .number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0a0a1a;
+        }
+        .live-stats .item .number.gold { color: #f0b90b; }
+        .live-stats .item .number.green { color: #10b981; }
+        .live-stats .item .number.blue { color: #3b82f6; }
+        .live-stats .item .label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .live-stats .item .sub {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 2px;
+        }
+        
         /* ===== LANG SELECTOR ===== */
         .lang-selector {
             display: flex;
             justify-content: center;
             gap: 4px;
             flex-wrap: wrap;
-            margin: 16px 0 24px;
+            margin: 16px 0 20px;
         }
         .lang-selector button {
             padding: 5px 14px;
@@ -76,25 +109,6 @@
         }
         .lang-selector button:hover { border-color: #f0b90b; color: #0a0a1a; }
         .lang-selector button.active { border-color: #f0b90b; background: #f0b90b; color: #0a0a1a; }
-        
-        /* ===== STATS ===== */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        .stats .item {
-            background: #f9fafb;
-            border-radius: 16px;
-            padding: 16px;
-            text-align: center;
-            border: 1px solid #f3f4f6;
-            transition: all 0.3s;
-        }
-        .stats .item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
-        .stats .item .number { font-size: 28px; font-weight: 800; color: #0a0a1a; }
-        .stats .item .label { font-size: 13px; color: #6b7280; margin-top: 2px; }
         
         /* ===== TRUST ===== */
         .trust {
@@ -165,17 +179,6 @@
         .detail-box .content .hl { color: #f0b90b; font-weight: 600; }
         .detail-box .content .ok { color: #10b981; font-weight: 600; }
         
-        /* ===== URGENCE ===== */
-        .urgence {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 12px;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .urgence span { color: #dc2626; font-weight: 700; font-size: 14px; }
-        
         /* ===== CONTACT ===== */
         .contact {
             display: grid;
@@ -216,6 +219,17 @@
         .form-group { margin-bottom: 14px; }
         .form-group label { display: block; color: #0a0a1a; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
         .form-group label .required { color: #dc2626; }
+        .form-group label .badge-contact {
+            display: inline-block;
+            background: #10b981;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 6px;
+            text-transform: uppercase;
+        }
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px 16px;
@@ -231,6 +245,7 @@
         .form-group textarea { min-height: 80px; resize: vertical; }
         .form-group .hint { color: #6b7280; font-size: 12px; margin-top: 4px; }
         .form-group .hint .hl { color: #f0b90b; font-weight: 600; }
+        .form-group .hint .important { color: #dc2626; font-weight: 600; }
         
         .btn {
             width: 100%;
@@ -370,11 +385,10 @@
         .gear { cursor: pointer; font-size: 16px; color: #6b7280; }
         .gear:hover { color: #f0b90b; }
         
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .container { padding: 24px 18px; }
             .services { grid-template-columns: 1fr 1fr; }
-            .stats { grid-template-columns: 1fr 1fr; }
+            .live-stats { grid-template-columns: 1fr 1fr; }
             .trust { grid-template-columns: repeat(3,1fr); }
             .contact { grid-template-columns: 1fr; }
             .header h1 { font-size: 28px; }
@@ -383,7 +397,7 @@
         @media (max-width: 480px) {
             .services { grid-template-columns: 1fr; }
             .trust { grid-template-columns: repeat(2,1fr); }
-            .stats { grid-template-columns: 1fr 1fr; }
+            .live-stats { grid-template-columns: 1fr 1fr; }
             .header h1 { font-size: 24px; }
         }
     </style>
@@ -394,7 +408,31 @@
     <div class="header">
         <span class="brand">✦ MESSAGERIE PRO</span>
         <h1>Transforme <span class="accent">ton activité</span></h1>
-        <p>Choisis ton service — Zéro compromis</p>
+        <p>Solutions digitales depuis 2022</p>
+    </div>
+    
+    <!-- ===== LIVE STATS ===== -->
+    <div class="live-stats" id="liveStats">
+        <div class="item">
+            <div class="number gold" id="totalClients">147</div>
+            <div class="label">👥 Clients satisfaits</div>
+            <div class="sub">Depuis 2022</div>
+        </div>
+        <div class="item">
+            <div class="number green" id="todayRequests">0</div>
+            <div class="label">📩 Demandes aujourd'hui</div>
+            <div class="sub" id="todayStatus">🔵 En direct</div>
+        </div>
+        <div class="item">
+            <div class="number blue" id="onlineCount">...</div>
+            <div class="label">👤 En ligne</div>
+            <div class="sub">Sur le site</div>
+        </div>
+        <div class="item">
+            <div class="number" id="totalVisits">...</div>
+            <div class="label">📊 Visites totales</div>
+            <div class="sub">Depuis le lancement</div>
+        </div>
     </div>
     
     <!-- ===== LANG SELECTOR ===== -->
@@ -405,14 +443,6 @@
         <button data-lang="de" onclick="switchLang('de')">DE</button>
         <button data-lang="pt" onclick="switchLang('pt')">PT</button>
         <button data-lang="ar" onclick="switchLang('ar')">AR</button>
-    </div>
-    
-    <!-- ===== STATS ===== -->
-    <div class="stats">
-        <div class="item"><div class="number">+500</div><div class="label" id="s1">Clients satisfaits</div></div>
-        <div class="item"><div class="number">98%</div><div class="label" id="s2">Taux de satisfaction</div></div>
-        <div class="item"><div class="number">4.9/5</div><div class="label" id="s3">Note moyenne</div></div>
-        <div class="item"><div class="number">+5 ans</div><div class="label" id="s4">D'expérience</div></div>
     </div>
     
     <!-- ===== TRUST ===== -->
@@ -489,9 +519,6 @@
         <div class="content" id="dc6">Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span></div>
     </div>
     
-    <!-- ===== URGENCE ===== -->
-    <div class="urgence"><span id="urgence">Offre spéciale - Plus que 3 places ce mois-ci</span></div>
-    
     <!-- ===== CONTACT ===== -->
     <div class="contact">
         <a href="https://wa.me/22960315458" target="_blank" class="whatsapp">
@@ -527,14 +554,14 @@
             <input type="text" id="ville" placeholder="Entrez votre ville" required>
         </div>
         <div class="form-group">
-            <label id="l4">WhatsApp / Téléphone <span class="required">*</span></label>
+            <label id="l4">WhatsApp / Téléphone <span class="required">*</span> <span class="badge-contact">📱 ACTIF</span></label>
             <input type="tel" id="whatsapp" placeholder="+229 60 31 54 58" required>
-            <div class="hint"><span class="hl" id="h1">Important :</span> <span id="h1b">Nous vous recontacterons sur ce numéro</span></div>
+            <div class="hint"><span class="important">📌 Nous vous recontacterons sur ce numéro</span> — <span class="hl">Réponse garantie sous 24h</span></div>
         </div>
         <div class="form-group">
-            <label id="l5">Email <span class="required">*</span></label>
+            <label id="l5">Email <span class="required">*</span> <span class="badge-contact">✉️ ACTIF</span></label>
             <input type="email" id="email" placeholder="jean.dupont@email.com" required>
-            <div class="hint"><span class="hl" id="h2">Important :</span> <span id="h2b">Nous vous enverrons une copie</span></div>
+            <div class="hint"><span class="important">📌 Nous vous enverrons une copie de votre message</span> — <span class="hl">Confirmation immédiate</span></div>
         </div>
         <div class="form-group">
             <label id="l6">Âge <span class="required">*</span></label>
@@ -590,8 +617,9 @@
     
     <!-- ===== STATS BOTTOM ===== -->
     <div class="stats-bottom">
-        <div class="item"><div class="number" id="onlineCount">...</div><div class="label" id="onlineLabel">En ligne</div></div>
-        <div class="item"><div class="number total" id="totalCount">...</div><div class="label" id="totalLabel">Visiteurs total</div></div>
+        <div class="item"><div class="number" id="onlineCount2">...</div><div class="label" id="onlineLabel">En ligne</div></div>
+        <div class="item"><div class="number total" id="totalCount">...</div><div class="label" id="totalLabel">Visites totales</div></div>
+        <div class="item"><div class="number total" id="totalClients2">147</div><div class="label">👥 Clients satisfaits</div></div>
     </div>
     
     <!-- ===== FOOTER ===== -->
@@ -620,6 +648,42 @@
 </div>
 
 <script>
+// ============================================================
+// 1. COMPTEUR DE DEMANDES - BLUFF
+// ============================================================
+let todayRequests = parseInt(localStorage.getItem('todayRequests')) || Math.floor(Math.random() * 16);
+let totalClients = 147;
+
+function updateTodayRequests() {
+    // Variation aléatoire entre 0 et 16
+    const variation = Math.floor(Math.random() * 17);
+    todayRequests = variation;
+    localStorage.setItem('todayRequests', todayRequests);
+    document.getElementById('todayRequests').textContent = todayRequests;
+    
+    // Statut en direct
+    const statusEl = document.getElementById('todayStatus');
+    if (todayRequests > 10) {
+        statusEl.textContent = '🔥 Très actif';
+        statusEl.style.color = '#10b981';
+    } else if (todayRequests > 5) {
+        statusEl.textContent = '📈 Activité moyenne';
+        statusEl.style.color = '#f0b90b';
+    } else if (todayRequests > 0) {
+        statusEl.textContent = '📩 Demandes en cours';
+        statusEl.style.color = '#3b82f6';
+    } else {
+        statusEl.textContent = '💤 Période calme';
+        statusEl.style.color = '#6b7280';
+    }
+}
+
+// Mettre à jour toutes les 30 secondes
+setInterval(updateTodayRequests, 30000);
+
+// ============================================================
+// 2. TRADUCTIONS
+// ============================================================
 const T = {
     fr: {
         s1: 'Clients satisfaits', s2: 'Taux de satisfaction', s3: 'Note moyenne', s4: "D'expérience",
@@ -636,15 +700,12 @@ const T = {
         dc4: 'Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br>✅ <span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 à 1000</span> emails<br>✅ <span class="ok">Contourne TikTok, Facebook</span><br>🎯 <span class="hl">Stratégie secrète incluse</span>',
         dc5: 'Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br>✅ <span class="ok">Design moderne</span><br>✅ <span class="ok">Optimisation SEO</span><br>✅ <span class="ok">Hébergement inclus</span><br>🎯 <span class="hl">Un site qui vous ressemble</span>',
         dc6: 'Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span>',
-        urgence: 'Offre spéciale - Plus que 3 places ce mois-ci',
         whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Réponse en 5min',
         assistantLabel: 'Assistant IA', assistantSub: 'Bientôt disponible',
         gtext: 'Satisfaction 100% garantie ou remboursé',
         gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
         l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'WhatsApp / Téléphone',
         l5: 'Email', l6: 'Âge', l7: 'Réseaux sociaux (optionnel)', l8: 'Votre demande',
-        h1: 'Important :', h1b: 'Nous vous recontacterons sur ce numéro',
-        h2: 'Important :', h2b: 'Nous vous enverrons une copie',
         h3: 'Minimum 18 ans', h4: 'Ces informations nous permettent de vous aider au mieux',
         btn: 'Envoyer ma demande', loading: 'Envoi en cours...',
         faqTitle: 'Questions fréquentes',
@@ -656,7 +717,7 @@ const T = {
         fa3: 'Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.',
         fq4: 'C\'est quoi un Pack Mails vérifié ?',
         fa4: 'Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.',
-        online: 'En ligne', total: 'Visiteurs total',
+        online: 'En ligne', total: 'Visites totales',
         f1a: 'SSL sécurisé', f1b: 'Données cryptées', f1c: 'RGPD conforme',
         f2a: 'Mentions légales', f2b: 'Politique confidentialité', f2c: 'CGV',
         f3a: '9h-18h (Lun-Ven)', fb1: 'Tous droits réservés', fb2: 'Dernière mise à jour'
@@ -676,15 +737,12 @@ const T = {
         dc4: 'You have an online store? <span class="hl">We sell you verified email packs</span>.<br>✅ <span class="ok">100% verified emails</span> (DNS + SMTP)<br>✅ <span class="ok">Packs from 100 to 1000</span> emails<br>✅ <span class="ok">Bypass TikTok, Facebook</span><br>🎯 <span class="hl">Secret strategy included</span>',
         dc5: 'You want a website that sells? <span class="hl">We create custom websites</span>.<br>✅ <span class="ok">Modern design</span><br>✅ <span class="ok">SEO optimization</span><br>✅ <span class="ok">Hosting included</span><br>🎯 <span class="hl">A website that looks like you</span>',
         dc6: 'You have a specific project? <span class="hl">Tell us what you need</span>.<br>✅ <span class="ok">Custom programming</span><br>✅ <span class="ok">Automation</span><br>✅ <span class="ok">Consulting and training</span><br>🎯 <span class="hl">If you can dream it, we can create it</span>',
-        urgence: 'Special offer - Only 3 spots left this month',
         whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Response in 5min',
         assistantLabel: 'AI Assistant', assistantSub: 'Coming soon',
         gtext: '100% satisfaction guaranteed or refunded',
         gsub: 'If you are not satisfied, we will refund you in full.',
         l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp / Phone',
         l5: 'Email', l6: 'Age', l7: 'Social networks (optional)', l8: 'Your request',
-        h1: 'Important:', h1b: 'We will contact you on this number',
-        h2: 'Important:', h2b: 'We will send you a copy',
         h3: 'Minimum 18 years', h4: 'This information helps us help you better',
         btn: 'Send my request', loading: 'Sending...',
         faqTitle: 'Frequently Asked Questions',
@@ -696,7 +754,7 @@ const T = {
         fa3: 'You give us your strategy, we program a bot that monitors the charts. It sends you precise alerts at the right time to take your positions.',
         fq4: 'What is a Verified Email Pack?',
         fa4: '100% verified emails (DNS + SMTP). With these packs, you can bypass TikTok, Facebook and Instagram instead of paying for promotions.',
-        online: 'Online', total: 'Total visitors',
+        online: 'Online', total: 'Total visits',
         f1a: 'SSL secured', f1b: 'Encrypted data', f1c: 'GDPR compliant',
         f2a: 'Legal notices', f2b: 'Privacy policy', f2c: 'Terms',
         f3a: '9am-6pm (Mon-Fri)', fb1: 'All rights reserved', fb2: 'Last update'
@@ -716,15 +774,12 @@ const T = {
         dc4: '¿Tienes una tienda online? <span class="hl">Te vendemos packs de emails verificados</span>.<br>✅ <span class="ok">Emails 100% verificados</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 a 1000</span><br>✅ <span class="ok">Evita TikTok, Facebook</span><br>🎯 <span class="hl">Estrategia secreta incluida</span>',
         dc5: '¿Quieres un sitio que venda? <span class="hl">Creamos sitios a medida</span>.<br>✅ <span class="ok">Diseño moderno</span><br>✅ <span class="ok">Optimización SEO</span><br>✅ <span class="ok">Alojamiento incluido</span><br>🎯 <span class="hl">Un sitio que se parece a ti</span>',
         dc6: '¿Tienes un proyecto específico? <span class="hl">Dinos lo que necesitas</span>.<br>✅ <span class="ok">Programación a medida</span><br>✅ <span class="ok">Automatización</span><br>✅ <span class="ok">Consultoría y formación</span><br>🎯 <span class="hl">Si puedes soñarlo, podemos crearlo</span>',
-        urgence: 'Oferta especial - Solo quedan 3 plazas este mes',
         whatsappLabel: 'WhatsApp Directo', whatsappSub: 'Respuesta en 5min',
         assistantLabel: 'Asistente IA', assistantSub: 'Próximamente',
         gtext: '100% de satisfacción garantizada o reembolso',
         gsub: 'Si no estás satisfecho, te reembolsamos íntegramente.',
         l1: 'Nombre completo', l2: 'País', l3: 'Ciudad', l4: 'WhatsApp / Teléfono',
         l5: 'Email', l6: 'Edad', l7: 'Redes sociales (opcional)', l8: 'Tu solicitud',
-        h1: 'Importante:', h1b: 'Te contactaremos en este número',
-        h2: 'Importante:', h2b: 'Te enviaremos una copia',
         h3: 'Mínimo 18 años', h4: 'Esta información nos ayuda a ayudarte mejor',
         btn: 'Enviar mi solicitud', loading: 'Enviando...',
         faqTitle: 'Preguntas frecuentes',
@@ -736,7 +791,7 @@ const T = {
         fa3: 'Nos das tu estrategia, programamos un bot que monitorea los gráficos. Te envía alertas precisas en el momento justo para tomar posiciones.',
         fq4: '¿Qué es un Pack de Emails Verificados?',
         fa4: 'Emails 100% verificados (DNS + SMTP). Con estos packs, puedes evitar TikTok, Facebook e Instagram en lugar de pagar promociones.',
-        online: 'En línea', total: 'Visitantes total',
+        online: 'En línea', total: 'Visitas totales',
         f1a: 'SSL seguro', f1b: 'Datos encriptados', f1c: 'Cumple RGPD',
         f2a: 'Aviso legal', f2b: 'Política privacidad', f2c: 'Condiciones',
         f3a: '9h-18h (Lun-Vie)', fb1: 'Todos los derechos reservados', fb2: 'Última actualización'
@@ -756,15 +811,12 @@ const T = {
         dc4: 'Du hast einen Online-Shop? <span class="hl">Wir verkaufen dir verifizierte Email-Packs</span>.<br>✅ <span class="ok">100% verifizierte Emails</span> (DNS + SMTP)<br>✅ <span class="ok">Packs von 100 bis 1000</span><br>✅ <span class="ok">Umgehe TikTok, Facebook</span><br>🎯 <span class="hl">Geheime Strategie inklusive</span>',
         dc5: 'Du möchtest eine Website, die verkauft? <span class="hl">Wir erstellen maßgeschneiderte Websites</span>.<br>✅ <span class="ok">Modernes Design</span><br>✅ <span class="ok">SEO-Optimierung</span><br>✅ <span class="ok">Hosting inklusive</span><br>🎯 <span class="hl">Eine Website, die zu dir passt</span>',
         dc6: 'Du hast ein spezifisches Projekt? <span class="hl">Sag uns, was du brauchst</span>.<br>✅ <span class="ok">Maßgeschneiderte Programmierung</span><br>✅ <span class="ok">Automatisierung</span><br>✅ <span class="ok">Beratung und Schulung</span><br>🎯 <span class="hl">Wenn du es träumen kannst, wir können es erschaffen</span>',
-        urgence: 'Spezialangebot - Nur noch 3 Plätze diesen Monat',
         whatsappLabel: 'WhatsApp Direkt', whatsappSub: 'Antwort in 5min',
         assistantLabel: 'KI-Assistent', assistantSub: 'Bald verfügbar',
         gtext: '100% Zufriedenheitsgarantie oder Geld zurück',
         gsub: 'Wenn du nicht zufrieden bist, erstatten wir dir den vollen Betrag.',
         l1: 'Vollständiger Name', l2: 'Land', l3: 'Stadt', l4: 'WhatsApp / Telefon',
         l5: 'Email', l6: 'Alter', l7: 'Soziale Netzwerke (optional)', l8: 'Deine Anfrage',
-        h1: 'Wichtig:', h1b: 'Wir werden dich unter dieser Nummer kontaktieren',
-        h2: 'Wichtig:', h2b: 'Wir senden dir eine Kopie',
         h3: 'Mindestens 18 Jahre', h4: 'Diese Informationen helfen uns, dir besser zu helfen',
         btn: 'Meine Anfrage senden', loading: 'Senden...',
         faqTitle: 'Häufig gestellte Fragen',
@@ -776,7 +828,7 @@ const T = {
         fa3: 'Du gibst uns deine Strategie, wir programmieren einen Bot, der die Charts überwacht. Er sendet dir präzise Alarme zur richtigen Zeit, um Positionen zu eröffnen.',
         fq4: 'Was ist ein verifiziertes Email-Pack?',
         fa4: '100% verifizierte Emails (DNS + SMTP). Mit diesen Packs kannst du TikTok, Facebook und Instagram umgehen, anstatt für Werbung zu bezahlen.',
-        online: 'Online', total: 'Besucher gesamt',
+        online: 'Online', total: 'Besuche gesamt',
         f1a: 'SSL-gesichert', f1b: 'Verschlüsselte Daten', f1c: 'DSGVO-konform',
         f2a: 'Impressum', f2b: 'Datenschutz', f2c: 'AGB',
         f3a: '9-18 Uhr (Mo-Fr)', fb1: 'Alle Rechte vorbehalten', fb2: 'Letzte Aktualisierung'
@@ -796,15 +848,12 @@ const T = {
         dc4: 'Tem uma loja online? <span class="hl">Vendemos pacotes de emails verificados</span>.<br>✅ <span class="ok">Emails 100% verificados</span> (DNS + SMTP)<br>✅ <span class="ok">Pacotes de 100 a 1000</span><br>✅ <span class="ok">Contorne TikTok, Facebook</span><br>🎯 <span class="hl">Estratégia secreta incluída</span>',
         dc5: 'Quer um site que venda? <span class="hl">Criamos sites sob medida</span>.<br>✅ <span class="ok">Design moderno</span><br>✅ <span class="ok">Otimização SEO</span><br>✅ <span class="ok">Hospedagem incluída</span><br>🎯 <span class="hl">Um site que se parece com você</span>',
         dc6: 'Tem um projeto específico? <span class="hl">Diga-nos o que precisa</span>.<br>✅ <span class="ok">Programação sob medida</span><br>✅ <span class="ok">Automação</span><br>✅ <span class="ok">Consultoria e formação</span><br>🎯 <span class="hl">Se você pode sonhar, nós podemos criar</span>',
-        urgence: 'Oferta especial - Apenas 3 vagas este mês',
         whatsappLabel: 'WhatsApp Directo', whatsappSub: 'Resposta em 5min',
         assistantLabel: 'Assistente IA', assistantSub: 'Em breve',
         gtext: '100% de satisfação garantida ou reembolso',
         gsub: 'Se não estiver satisfeito, reembolsamos integralmente.',
         l1: 'Nome completo', l2: 'País', l3: 'Cidade', l4: 'WhatsApp / Telefone',
         l5: 'Email', l6: 'Idade', l7: 'Redes sociais (opcional)', l8: 'Sua solicitação',
-        h1: 'Importante:', h1b: 'Entraremos em contato neste número',
-        h2: 'Importante:', h2b: 'Enviaremos uma cópia',
         h3: 'Mínimo 18 anos', h4: 'Esta informação nos ajuda a ajudá-lo melhor',
         btn: 'Enviar minha solicitação', loading: 'Enviando...',
         faqTitle: 'Perguntas frequentes',
@@ -816,7 +865,7 @@ const T = {
         fa3: 'Você nos dá sua estratégia, programamos um bot que monitora os gráficos. Ele envia alertas precisos no momento certo para tomar posições.',
         fq4: 'O que é um Pacote de Emails Verificados?',
         fa4: 'Emails 100% verificados (DNS + SMTP). Com esses pacotes, você pode contornar TikTok, Facebook e Instagram em vez de pagar por promoções.',
-        online: 'Online', total: 'Visitantes total',
+        online: 'Online', total: 'Visitas totais',
         f1a: 'SSL seguro', f1b: 'Dados criptografados', f1c: 'RGPD conforme',
         f2a: 'Aviso legal', f2b: 'Política privacidade', f2c: 'Condições',
         f3a: '9h-18h (Seg-Sex)', fb1: 'Todos os direitos reservados', fb2: 'Última atualização'
@@ -836,15 +885,12 @@ const T = {
         dc4: 'لَدَيْكَ مَتْجَرٌ إِلِكْتْرُونِيّ؟ <span class="hl">نَبِيعُكَ حُزَمَ بَرِيدٍ مُؤَكَّدَةٍ</span>.<br>✅ <span class="ok">بَرِيدٌ مُؤَكَّدٌ 100%</span> (DNS+SMTP)<br>✅ <span class="ok">حُزَمٌ مِنْ 100 إِلَى 1000</span><br>✅ <span class="ok">تَجَاوُز تِيك توك، فَيْس بُوك</span><br>🎯 <span class="hl">إِسْتِرَاتِيجِيَّة سِرِّيَّة مُضَمَّنَة</span>',
         dc5: 'تُرِيدُ مَوْقِعًا يَبِيعُ؟ <span class="hl">نُنْشِئُ مَوَاقِعَ حَسَبَ الطَّلَبِ</span>.<br>✅ <span class="ok">تَصْمِيم حَدِيث</span><br>✅ <span class="ok">تَحْسِين سِيُو</span><br>✅ <span class="ok">اسْتِضَافَة مُضَمَّنَة</span><br>🎯 <span class="hl">مَوْقِعٌ يُشْبِهُكَ</span>',
         dc6: 'لَدَيْكَ مَشْرُوعٌ مُحَدَّدٌ؟ <span class="hl">أَخْبِرْنَا بِمَا تَحْتَاجُ</span>.<br>✅ <span class="ok">بَرْمَجَة حَسَبَ الطَّلَبِ</span><br>✅ <span class="ok">أَتْمَتَة</span><br>✅ <span class="ok">اسْتِشَارَة وَتَدْرِيب</span><br>🎯 <span class="hl">إِنِ اسْتَطَعْتَ تَخَيُّلَهُ، نَسْتَطِيعُ إِنْشَاؤُهُ</span>',
-        urgence: 'عَرْضٌ خَاصٌّ - 3 مَقَاعِدَ فَقَطْ هَذَا الشَّهْرِ',
         whatsappLabel: 'وَاتْسَاب مُبَاشِر', whatsappSub: 'رَدٌّ فِي 5 دَقَائِق',
         assistantLabel: 'مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', assistantSub: 'قَرِيبًا',
         gtext: 'رِضًا مَضْمُونٌ 100% أَوِ اسْتِرْدَادُ الْمَالِ',
         gsub: 'إِذَا لَمْ تَكُنْ رَاضِيًا، سَنُعِيدُ لَكَ الْمَبْلَغَ كَامِلًا.',
         l1: 'الِاسْمُ وَاللَّقَبُ', l2: 'الْبَلَدُ', l3: 'الْمَدِينَةُ', l4: 'وَاتْسَاب / هَاتِف',
         l5: 'الْبَرِيدُ الإِلِكْتْرُونِيّ', l6: 'الْعُمْرُ', l7: 'شَبَكَاتٌ اجْتِمَاعِيَّة (اخْتِيَارِيّ)', l8: 'طَلَبُكَ',
-        h1: 'مُهِمٌّ:', h1b: 'سَنَتَصِلُ بِكَ عَلَى هَذَا الرَّقْمِ',
-        h2: 'مُهِمٌّ:', h2b: 'سَنُرْسِلُ لَكَ نُسْخَةً',
         h3: 'الْحَدُّ الْأَدْنَى 18 سَنَةً', h4: 'هَذِهِ الْمَعْلُومَاتُ تُسَاعِدُنَا عَلَى مُسَاعَدَتِكَ بِشَكْلٍ أَفْضَل',
         btn: 'أَرْسِلْ طَلَبِي', loading: 'جَارِي الْإِرْسَالُ...',
         faqTitle: 'أَسْئِلَةٌ شَائِعَةٌ',
@@ -856,7 +902,7 @@ const T = {
         fa3: 'تُعْطِينَا إِسْتِرَاتِيجِيَّتَكَ، نُبَرْمِجُ بُوتًا يُرَاقِبُ الرُّسُومَ الْبَيَانِيَّةَ. يُرْسِلُ لَكَ تَنْبِيهَاتٍ دَقِيقَةً فِي الْوَقْتِ الْمُنَاسِبِ لِاتِّخَاذِ الْوُضُوعَاتِ.',
         fq4: 'مَا هِيَ حُزَمُ الْبَرِيدِ الْمُؤَكَّدَةُ؟',
         fa4: 'بَرِيدٌ مُؤَكَّدٌ 100% (DNS+SMTP). بِهَذِهِ الْحُزَمِ، يُمْكِنُكَ تَجَاوُزُ تِيك توك، فَيْس بُوك وَإِنْسْتْغْرَام بِدَلَ الْإِعْلَانَاتِ.',
-        online: 'مُتَّصِل', total: 'الزُّوَّارُ الْإِجْمَالِيّ',
+        online: 'مُتَّصِل', total: 'الزِّيَارَاتُ الْإِجْمَالِيَّة',
         f1a: 'SSL مُؤَمَّن', f1b: 'بَيَانَاتٌ مُشَفَّرَةٌ', f1c: 'مُتَوَافِقٌ مَعَ RGPD',
         f2a: 'إِشْعَارَاتٌ قَانُونِيَّة', f2b: 'سِيَاسَةُ الْخُصُوصِيَّةِ', f2c: 'شُرُوط الْخِدْمَة',
         f3a: '9-18 (الإثْنَيْن-الْجُمُعَة)', fb1: 'جَمِيعُ الْحُقُوقِ مَحْفُوظَةٌ', fb2: 'آخِرُ تَحْدِيثٍ'
@@ -906,7 +952,6 @@ function switchLang(lang) {
     document.getElementById('dc4').innerHTML = t.dc4;
     document.getElementById('dc5').innerHTML = t.dc5;
     document.getElementById('dc6').innerHTML = t.dc6;
-    document.getElementById('urgence').textContent = t.urgence;
     document.getElementById('whatsappLabel').textContent = t.whatsappLabel;
     document.getElementById('whatsappSub').textContent = t.whatsappSub;
     document.getElementById('assistantLabel').textContent = t.assistantLabel;
@@ -916,15 +961,11 @@ function switchLang(lang) {
     document.getElementById('l1').innerHTML = t.l1 + ' <span class="required">*</span>';
     document.getElementById('l2').innerHTML = t.l2 + ' <span class="required">*</span>';
     document.getElementById('l3').innerHTML = t.l3 + ' <span class="required">*</span>';
-    document.getElementById('l4').innerHTML = t.l4 + ' <span class="required">*</span>';
-    document.getElementById('l5').innerHTML = t.l5 + ' <span class="required">*</span>';
+    document.getElementById('l4').innerHTML = t.l4 + ' <span class="required">*</span> <span class="badge-contact">📱 ACTIF</span>';
+    document.getElementById('l5').innerHTML = t.l5 + ' <span class="required">*</span> <span class="badge-contact">✉️ ACTIF</span>';
     document.getElementById('l6').innerHTML = t.l6 + ' <span class="required">*</span>';
     document.getElementById('l7').textContent = t.l7;
     document.getElementById('l8').innerHTML = t.l8 + ' <span class="required">*</span>';
-    document.getElementById('h1').textContent = t.h1;
-    document.getElementById('h1b').textContent = t.h1b;
-    document.getElementById('h2').textContent = t.h2;
-    document.getElementById('h2b').textContent = t.h2b;
     document.getElementById('h3').textContent = t.h3;
     document.getElementById('h4').textContent = t.h4;
     document.getElementById('sendBtn').textContent = t.btn;
@@ -1009,6 +1050,10 @@ function sendMessage(e) {
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
             selectedService = null;
+            // Incrémenter le compteur de demandes du jour
+            todayRequests = Math.min(todayRequests + 1, 16);
+            localStorage.setItem('todayRequests', todayRequests);
+            document.getElementById('todayRequests').textContent = todayRequests;
         } else {
             showToast('Erreur : ' + (data.error || 'Inconnue'), 'error');
         }
@@ -1054,11 +1099,19 @@ function updateCounters() {
         })
         .then(r => r.json())
         .then(data => {
-            if (data.online !== undefined) document.getElementById('onlineCount').textContent = data.online;
-            if (data.total !== undefined) document.getElementById('totalCount').textContent = data.total;
+            if (data.online !== undefined) {
+                document.getElementById('onlineCount').textContent = data.online;
+                document.getElementById('onlineCount2').textContent = data.online;
+            }
+            if (data.total !== undefined) {
+                document.getElementById('totalVisits').textContent = data.total;
+                document.getElementById('totalCount').textContent = data.total;
+            }
         })
         .catch(() => {
             document.getElementById('onlineCount').textContent = '?';
+            document.getElementById('onlineCount2').textContent = '?';
+            document.getElementById('totalVisits').textContent = '?';
             document.getElementById('totalCount').textContent = '?';
         });
     });
@@ -1067,6 +1120,11 @@ function updateCounters() {
 window.addEventListener('load', function() {
     const saved = localStorage.getItem('lang');
     if (saved && T[saved]) switchLang(saved);
+    
+    // Initialiser le compteur de demandes
+    updateTodayRequests();
+    
+    // Mettre à jour les compteurs de visiteurs
     updateCounters();
     setInterval(updateCounters, 30000);
 });
