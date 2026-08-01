@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESSAGERIE PRO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background: #0a0a1a;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255,255,255,0.03);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { font-size: 32px; font-weight: 900; color: #fff; }
+        .header h1 span { color: #f0b90b; }
+        .header p { color: #94a3b8; font-size: 16px; margin-top: 4px; }
+        
+        .lang-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0 20px;
+        }
+        .lang-selector button {
+            padding: 6px 14px;
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .lang-selector button:hover { border-color: #f0b90b; color: #f0b90b; }
+        .lang-selector button.active { border-color: #f0b90b; background: rgba(240,185,11,0.1); color: #f0b90b; }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .stats .item {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .stats .item .number { font-size: 26px; font-weight: 900; color: #f0b90b; }
+        .stats .item .label { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+        
+        .trust {
+            display: grid;
+            grid-template-columns: repeat(6,1fr);
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .trust .item {
+            text-align: center;
+            padding: 8px 4px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .trust .item .icon { font-size: 20px; display: block; }
+        .trust .item .label { font-size: 10px; color: #22c55e; font-weight: 600; }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 16px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .service-card:hover { border-color: #f0b90b; transform: translateY(-3px); }
+        .service-card.selected { border-color: #f0b90b; background: rgba(240,185,11,0.05); }
+        .service-card .icon { font-size: 32px; display: block; margin-bottom: 6px; }
+        .service-card .name { color: #fff; font-size: 14px; font-weight: 700; }
+        .service-card .desc { color: #94a3b8; font-size: 11px; margin-top: 4px; }
+        .service-card .badge {
+            display: inline-block;
+            background: #f0b90b;
+            color: #0a0a1a;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        
+        .detail-box {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            display: none;
+        }
+        .detail-box.active { display: block; border-color: rgba(240,185,11,0.15); background: rgba(240,185,11,0.02); }
+        .detail-box .title { color: #f0b90b; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+        .detail-box .content { color: #cbd5e1; font-size: 13px; line-height: 1.7; }
+        .detail-box .content .hl { color: #f0b90b; font-weight: 600; }
+        .detail-box .content .ok { color: #22c55e; font-weight: 600; }
+        
+        .urgence {
+            background: rgba(239,68,68,0.04);
+            border: 2px solid rgba(239,68,68,0.1);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .urgence span { color: #ef4444; font-weight: 700; font-size: 14px; }
+        
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .contact a {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .contact a:hover { border-color: #f0b90b; transform: translateY(-3px); }
+        .contact a .icon { font-size: 28px; display: block; }
+        .contact a .label { font-size: 14px; font-weight: 600; }
+        .contact a .sub { font-size: 11px; color: #94a3b8; }
+        .contact .whatsapp { border-color: rgba(34,197,94,0.2); }
+        .contact .whatsapp:hover { border-color: #22c55e; }
+        
+        .guarantee {
+            background: rgba(240,185,11,0.04);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            border: 2px solid rgba(240,185,11,0.08);
+            margin-bottom: 18px;
+        }
+        .guarantee .text { color: #f0b90b; font-weight: 900; font-size: 17px; }
+        .guarantee .sub { color: #94a3b8; font-size: 12px; margin-top: 4px; }
+        
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; color: #cbd5e1; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .form-group label .required { color: #ff5f56; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #f0b90b; }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .form-group .hint { color: #64748b; font-size: 11px; margin-top: 4px; }
+        .form-group .hint .hl { color: #f0b90b; font-weight: 600; }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg,#f0b90b,#f59e0b);
+            color: #0a0a1a;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 40px rgba(240,185,11,0.2); }
+        
+        .toast {
+            display: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 12px;
+            text-align: center;
+        }
+        .toast.success { display: block; background: rgba(16,185,129,0.1); border: 1px solid #10b981; color: #10b981; }
+        .toast.error { display: block; background: rgba(255,87,87,0.1); border: 1px solid #ff5f56; color: #ff5f56; }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #f0b90b;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+        .loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
+        
+        .faq {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding-top: 16px;
+        }
+        .faq h3 { color: #f0b90b; font-size: 16px; text-align: center; margin-bottom: 10px; }
+        .faq-item {
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 6px;
+            border: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer;
+        }
+        .faq-item:hover { background: rgba(255,255,255,0.04); }
+        .faq-item .q { color: #cbd5e1; font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; }
+        .faq-item .q .arrow { color: #f0b90b; transition: 0.3s; }
+        .faq-item .q .arrow.open { transform: rotate(180deg); }
+        .faq-item .a { color: #94a3b8; font-size: 12px; line-height: 1.6; margin-top: 6px; display: none; }
+        .faq-item .a.open { display: block; }
+        
+        .footer {
+            margin-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding-top: 14px;
+            text-align: center;
+            color: #64748b;
+            font-size: 11px;
+            line-height: 2;
+        }
+        .footer a { color: #4d96ff; text-decoration: none; }
+        .footer a:hover { color: #f0b90b; }
+        .footer .highlight { color: #f0b90b; font-weight: 600; }
+        .gear { cursor: pointer; font-size: 18px; color: #64748b; }
+        .gear:hover { color: #f0b90b; }
+        
+        .stats-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 12px;
+            padding: 10px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+        }
+        .stats-bottom .item { text-align: center; }
+        .stats-bottom .item .number { font-size: 18px; font-weight: 700; color: #22c55e; }
+        .stats-bottom .item .number.total { color: #f0b90b; }
+        .stats-bottom .item .label { font-size: 11px; color: #64748b; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 18px; }
+            .services { grid-template-columns: 1fr 1fr; }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .trust { grid-template-columns: repeat(3,1fr); }
+            .contact { grid-template-columns: 1fr; }
+            .header h1 { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            .services { grid-template-columns: 1fr; }
+            .trust { grid-template-columns: repeat(2,1fr); }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🚀 <span id="mainTitle">TRANSFORME TON ACTIVITÉ</span></h1>
+        <p id="mainSub">Choisis ton service — Zéro compromis</p>
+    </div>
+    
+    <div class="lang-selector">
+        <button class="active" data-lang="fr" onclick="switchLang('fr')">🇫🇷 FR</button>
+        <button data-lang="en" onclick="switchLang('en')">🇬🇧 EN</button>
+        <button data-lang="es" onclick="switchLang('es')">🇪🇸 ES</button>
+        <button data-lang="de" onclick="switchLang('de')">🇩🇪 DE</button>
+        <button data-lang="pt" onclick="switchLang('pt')">🇵🇹 PT</button>
+        <button data-lang="ar" onclick="switchLang('ar')">🇸🇦 AR</button>
+    </div>
+    
+    <div class="stats">
+        <div class="item"><div class="number">+500</div><div class="label" id="s1">Clients satisfaits</div></div>
+        <div class="item"><div class="number">98%</div><div class="label" id="s2">Taux de satisfaction</div></div>
+        <div class="item"><div class="number">4.9/5</div><div class="label" id="s3">Note moyenne</div></div>
+        <div class="item"><div class="number">+5 ans</div><div class="label" id="s4">D'expérience</div></div>
+    </div>
+    
+    <div class="trust">
+        <div class="item"><span class="icon">🔒</span><span class="label" id="t1">SSL</span></div>
+        <div class="item"><span class="icon">⏱️</span><span class="label" id="t2">&lt;24h</span></div>
+        <div class="item"><span class="icon">🤝</span><span class="label" id="t3">Garantie 30j</span></div>
+        <div class="item"><span class="icon">📋</span><span class="label" id="t4">RGPD</span></div>
+        <div class="item"><span class="icon">🌍</span><span class="label" id="t5">Mondial</span></div>
+        <div class="item"><span class="icon">💎</span><span class="label" id="t6">Expertise</span></div>
+    </div>
+    
+    <div class="services">
+        <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'telegram')">
+            <span class="icon">🤖</span>
+            <div class="name">⚡ BOT TELEGRAM</div>
+            <div class="desc" id="d1">Automatise ton groupe • Modération 24h/24</div>
+            <span class="badge" id="b1">POPULAIRE</span>
+        </div>
+        <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'ia')">
+            <span class="icon">🧠</span>
+            <div class="name">🤖 ASSISTANT IA</div>
+            <div class="desc" id="d2">IA qui gère tes clients • Devis 24h/24</div>
+            <span class="badge" id="b2">NOUVEAU</span>
+        </div>
+        <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'trading')">
+            <span class="icon">📊</span>
+            <div class="name">📈 BOT TRADING</div>
+            <div class="desc" id="d3">Bot sur ta stratégie • Alertes précises</div>
+            <span class="badge" id="b3">🔥 TOP</span>
+        </div>
+        <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'mails')">
+            <span class="icon">📧</span>
+            <div class="name">📦 PACK MAILS</div>
+            <div class="desc" id="d4">100-500+ emails vérifiés DNS+SMTP</div>
+            <span class="badge" id="b4">💎 EXCLUSIF</span>
+        </div>
+        <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'sites')">
+            <span class="icon">🌐</span>
+            <div class="name">🌐 CRÉATION SITES</div>
+            <div class="desc" id="d5">Vitrines • E-commerce • SEO • Hébergement</div>
+        </div>
+        <div class="service-card" data-service="AUTRES" onclick="selectService(this,'autres')">
+            <span class="icon">🛠️</span>
+            <div class="name">🛠️ AUTRES SERVICES</div>
+            <div class="desc" id="d6">Programmation • Automatisation • Conseil</div>
+        </div>
+    </div>
+    
+    <div class="detail-box" id="detail-telegram">
+        <div class="title" id="dt1">🤖 BOT TELEGRAM</div>
+        <div class="content" id="dc1">Tu as un groupe Telegram et t'en as marre d'être toujours là ? <span class="hl">Je configure un bot qui gère tout comme toi</span>.<br>✅ <span class="ok">Modération automatique</span> des messages<br>✅ <span class="ok">Réponses automatiques</span> aux questions<br>✅ <span class="ok">Gestion des membres</span><br>🎯 <span class="hl">Plus besoin d'être connecté 24h/24</span></div>
+    </div>
+    <div class="detail-box" id="detail-ia">
+        <div class="title" id="dt2">🧠 ASSISTANT IA</div>
+        <div class="content" id="dc2">Tu veux être indépendant ? <span class="hl">Je crée un assistant virtuel qui travaille pour toi 24h/24</span>.<br>✅ <span class="ok">Chatbot intelligent</span> pour tes clients<br>✅ <span class="ok">Prise de rendez-vous</span> automatique<br>✅ <span class="ok">Génération de devis</span><br>🎯 <span class="hl">Test gratuit 1 semaine</span></div>
+    </div>
+    <div class="detail-box" id="detail-trading">
+        <div class="title" id="dt3">📊 BOT TRADING</div>
+        <div class="content" id="dc3">Tu fais du trading et ça prend du temps ? <span class="hl">Je crée un bot sur ta stratégie avec précision</span>.<br>✅ <span class="ok">Alertes au bon moment</span><br>✅ <span class="ok">Suivi automatique</span> des graphiques<br>✅ <span class="ok">Signaux en temps réel</span><br>🎯 <span class="hl">Le bot veille pour toi</span></div>
+    </div>
+    <div class="detail-box" id="detail-mails">
+        <div class="title" id="dt4">📧 PACK MAILS</div>
+        <div class="content" id="dc4">Tu as une boutique en ligne ? <span class="hl">Je te vends des packs de mails vérifiés</span>.<br>✅ <span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 à 1000</span> emails<br>✅ <span class="ok">Contourne TikTok, Facebook</span><br>🎯 <span class="hl">Stratégie secrète incluse</span></div>
+    </div>
+    <div class="detail-box" id="detail-sites">
+        <div class="title" id="dt5">🌐 CRÉATION DE SITES</div>
+        <div class="content" id="dc5">Tu veux un site qui vend ? <span class="hl">Je crée des sites sur mesure</span>.<br>✅ <span class="ok">Design moderne</span><br>✅ <span class="ok">Optimisation SEO</span><br>✅ <span class="ok">Hébergement inclus</span><br>🎯 <span class="hl">Un site qui te ressemble</span></div>
+    </div>
+    <div class="detail-box" id="detail-autres">
+        <div class="title" id="dt6">🛠️ AUTRES SERVICES</div>
+        <div class="content" id="dc6">Tu as un projet spécifique ? <span class="hl">Dis-moi ce dont tu as besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si tu peux le rêver, je peux le créer</span></div>
+    </div>
+    
+    <div class="urgence"><span id="urgence">⏰ OFFRE SPÉCIALE - Plus que 3 places ce mois-ci</span></div>
+    
+    <div class="contact">
+        <a href="https://wa.me/22960315458" target="_blank" class="whatsapp">
+            <span class="icon">💬</span>
+            <div class="label" id="whatsappLabel">📱 WhatsApp Direct</div>
+            <div class="sub">+229 60 31 54 58 • <span id="whatsappSub">Réponse en 5min</span></div>
+        </a>
+        <a href="#" onclick="alert('🔗 Lien vers l\'assistant IA bientôt disponible')">
+            <span class="icon">🤖</span>
+            <div class="label" id="assistantLabel">🧠 Assistant IA</div>
+            <div class="sub" id="assistantSub">Pose ta question, il répond</div>
+        </a>
+    </div>
+    
+    <div class="guarantee">
+        <div class="text" id="gtext">💎 Satisfaction 100% garantie ou remboursé</div>
+        <div class="sub" id="gsub">Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
+    </div>
+    
+    <form id="messageForm" onsubmit="sendMessage(event)">
+        <div class="form-group">
+            <label id="l1">👤 Nom et prénom <span class="required">*</span></label>
+            <input type="text" id="nom" placeholder="Jean Dupont" required>
+        </div>
+        <div class="form-group">
+            <label id="l2">🌍 Pays <span class="required">*</span></label>
+            <input type="text" id="pays" placeholder="Entrez votre pays" required>
+        </div>
+        <div class="form-group">
+            <label id="l3">🏙️ Ville <span class="required">*</span></label>
+            <input type="text" id="ville" placeholder="Entrez votre ville" required>
+        </div>
+        <div class="form-group">
+            <label id="l4">📱 WhatsApp / Téléphone <span class="required">*</span></label>
+            <input type="tel" id="whatsapp" placeholder="+229 60 31 54 58" required>
+            <div class="hint">📌 <span class="hl" id="h1">Important :</span> <span id="h1b">Nous vous recontacterons sur ce numéro</span></div>
+        </div>
+        <div class="form-group">
+            <label id="l5">📧 Email <span class="required">*</span></label>
+            <input type="email" id="email" placeholder="jean.dupont@email.com" required>
+            <div class="hint">📌 <span class="hl" id="h2">Important :</span> <span id="h2b">Nous vous enverrons une copie</span></div>
+        </div>
+        <div class="form-group">
+            <label id="l6">📅 Âge <span class="required">*</span></label>
+            <input type="number" id="age" placeholder="25" min="18" max="99" required>
+            <div class="hint" id="h3">📌 Minimum 18 ans</div>
+        </div>
+        <div class="form-group">
+            <label id="l7">🔗 Réseaux sociaux (optionnel)</label>
+            <input type="text" id="reseau" placeholder="LinkedIn, Twitter, Instagram">
+        </div>
+        <div class="form-group">
+            <label id="l8">✉️ Votre demande <span class="required">*</span></label>
+            <textarea id="message" placeholder="Décrivez votre projet en détail..." required></textarea>
+            <div class="hint" id="h4">📌 Ces informations nous permettent de vous aider au mieux</div>
+        </div>
+        <button type="submit" class="btn" id="sendBtn">🚀 ENVOYER MA DEMANDE</button>
+        <div class="loading" id="loading"><span class="spinner">⏳</span> <span id="loadingText">Envoi en cours...</span></div>
+    </form>
+    <div id="toast" class="toast"></div>
+    
+    <div class="faq">
+        <h3 id="faqTitle">❓ Questions fréquentes</h3>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq1">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa1">Je configure un bot qui gère ton groupe comme toi. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec ton assistant IA.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq2">Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa2">Je crée un site avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous et génère des devis.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq3">Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa3">Tu me donnes ta stratégie, je programme un bot qui surveille les graphiques. Il t'envoie des alertes précises au bon moment pour prendre tes positions.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq4">C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa4">Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
+        </div>
+    </div>
+    
+    <div class="stats-bottom">
+        <div class="item"><div class="number" id="onlineCount">...</div><div class="label" id="onlineLabel">👥 En ligne</div></div>
+        <div class="item"><div class="number total" id="totalCount">...</div><div class="label" id="totalLabel">📊 Visiteurs total</div></div>
+    </div>
+    
+    <div class="footer">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;text-align:left;">
+            <div>
+                <strong style="color:#f0b90b;">🔒 Sécurité</strong>
+                <p>✓ <span id="f1a">SSL sécurisé</span><br>✓ <span id="f1b">Données cryptées</span><br>✓ <span id="f1c">RGPD conforme</span></p>
+            </div>
+            <div>
+                <strong style="color:#f0b90b;">📋 Légal</strong>
+                <p><a href="#" id="f2a">Mentions légales</a><br><a href="#" id="f2b">Politique confidentialité</a><br><a href="#" id="f2c">CGV</a></p>
+            </div>
+            <div>
+                <strong style="color:#f0b90b;">📞 Contact</strong>
+                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;">+229 60 31 54 58</a><br>🕐 <span id="f3a">9h-18h (Lun-Ven)</span></p>
+            </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;margin-top:12px;">
+            <p>© 2026 Messagerie Pro — <span id="fb1">Tous droits réservés</span></p>
+            <p><span id="fb2">Dernière mise à jour</span> : <span class="highlight">27 Juillet 2026</span></p>
+            <span class="gear" onclick="window.location.href='admin.html'">⚙️</span>
+            <span style="color:#64748b;font-size:11px;"> Administration</span>
+        </div>
+    </div>
+</div>
+
+<script>
+const T = {
+    fr: {
+        title: 'TRANSFORME TON ACTIVITÉ', sub: 'Choisis ton service — Zéro compromis',
+        s1: 'Clients satisfaits', s2: 'Taux de satisfaction', s3: 'Note moyenne', s4: "D'expérience",
+        t1: 'SSL', t2: '<24h', t3: 'Garantie 30j', t4: 'RGPD', t5: 'Mondial', t6: 'Expertise',
+        d1: 'Automatise ton groupe • Modération 24h/24', d2: 'IA qui gère tes clients • Devis 24h/24',
+        d3: 'Bot sur ta stratégie • Alertes précises', d4: '100-500+ emails vérifiés DNS+SMTP',
+        d5: 'Vitrines • E-commerce • SEO • Hébergement', d6: 'Programmation • Automatisation • Conseil',
+        b1: 'POPULAIRE', b2: 'NOUVEAU', b3: '🔥 TOP', b4: '💎 EXCLUSIF',
+        dt1: '🤖 BOT TELEGRAM', dt2: '🧠 ASSISTANT IA', dt3: '📊 BOT TRADING',
+        dt4: '📧 PACK MAILS', dt5: '🌐 CRÉATION DE SITES', dt6: '🛠️ AUTRES SERVICES',
+        dc1: 'Tu as un groupe Telegram et t\'en as marre d\'être toujours là ? <span class="hl">Je configure un bot qui gère tout comme toi</span>.<br>✅ <span class="ok">Modération automatique</span> des messages<br>✅ <span class="ok">Réponses automatiques</span> aux questions<br>✅ <span class="ok">Gestion des membres</span><br>🎯 <span class="hl">Plus besoin d\'être connecté 24h/24</span>',
+        dc2: 'Tu veux être indépendant ? <span class="hl">Je crée un assistant virtuel qui travaille pour toi 24h/24</span>.<br>✅ <span class="ok">Chatbot intelligent</span> pour tes clients<br>✅ <span class="ok">Prise de rendez-vous</span> automatique<br>✅ <span class="ok">Génération de devis</span><br>🎯 <span class="hl">Test gratuit 1 semaine</span>',
+        dc3: 'Tu fais du trading et ça prend du temps ? <span class="hl">Je crée un bot sur ta stratégie avec précision</span>.<br>✅ <span class="ok">Alertes au bon moment</span><br>✅ <span class="ok">Suivi automatique</span> des graphiques<br>✅ <span class="ok">Signaux en temps réel</span><br>🎯 <span class="hl">Le bot veille pour toi</span>',
+        dc4: 'Tu as une boutique en ligne ? <span class="hl">Je te vends des packs de mails vérifiés</span>.<br>✅ <span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 à 1000</span> emails<br>✅ <span class="ok">Contourne TikTok, Facebook</span><br>🎯 <span class="hl">Stratégie secrète incluse</span>',
+        dc5: 'Tu veux un site qui vend ? <span class="hl">Je crée des sites sur mesure</span>.<br>✅ <span class="ok">Design moderne</span><br>✅ <span class="ok">Optimisation SEO</span><br>✅ <span class="ok">Hébergement inclus</span><br>🎯 <span class="hl">Un site qui te ressemble</span>',
+        dc6: 'Tu as un projet spécifique ? <span class="hl">Dis-moi ce dont tu as besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si tu peux le rêver, je peux le créer</span>',
+        urgence: '⏰ OFFRE SPÉCIALE - Plus que 3 places ce mois-ci',
+        whatsappLabel: '📱 WhatsApp Direct', whatsappSub: 'Réponse en 5min',
+        assistantLabel: '🧠 Assistant IA', assistantSub: 'Pose ta question, il répond',
+        gtext: '💎 Satisfaction 100% garantie ou remboursé',
+        gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
+        l1: '👤 Nom et prénom', l2: '🌍 Pays', l3: '🏙️ Ville', l4: '📱 WhatsApp / Téléphone',
+        l5: '📧 Email', l6: '📅 Âge', l7: '🔗 Réseaux sociaux (optionnel)', l8: '✉️ Votre demande',
+        h1: 'Important :', h1b: 'Nous vous recontacterons sur ce numéro',
+        h2: 'Important :', h2b: 'Nous vous enverrons une copie',
+        h3: '📌 Minimum 18 ans', h4: '📌 Ces informations nous permettent de vous aider au mieux',
+        btn: '🚀 ENVOYER MA DEMANDE', loading: 'Envoi en cours...',
+        faqTitle: '❓ Questions fréquentes',
+        fq1: 'Comment fonctionne le Bot Telegram ?',
+        fa1: 'Je configure un bot qui gère ton groupe comme toi. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec ton assistant IA.',
+        fq2: 'Comment fonctionne l\'Assistant IA ?',
+        fa2: 'Je crée un site avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous et génère des devis.',
+        fq3: 'Comment fonctionne le Bot Trading ?',
+        fa3: 'Tu me donnes ta stratégie, je programme un bot qui surveille les graphiques. Il t\'envoie des alertes précises au bon moment pour prendre tes positions.',
+        fq4: 'C\'est quoi un Pack Mails vérifié ?',
+        fa4: 'Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.',
+        online: '👥 En ligne', total: '📊 Visiteurs total',
+        f1a: 'SSL sécurisé', f1b: 'Données cryptées', f1c: 'RGPD conforme',
+        f2a: 'Mentions légales', f2b: 'Politique confidentialité', f2c: 'CGV',
+        f3a: '9h-18h (Lun-Ven)', fb1: 'Tous droits réservés', fb2: 'Dernière mise à jour'
+    },
+    en: {
+        title: 'TRANSFORM YOUR BUSINESS', sub: 'Choose your service — Zero compromise',
+        s1: 'Happy Clients', s2: 'Satisfaction Rate', s3: 'Average Rating', s4: 'Experience',
+        t1: 'SSL', t2: '<24h', t3: '30 Days Guarantee', t4: 'GDPR', t5: 'Worldwide', t6: 'Expertise',
+        d1: 'Automate your group • Moderation 24/7', d2: 'AI manages your clients • Quotes 24/7',
+        d3: 'Bot on your strategy • Precise alerts', d4: '100-500+ verified emails DNS+SMTP',
+        d5: 'Showcases • E-commerce • SEO • Hosting', d6: 'Programming • Automation • Consulting',
+        b1: 'POPULAR', b2: 'NEW', b3: '🔥 TOP', b4: '💎 EXCLUSIVE',
+        dt1: '🤖 TELEGRAM BOT', dt2: '🧠 AI ASSISTANT', dt3: '📊 TRADING BOT',
+        dt4: '📧 EMAIL PACKS', dt5: '🌐 WEBSITE CREATION', dt6: '🛠️ OTHER SERVICES',
+        dc1: 'You have a Telegram group and you\'re tired of always being there? <span class="hl">I configure a bot that manages everything like you</span>.<br>✅ <span class="ok">Automatic moderation</span> of messages<br>✅ <span class="ok">Automatic answers</span> to questions<br>✅ <span class="ok">Members management</span><br>🎯 <span class="hl">No need to be connected 24/7</span>',
+        dc2: 'You want to be independent? <span class="hl">I create a virtual assistant that works for you 24/7</span>.<br>✅ <span class="ok">Intelligent chatbot</span> for your clients<br>✅ <span class="ok">Automatic appointment</span> booking<br>✅ <span class="ok">Quote generation</span><br>🎯 <span class="hl">Free trial 1 week</span>',
+        dc3: 'You do trading and it takes time? <span class="hl">I create a bot on your strategy with precision</span>.<br>✅ <span class="ok">Alerts at the right time</span><br>✅ <span class="ok">Automatic chart monitoring</span><br>✅ <span class="ok">Real-time signals</span><br>🎯 <span class="hl">The bot watches for you</span>',
+        dc4: 'You have an online store? <span class="hl">I sell you verified email packs</span>.<br>✅ <span class="ok">100% verified emails</span> (DNS + SMTP)<br>✅ <span class="ok">Packs from 100 to 1000</span> emails<br>✅ <span class="ok">Bypass TikTok, Facebook</span><br>🎯 <span class="hl">Secret strategy included</span>',
+        dc5: 'You want a website that sells? <span class="hl">I create custom websites</span>.<br>✅ <span class="ok">Modern design</span><br>✅ <span class="ok">SEO optimization</span><br>✅ <span class="ok">Hosting included</span><br>🎯 <span class="hl">A website that looks like you</span>',
+        dc6: 'You have a specific project? <span class="hl">Tell me what you need</span>.<br>✅ <span class="ok">Custom programming</span><br>✅ <span class="ok">Automation</span><br>✅ <span class="ok">Consulting and training</span><br>🎯 <span class="hl">If you can dream it, I can create it</span>',
+        urgence: '⏰ SPECIAL OFFER - Only 3 spots left this month',
+        whatsappLabel: '📱 WhatsApp Direct', whatsappSub: 'Response in 5min',
+        assistantLabel: '🧠 AI Assistant', assistantSub: 'Ask your question, he answers',
+        gtext: '💎 100% satisfaction guaranteed or refunded',
+        gsub: 'If you are not satisfied, we will refund you in full.',
+        l1: '👤 Full Name', l2: '🌍 Country', l3: '🏙️ City', l4: '📱 WhatsApp / Phone',
+        l5: '📧 Email', l6: '📅 Age', l7: '🔗 Social networks (optional)', l8: '✉️ Your request',
+        h1: 'Important:', h1b: 'We will contact you on this number',
+        h2: 'Important:', h2b: 'We will send you a copy',
+        h3: '📌 Minimum 18 years', h4: '📌 This information helps us help you better',
+        btn: '🚀 SEND MY REQUEST', loading: 'Sending...',
+        faqTitle: '❓ Frequently Asked Questions',
+        fq1: 'How does the Telegram Bot work?',
+        fa1: 'I configure a bot that manages your group like you. It moderates messages, answers questions, welcomes new members and interacts with your AI assistant.',
+        fq2: 'How does the AI Assistant work?',
+        fa2: 'I create a website with an intelligent chatbot that manages your clients automatically. It presents your services, answers questions, takes appointments and generates quotes.',
+        fq3: 'How does the Trading Bot work?',
+        fa3: 'You give me your strategy, I program a bot that monitors the charts. It sends you precise alerts at the right time to take your positions.',
+        fq4: 'What is a Verified Email Pack?',
+        fa4: '100% verified emails (DNS + SMTP). With these packs, you can bypass TikTok, Facebook and Instagram instead of paying for promotions.',
+        online: '👥 Online', total: '📊 Total visitors',
+        f1a: 'SSL secured', f1b: 'Encrypted data', f1c: 'GDPR compliant',
+        f2a: 'Legal notices', f2b: 'Privacy policy', f2c: 'Terms',
+        f3a: '9am-6pm (Mon-Fri)', fb1: 'All rights reserved', fb2: 'Last update'
+    },
+    es: {
+        title: 'TRANSFORMA TU NEGOCIO', sub: 'Elige tu servicio — Cero compromisos',
+        s1: 'Clientes satisfechos', s2: 'Tasa de satisfacción', s3: 'Calificación promedio', s4: 'Experiencia',
+        t1: 'SSL', t2: '<24h', t3: 'Garantía 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiencia',
+        d1: 'Automatiza tu grupo • Moderación 24/7', d2: 'IA gestiona tus clientes • Presupuestos 24/7',
+        d3: 'Bot en tu estrategia • Alertas precisas', d4: '100-500+ emails verificados DNS+SMTP',
+        d5: 'Vitrinas • E-commerce • SEO • Alojamiento', d6: 'Programación • Automatización • Consultoría',
+        b1: 'POPULAR', b2: 'NUEVO', b3: '🔥 TOP', b4: '💎 EXCLUSIVO',
+        dt1: '🤖 BOT TELEGRAM', dt2: '🧠 ASISTENTE IA', dt3: '📊 BOT TRADING',
+        dt4: '📧 PACKS EMAILS', dt5: '🌐 CREACIÓN DE SITIOS', dt6: '🛠️ OTROS SERVICIOS',
+        dc1: '¿Tienes un grupo de Telegram y estás cansado de estar siempre ahí? <span class="hl">Configuro un bot que gestiona todo como tú</span>.<br>✅ <span class="ok">Moderación automática</span> de mensajes<br>✅ <span class="ok">Respuestas automáticas</span><br>✅ <span class="ok">Gestión de miembros</span><br>🎯 <span class="hl">No necesitas estar conectado 24/7</span>',
+        dc2: '¿Quieres ser independiente? <span class="hl">Creo un asistente virtual que trabaja para ti 24/7</span>.<br>✅ <span class="ok">Chatbot inteligente</span><br>✅ <span class="ok">Toma de citas</span> automática<br>✅ <span class="ok">Generación de presupuestos</span><br>🎯 <span class="hl">Prueba gratis 1 semana</span>',
+        dc3: '¿Haces trading y te lleva tiempo? <span class="hl">Creo un bot sobre tu estrategia con precisión</span>.<br>✅ <span class="ok">Alertas en el momento justo</span><br>✅ <span class="ok">Seguimiento automático</span><br>✅ <span class="ok">Señales en tiempo real</span><br>🎯 <span class="hl">El bot vigila por ti</span>',
+        dc4: '¿Tienes una tienda online? <span class="hl">Te vendo packs de emails verificados</span>.<br>✅ <span class="ok">Emails 100% verificados</span> (DNS + SMTP)<br>✅ <span class="ok">Packs de 100 a 1000</span><br>✅ <span class="ok">Evita TikTok, Facebook</span><br>🎯 <span class="hl">Estrategia secreta incluida</span>',
+        dc5: '¿Quieres un sitio que venda? <span class="hl">Creo sitios a medida</span>.<br>✅ <span class="ok">Diseño moderno</span><br>✅ <span class="ok">Optimización SEO</span><br>✅ <span class="ok">Alojamiento incluido</span><br>🎯 <span class="hl">Un sitio que se parece a ti</span>',
+        dc6: '¿Tienes un proyecto específico? <span class="hl">Dime lo que necesitas</span>.<br>✅ <span class="ok">Programación a medida</span><br>✅ <span class="ok">Automatización</span><br>✅ <span class="ok">Consultoría y formación</span><br>🎯 <span class="hl">Si puedes soñarlo, puedo crearlo</span>',
+        urgence: '⏰ OFERTA ESPECIAL - Solo quedan 3 plazas este mes',
+        whatsappLabel: '📱 WhatsApp Directo', whatsappSub: 'Respuesta en 5min',
+        assistantLabel: '🧠 Asistente IA', assistantSub: 'Haz tu pregunta, él responde',
+        gtext: '💎 100% de satisfacción garantizada o reembolso',
+        gsub: 'Si no estás satisfecho, te reembolsamos íntegramente.',
+        l1: '👤 Nombre completo', l2: '🌍 País', l3: '🏙️ Ciudad', l4: '📱 WhatsApp / Teléfono',
+        l5: '📧 Email', l6: '📅 Edad', l7: '🔗 Redes sociales (opcional)', l8: '✉️ Tu solicitud',
+        h1: 'Importante:', h1b: 'Te contactaremos en este número',
+        h2: 'Importante:', h2b: 'Te enviaremos una copia',
+        h3: '📌 Mínimo 18 años', h4: '📌 Esta información nos ayuda a ayudarte mejor',
+        btn: '🚀 ENVIAR MI SOLICITUD', loading: 'Enviando...',
+        faqTitle: '❓ Preguntas frecuentes',
+        fq1: '¿Cómo funciona el Bot de Telegram?',
+        fa1: 'Configuro un bot que gestiona tu grupo como tú. Modera mensajes, responde preguntas, da la bienvenida a nuevos miembros e interactúa con tu asistente IA.',
+        fq2: '¿Cómo funciona el Asistente IA?',
+        fa2: 'Creo un sitio con un chatbot inteligente que gestiona tus clientes automáticamente. Presenta tus servicios, responde preguntas, toma citas y genera presupuestos.',
+        fq3: '¿Cómo funciona el Bot de Trading?',
+        fa3: 'Me das tu estrategia, programo un bot que monitorea los gráficos. Te envía alertas precisas en el momento justo para tomar posiciones.',
+        fq4: '¿Qué es un Pack de Emails Verificados?',
+        fa4: 'Emails 100% verificados (DNS + SMTP). Con estos packs, puedes evitar TikTok, Facebook e Instagram en lugar de pagar promociones.',
+        online: '👥 En línea', total: '📊 Visitantes total',
+        f1a: 'SSL seguro', f1b: 'Datos encriptados', f1c: 'Cumple RGPD',
+        f2a: 'Aviso legal', f2b: 'Política privacidad', f2c: 'Condiciones',
+        f3a: '9h-18h (Lun-Vie)', fb1: 'Todos los derechos reservados', fb2: 'Última actualización'
+    },
+    de: {
+        title: 'VERWANDLE DEIN GESCHÄFT', sub: 'Wähle deinen Service — Null Kompromisse',
+        s1: 'Zufriedene Kunden', s2: 'Zufriedenheitsrate', s3: 'Durchschnittliche Bewertung', s4: 'Erfahrung',
+        t1: 'SSL', t2: '<24h', t3: 'Garantie 30d', t4: 'DSGVO', t5: 'Weltweit', t6: 'Expertise',
+        d1: 'Automatisiere deine Gruppe • Moderation 24/7', d2: 'KI verwaltet Kunden • Angebote 24/7',
+        d3: 'Bot auf deine Strategie • Präzise Alarme', d4: '100-500+ verifizierte Emails DNS+SMTP',
+        d5: 'Schaufenster • E-Commerce • SEO • Hosting', d6: 'Programmierung • Automatisierung • Beratung',
+        b1: 'POPULÄR', b2: 'NEU', b3: '🔥 TOP', b4: '💎 EXKLUSIV',
+        dt1: '🤖 TELEGRAM BOT', dt2: '🧠 KI-ASSISTENT', dt3: '📊 TRADING BOT',
+        dt4: '📧 EMAIL-PACKS', dt5: '🌐 WEBSITE-ERSTELLUNG', dt6: '🛠️ ANDERE DIENSTE',
+        dc1: 'Du hast eine Telegram-Gruppe und bist es leid, immer da zu sein? <span class="hl">Ich konfiguriere einen Bot, der alles wie du verwaltet</span>.<br>✅ <span class="ok">Automatische Moderation</span><br>✅ <span class="ok">Automatische Antworten</span><br>✅ <span class="ok">Mitgliederverwaltung</span><br>🎯 <span class="hl">Kein 24/7 verbunden sein nötig</span>',
+        dc2: 'Du möchtest unabhängig sein? <span class="hl">Ich erstelle einen virtuellen Assistenten, der 24/7 für dich arbeitet</span>.<br>✅ <span class="ok">Intelligenter Chatbot</span><br>✅ <span class="ok">Terminbuchung</span> automatisch<br>✅ <span class="ok">Angebotserstellung</span><br>🎯 <span class="hl">Kostenlose Testversion 1 Woche</span>',
+        dc3: 'Du handelst mit Trading und es kostet Zeit? <span class="hl">Ich erstelle einen Bot nach deiner Strategie mit Präzision</span>.<br>✅ <span class="ok">Alarme zur richtigen Zeit</span><br>✅ <span class="ok">Automatische Chart-Überwachung</span><br>✅ <span class="ok">Echtzeitsignale</span><br>🎯 <span class="hl">Der Bot wacht für dich</span>',
+        dc4: 'Du hast einen Online-Shop? <span class="hl">Ich verkaufe dir verifizierte Email-Packs</span>.<br>✅ <span class="ok">100% verifizierte Emails</span> (DNS + SMTP)<br>✅ <span class="ok">Packs von 100 bis 1000</span><br>✅ <span class="ok">Umgehe TikTok, Facebook</span><br>🎯 <span class="hl">Geheime Strategie inklusive</span>',
+        dc5: 'Du möchtest eine Website, die verkauft? <span class="hl">Ich erstelle maßgeschneiderte Websites</span>.<br>✅ <span class="ok">Modernes Design</span><br>✅ <span class="ok">SEO-Optimierung</span><br>✅ <span class="ok">Hosting inklusive</span><br>🎯 <span class="hl">Eine Website, die zu dir passt</span>',
+        dc6: 'Du hast ein spezifisches Projekt? <span class="hl">Sag mir, was du brauchst</span>.<br>✅ <span class="ok">Maßgeschneiderte Programmierung</span><br>✅ <span class="ok">Automatisierung</span><br>✅ <span class="ok">Beratung und Schulung</span><br>🎯 <span class="hl">Wenn du es träumen kannst, kann ich es erschaffen</span>',
+        urgence: '⏰ SPEZIALANGEBOT - Nur noch 3 Plätze diesen Monat',
+        whatsappLabel: '📱 WhatsApp Direkt', whatsappSub: 'Antwort in 5min',
+        assistantLabel: '🧠 KI-Assistent', assistantSub: 'Stelle deine Frage, er antwortet',
+        gtext: '💎 100% Zufriedenheitsgarantie oder Geld zurück',
+        gsub: 'Wenn du nicht zufrieden bist, erstatten wir dir den vollen Betrag.',
+        l1: '👤 Vollständiger Name', l2: '🌍 Land', l3: '🏙️ Stadt', l4: '📱 WhatsApp / Telefon',
+        l5: '📧 Email', l6: '📅 Alter', l7: '🔗 Soziale Netzwerke (optional)', l8: '✉️ Deine Anfrage',
+        h1: 'Wichtig:', h1b: 'Wir werden dich unter dieser Nummer kontaktieren',
+        h2: 'Wichtig:', h2b: 'Wir senden dir eine Kopie',
+        h3: '📌 Mindestens 18 Jahre', h4: '📌 Diese Informationen helfen uns, dir besser zu helfen',
+        btn: '🚀 MEINE ANFRAGE SENDEN', loading: 'Senden...',
+        faqTitle: '❓ Häufig gestellte Fragen',
+        fq1: 'Wie funktioniert der Telegram Bot?',
+        fa1: 'Ich konfiguriere einen Bot, der deine Gruppe wie du verwaltet. Er moderiert Nachrichten, beantwortet Fragen, begrüßt neue Mitglieder und interagiert mit deinem KI-Assistenten.',
+        fq2: 'Wie funktioniert der KI-Assistent?',
+        fa2: 'Ich erstelle eine Website mit einem intelligenten Chatbot, der deine Kunden automatisch verwaltet. Er präsentiert deine Dienste, beantwortet Fragen, nimmt Termine entgegen und erstellt Angebote.',
+        fq3: 'Wie funktioniert der Trading Bot?',
+        fa3: 'Du gibst mir deine Strategie, ich programmiere einen Bot, der die Charts überwacht. Er sendet dir präzise Alarme zur richtigen Zeit, um Positionen zu eröffnen.',
+        fq4: 'Was ist ein verifiziertes Email-Pack?',
+        fa4: '100% verifizierte Emails (DNS + SMTP). Mit diesen Packs kannst du TikTok, Facebook und Instagram umgehen, anstatt für Werbung zu bezahlen.',
+        online: '👥 Online', total: '📊 Besucher gesamt',
+        f1a: 'SSL-gesichert', f1b: 'Verschlüsselte Daten', f1c: 'DSGVO-konform',
+        f2a: 'Impressum', f2b: 'Datenschutz', f2c: 'AGB',
+        f3a: '9-18 Uhr (Mo-Fr)', fb1: 'Alle Rechte vorbehalten', fb2: 'Letzte Aktualisierung'
+    },
+    pt: {
+        title: 'TRANSFORME O SEU NEGÓCIO', sub: 'Escolha o seu serviço — Zero compromissos',
+        s1: 'Clientes satisfeitos', s2: 'Taxa de satisfação', s3: 'Avaliação média', s4: 'Experiência',
+        t1: 'SSL', t2: '<24h', t3: 'Garantia 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiência',
+        d1: 'Automatize seu grupo • Moderação 24/7', d2: 'IA gerencia clientes • Orçamentos 24/7',
+        d3: 'Bot na sua estratégia • Alertas precisos', d4: '100-500+ emails verificados DNS+SMTP',
+        d5: 'Vitrines • E-commerce • SEO • Hospedagem', d6: 'Programação • Automação • Consultoria',
+        b1: 'POPULAR', b2: 'NOVO', b3: '🔥 TOP', b4: '💎 EXCLUSIVO',
+        dt1: '🤖 BOT TELEGRAM', dt2: '🧠 ASSISTENTE IA', dt3: '📊 BOT TRADING',
+        dt4: '📧 PACOTES EMAILS', dt5: '🌐 CRIAÇÃO DE SITES', dt6: '🛠️ OUTROS SERVIÇOS',
+        dc1: 'Tem um grupo do Telegram e está cansado de estar sempre lá? <span class="hl">Configuro um bot que gerencia tudo como você</span>.<br>✅ <span class="ok">Moderação automática</span><br>✅ <span class="ok">Respostas automáticas</span><br>✅ <span class="ok">Gestão de membros</span><br>🎯 <span class="hl">Não precisa estar conectado 24/7</span>',
+        dc2: 'Quer ser independente? <span class="hl">Crio um assistente virtual que trabalha para você 24/7</span>.<br>✅ <span class="ok">Chatbot inteligente</span><br>✅ <span class="ok">Agendamento automático</span><br>✅ <span class="ok">Geração de orçamentos</span><br>🎯 <span class="hl">Teste grátis 1 semana</span>',
+        dc3: 'Faz trading e leva tempo? <span class="hl">Crio um bot na sua estratégia com precisão</span>.<br>✅ <span class="ok">Alertas no momento certo</span><br>✅ <span class="ok">Monitoramento automático</span><br>✅ <span class="ok">Sinais em tempo real</span><br>🎯 <span class="hl">O bot vigia por você</span>',
+        dc4: 'Tem uma loja online? <span class="hl">Vendo pacotes de emails verificados</span>.<br>✅ <span class="ok">Emails 100% verificados</span> (DNS + SMTP)<br>✅ <span class="ok">Pacotes de 100 a 1000</span><br>✅ <span class="ok">Contorne TikTok, Facebook</span><br>🎯 <span class="hl">Estratégia secreta incluída</span>',
+        dc5: 'Quer um site que venda? <span class="hl">Crio sites sob medida</span>.<br>✅ <span class="ok">Design moderno</span><br>✅ <span class="ok">Otimização SEO</span><br>✅ <span class="ok">Hospedagem incluída</span><br>🎯 <span class="hl">Um site que se parece com você</span>',
+        dc6: 'Tem um projeto específico? <span class="hl">Diga o que precisa</span>.<br>✅ <span class="ok">Programação sob medida</span><br>✅ <span class="ok">Automação</span><br>✅ <span class="ok">Consultoria e formação</span><br>🎯 <span class="hl">Se você pode sonhar, eu posso criar</span>',
+        urgence: '⏰ OFERTA ESPECIAL - Apenas 3 vagas este mês',
+        whatsappLabel: '📱 WhatsApp Directo', whatsappSub: 'Resposta em 5min',
+        assistantLabel: '🧠 Assistente IA', assistantSub: 'Faça sua pergunta, ele responde',
+        gtext: '💎 100% de satisfação garantida ou reembolso',
+        gsub: 'Se não estiver satisfeito, reembolsamos integralmente.',
+        l1: '👤 Nome completo', l2: '🌍 País', l3: '🏙️ Cidade', l4: '📱 WhatsApp / Telefone',
+        l5: '📧 Email', l6: '📅 Idade', l7: '🔗 Redes sociais (opcional)', l8: '✉️ Sua solicitação',
+        h1: 'Importante:', h1b: 'Entraremos em contato neste número',
+        h2: 'Importante:', h2b: 'Enviaremos uma cópia',
+        h3: '📌 Mínimo 18 anos', h4: '📌 Esta informação nos ajuda a ajudá-lo melhor',
+        btn: '🚀 ENVIAR MINHA SOLICITAÇÃO', loading: 'Enviando...',
+        faqTitle: '❓ Perguntas frequentes',
+        fq1: 'Como funciona o Bot do Telegram?',
+        fa1: 'Configuro um bot que gerencia seu grupo como você. Ele modera mensagens, responde perguntas, dá boas-vindas a novos membros e interage com seu assistente IA.',
+        fq2: 'Como funciona o Assistente IA?',
+        fa2: 'Crio um site com um chatbot inteligente que gerencia seus clientes automaticamente. Apresenta seus serviços, responde perguntas, agenda compromissos e gera orçamentos.',
+        fq3: 'Como funciona o Bot de Trading?',
+        fa3: 'Você me dá sua estratégia, programo um bot que monitora os gráficos. Ele envia alertas precisos no momento certo para tomar posições.',
+        fq4: 'O que é um Pacote de Emails Verificados?',
+        fa4: 'Emails 100% verificados (DNS + SMTP). Com esses pacotes, você pode contornar TikTok, Facebook e Instagram em vez de pagar por promoções.',
+        online: '👥 Online', total: '📊 Visitantes total',
+        f1a: 'SSL seguro', f1b: 'Dados criptografados', f1c: 'RGPD conforme',
+        f2a: 'Aviso legal', f2b: 'Política privacidade', f2c: 'Condições',
+        f3a: '9h-18h (Seg-Sex)', fb1: 'Todos os direitos reservados', fb2: 'Última atualização'
+    },
+    ar: {
+        title: 'حَوِّلْ نَشَاطَكَ', sub: 'اخْتَرْ خِدْمَتَكَ — صِفْرُ تَنَازُلَات',
+        s1: 'عُمَلَاءُ رَاضُونَ', s2: 'مُعَدَّلُ الرِّضَى', s3: 'مُعَدَّلُ التَّقْيِيمِ', s4: 'خِبْرَة',
+        t1: 'SSL', t2: '<24h', t3: 'ضَمَان 30ي', t4: 'RGPD', t5: 'عَالَمِي', t6: 'خِبْرَة',
+        d1: 'أَتْمِتْ مَجْمُوعَتَكَ • رَقَابَة 24/7', d2: 'الذَّكَاءُ الاصْطِنَاعِيُّ يُدِيرُ عُمَلَاءَكَ • تَسْعِيرَات 24/7',
+        d3: 'بُوتٌ عَلَى إِسْتِرَاتِيجِيَّتِكَ • تَنْبِيهَاتٌ دَقِيقَةٌ', d4: '100-500+ بَرِيدًا إِلِكْتْرُونِيًّا مُؤَكَّدًا DNS+SMTP',
+        d5: 'وَاجِهَات • تِجَارَة إِلِكْتْرُونِيَّة • سِيُو • اسْتِضَافَة', d6: 'بَرْمَجَة • أَتْمَتَة • اسْتِشَارَة',
+        b1: 'شَائِع', b2: 'جَدِيد', b3: '🔥 أَفْضَل', b4: '💎 حَصْرِيّ',
+        dt1: '🤖 بُوت تِلِغْرَام', dt2: '🧠 مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', dt3: '📊 بُوت التَّدَاوُلِ',
+        dt4: '📧 حُزَمُ الْبَرِيدِ', dt5: '🌐 إِنْشَاءُ مَوَاقِعَ', dt6: '🛠️ خِدْمَاتٌ أُخْرَى',
+        dc1: 'لَدَيْكَ مَجْمُوعَةُ تِلِغْرَامَ وَأَنْتَ تَعِبْتَ مِنَ الْوُجُودِ دَائِمًا؟ <span class="hl">أُهَيِّئُ بُوتًا يَدِيرُ كُلَّ شَيْءٍ مِثْلَكَ</span>.<br>✅ <span class="ok">رَقَابَة تِلْقَائِيَّة</span><br>✅ <span class="ok">رُدُود تِلْقَائِيَّة</span><br>✅ <span class="ok">إِدَارَة الْأَعْضَاء</span><br>🎯 <span class="hl">لَا حَاجَةَ لِلِاتِّصَالِ 24/7</span>',
+        dc2: 'تُرِيدُ أَنْ تَكُونَ مُسْتَقِلًّا؟ <span class="hl">أُنْشِئُ مُسَاعِدًا افْتِرَاضِيًّا يَعْمَلُ لَكَ 24/7</span>.<br>✅ <span class="ok">رَبُوت مُحَادَثَة ذَكِيّ</span><br>✅ <span class="ok">حَجْز مَوَاعِيد تِلْقَائِيّ</span><br>✅ <span class="ok">إِنْشَاء تَسْعِيرَات</span><br>🎯 <span class="hl">تَجْرِبَة مَجَّانِيَّة أُسْبُوع</span>',
+        dc3: 'تَتَعَامَلُ مَعَ التَّدَاوُلِ وَيَسْتَغْرِقُ الْوَقْتَ؟ <span class="hl">أُنْشِئُ بُوتًا عَلَى إِسْتِرَاتِيجِيَّتِكَ بِدِقَّةٍ</span>.<br>✅ <span class="ok">تَنْبِيهَاتٌ فِي الْوَقْتِ الْمُنَاسِبِ</span><br>✅ <span class="ok">مُتَابَعَة تِلْقَائِيَّة</span><br>✅ <span class="ok">إِشَارَاتٌ فِي الْوَقْتِ الْفِعْلِيّ</span><br>🎯 <span class="hl">الْبُوتُ يَرْقُبُ لَكَ</span>',
+        dc4: 'لَدَيْكَ مَتْجَرٌ إِلِكْتْرُونِيّ؟ <span class="hl">أَبِيعُكَ حُزَمَ بَرِيدٍ مُؤَكَّدَةٍ</span>.<br>✅ <span class="ok">بَرِيدٌ مُؤَكَّدٌ 100%</span> (DNS+SMTP)<br>✅ <span class="ok">حُزَمٌ مِنْ 100 إِلَى 1000</span><br>✅ <span class="ok">تَجَاوُز تِيك توك، فَيْس بُوك</span><br>🎯 <span class="hl">إِسْتِرَاتِيجِيَّة سِرِّيَّة مُضَمَّنَة</span>',
+        dc5: 'تُرِيدُ مَوْقِعًا يَبِيعُ؟ <span class="hl">أُنْشِئُ مَوَاقِعَ حَسَبَ الطَّلَبِ</span>.<br>✅ <span class="ok">تَصْمِيم حَدِيث</span><br>✅ <span class="ok">تَحْسِين سِيُو</span><br>✅ <span class="ok">اسْتِضَافَة مُضَمَّنَة</span><br>🎯 <span class="hl">مَوْقِعٌ يُشْبِهُكَ</span>',
+        dc6: 'لَدَيْكَ مَشْرُوعٌ مُحَدَّدٌ؟ <span class="hl">أَخْبِرْنِي بِمَا تَحْتَاجُ</span>.<br>✅ <span class="ok">بَرْمَجَة حَسَبَ الطَّلَبِ</span><br>✅ <span class="ok">أَتْمَتَة</span><br>✅ <span class="ok">اسْتِشَارَة وَتَدْرِيب</span><br>🎯 <span class="hl">إِنِ اسْتَطَعْتَ تَخَيُّلَهُ، يُمْكِنُنِي إِنْشَاؤُهُ</span>',
+        urgence: '⏰ عَرْضٌ خَاصٌّ - 3 مَقَاعِدَ فَقَطْ هَذَا الشَّهْرِ',
+        whatsappLabel: '📱 وَاتْسَاب مُبَاشِر', whatsappSub: 'رَدٌّ فِي 5 دَقَائِق',
+        assistantLabel: '🧠 مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', assistantSub: 'اسْأَلْ سُؤَالَكَ، يُجِيبُكَ',
+        gtext: '💎 رِضًا مَضْمُونٌ 100% أَوِ اسْتِرْدَادُ الْمَالِ',
+        gsub: 'إِذَا لَمْ تَكُنْ رَاضِيًا، سَنُعِيدُ لَكَ الْمَبْلَغَ كَامِلًا.',
+        l1: '👤 الِاسْمُ وَاللَّقَبُ', l2: '🌍 الْبَلَدُ', l3: '🏙️ الْمَدِينَةُ', l4: '📱 وَاتْسَاب / هَاتِف',
+        l5: '📧 الْبَرِيدُ الإِلِكْتْرُونِيّ', l6: '📅 الْعُمْرُ', l7: '🔗 شَبَكَاتٌ اجْتِمَاعِيَّة (اخْتِيَارِيّ)', l8: '✉️ طَلَبُكَ',
+        h1: 'مُهِمٌّ:', h1b: 'سَنَتَصِلُ بِكَ عَلَى هَذَا الرَّقْمِ',
+        h2: 'مُهِمٌّ:', h2b: 'سَنُرْسِلُ لَكَ نُسْخَةً',
+        h3: '📌 الْحَدُّ الْأَدْنَى 18 سَنَةً', h4: '📌 هَذِهِ الْمَعْلُومَاتُ تُسَاعِدُنَا عَلَى مُسَاعَدَتِكَ بِشَكْلٍ أَفْضَل',
+        btn: '🚀 أَرْسِلْ طَلَبِي', loading: 'جَارِي الْإِرْسَالُ...',
+        faqTitle: '❓ أَسْئِلَةٌ شَائِعَةٌ',
+        fq1: 'كَيْفَ يَعْمَلُ بُوتُ تِلِغْرَامَ؟',
+        fa1: 'أُهَيِّئُ بُوتًا يَدِيرُ مَجْمُوعَتَكَ مِثْلَكَ. يَرَاقِبُ الرَّسَائِلَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يُرَحِّبُ بِالْأَعْضَاءِ الْجُدُدِ وَيَتَفَاعَلُ مَعَ مُسَاعِدِكَ الذَّكِيّ.',
+        fq2: 'كَيْفَ يَعْمَلُ مُسَاعِدُ الذَّكَاءِ الاصْطِنَاعِيّ؟',
+        fa2: 'أُنْشِئُ مَوْقِعًا مَعَ رَبُوتِ مُحَادَثَةٍ ذَكِيّ يُدِيرُ عُمَلَاءَكَ تِلْقَائِيًّا. يَعْرِضُ خِدْمَاتِكَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يَحْجِزُ الْمَوَاعِيدَ وَيُنْشِئُ التَّسْعِيرَاتِ.',
+        fq3: 'كَيْفَ يَعْمَلُ بُوتُ التَّدَاوُلِ؟',
+        fa3: 'تُعْطِينِي إِسْتِرَاتِيجِيَّتَكَ، أُبَرْمِجُ بُوتًا يُرَاقِبُ الرُّسُومَ الْبَيَانِيَّةَ. يُرْسِلُ لَكَ تَنْبِيهَاتٍ دَقِيقَةً فِي الْوَقْتِ الْمُنَاسِبِ لِاتِّخَاذِ الْوُضُوعَاتِ.',
+        fq4: 'مَا هِيَ حُزَمُ الْبَرِيدِ الْمُؤَكَّدَةُ؟',
+        fa4: 'بَرِيدٌ مُؤَكَّدٌ 100% (DNS+SMTP). بِهَذِهِ الْحُزَمِ، يُمْكِنُكَ تَجَاوُزُ تِيك توك، فَيْس بُوك وَإِنْسْتْغْرَام بِدَلَ الْإِعْلَانَاتِ.',
+        online: '👥 مُتَّصِل', total: '📊 الزُّوَّارُ الْإِجْمَالِيّ',
+        f1a: 'SSL مُؤَمَّن', f1b: 'بَيَانَاتٌ مُشَفَّرَةٌ', f1c: 'مُتَوَافِقٌ مَعَ RGPD',
+        f2a: 'إِشْعَارَاتٌ قَانُونِيَّة', f2b: 'سِيَاسَةُ الْخُصُوصِيَّةِ', f2c: 'شُرُوط الْخِدْمَة',
+        f3a: '9-18 (الإثْنَيْن-الْجُمُعَة)', fb1: 'جَمِيعُ الْحُقُوقِ مَحْفُوظَةٌ', fb2: 'آخِرُ تَحْدِيثٍ'
+    }
+};
+
+let currentLang = 'fr';
+
+function switchLang(lang) {
+    currentLang = lang;
+    const t = T[lang];
+    if (!t) return;
+    
+    document.querySelectorAll('.lang-selector button').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    
+    document.getElementById('mainTitle').textContent = t.title;
+    document.getElementById('mainSub').textContent = t.sub;
+    document.getElementById('s1').textContent = t.s1;
+    document.getElementById('s2').textContent = t.s2;
+    document.getElementById('s3').textContent = t.s3;
+    document.getElementById('s4').textContent = t.s4;
+    document.getElementById('t1').textContent = t.t1;
+    document.getElementById('t2').textContent = t.t2;
+    document.getElementById('t3').textContent = t.t3;
+    document.getElementById('t4').textContent = t.t4;
+    document.getElementById('t5').textContent = t.t5;
+    document.getElementById('t6').textContent = t.t6;
+    document.getElementById('d1').textContent = t.d1;
+    document.getElementById('d2').textContent = t.d2;
+    document.getElementById('d3').textContent = t.d3;
+    document.getElementById('d4').textContent = t.d4;
+    document.getElementById('d5').textContent = t.d5;
+    document.getElementById('d6').textContent = t.d6;
+    document.getElementById('b1').textContent = t.b1;
+    document.getElementById('b2').textContent = t.b2;
+    document.getElementById('b3').textContent = t.b3;
+    document.getElementById('b4').textContent = t.b4;
+    document.getElementById('dt1').textContent = t.dt1;
+    document.getElementById('dt2').textContent = t.dt2;
+    document.getElementById('dt3').textContent = t.dt3;
+    document.getElementById('dt4').textContent = t.dt4;
+    document.getElementById('dt5').textContent = t.dt5;
+    document.getElementById('dt6').textContent = t.dt6;
+    document.getElementById('dc1').innerHTML = t.dc1;
+    document.getElementById('dc2').innerHTML = t.dc2;
+    document.getElementById('dc3').innerHTML = t.dc3;
+    document.getElementById('dc4').innerHTML = t.dc4;
+    document.getElementById('dc5').innerHTML = t.dc5;
+    document.getElementById('dc6').innerHTML = t.dc6;
+    document.getElementById('urgence').textContent = t.urgence;
+    document.getElementById('whatsappLabel').textContent = t.whatsappLabel;
+    document.getElementById('whatsappSub').textContent = t.whatsappSub;
+    document.getElementById('assistantLabel').textContent = t.assistantLabel;
+    document.getElementById('assistantSub').textContent = t.assistantSub;
+    document.getElementById('gtext').textContent = t.gtext;
+    document.getElementById('gsub').textContent = t.gsub;
+    document.getElementById('l1').innerHTML = t.l1 + ' <span class="required">*</span>';
+    document.getElementById('l2').innerHTML = t.l2 + ' <span class="required">*</span>';
+    document.getElementById('l3').innerHTML = t.l3 + ' <span class="required">*</span>';
+    document.getElementById('l4').innerHTML = t.l4 + ' <span class="required">*</span>';
+    document.getElementById('l5').innerHTML = t.l5 + ' <span class="required">*</span>';
+    document.getElementById('l6').innerHTML = t.l6 + ' <span class="required">*</span>';
+    document.getElementById('l7').textContent = t.l7;
+    document.getElementById('l8').innerHTML = t.l8 + ' <span class="required">*</span>';
+    document.getElementById('h1').textContent = t.h1;
+    document.getElementById('h1b').textContent = t.h1b;
+    document.getElementById('h2').textContent = t.h2;
+    document.getElementById('h2b').textContent = t.h2b;
+    document.getElementById('h3').textContent = t.h3;
+    document.getElementById('h4').textContent = t.h4;
+    document.getElementById('sendBtn').textContent = t.btn;
+    document.getElementById('loadingText').textContent = t.loading;
+    document.getElementById('faqTitle').textContent = t.faqTitle;
+    document.getElementById('fq1').textContent = t.fq1;
+    document.getElementById('fa1').textContent = t.fa1;
+    document.getElementById('fq2').textContent = t.fq2;
+    document.getElementById('fa2').textContent = t.fa2;
+    document.getElementById('fq3').textContent = t.fq3;
+    document.getElementById('fa3').textContent = t.fa3;
+    document.getElementById('fq4').textContent = t.fq4;
+    document.getElementById('fa4').textContent = t.fa4;
+    document.getElementById('onlineLabel').textContent = t.online;
+    document.getElementById('totalLabel').textContent = t.total;
+    document.getElementById('f1a').textContent = t.f1a;
+    document.getElementById('f1b').textContent = t.f1b;
+    document.getElementById('f1c').textContent = t.f1c;
+    document.getElementById('f2a').textContent = t.f2a;
+    document.getElementById('f2b').textContent = t.f2b;
+    document.getElementById('f2c').textContent = t.f2c;
+    document.getElementById('f3a').textContent = t.f3a;
+    document.getElementById('fb1').textContent = t.fb1;
+    document.getElementById('fb2').textContent = t.fb2;
+    
+    localStorage.setItem('lang', lang);
+}
+
+let selectedService = null;
+
+function selectService(el, id) {
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedService = el.dataset.service;
+    
+    document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
+    const detail = document.getElementById('detail-' + id);
+    if (detail) detail.classList.add('active');
+}
+
+function sendMessage(e) {
+    e.preventDefault();
+    if (!selectedService) {
+        showToast('Veuillez sélectionner un service.', 'error');
+        return;
+    }
+    const nom = document.getElementById('nom').value.trim();
+    const pays = document.getElementById('pays').value.trim();
+    const ville = document.getElementById('ville').value.trim();
+    const whatsapp = document.getElementById('whatsapp').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const age = document.getElementById('age').value.trim();
+    const reseau = document.getElementById('reseau').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (!nom || !pays || !ville || !whatsapp || !email || !age || !message) {
+        showToast('Tous les champs obligatoires doivent être remplis.', 'error');
+        return;
+    }
+    if (parseInt(age) < 18) {
+        showToast('Vous devez avoir au moins 18 ans.', 'error');
+        return;
+    }
+    
+    const btn = document.getElementById('sendBtn');
+    const loading = document.getElementById('loading');
+    btn.disabled = true;
+    loading.style.display = 'block';
+    
+    fetch('https://sitmessag.onrender.com/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ service: selectedService, nom, pays, ville, whatsapp, email, age, reseau, message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        btn.disabled = false;
+        loading.style.display = 'none';
+        if (data.status === 'ok') {
+            showToast('Message envoyé avec succès !', 'success');
+            document.getElementById('messageForm').reset();
+            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
+            selectedService = null;
+        } else {
+            showToast('Erreur : ' + (data.error || 'Inconnue'), 'error');
+        }
+    })
+    .catch(() => {
+        btn.disabled = false;
+        loading.style.display = 'none';
+        showToast('Erreur de connexion au serveur.', 'error');
+    });
+}
+
+function showToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast ' + type;
+    setTimeout(() => { toast.className = 'toast'; }, 5000);
+}
+
+function toggleFaq(el) {
+    const a = el.querySelector('.a');
+    const arrow = el.querySelector('.arrow');
+    if (a) {
+        a.classList.toggle('open');
+        if (arrow) arrow.classList.toggle('open');
+    }
+}
+
+function getIP() {
+    return new Promise((resolve) => {
+        fetch('https://api.ipify.org?format=json')
+            .then(r => r.json())
+            .then(data => resolve(data.ip))
+            .catch(() => resolve('unknown'));
+    });
+}
+
+function updateCounters() {
+    getIP().then(ip => {
+        fetch('https://sitmessag.onrender.com/api/visiteur', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ip: ip })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.online !== undefined) document.getElementById('onlineCount').textContent = data.online;
+            if (data.total !== undefined) document.getElementById('totalCount').textContent = data.total;
+        })
+        .catch(() => {
+            document.getElementById('onlineCount').textContent = '?';
+            document.getElementById('totalCount').textContent = '?';
+        });
+    });
+}
+
+window.addEventListener('load', function() {
+    const saved = localStorage.getItem('lang');
+    if (saved && T[saved]) switchLang(saved);
+    updateCounters();
+    setInterval(updateCounters, 30000);
+});
+</script>
+</body>
+</html>
