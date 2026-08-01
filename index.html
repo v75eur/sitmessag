@@ -110,54 +110,60 @@
         .lang-selector button:hover { border-color: #f0b90b; color: #0a0a1a; }
         .lang-selector button.active { border-color: #f0b90b; background: #f0b90b; color: #0a0a1a; }
         
-        /* ===== FAQ EN HAUT ===== */
-        . faq-top { animation: blinkBorder 1.5s infinite; 
+        /* ===== FAQ EN HAUT - CLIGNOTANT ===== */
+        .faq-top {
             background: #fffbeb;
             border-radius: 16px;
             padding: 20px 24px;
             margin-bottom: 20px;
-            border: 2px solid #fde68a; animation: blinkBorder 1.5s infinite;
-            animation: blinkBorder 2s infinite;
+            border: 3px solid #fde68a;
+            animation: blinkBorder 1.2s infinite;
+            box-shadow: 0 0 30px rgba(240,185,11,0.05);
         }
-         @keyframes blinkBorder {
-            0%, 100% { border-color: #fde68a; }
-            50% { border-color: #f0b90b; box-shadow: 0 0 20px rgba(240,185,11,0.15); }
+        @keyframes blinkBorder {
+            0%, 100% { border-color: #fde68a; box-shadow: 0 0 20px rgba(240,185,11,0.05); }
+            50% { border-color: #f0b90b; box-shadow: 0 0 40px rgba(240,185,11,0.2); }
         }
         .faq-top h3 {
             color: #0a0a1a;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
-        .faq-top h3 .icon { font-size: 20px; }
+        .faq-top h3 .icon { font-size: 22px; animation: pulseIcon 1.2s infinite; }
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
         .faq-top .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
         }
         .faq-top .item {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 10px 14px;
+            border-radius: 12px;
+            padding: 12px 16px;
             border: 1px solid #f3f4f6;
             font-size: 13px;
             color: #0a0a1a;
             line-height: 1.5;
             transition: all 0.3s;
         }
-        .faq-top .item:hover { border-color: #f0b90b; transform: translateY(-2px); }
+        .faq-top .item:hover { border-color: #f0b90b; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
         .faq-top .item strong { color: #f0b90b; }
         .faq-top .item .ex {
             display: block;
-            font-size: 11px;
+            font-size: 12px;
             color: #6b7280;
-            margin-top: 3px;
-            padding: 4px 8px;
+            margin-top: 4px;
+            padding: 6px 10px;
             background: #f9fafb;
-            border-radius: 6px;
+            border-radius: 8px;
+            border-left: 3px solid #f0b90b;
         }
         
         /* ===== TRUST ===== */
@@ -501,7 +507,7 @@
         <button data-lang="ar" onclick="switchLang('ar')">AR</button>
     </div>
     
-    <!-- ===== FAQ EN HAUT ===== -->
+    <!-- ===== FAQ EN HAUT - CLIGNOTANT ===== -->
     <div class="faq-top">
         <h3><span class="icon">💡</span> Comprendre en 2 minutes — Exemples concrets</h3>
         <div class="grid">
@@ -742,47 +748,34 @@ let todayRequests = parseInt(localStorage.getItem('todayRequests'));
 let requestHistory = JSON.parse(localStorage.getItem('requestHistory')) || [];
 
 function generateRealisticRequests() {
-    // Si c'est un nouveau jour ou pas encore initialisé
     const today = new Date().toDateString();
     const lastDate = localStorage.getItem('lastDate');
     
     if (lastDate !== today) {
-        // Nouveau jour - réinitialiser avec une valeur réaliste
         localStorage.setItem('lastDate', today);
-        
-        // Générer une valeur entre 0 et 10 avec tendance croissante
-        // Plus on avance dans la semaine, plus les demandes augmentent
-        const dayOfWeek = new Date().getDay(); // 0=dimanche, 6=samedi
+        const dayOfWeek = new Date().getDay();
         let base = 0;
-        if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Lundi à Vendredi
-            base = Math.floor(Math.random() * 6) + 2; // 2 à 7
-        } else { // Week-end
-            base = Math.floor(Math.random() * 4); // 0 à 3
+        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+            base = Math.floor(Math.random() * 6) + 2;
+        } else {
+            base = Math.floor(Math.random() * 4);
         }
-        // Ajouter un peu de variabilité
         todayRequests = Math.min(base + Math.floor(Math.random() * 3), 10);
-        
         localStorage.setItem('todayRequests', todayRequests);
-        
-        // Sauvegarder l'historique
         requestHistory.push({ date: today, value: todayRequests });
         if (requestHistory.length > 30) requestHistory.shift();
         localStorage.setItem('requestHistory', JSON.stringify(requestHistory));
     } else {
-        // Même jour - petite variation réaliste (+1 ou -1)
         const variation = Math.random() > 0.7 ? (Math.random() > 0.5 ? 1 : -1) : 0;
         todayRequests = Math.min(Math.max(todayRequests + variation, 0), 10);
         localStorage.setItem('todayRequests', todayRequests);
     }
-    
     return todayRequests;
 }
 
 function updateTodayRequests() {
     const count = generateRealisticRequests();
     document.getElementById('todayRequests').textContent = count;
-    
-    // Statut en direct avec clignotement
     const statusEl = document.getElementById('todayStatus');
     if (count > 7) {
         statusEl.textContent = '🔥 Très actif';
@@ -803,11 +796,8 @@ function updateTodayRequests() {
     }
 }
 
-// Initialiser au chargement
 generateRealisticRequests();
 updateTodayRequests();
-
-// Mettre à jour toutes les 30 secondes
 setInterval(updateTodayRequests, 30000);
 
 // ============================================================
@@ -1203,7 +1193,6 @@ function sendMessage(e) {
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
             selectedService = null;
-            // Incrémenter le compteur de demandes du jour
             todayRequests = Math.min(todayRequests + 1, 10);
             localStorage.setItem('todayRequests', todayRequests);
             document.getElementById('todayRequests').textContent = todayRequests;
