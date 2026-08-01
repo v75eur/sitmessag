@@ -16,7 +16,7 @@
             align-items: center;
         }
         .container {
-            max-width: 920px;
+            max-width: 950px;
             width: 100%;
             background: rgba(255,255,255,0.03);
             backdrop-filter: blur(20px);
@@ -26,7 +26,6 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.6);
         }
         
-        /* ===== BANDEAU FLASH ===== */
         .flash-banner {
             background: linear-gradient(135deg, #f0b90b, #f59e0b);
             padding: 12px 20px;
@@ -43,7 +42,6 @@
         }
         @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.02)} }
         
-        /* ===== LOGO ===== */
         .logo {
             text-align: center;
             font-size: 10px;
@@ -87,7 +85,7 @@
             letter-spacing: 3px;
         }
         
-        /* ===== SÉLECTEUR DE LANGUE ===== */
+        /* ===== LANG SELECTOR ===== */
         .lang-selector {
             display: flex;
             justify-content: center;
@@ -293,6 +291,56 @@
         .service-card .name { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 3px; }
         .service-card .desc { color: #94a3b8; font-size: 11px; line-height: 1.4; }
         
+        /* ===== BANNIÈRES SERVICES DÉTAILLÉES ===== */
+        .service-detail-banner {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(255,255,255,0.04);
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+        .service-detail-banner.active {
+            display: block;
+            border-color: rgba(240,185,11,0.2);
+            background: rgba(240,185,11,0.03);
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .service-detail-banner .sd-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: #f0b90b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .service-detail-banner .sd-title .icon { font-size: 24px; }
+        .service-detail-banner .sd-content {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        .service-detail-banner .sd-content .highlight { color: #f0b90b; font-weight: 700; }
+        .service-detail-banner .sd-content .highlight-green { color: #22c55e; font-weight: 700; }
+        .service-detail-banner .sd-content .highlight-blue { color: #4d96ff; font-weight: 700; }
+        .service-detail-banner .sd-content .highlight-red { color: #ef4444; font-weight: 700; }
+        .service-detail-banner .sd-badge {
+            display: inline-block;
+            background: rgba(240,185,11,0.1);
+            border: 1px solid rgba(240,185,11,0.2);
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #f0b90b;
+            margin-right: 4px;
+        }
+        
         /* ===== FORMULAIRE ===== */
         .form-group { margin-bottom: 12px; }
         .form-group label {
@@ -353,35 +401,7 @@
         }
         .form-group .info-box b { color: #fff; }
         
-        /* ===== BANNIÈRES ===== */
-        .promo-banner {
-            background: linear-gradient(135deg, rgba(240,185,11,0.06), rgba(77,150,255,0.03));
-            border: 2px solid rgba(240,185,11,0.12);
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin-bottom: 18px;
-        }
-        .promo-banner .title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            font-size: 18px;
-            font-weight: 900;
-            color: #f0b90b;
-            margin-bottom: 4px;
-        }
-        .promo-banner .title .icon { font-size: 28px; }
-        .promo-banner .content {
-            color: #cbd5e1;
-            font-size: 14px;
-            text-align: center;
-            line-height: 1.8;
-        }
-        .promo-banner .content .highlight { color: #f0b90b; font-weight: 700; }
-        .promo-banner .content .highlight-green { color: #22c55e; font-weight: 700; }
-        
+        /* ===== URGENCE ===== */
         .urgence-box {
             background: rgba(239,68,68,0.04);
             border: 2px solid rgba(239,68,68,0.15);
@@ -603,7 +623,6 @@
         }
         .gear:hover { color: #f0b90b; }
         
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .container { padding: 18px 14px; }
             .services { grid-template-columns: 1fr 1fr; }
@@ -645,7 +664,7 @@
     <h1>🔥 TRANSFORME TON ACTIVITÉ</h1>
     <p class="subtitle">Choisis ton arme secrète — Zéro compromis</p>
     
-    <!-- ===== SÉLECTEUR DE LANGUE ===== -->
+    <!-- ===== LANG SELECTOR ===== -->
     <div class="lang-selector" id="langSelector">
         <span class="lang-label">🌐</span>
         <button class="active" data-lang="fr" onclick="changeLanguage('fr')">🇫🇷 FR</button>
@@ -659,141 +678,224 @@
     </div>
     
     <!-- ===== SOCIAL PROOF ===== -->
-    <div class="social-proof" id="socialProof">
-        <div class="stat"><span class="number gold">+500</span><span class="label" data-key="clients">👥 Clients satisfaits</span></div>
-        <div class="stat"><span class="number green">98%</span><span class="label" data-key="satisfaction">⭐ Taux de satisfaction</span></div>
-        <div class="stat"><span class="number blue">4.9/5</span><span class="label" data-key="note">📊 Note moyenne</span></div>
-        <div class="stat"><span class="number purple">+5 ans</span><span class="label" data-key="experience">🏆 D'expérience</span></div>
+    <div class="social-proof">
+        <div class="stat"><span class="number gold">+500</span><span class="label">👥 Clients satisfaits</span></div>
+        <div class="stat"><span class="number green">98%</span><span class="label">⭐ Taux de satisfaction</span></div>
+        <div class="stat"><span class="number blue">4.9/5</span><span class="label">📊 Note moyenne</span></div>
+        <div class="stat"><span class="number purple">+5 ans</span><span class="label">🏆 D'expérience</span></div>
     </div>
     
     <!-- ===== TRUST ===== -->
-    <div class="trust-banner" id="trustBanner">
-        <div class="trust-item"><span class="icon">🔒</span><span class="label" data-key="ssl">SSL</span></div>
-        <div class="trust-item"><span class="icon">⏱️</span><span class="label" data-key="response"><24h</span></div>
-        <div class="trust-item"><span class="icon">🤝</span><span class="label" data-key="garantie">Garantie 30j</span></div>
-        <div class="trust-item"><span class="icon">📋</span><span class="label" data-key="rgpd">RGPD</span></div>
-        <div class="trust-item"><span class="icon">🌍</span><span class="label" data-key="mondial">Mondial</span></div>
-        <div class="trust-item"><span class="icon">💎</span><span class="label" data-key="expertise">Expertise</span></div>
+    <div class="trust-banner">
+        <div class="trust-item"><span class="icon">🔒</span><span class="label">SSL</span></div>
+        <div class="trust-item"><span class="icon">⏱️</span><span class="label"><24h</span></div>
+        <div class="trust-item"><span class="icon">🤝</span><span class="label">Garantie 30j</span></div>
+        <div class="trust-item"><span class="icon">📋</span><span class="label">RGPD</span></div>
+        <div class="trust-item"><span class="icon">🌍</span><span class="label">Mondial</span></div>
+        <div class="trust-item"><span class="icon">💎</span><span class="label">Expertise</span></div>
     </div>
     
     <!-- ===== TERMINAL ===== -->
     <div class="terminal" id="terminal">
         <div class="header">
-            <span id="terminalTitle">📟 TERMINAL PRO</span>
+            <span>📟 TERMINAL PRO</span>
             <div class="dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div>
         </div>
         <div id="terminalContent">
-            <div class="line"><span class="prompt">➜</span> <span data-key="init">Initialisation du terminal...</span></div>
-            <div class="line"><span class="prompt">➜</span> <span class="highlight" data-key="services_available">6 services révolutionnaires</span> <span data-key="available">disponibles</span></div>
-            <div class="line"><span class="prompt">➜</span> <span data-key="waiting">En attente de sélection</span> <span class="blink">▊</span></div>
+            <div class="line"><span class="prompt">➜</span> Initialisation du terminal...</div>
+            <div class="line"><span class="prompt">➜</span> <span class="highlight">6 services révolutionnaires</span> disponibles</div>
+            <div class="line"><span class="prompt">➜</span> En attente de sélection <span class="blink">▊</span></div>
         </div>
     </div>
     
     <!-- ===== SERVICES ===== -->
     <div class="services" id="services">
-        <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'🤖 Bot Telegram')">
-            <span class="badge" data-key="popular">POPULAIRE</span>
+        <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'🤖 Bot Telegram', 'telegram')">
+            <span class="badge">POPULAIRE</span>
             <span class="icon">🤖</span>
             <div class="name">⚡ BOT TELEGRAM</div>
-            <div class="desc" data-key="desc_telegram">Automatise ton groupe • Modération • Réponses auto 24h/24</div>
+            <div class="desc">Automatise ton groupe • Modération • Réponses auto 24h/24</div>
         </div>
-        <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'🧠 Assistant IA')">
-            <span class="badge" data-key="new">NOUVEAU</span>
+        <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'🧠 Assistant IA', 'ia')">
+            <span class="badge">NOUVEAU</span>
             <span class="icon">🧠</span>
             <div class="name">🤖 ASSISTANT IA</div>
-            <div class="desc" data-key="desc_ia">L'IA qui gère tes clients • Rendez-vous • Devis 24h/24</div>
+            <div class="desc">L'IA qui gère tes clients • Rendez-vous • Devis 24h/24</div>
         </div>
-        <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'📊 Bot Trading')">
-            <span class="badge" data-key="top">🔥 TOP</span>
+        <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'📊 Bot Trading', 'trading')">
+            <span class="badge">🔥 TOP</span>
             <span class="icon">📊</span>
             <div class="name">📈 BOT TRADING</div>
-            <div class="desc" data-key="desc_trading">Bot sur ta stratégie • Alertes précises • Signaux temps réel</div>
+            <div class="desc">Bot sur ta stratégie • Alertes précises • Signaux temps réel</div>
         </div>
-        <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'📦 Pack Mails')">
-            <span class="badge" data-key="exclusif">💎 EXCLUSIF</span>
+        <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'📦 Pack Mails', 'mails')">
+            <span class="badge">💎 EXCLUSIF</span>
             <span class="icon">📧</span>
             <div class="name">📦 PACK MAILS</div>
-            <div class="desc" data-key="desc_mails">100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook</div>
+            <div class="desc">100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook</div>
         </div>
-        <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'🌐 Création sites')">
+        <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'🌐 Création sites', 'sites')">
             <span class="icon">🌐</span>
             <div class="name">🌐 CRÉATION SITES</div>
-            <div class="desc" data-key="desc_sites">Vitrines • E-commerce • Landing pages • SEO • Hébergement</div>
+            <div class="desc">Vitrines • E-commerce • Landing pages • SEO • Hébergement</div>
         </div>
-        <div class="service-card" data-service="AUTRES" onclick="selectService(this,'🛠️ Autres services')">
+        <div class="service-card" data-service="AUTRES" onclick="selectService(this,'🛠️ Autres services', 'autres')">
             <span class="icon">🛠️</span>
             <div class="name">🛠️ AUTRES SERVICES</div>
-            <div class="desc" data-key="desc_autres">Programmation • Automatisation • Conseil • Formation</div>
+            <div class="desc">Programmation • Automatisation • Conseil • Formation</div>
         </div>
     </div>
     
-    <!-- ===== PROMO ===== -->
-    <div class="promo-banner" id="promoBanner">
-        <div class="title"><span class="icon">🔥</span> <span data-key="promo_title">OFFRE SPÉCIALE — PACK MAILS VERIFIÉS</span></div>
-        <div class="content">
-            💡 <span class="highlight" data-key="promo_highlight">Contourne TikTok, Facebook, Instagram</span> <span data-key="promo_text">sans payer de promotions !</span><br>
-            📧 <span class="highlight-green" data-key="promo_mails">Emails 100% vérifiés (DNS + SMTP)</span> — <span data-key="promo_secret">Stratégie secrète incluse</span>
+    <!-- ===== BANNIÈRES DÉTAILLÉES DES SERVICES ===== -->
+    
+    <!-- 1. BOT TELEGRAM -->
+    <div class="service-detail-banner" id="detail-telegram">
+        <div class="sd-title"><span class="icon">🤖</span> BOT TELEGRAM — AUTOMATISE TON GROUPE</div>
+        <div class="sd-content">
+            <span class="sd-badge">🔥 POPULAIRE</span>
+            Tu as un groupe ou canal Telegram et t'en as marre d'être toujours là ? <span class="highlight">Je te configure un bot qui gère tout comme toi</span>, selon tes désirs.<br>
+            ✅ <span class="highlight-green">Modération automatique</span> des messages<br>
+            ✅ <span class="highlight-green">Réponses automatiques</span> aux questions fréquentes<br>
+            ✅ <span class="highlight-green">Gestion des nouveaux membres</span> (bienvenue, vérification)<br>
+            ✅ <span class="highlight-green">Messages programmés</span> et statistiques<br>
+            ✅ <span class="highlight-green">Intégration avec ton assistant IA</span><br>
+            🎯 <span class="highlight">Plus besoin d'être connecté 24h/24</span> — Le bot travaille pour toi !
+        </div>
+    </div>
+    
+    <!-- 2. ASSISTANT IA -->
+    <div class="service-detail-banner" id="detail-ia">
+        <div class="sd-title"><span class="icon">🧠</span> ASSISTANT IA — DEVIENS INDÉPENDANT</div>
+        <div class="sd-content">
+            <span class="sd-badge">💎 RÉVOLUTIONNAIRE</span>
+            Tu veux être indépendant et orienter les gens vers ton assistant sur un site IA qui gère tes services ou produits ? <span class="highlight">Je crée un assistant virtuel qui travaille pour toi 24h/24 !</span><br>
+            ✅ <span class="highlight-green">Chatbot intelligent</span> qui répond à tes clients<br>
+            ✅ <span class="highlight-green">Présentation automatique</span> de tes services<br>
+            ✅ <span class="highlight-green">Prise de rendez-vous</span> et génération de devis<br>
+            ✅ <span class="highlight-green">Interface personnalisée</span> à ton image<br>
+            ✅ <span class="highlight-green">Gestion des demandes</span> et des clients<br>
+            🎯 <span class="highlight">Test gratuit pendant 1 semaine</span> — Personnalisé selon tes besoins !
+        </div>
+    </div>
+    
+    <!-- 3. BOT TRADING -->
+    <div class="service-detail-banner" id="detail-trading">
+        <div class="sd-title"><span class="icon">📊</span> BOT TRADING — LIBÈRE TON TEMPS</div>
+        <div class="sd-content">
+            <span class="sd-badge">🏆 PRÉCISION</span>
+            Tu fais du trading et ça prend du temps à être devant les graphiques ? <span class="highlight">Je crée un bot pour toi sur ta stratégie avec une précision chirurgicale !</span><br>
+            ✅ <span class="highlight-green">Alertes au bon moment</span> pour prendre tes positions<br>
+            ✅ <span class="highlight-green">Suivi automatique</span> des graphiques<br>
+            ✅ <span class="highlight-green">Signaux en temps réel</span> sur WhatsApp/Telegram<br>
+            ✅ <span class="highlight-green">Analyse technique automatisée</span><br>
+            ✅ <span class="highlight-green">Backtesting</span> de ta stratégie<br>
+            🎯 <span class="highlight">Tu n'as plus besoin de rester devant les écrans</span> — Le bot veille pour toi !
+        </div>
+    </div>
+    
+    <!-- 4. PACK MAILS -->
+    <div class="service-detail-banner" id="detail-mails">
+        <div class="sd-title"><span class="icon">📧</span> PACK MAILS — L'ARME SECRÈTE</div>
+        <div class="sd-content">
+            <span class="sd-badge">💎 EXCLUSIF</span>
+            Tu as un service en ligne ou une boutique ? <span class="highlight">Je te vends des packs de mails vérifiés pour contourner les réseaux sociaux !</span><br>
+            ✅ <span class="highlight-green">Emails 100% vérifiés</span> (DNS + SMTP)<br>
+            ✅ <span class="highlight-green">Packs de 100, 300, 500 ou 1000</span> emails<br>
+            ✅ <span class="highlight-green">Contournement TikTok, Facebook, Instagram</span><br>
+            ✅ <span class="highlight-green">Stratégie secrète</span> incluse<br>
+            ✅ <span class="highlight-green">Livraison en 24h</span><br>
+            🎯 <span class="highlight">Au lieu de payer des promotions que tu ne comprends pas</span> — Utilise cette stratégie secrète !
+        </div>
+    </div>
+    
+    <!-- 5. CRÉATION SITES -->
+    <div class="service-detail-banner" id="detail-sites">
+        <div class="sd-title"><span class="icon">🌐</span> CRÉATION DE SITES — TON ÉCRIN DIGITAL</div>
+        <div class="sd-content">
+            <span class="sd-badge">🎨 SUR MESURE</span>
+            Tu veux un site qui vend et qui convertit ? <span class="highlight">Je crée des sites vitrines, e-commerce, landing pages sur mesure !</span><br>
+            ✅ <span class="highlight-green">Design moderne et responsive</span><br>
+            ✅ <span class="highlight-green">Optimisation SEO</span> pour être visible<br>
+            ✅ <span class="highlight-green">Formulaire de contact</span> et intégration IA<br>
+            ✅ <span class="highlight-green">Hébergement inclus</span><br>
+            ✅ <span class="highlight-green">Maintenance et support</span><br>
+            🎯 <span class="highlight">Un site qui te ressemble</span> — Qui vend et qui convertit !
+        </div>
+    </div>
+    
+    <!-- 6. AUTRES SERVICES -->
+    <div class="service-detail-banner" id="detail-autres">
+        <div class="sd-title"><span class="icon">🛠️</span> AUTRES SERVICES — TOUT CE DONT TU AS BESOIN</div>
+        <div class="sd-content">
+            <span class="sd-badge">⚡ ULTIME</span>
+            Tu as un projet, une idée, un besoin spécifique ? <span class="highlight">Dis-moi ce dont tu as besoin, je le réalise !</span><br>
+            ✅ <span class="highlight-green">Programmation sur mesure</span><br>
+            ✅ <span class="highlight-green">Automatisation de tâches</span><br>
+            ✅ <span class="highlight-green">Conseil en stratégie digitale</span><br>
+            ✅ <span class="highlight-green">Formation personnalisée</span><br>
+            ✅ <span class="highlight-green">Assistance technique</span><br>
+            🎯 <span class="highlight">Si tu peux le rêver</span> — Je peux le créer !
         </div>
     </div>
     
     <!-- ===== URGENCE ===== -->
-    <div class="urgence-box"><span data-key="urgence">⏰ OFFRE SPÉCIALE - Plus que 3 places disponibles ce mois-ci !</span></div>
+    <div class="urgence-box"><span>⏰ OFFRE SPÉCIALE - Plus que 3 places disponibles ce mois-ci !</span></div>
     
     <!-- ===== CONTACT ===== -->
     <div class="contact-rapide">
         <a href="https://wa.me/22960315458" target="_blank" class="contact-card whatsapp">
             <span class="icon">💬</span>
-            <div class="label" data-key="whatsapp_label">📱 WhatsApp Direct</div>
-            <div class="sub">+229 60 31 54 58 • <span data-key="response_time">Réponse en 5min</span></div>
+            <div class="label">📱 WhatsApp Direct</div>
+            <div class="sub">+229 60 31 54 58 • Réponse en 5min</div>
         </a>
         <div class="contact-card assistant" onclick="alert('🔗 Lien vers l\'assistant IA bientôt disponible !')">
             <span class="icon">🤖</span>
-            <div class="label" data-key="assistant_label">🧠 Assistant IA</div>
-            <div class="sub" data-key="assistant_sub">Pose ta question, il te répond</div>
+            <div class="label">🧠 Assistant IA</div>
+            <div class="sub">Pose ta question, il te répond</div>
         </div>
     </div>
     
     <!-- ===== GARANTIE ===== -->
     <div class="guarantee-box">
-        <div class="guarantee-text" data-key="garantie_title">💎 RÉVOLUTIONNAIRE - Satisfaction 100% garantie ou remboursé</div>
-        <div class="guarantee-sub" data-key="garantie_sub">Nous nous engageons sur la qualité de nos services. Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
+        <div class="guarantee-text">💎 RÉVOLUTIONNAIRE - Satisfaction 100% garantie ou remboursé</div>
+        <div class="guarantee-sub">Nous nous engageons sur la qualité de nos services. Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
     </div>
     
     <!-- ===== FORMULAIRE ===== -->
     <form id="messageForm" onsubmit="sendMessage(event)">
         <div class="form-group">
-            <label data-key="label_nom">👤 Nom et prénom <span class="required">*</span></label>
+            <label>👤 Nom et prénom <span class="required">*</span></label>
             <input type="text" id="nom" placeholder="Jean Dupont" required>
         </div>
         <div class="form-group">
-            <label data-key="label_pays">🌍 Pays <span class="required">*</span></label>
+            <label>🌍 Pays <span class="required">*</span></label>
             <input type="text" id="pays" placeholder="Entrez votre pays" required>
         </div>
         <div class="form-group">
-            <label data-key="label_ville">🏙️ Ville <span class="required">*</span></label>
+            <label>🏙️ Ville <span class="required">*</span></label>
             <input type="text" id="ville" placeholder="Entrez votre ville" required>
         </div>
         <div class="form-group">
-            <label data-key="label_whatsapp">📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label>
+            <label>📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label>
             <input type="tel" id="whatsapp" placeholder="+229 60 31 54 58" required>
-            <div class="hint">📌 <span class="highlight-text" data-key="hint_whatsapp">Très important :</span> <span data-key="hint_whatsapp_text">Nous vous recontacterons sur ce numéro.</span></div>
+            <div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous recontacterons sur ce numéro.</div>
         </div>
         <div class="form-group">
-            <label data-key="label_email">📧 Email <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label>
+            <label>📧 Email <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label>
             <input type="email" id="email" placeholder="jean.dupont@email.com" required>
-            <div class="hint">📌 <span class="highlight-text" data-key="hint_email">Très important :</span> <span data-key="hint_email_text">Nous vous enverrons une copie de votre message.</span></div>
+            <div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous enverrons une copie de votre message.</div>
         </div>
         <div class="form-group">
-            <label data-key="label_age">📅 Âge <span class="required">*</span></label>
+            <label>📅 Âge <span class="required">*</span></label>
             <input type="number" id="age" placeholder="25" min="18" max="99" required>
-            <div class="hint" data-key="hint_age">📌 Minimum 18 ans.</div>
+            <div class="hint">📌 Minimum 18 ans.</div>
         </div>
         <div class="form-group">
-            <label data-key="label_reseau">🔗 Réseaux sociaux (optionnel)</label>
+            <label>🔗 Réseaux sociaux (optionnel)</label>
             <input type="text" id="reseau" placeholder="LinkedIn, Twitter, Instagram, etc.">
         </div>
         <div class="form-group">
-            <label data-key="label_message">✉️ Votre demande <span class="required">*</span></label>
+            <label>✉️ Votre demande <span class="required">*</span></label>
             <textarea id="message" placeholder="Décrivez votre projet, votre stratégie, ou votre besoin de manière détaillée..." required></textarea>
             <div class="info-box" id="infoTelegram">🤖 <b>BOT TELEGRAM :</b> Décris ce que tu veux que le bot fasse.<br>📌 Gestion des membres • Réponses auto • Messages programmés</div>
             <div class="info-box" id="infoIA">🧠 <b>ASSISTANT IA :</b> Décris ton activité et ce que tu veux automatiser.<br>🎯 Chatbot • Rendez-vous • Devis • Réponses clients 24h/24</div>
@@ -801,60 +903,60 @@
             <div class="info-box" id="infoMails">📦 <b>PACK MAILS :</b> Indique le nombre d'emails souhaité (100, 300, 500, 1000).<br>🎯 Stratégie secrète incluse pour contourner TikTok/Facebook</div>
             <div class="info-box" id="infoSites">🌐 <b>CRÉATION DE SITES :</b> Décris le type de site et tes besoins.<br>📌 Vitrine • E-commerce • Landing page • Design • Hébergement • SEO</div>
             <div class="info-box" id="infoAutres">🛠️ <b>AUTRES SERVICES :</b> Décris ce dont tu as besoin.<br>💻 Programmation • Automatisation • Conseil • Formation • Assistance</div>
-            <div class="hint" data-key="hint_message">📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.</div>
+            <div class="hint">📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.</div>
         </div>
-        <button type="submit" class="btn" id="sendBtn" data-key="btn_send">🔥 LANCER MON PROJET</button>
-        <div class="loading" id="loading"><span class="spinner">⏳</span> <span data-key="loading">Envoi en cours...</span></div>
+        <button type="submit" class="btn" id="sendBtn">🔥 LANCER MON PROJET</button>
+        <div class="loading" id="loading"><span class="spinner">⏳</span> Envoi en cours...</div>
     </form>
     <div id="toast" class="toast"></div>
     
     <!-- ===== FAQ ===== -->
     <div class="faq-section">
-        <h3 data-key="faq_title">❓ Questions fréquentes</h3>
+        <h3>❓ Questions fréquentes</h3>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question"><span data-key="faq1_q">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
-            <div class="answer" data-key="faq1_a">Je configure un bot qui gère ton groupe ou canal comme toi. Il peut modérer les messages, répondre aux questions fréquentes, accueillir les nouveaux membres, envoyer des messages programmés et même interagir avec ton assistant IA.</div>
+            <div class="question">Comment fonctionne le Bot Telegram ?<span class="arrow">▼</span></div>
+            <div class="answer">Je configure un bot qui gère ton groupe ou canal comme toi. Il peut modérer les messages, répondre aux questions fréquentes, accueillir les nouveaux membres, envoyer des messages programmés et même interagir avec ton assistant IA.</div>
         </div>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question"><span data-key="faq2_q">Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
-            <div class="answer" data-key="faq2_a">Je crée un site web avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous, génère des devis et peut même vendre tes produits.</div>
+            <div class="question">Comment fonctionne l'Assistant IA ?<span class="arrow">▼</span></div>
+            <div class="answer">Je crée un site web avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous, génère des devis et peut même vendre tes produits.</div>
         </div>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question"><span data-key="faq3_q">Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
-            <div class="answer" data-key="faq3_a">Tu me donnes ta stratégie de trading et je programme un bot qui surveille les graphiques pour toi. Il t'envoie des alertes précises au bon moment pour prendre tes positions.</div>
+            <div class="question">Comment fonctionne le Bot Trading ?<span class="arrow">▼</span></div>
+            <div class="answer">Tu me donnes ta stratégie de trading et je programme un bot qui surveille les graphiques pour toi. Il t'envoie des alertes précises au bon moment pour prendre tes positions.</div>
         </div>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question"><span data-key="faq4_q">C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
-            <div class="answer" data-key="faq4_a">Ce sont des emails 100% vérifiés (DNS + SMTP) qui confirment l'existence d'un mail fonctionnel. Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
+            <div class="question">C'est quoi un Pack Mails vérifié ?<span class="arrow">▼</span></div>
+            <div class="answer">Ce sont des emails 100% vérifiés (DNS + SMTP) qui confirment l'existence d'un mail fonctionnel. Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
         </div>
     </div>
     
     <!-- ===== STATS ===== -->
     <div class="stats-banner">
-        <div class="stat-item"><div class="number" id="onlineCount">...</div><div class="label" data-key="online">👥 En ligne</div></div>
-        <div class="stat-item"><div class="number total" id="totalCount">...</div><div class="label" data-key="total">📊 Visiteurs total</div></div>
+        <div class="stat-item"><div class="number" id="onlineCount">...</div><div class="label">👥 En ligne</div></div>
+        <div class="stat-item"><div class="number total" id="totalCount">...</div><div class="label">📊 Visiteurs total</div></div>
     </div>
     
     <!-- ===== FOOTER ===== -->
     <div class="footer">
         <div class="footer-grid">
             <div>
-                <h4 data-key="footer_security">🔒 Sécurité & Confiance</h4>
-                <p>✓ <span data-key="footer_ssl">SSL sécurisé</span><br>✓ <span data-key="footer_crypto">Données cryptées</span><br>✓ <span data-key="footer_rgpd">RGPD conforme</span><br>✓ <span data-key="footer_garantie">Garantie 30 jours</span></p>
+                <h4>🔒 Sécurité & Confiance</h4>
+                <p>✓ SSL sécurisé<br>✓ Données cryptées<br>✓ RGPD conforme<br>✓ Garantie 30 jours</p>
             </div>
             <div>
-                <h4 data-key="footer_legal">📋 Informations légales</h4>
-                <p><a href="#mentions" data-key="footer_mentions">Mentions légales</a><br><a href="#confidentialite" data-key="footer_confidentialite">Politique confidentialité</a><br><a href="#cgv" data-key="footer_cgv">CGV</a></p>
+                <h4>📋 Informations légales</h4>
+                <p><a href="#mentions">Mentions légales</a><br><a href="#confidentialite">Politique confidentialité</a><br><a href="#cgv">CGV</a></p>
             </div>
             <div>
-                <h4 data-key="footer_contact">📞 Contactez-nous</h4>
-                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;" target="_blank">+229 60 31 54 58</a> (WhatsApp)<br>🕐 <span data-key="footer_hours">9h-18h (Lun-Ven)</span><br>🌍 Bénin — Monde</p>
+                <h4>📞 Contactez-nous</h4>
+                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;" target="_blank">+229 60 31 54 58</a> (WhatsApp)<br>🕐 9h-18h (Lun-Ven)<br>🌍 Bénin — Monde</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Messagerie Pro — <span data-key="footer_brand">Révolution Digitale</span> — <span data-key="footer_rights">Tous droits réservés</span></p>
-            <p>🏢 <span data-key="footer_siret">Société immatriculée — SIRET : XX XXX XXX XXX</span></p>
-            <p>📅 <span data-key="footer_update">Dernière mise à jour</span> : <span class="highlight">27 Juillet 2026</span></p>
+            <p>© 2026 Messagerie Pro — Révolution Digitale — Tous droits réservés</p>
+            <p>🏢 Société immatriculée — SIRET : XX XXX XXX XXX</p>
+            <p>📅 Dernière mise à jour : <span class="highlight">27 Juillet 2026</span></p>
             <br>
             <span class="gear" onclick="window.location.href='admin.html'">⚙️</span>
             <span style="color:#64748b;font-size:11px;"> Administration</span>
@@ -892,60 +994,12 @@ const translations = {
         desc_mails: '100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook',
         desc_sites: 'Vitrines • E-commerce • Landing pages • SEO • Hébergement',
         desc_autres: 'Programmation • Automatisation • Conseil • Formation',
-        promo_title: 'OFFRE SPÉCIALE — PACK MAILS VERIFIÉS',
-        promo_highlight: 'Contourne TikTok, Facebook, Instagram',
-        promo_text: 'sans payer de promotions !',
-        promo_mails: 'Emails 100% vérifiés (DNS + SMTP)',
-        promo_secret: 'Stratégie secrète incluse',
-        urgence: '⏰ OFFRE SPÉCIALE - Plus que 3 places disponibles ce mois-ci !',
-        whatsapp_label: '📱 WhatsApp Direct',
-        response_time: 'Réponse en 5min',
-        assistant_label: '🧠 Assistant IA',
-        assistant_sub: 'Pose ta question, il te répond',
-        garantie_title: '💎 RÉVOLUTIONNAIRE - Satisfaction 100% garantie ou remboursé',
-        garantie_sub: 'Nous nous engageons sur la qualité de nos services. Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
-        label_nom: '👤 Nom et prénom',
-        label_pays: '🌍 Pays',
-        label_ville: '🏙️ Ville',
-        label_whatsapp: '📱 WhatsApp / Téléphone',
-        hint_whatsapp: 'Très important :',
-        hint_whatsapp_text: 'Nous vous recontacterons sur ce numéro.',
-        label_email: '📧 Email',
-        hint_email: 'Très important :',
-        hint_email_text: 'Nous vous enverrons une copie de votre message.',
-        label_age: '📅 Âge',
-        hint_age: '📌 Minimum 18 ans.',
-        label_reseau: '🔗 Réseaux sociaux (optionnel)',
-        label_message: '✉️ Votre demande',
-        hint_message: '📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.',
-        btn_send: '🔥 LANCER MON PROJET',
-        loading: 'Envoi en cours...',
-        faq_title: '❓ Questions fréquentes',
-        faq1_q: 'Comment fonctionne le Bot Telegram ?',
-        faq1_a: 'Je configure un bot qui gère ton groupe ou canal comme toi. Il peut modérer les messages, répondre aux questions fréquentes, accueillir les nouveaux membres, envoyer des messages programmés et même interagir avec ton assistant IA.',
-        faq2_q: 'Comment fonctionne l\'Assistant IA ?',
-        faq2_a: 'Je crée un site web avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous, génère des devis et peut même vendre tes produits.',
-        faq3_q: 'Comment fonctionne le Bot Trading ?',
-        faq3_a: 'Tu me donnes ta stratégie de trading et je programme un bot qui surveille les graphiques pour toi. Il t\'envoie des alertes précises au bon moment pour prendre tes positions.',
-        faq4_q: 'C\'est quoi un Pack Mails vérifié ?',
-        faq4_a: 'Ce sont des emails 100% vérifiés (DNS + SMTP) qui confirment l\'existence d\'un mail fonctionnel. Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.',
-        online: '👥 En ligne',
-        total: '📊 Visiteurs total',
-        footer_security: '🔒 Sécurité & Confiance',
-        footer_ssl: 'SSL sécurisé',
-        footer_crypto: 'Données cryptées',
-        footer_rgpd: 'RGPD conforme',
-        footer_garantie: 'Garantie 30 jours',
-        footer_legal: '📋 Informations légales',
-        footer_mentions: 'Mentions légales',
-        footer_confidentialite: 'Politique confidentialité',
-        footer_cgv: 'CGV',
-        footer_contact: '📞 Contactez-nous',
-        footer_hours: '9h-18h (Lun-Ven)',
-        footer_brand: 'Révolution Digitale',
-        footer_rights: 'Tous droits réservés',
-        footer_siret: 'Société immatriculée — SIRET : XX XXX XXX XXX',
-        footer_update: 'Dernière mise à jour'
+        detail_telegram: '🤖 BOT TELEGRAM — AUTOMATISE TON GROUPE',
+        detail_ia: '🧠 ASSISTANT IA — DEVIENS INDÉPENDANT',
+        detail_trading: '📊 BOT TRADING — LIBÈRE TON TEMPS',
+        detail_mails: '📧 PACK MAILS — L\'ARME SECRÈTE',
+        detail_sites: '🌐 CRÉATION DE SITES — TON ÉCRIN DIGITAL',
+        detail_autres: '🛠️ AUTRES SERVICES — TOUT CE DONT TU AS BESOIN'
     },
     en: {
         clients: '👥 Happy Clients',
@@ -972,60 +1026,12 @@ const translations = {
         desc_mails: '100-500+ verified emails DNS+SMTP • Bypass TikTok/Facebook',
         desc_sites: 'Showcases • E-commerce • Landing pages • SEO • Hosting',
         desc_autres: 'Programming • Automation • Consulting • Training',
-        promo_title: 'SPECIAL OFFER — VERIFIED EMAIL PACKS',
-        promo_highlight: 'Bypass TikTok, Facebook, Instagram',
-        promo_text: 'without paying for promotions!',
-        promo_mails: '100% verified emails (DNS + SMTP)',
-        promo_secret: 'Secret strategy included',
-        urgence: '⏰ SPECIAL OFFER - Only 3 spots left this month!',
-        whatsapp_label: '📱 WhatsApp Direct',
-        response_time: 'Response in 5min',
-        assistant_label: '🧠 AI Assistant',
-        assistant_sub: 'Ask your question, he answers',
-        garantie_title: '💎 REVOLUTIONARY - 100% satisfaction guaranteed or refunded',
-        garantie_sub: 'We are committed to the quality of our services. If you are not satisfied, we will refund you in full.',
-        label_nom: '👤 Full Name',
-        label_pays: '🌍 Country',
-        label_ville: '🏙️ City',
-        label_whatsapp: '📱 WhatsApp / Phone',
-        hint_whatsapp: 'Very important:',
-        hint_whatsapp_text: 'We will contact you on this number.',
-        label_email: '📧 Email',
-        hint_email: 'Very important:',
-        hint_email_text: 'We will send you a copy of your message.',
-        label_age: '📅 Age',
-        hint_age: '📌 Minimum 18 years.',
-        label_reseau: '🔗 Social networks (optional)',
-        label_message: '✉️ Your request',
-        hint_message: '📌 This information allows us to contact you and help you better.',
-        btn_send: '🔥 LAUNCH MY PROJECT',
-        loading: 'Sending...',
-        faq_title: '❓ Frequently Asked Questions',
-        faq1_q: 'How does the Telegram Bot work?',
-        faq1_a: 'I configure a bot that manages your group or channel like you. It can moderate messages, answer frequently asked questions, welcome new members, send scheduled messages and even interact with your AI assistant.',
-        faq2_q: 'How does the AI Assistant work?',
-        faq2_a: 'I create a website with an intelligent chatbot that manages your clients automatically. It presents your services, answers questions, takes appointments, generates quotes and can even sell your products.',
-        faq3_q: 'How does the Trading Bot work?',
-        faq3_a: 'You give me your trading strategy and I program a bot that monitors the charts for you. It sends you precise alerts at the right time to take your positions.',
-        faq4_q: 'What is a Verified Email Pack?',
-        faq4_a: 'These are 100% verified emails (DNS + SMTP) that confirm the existence of a functional email. With these packs, you can bypass TikTok, Facebook and Instagram instead of paying for promotions.',
-        online: '👥 Online',
-        total: '📊 Total visitors',
-        footer_security: '🔒 Security & Trust',
-        footer_ssl: 'SSL secured',
-        footer_crypto: 'Encrypted data',
-        footer_rgpd: 'GDPR compliant',
-        footer_garantie: '30 days guarantee',
-        footer_legal: '📋 Legal information',
-        footer_mentions: 'Legal notices',
-        footer_confidentialite: 'Privacy policy',
-        footer_cgv: 'Terms of service',
-        footer_contact: '📞 Contact us',
-        footer_hours: '9am-6pm (Mon-Fri)',
-        footer_brand: 'Digital Revolution',
-        footer_rights: 'All rights reserved',
-        footer_siret: 'Registered company — SIRET: XX XXX XXX XXX',
-        footer_update: 'Last update'
+        detail_telegram: '🤖 TELEGRAM BOT — AUTOMATE YOUR GROUP',
+        detail_ia: '🧠 AI ASSISTANT — BECOME INDEPENDENT',
+        detail_trading: '📊 TRADING BOT — FREE YOUR TIME',
+        detail_mails: '📧 EMAIL PACKS — THE SECRET WEAPON',
+        detail_sites: '🌐 WEBSITE CREATION — YOUR DIGITAL SHOWCASE',
+        detail_autres: '🛠️ OTHER SERVICES — EVERYTHING YOU NEED'
     },
     es: {
         clients: '👥 Clientes satisfechos',
@@ -1052,60 +1058,12 @@ const translations = {
         desc_mails: '100-500+ emails verificados DNS+SMTP • Evita TikTok/Facebook',
         desc_sites: 'Vitrinas • E-commerce • Landing pages • SEO • Alojamiento',
         desc_autres: 'Programación • Automatización • Consultoría • Formación',
-        promo_title: 'OFERTA ESPECIAL — PACKS DE EMAILS VERIFICADOS',
-        promo_highlight: 'Evita TikTok, Facebook, Instagram',
-        promo_text: '¡sin pagar promociones!',
-        promo_mails: 'Emails 100% verificados (DNS + SMTP)',
-        promo_secret: 'Estrategia secreta incluida',
-        urgence: '⏰ OFERTA ESPECIAL - ¡Solo quedan 3 plazas este mes!',
-        whatsapp_label: '📱 WhatsApp Directo',
-        response_time: 'Respuesta en 5min',
-        assistant_label: '🧠 Asistente IA',
-        assistant_sub: 'Haz tu pregunta, él responde',
-        garantie_title: '💎 REVOLUCIONARIO - 100% de satisfacción garantizada o reembolso',
-        garantie_sub: 'Nos comprometemos con la calidad de nuestros servicios. Si no estás satisfecho, te reembolsamos íntegramente.',
-        label_nom: '👤 Nombre completo',
-        label_pays: '🌍 País',
-        label_ville: '🏙️ Ciudad',
-        label_whatsapp: '📱 WhatsApp / Teléfono',
-        hint_whatsapp: 'Muy importante:',
-        hint_whatsapp_text: 'Te contactaremos en este número.',
-        label_email: '📧 Email',
-        hint_email: 'Muy importante:',
-        hint_email_text: 'Te enviaremos una copia de tu mensaje.',
-        label_age: '📅 Edad',
-        hint_age: '📌 Mínimo 18 años.',
-        label_reseau: '🔗 Redes sociales (opcional)',
-        label_message: '✉️ Tu solicitud',
-        hint_message: '📌 Esta información nos permite contactarte y ayudarte mejor.',
-        btn_send: '🔥 LANZAR MI PROYECTO',
-        loading: 'Enviando...',
-        faq_title: '❓ Preguntas frecuentes',
-        faq1_q: '¿Cómo funciona el Bot de Telegram?',
-        faq1_a: 'Configuro un bot que gestiona tu grupo o canal como tú. Puede moderar mensajes, responder preguntas frecuentes, dar la bienvenida a nuevos miembros, enviar mensajes programados e incluso interactuar con tu asistente IA.',
-        faq2_q: '¿Cómo funciona el Asistente IA?',
-        faq2_a: 'Creo un sitio web con un chatbot inteligente que gestiona tus clientes automáticamente. Presenta tus servicios, responde preguntas, toma citas, genera presupuestos y puede incluso vender tus productos.',
-        faq3_q: '¿Cómo funciona el Bot de Trading?',
-        faq3_a: 'Me das tu estrategia de trading y programo un bot que monitorea los gráficos por ti. Te envía alertas precisas en el momento adecuado para tomar posiciones.',
-        faq4_q: '¿Qué es un Pack de Emails Verificados?',
-        faq4_a: 'Son emails 100% verificados (DNS + SMTP) que confirman la existencia de un email funcional. Con estos packs, puedes evitar TikTok, Facebook e Instagram en lugar de pagar promociones.',
-        online: '👥 En línea',
-        total: '📊 Visitantes total',
-        footer_security: '🔒 Seguridad y Confianza',
-        footer_ssl: 'SSL seguro',
-        footer_crypto: 'Datos encriptados',
-        footer_rgpd: 'Cumple RGPD',
-        footer_garantie: 'Garantía 30 días',
-        footer_legal: '📋 Información legal',
-        footer_mentions: 'Aviso legal',
-        footer_confidentialite: 'Política de privacidad',
-        footer_cgv: 'Condiciones',
-        footer_contact: '📞 Contáctanos',
-        footer_hours: '9h-18h (Lun-Vie)',
-        footer_brand: 'Revolución Digital',
-        footer_rights: 'Todos los derechos reservados',
-        footer_siret: 'Empresa registrada — SIRET: XX XXX XXX XXX',
-        footer_update: 'Última actualización'
+        detail_telegram: '🤖 BOT TELEGRAM — AUTOMATIZA TU GRUPO',
+        detail_ia: '🧠 ASISTENTE IA — VUELVETE INDEPENDIENTE',
+        detail_trading: '📊 BOT TRADING — LIBERA TU TIEMPO',
+        detail_mails: '📧 PACKS EMAILS — EL ARMA SECRETA',
+        detail_sites: '🌐 CREACIÓN DE SITIOS — TU ESCAPARATE DIGITAL',
+        detail_autres: '🛠️ OTROS SERVICIOS — TODO LO QUE NECESITAS'
     },
     de: {
         clients: '👥 Zufriedene Kunden',
@@ -1132,60 +1090,44 @@ const translations = {
         desc_mails: '100-500+ verifizierte Emails DNS+SMTP • Umgehe TikTok/Facebook',
         desc_sites: 'Schaufenster • E-Commerce • Landing Pages • SEO • Hosting',
         desc_autres: 'Programmierung • Automatisierung • Beratung • Schulung',
-        promo_title: 'SPEZIALANGEBOT — VERIFIZIERTE EMAIL-PACKS',
-        promo_highlight: 'Umgehe TikTok, Facebook, Instagram',
-        promo_text: 'ohne für Werbung zu bezahlen!',
-        promo_mails: '100% verifizierte Emails (DNS + SMTP)',
-        promo_secret: 'Geheime Strategie inklusive',
-        urgence: '⏰ SPEZIALANGEBOT - Nur noch 3 Plätze diesen Monat!',
-        whatsapp_label: '📱 WhatsApp Direkt',
-        response_time: 'Antwort in 5min',
-        assistant_label: '🧠 KI-Assistent',
-        assistant_sub: 'Stelle deine Frage, er antwortet',
-        garantie_title: '💎 REVOLUTIONÄR - 100% Zufriedenheitsgarantie oder Geld zurück',
-        garantie_sub: 'Wir stehen für die Qualität unserer Dienstleistungen. Wenn Sie nicht zufrieden sind, erstatten wir Ihnen den vollen Betrag.',
-        label_nom: '👤 Vollständiger Name',
-        label_pays: '🌍 Land',
-        label_ville: '🏙️ Stadt',
-        label_whatsapp: '📱 WhatsApp / Telefon',
-        hint_whatsapp: 'Sehr wichtig:',
-        hint_whatsapp_text: 'Wir werden Sie unter dieser Nummer kontaktieren.',
-        label_email: '📧 Email',
-        hint_email: 'Sehr wichtig:',
-        hint_email_text: 'Wir senden Ihnen eine Kopie Ihrer Nachricht.',
-        label_age: '📅 Alter',
-        hint_age: '📌 Mindestens 18 Jahre.',
-        label_reseau: '🔗 Soziale Netzwerke (optional)',
-        label_message: '✉️ Ihre Anfrage',
-        hint_message: '📌 Diese Informationen ermöglichen es uns, Sie zu kontaktieren und Ihnen besser zu helfen.',
-        btn_send: '🔥 MEIN PROJEKT STARTEN',
-        loading: 'Senden...',
-        faq_title: '❓ Häufig gestellte Fragen',
-        faq1_q: 'Wie funktioniert der Telegram Bot?',
-        faq1_a: 'Ich konfiguriere einen Bot, der deine Gruppe oder deinen Kanal wie du verwaltet. Er kann Nachrichten moderieren, häufig gestellte Fragen beantworten, neue Mitglieder willkommen heißen, geplante Nachrichten senden und sogar mit deinem KI-Assistenten interagieren.',
-        faq2_q: 'Wie funktioniert der KI-Assistent?',
-        faq2_a: 'Ich erstelle eine Website mit einem intelligenten Chatbot, der deine Kunden automatisch verwaltet. Er präsentiert deine Dienste, beantwortet Fragen, nimmt Termine entgegen, erstellt Angebote und kann sogar deine Produkte verkaufen.',
-        faq3_q: 'Wie funktioniert der Trading Bot?',
-        faq3_a: 'Du gibst mir deine Trading-Strategie und ich programmiere einen Bot, der die Charts für dich überwacht. Er sendet dir präzise Alarme zum richtigen Zeitpunkt, um Positionen zu eröffnen.',
-        faq4_q: 'Was ist ein verifiziertes Email-Pack?',
-        faq4_a: 'Das sind 100% verifizierte Emails (DNS + SMTP), die die Existenz einer funktionalen Email bestätigen. Mit diesen Packs kannst du TikTok, Facebook und Instagram umgehen, anstatt für Werbung zu bezahlen.',
-        online: '👥 Online',
-        total: '📊 Besucher gesamt',
-        footer_security: '🔒 Sicherheit & Vertrauen',
-        footer_ssl: 'SSL-gesichert',
-        footer_crypto: 'Verschlüsselte Daten',
-        footer_rgpd: 'DSGVO-konform',
-        footer_garantie: '30 Tage Garantie',
-        footer_legal: '📋 Rechtliche Informationen',
-        footer_mentions: 'Impressum',
-        footer_confidentialite: 'Datenschutz',
-        footer_cgv: 'AGB',
-        footer_contact: '📞 Kontaktieren Sie uns',
-        footer_hours: '9-18 Uhr (Mo-Fr)',
-        footer_brand: 'Digitale Revolution',
-        footer_rights: 'Alle Rechte vorbehalten',
-        footer_siret: 'Eingetragenes Unternehmen — SIRET: XX XXX XXX XXX',
-        footer_update: 'Letzte Aktualisierung'
+        detail_telegram: '🤖 TELEGRAM BOT — AUTOMATISIERE DEINE GRUPPE',
+        detail_ia: '🧠 KI-ASSISTENT — WERDE UNABHÄNGIG',
+        detail_trading: '📊 TRADING BOT — BEFREIE DEINE ZEIT',
+        detail_mails: '📧 EMAIL-PACKS — DIE GEHEIME WAFFE',
+        detail_sites: '🌐 WEBSITE-ERSTELLUNG — DEIN DIGITALER SCHAUFENSTER',
+        detail_autres: '🛠️ ANDERE DIENSTE — ALLES WAS DU BRAUCHST'
+    },
+    pt: {
+        clients: '👥 Clientes satisfeitos',
+        satisfaction: '⭐ Taxa de satisfação',
+        note: '📊 Avaliação média',
+        experience: '🏆 De experiência',
+        ssl: 'SSL',
+        response: '<24h',
+        garantie: 'Garantia 30d',
+        rgpd: 'RGPD',
+        mondial: 'Mundial',
+        expertise: 'Experiência',
+        init: 'Inicializando terminal...',
+        services_available: '6 serviços revolucionários',
+        available: 'disponíveis',
+        waiting: 'Aguardando seleção',
+        popular: 'POPULAR',
+        new: 'NOVO',
+        top: '🔥 TOP',
+        exclusif: '💎 EXCLUSIVO',
+        desc_telegram: 'Automatize seu grupo • Moderação • Respostas automáticas 24/7',
+        desc_ia: 'IA que gerencia seus clientes • Compromissos • Orçamentos 24/7',
+        desc_trading: 'Bot na sua estratégia • Alertas precisos • Sinais em tempo real',
+        desc_mails: '100-500+ emails verificados DNS+SMTP • Contorne TikTok/Facebook',
+        desc_sites: 'Vitrines • E-commerce • Landing pages • SEO • Hospedagem',
+        desc_autres: 'Programação • Automação • Consultoria • Formação',
+        detail_telegram: '🤖 BOT TELEGRAM — AUTOMATIZE SEU GRUPO',
+        detail_ia: '🧠 ASSISTENTE IA — TORNE-SE INDEPENDENTE',
+        detail_trading: '📊 BOT TRADING — LIBERE SEU TEMPO',
+        detail_mails: '📧 PACOTES EMAILS — A ARMA SECRETA',
+        detail_sites: '🌐 CRIAÇÃO DE SITES — SEU ESCAPATE DIGITAL',
+        detail_autres: '🛠️ OUTROS SERVIÇOS — TUDO O QUE VOCÊ PRECISA'
     }
 };
 
@@ -1193,95 +1135,63 @@ let currentLang = 'fr';
 
 function changeLanguage(lang) {
     currentLang = lang;
-    
-    // Mettre à jour les boutons
     document.querySelectorAll('.lang-selector button').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
     });
-    
-    // Traduire tous les éléments avec data-key
     document.querySelectorAll('[data-key]').forEach(el => {
         const key = el.dataset.key;
         if (translations[lang] && translations[lang][key]) {
             el.textContent = translations[lang][key];
         }
     });
-    
-    // Mettre à jour les badges
     document.querySelectorAll('.badge').forEach(el => {
         const key = el.dataset.key;
         if (translations[lang] && translations[lang][key]) {
             el.textContent = translations[lang][key];
         }
     });
-    
-    // Mettre à jour les descriptions des services
     document.querySelectorAll('.service-card .desc').forEach(el => {
         const key = el.dataset.key;
         if (translations[lang] && translations[lang][key]) {
             el.textContent = translations[lang][key];
         }
     });
-    
-    // Mettre à jour la garantie
-    document.querySelectorAll('.guarantee-box [data-key]').forEach(el => {
+    document.querySelectorAll('.sd-title').forEach(el => {
         const key = el.dataset.key;
         if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
+            el.innerHTML = translations[lang][key];
         }
     });
-    
-    // Mettre à jour le terminal
-    document.querySelectorAll('.terminal .line [data-key]').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    
-    // Mettre à jour les FAQs
-    document.querySelectorAll('.faq-item .question span').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    document.querySelectorAll('.faq-item .answer').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    
-    // Mettre à jour le titre du terminal
-    const terminalTitle = document.getElementById('terminalTitle');
-    if (translations[lang] && translations[lang]['terminal_title']) {
-        terminalTitle.textContent = translations[lang]['terminal_title'];
-    }
-    
-    // Sauvegarder la préférence
     localStorage.setItem('preferred_lang', lang);
 }
 
 // ============================================================
-// 2. GESTION DES SERVICES
+// 2. GESTION DES SERVICES AVEC BANNIÈRES
 // ============================================================
 let selectedService = null;
 
 function updateTerminal(serviceName) {
-    const waiting = translations[currentLang]?.waiting || 'En attente de sélection';
     document.getElementById('terminalContent').innerHTML = `
-        <div class="line"><span class="prompt">➜</span> <span data-key="init">Initialisation du terminal...</span></div>
+        <div class="line"><span class="prompt">➜</span> Initialisation du terminal...</div>
         <div class="line"><span class="prompt">➜</span> 📌 Service choisi : <span class="highlight">${serviceName}</span></div>
         <div class="line"><span class="prompt">➜</span> <span class="success">✅ Terminal prêt. Veuillez remplir le formulaire.</span></div>
     `;
 }
 
-function selectService(el, serviceName) {
+function selectService(el, serviceName, detailId) {
     document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
     selectedService = el.dataset.service;
     updateTerminal(serviceName);
+    
+    // Cacher toutes les bannières
+    document.querySelectorAll('.service-detail-banner').forEach(b => b.classList.remove('active'));
+    
+    // Afficher la bannière correspondante
+    if (detailId) {
+        const detail = document.getElementById('detail-' + detailId);
+        if (detail) detail.classList.add('active');
+    }
     
     document.querySelectorAll('.info-box').forEach(b => b.style.display = 'none');
     const infoMap = {
@@ -1350,6 +1260,7 @@ function sendMessage(e) {
             showToast('✅ Message envoyé avec succès !', 'success');
             document.getElementById('messageForm').reset();
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.service-detail-banner').forEach(b => b.classList.remove('active'));
             selectedService = null;
             document.querySelectorAll('.info-box').forEach(b => b.style.display = 'none');
         } else {
@@ -1423,12 +1334,10 @@ function updateCounters() {
 // 6. INIT
 // ============================================================
 window.addEventListener('load', function() {
-    // Langue préférée
     const savedLang = localStorage.getItem('preferred_lang');
     if (savedLang && translations[savedLang]) {
         changeLanguage(savedLang);
     }
-    
     updateCounters();
     setInterval(updateCounters, 30000);
 });
