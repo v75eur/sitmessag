@@ -27,11 +27,55 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         
-        .header { text-align: center; margin-bottom: 20px; }
-        .header h1 { font-size: 32px; font-weight: 900; color: #fff; }
-        .header h1 .accent { color: #f0b90b; }
-        .header p { color: #94a3b8; font-size: 16px; margin-top: 4px; }
+        /* ===== PYFIGLET ANIMÉ ===== */
+        .pyfiglet {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #fff;
+            margin-bottom: 4px;
+            letter-spacing: 2px;
+        }
+        .pyfiglet .line1 { color: #f0b90b; }
+        .pyfiglet .line2 { color: #4d96ff; }
+        .pyfiglet .line3 { color: #22c55e; }
         
+        /* Animation des lettres */
+        .pyfiglet span {
+            display: inline-block;
+            animation: letterPop 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        .pyfiglet .line1 span { animation-delay: calc(0.05s * var(--i, 0)); }
+        .pyfiglet .line2 span { animation-delay: calc(0.05s * var(--i, 0) + 0.3s); }
+        .pyfiglet .line3 span { animation-delay: calc(0.05s * var(--i, 0) + 0.6s); }
+        
+        @keyframes letterPop {
+            0% { opacity: 0; transform: translateY(-20px) scale(0.8); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        /* Effet de survol des lettres */
+        .pyfiglet span:hover {
+            color: #f0b90b;
+            transform: scale(1.1) translateY(-2px);
+            transition: all 0.3s;
+        }
+        
+        .pyfiglet-sub {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: -4px;
+            margin-bottom: 16px;
+            letter-spacing: 6px;
+            font-weight: 300;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+        
+        /* ===== LANG SELECTOR ===== */
         .lang-selector {
             display: flex;
             justify-content: center;
@@ -53,6 +97,7 @@
         .lang-selector button:hover { border-color: #f0b90b; color: #f0b90b; }
         .lang-selector button.active { border-color: #f0b90b; background: rgba(240,185,11,0.1); color: #f0b90b; }
         
+        /* ===== STATS ===== */
         .stats {
             display: grid;
             grid-template-columns: repeat(4,1fr);
@@ -71,6 +116,7 @@
         .stats .item .number { font-size: 26px; font-weight: 900; color: #f0b90b; }
         .stats .item .label { font-size: 12px; color: #94a3b8; margin-top: 2px; }
         
+        /* ===== TRUST ===== */
         .trust {
             display: grid;
             grid-template-columns: repeat(6,1fr);
@@ -87,6 +133,7 @@
         .trust .item svg { width: 24px; height: 24px; display: block; margin: 0 auto 4px; fill: #22c55e; }
         .trust .item .label { font-size: 10px; color: #22c55e; font-weight: 600; }
         
+        /* ===== SERVICES ===== */
         .services {
             display: grid;
             grid-template-columns: repeat(3,1fr);
@@ -131,6 +178,7 @@
             margin-top: 4px;
         }
         
+        /* ===== DETAIL BOX ===== */
         .detail-box {
             background: rgba(255,255,255,0.02);
             border-radius: 14px;
@@ -147,6 +195,7 @@
         .detail-box .content .hl { color: #f0b90b; font-weight: 600; }
         .detail-box .content .ok { color: #22c55e; font-weight: 600; }
         
+        /* ===== URGENCE ===== */
         .urgence {
             background: rgba(239,68,68,0.04);
             border: 2px solid rgba(239,68,68,0.1);
@@ -157,6 +206,7 @@
         }
         .urgence span { color: #ef4444; font-weight: 700; font-size: 14px; }
         
+        /* ===== CONTACT ===== */
         .contact {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -181,6 +231,7 @@
         .contact .whatsapp:hover { border-color: #22c55e; }
         .contact .whatsapp svg { fill: #22c55e; }
         
+        /* ===== GARANTIE ===== */
         .guarantee {
             background: rgba(240,185,11,0.04);
             border-radius: 14px;
@@ -192,6 +243,7 @@
         .guarantee .text { color: #f0b90b; font-weight: 900; font-size: 17px; }
         .guarantee .sub { color: #94a3b8; font-size: 12px; margin-top: 4px; }
         
+        /* ===== FORM ===== */
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; color: #cbd5e1; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
         .form-group label .required { color: #ff5f56; }
@@ -249,6 +301,7 @@
         .loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
         
+        /* ===== FAQ ===== */
         .faq {
             margin-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.04);
@@ -271,6 +324,7 @@
         .faq-item .a { color: #94a3b8; font-size: 12px; line-height: 1.6; margin-top: 6px; display: none; }
         .faq-item .a.open { display: block; }
         
+        /* ===== FOOTER ===== */
         .footer {
             margin-top: 18px;
             border-top: 1px solid rgba(255,255,255,0.04);
@@ -306,22 +360,33 @@
             .stats { grid-template-columns: 1fr 1fr; }
             .trust { grid-template-columns: repeat(3,1fr); }
             .contact { grid-template-columns: 1fr; }
-            .header h1 { font-size: 24px; }
+            .pyfiglet { font-size: 18px; }
         }
         @media (max-width: 480px) {
             .services { grid-template-columns: 1fr; }
             .trust { grid-template-columns: repeat(2,1fr); }
             .stats { grid-template-columns: 1fr 1fr; }
+            .pyfiglet { font-size: 14px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <h1>TRANSFORME <span class="accent">TON ACTIVITÉ</span></h1>
-        <p id="mainSub">Choisis ton service — Zéro compromis</p>
+    <!-- ===== PYFIGLET ANIMÉ ===== -->
+    <div class="pyfiglet">
+        <div class="line1">
+            <span style="--i:0">T</span><span style="--i:1">R</span><span style="--i:2">A</span><span style="--i:3">N</span><span style="--i:4">S</span><span style="--i:5">F</span><span style="--i:6">O</span><span style="--i:7">R</span><span style="--i:8">M</span><span style="--i:9">E</span>
+        </div>
+        <div class="line2">
+            <span style="--i:10">T</span><span style="--i:11">O</span><span style="--i:12">N</span>
+        </div>
+        <div class="line3">
+            <span style="--i:13">A</span><span style="--i:14">C</span><span style="--i:15">T</span><span style="--i:16">I</span><span style="--i:17">V</span><span style="--i:18">I</span><span style="--i:19">T</span><span style="--i:20">É</span>
+        </div>
     </div>
+    <div class="pyfiglet-sub">✦ SOLUTIONS DIGITALES ✦</div>
     
+    <!-- ===== LANG SELECTOR ===== -->
     <div class="lang-selector">
         <button class="active" data-lang="fr" onclick="switchLang('fr')">FR</button>
         <button data-lang="en" onclick="switchLang('en')">EN</button>
@@ -331,6 +396,7 @@
         <button data-lang="ar" onclick="switchLang('ar')">AR</button>
     </div>
     
+    <!-- ===== STATS ===== -->
     <div class="stats">
         <div class="item"><div class="number">+500</div><div class="label" id="s1">Clients satisfaits</div></div>
         <div class="item"><div class="number">98%</div><div class="label" id="s2">Taux de satisfaction</div></div>
@@ -338,6 +404,7 @@
         <div class="item"><div class="number">+5 ans</div><div class="label" id="s4">D'expérience</div></div>
     </div>
     
+    <!-- ===== TRUST ===== -->
     <div class="trust">
         <div class="item">
             <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.18l7 3.12v4.7c0 4.83-3.93 9.11-7 10.12-3.07-1.01-7-5.29-7-10.12V6.3l7-3.12zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
@@ -365,6 +432,7 @@
         </div>
     </div>
     
+    <!-- ===== SERVICES ===== -->
     <div class="services">
         <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'telegram')">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.05-.2-.06-.06-.16-.04-.22-.02-.09.02-1.52.96-4.28 2.83-.41.28-.78.42-1.11.41-.36-.01-1.07-.21-1.59-.38-.64-.22-1.15-.34-1.1-.72.03-.2.29-.4.8-.61 3.13-1.36 5.22-2.26 6.27-2.69 2.99-1.22 3.61-1.43 4.01-1.44.09 0 .29.02.42.13.11.09.14.21.15.33-.01.09 0 .33-.07.75z"/></svg>
@@ -402,6 +470,7 @@
         </div>
     </div>
     
+    <!-- ===== DETAIL BOX ===== -->
     <div class="detail-box" id="detail-telegram">
         <div class="title" id="dt1">BOT TELEGRAM</div>
         <div class="content" id="dc1">Vous avez un groupe Telegram et vous en avez marre d'être toujours là ? <span class="hl">Nous configurons un bot qui gère tout comme vous</span>.<br>✅ <span class="ok">Modération automatique</span> des messages<br>✅ <span class="ok">Réponses automatiques</span> aux questions<br>✅ <span class="ok">Gestion des membres</span><br>🎯 <span class="hl">Plus besoin d'être connecté 24h/24</span></div>
@@ -427,26 +496,30 @@
         <div class="content" id="dc6">Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span></div>
     </div>
     
+    <!-- ===== URGENCE ===== -->
     <div class="urgence"><span id="urgence">Offre spéciale - Plus que 3 places ce mois-ci</span></div>
     
+    <!-- ===== CONTACT ===== -->
     <div class="contact">
         <a href="https://wa.me/22960315458" target="_blank" class="whatsapp">
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <div class="label" id="whatsappLabel">WhatsApp Direct</div>
             <div class="sub">+229 60 31 54 58 • <span id="whatsappSub">Réponse en 5min</span></div>
         </a>
-        <a href="#" onclick="alert('Lien vers l\'assistant IA bientôt disponible')">
+        <a href="#" onclick="event.preventDefault(); document.getElementById('comingSoon').scrollIntoView({behavior:'smooth'});">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             <div class="label" id="assistantLabel">Assistant IA</div>
-            <div class="sub" id="assistantSub">Posez votre question, il répond</div>
+            <div class="sub" id="assistantSub">Bientôt disponible</div>
         </a>
     </div>
     
+    <!-- ===== GARANTIE ===== -->
     <div class="guarantee">
         <div class="text" id="gtext">Satisfaction 100% garantie ou remboursé</div>
         <div class="sub" id="gsub">Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
     </div>
     
+    <!-- ===== FORM ===== -->
     <form id="messageForm" onsubmit="sendMessage(event)">
         <div class="form-group">
             <label id="l1">Nom et prénom <span class="required">*</span></label>
@@ -489,6 +562,22 @@
     </form>
     <div id="toast" class="toast"></div>
     
+    <!-- ===== COMING SOON ===== -->
+    <div id="comingSoon" style="margin-top:24px; padding:20px; background:rgba(240,185,11,0.03); border-radius:16px; border:1px solid rgba(240,185,11,0.08); text-align:center;">
+        <div style="font-size:14px; color:#f0b90b; font-weight:700; letter-spacing:4px; margin-bottom:4px;">✦ PROCHAINEMENT ✦</div>
+        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">ASSISTANT IA</div>
+        <div style="color:#94a3b8; font-size:13px; max-width:400px; margin:0 auto; line-height:1.6;">
+            Un agent intelligent pour répondre à vos questions 24h/24.<br>
+            <span style="color:#f0b90b; font-weight:600;">Lien disponible très bientôt</span>
+        </div>
+        <div style="margin-top:10px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+            <span style="padding:4px 16px; background:rgba(240,185,11,0.06); border-radius:20px; font-size:11px; color:#f0b90b; border:1px solid rgba(240,185,11,0.08);">⚡ 24h/24</span>
+            <span style="padding:4px 16px; background:rgba(240,185,11,0.06); border-radius:20px; font-size:11px; color:#f0b90b; border:1px solid rgba(240,185,11,0.08);">🧠 IA avancée</span>
+            <span style="padding:4px 16px; background:rgba(240,185,11,0.06); border-radius:20px; font-size:11px; color:#f0b90b; border:1px solid rgba(240,185,11,0.08);">💬 Multi-langues</span>
+        </div>
+    </div>
+    
+    <!-- ===== FAQ ===== -->
     <div class="faq">
         <h3 id="faqTitle">Questions fréquentes</h3>
         <div class="faq-item" onclick="toggleFaq(this)">
@@ -509,11 +598,13 @@
         </div>
     </div>
     
+    <!-- ===== STATS BOTTOM ===== -->
     <div class="stats-bottom">
         <div class="item"><div class="number" id="onlineCount">...</div><div class="label" id="onlineLabel">En ligne</div></div>
         <div class="item"><div class="number total" id="totalCount">...</div><div class="label" id="totalLabel">Visiteurs total</div></div>
     </div>
     
+    <!-- ===== FOOTER ===== -->
     <div class="footer">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;text-align:left;">
             <div>
@@ -541,7 +632,6 @@
 <script>
 const T = {
     fr: {
-        sub: 'Choisis ton service — Zéro compromis',
         s1: 'Clients satisfaits', s2: 'Taux de satisfaction', s3: 'Note moyenne', s4: "D'expérience",
         t1: 'SSL', t2: '<24h', t3: 'Garantie 30j', t4: 'RGPD', t5: 'Mondial', t6: 'Expertise',
         d1: 'Automatisation complète de votre groupe', d2: 'Agent intelligent pour vos clients',
@@ -558,7 +648,7 @@ const T = {
         dc6: 'Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br>✅ <span class="ok">Programmation sur mesure</span><br>✅ <span class="ok">Automatisation</span><br>✅ <span class="ok">Conseil et formation</span><br>🎯 <span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span>',
         urgence: 'Offre spéciale - Plus que 3 places ce mois-ci',
         whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Réponse en 5min',
-        assistantLabel: 'Assistant IA', assistantSub: 'Posez votre question, il répond',
+        assistantLabel: 'Assistant IA', assistantSub: 'Bientôt disponible',
         gtext: 'Satisfaction 100% garantie ou remboursé',
         gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
         l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'WhatsApp / Téléphone',
@@ -582,7 +672,6 @@ const T = {
         f3a: '9h-18h (Lun-Ven)', fb1: 'Tous droits réservés', fb2: 'Dernière mise à jour'
     },
     en: {
-        sub: 'Choose your service — Zero compromise',
         s1: 'Happy Clients', s2: 'Satisfaction Rate', s3: 'Average Rating', s4: 'Experience',
         t1: 'SSL', t2: '<24h', t3: '30 Days Guarantee', t4: 'GDPR', t5: 'Worldwide', t6: 'Expertise',
         d1: 'Full group automation', d2: 'Intelligent agent for your clients',
@@ -599,7 +688,7 @@ const T = {
         dc6: 'You have a specific project? <span class="hl">Tell us what you need</span>.<br>✅ <span class="ok">Custom programming</span><br>✅ <span class="ok">Automation</span><br>✅ <span class="ok">Consulting and training</span><br>🎯 <span class="hl">If you can dream it, we can create it</span>',
         urgence: 'Special offer - Only 3 spots left this month',
         whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Response in 5min',
-        assistantLabel: 'AI Assistant', assistantSub: 'Ask your question, he answers',
+        assistantLabel: 'AI Assistant', assistantSub: 'Coming soon',
         gtext: '100% satisfaction guaranteed or refunded',
         gsub: 'If you are not satisfied, we will refund you in full.',
         l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp / Phone',
@@ -623,7 +712,6 @@ const T = {
         f3a: '9am-6pm (Mon-Fri)', fb1: 'All rights reserved', fb2: 'Last update'
     },
     es: {
-        sub: 'Elige tu servicio — Cero compromisos',
         s1: 'Clientes satisfechos', s2: 'Tasa de satisfacción', s3: 'Calificación promedio', s4: 'Experiencia',
         t1: 'SSL', t2: '<24h', t3: 'Garantía 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiencia',
         d1: 'Automatización completa de tu grupo', d2: 'Agente inteligente para tus clientes',
@@ -640,7 +728,7 @@ const T = {
         dc6: '¿Tienes un proyecto específico? <span class="hl">Dinos lo que necesitas</span>.<br>✅ <span class="ok">Programación a medida</span><br>✅ <span class="ok">Automatización</span><br>✅ <span class="ok">Consultoría y formación</span><br>🎯 <span class="hl">Si puedes soñarlo, podemos crearlo</span>',
         urgence: 'Oferta especial - Solo quedan 3 plazas este mes',
         whatsappLabel: 'WhatsApp Directo', whatsappSub: 'Respuesta en 5min',
-        assistantLabel: 'Asistente IA', assistantSub: 'Haz tu pregunta, él responde',
+        assistantLabel: 'Asistente IA', assistantSub: 'Próximamente',
         gtext: '100% de satisfacción garantizada o reembolso',
         gsub: 'Si no estás satisfecho, te reembolsamos íntegramente.',
         l1: 'Nombre completo', l2: 'País', l3: 'Ciudad', l4: 'WhatsApp / Teléfono',
@@ -664,7 +752,6 @@ const T = {
         f3a: '9h-18h (Lun-Vie)', fb1: 'Todos los derechos reservados', fb2: 'Última actualización'
     },
     de: {
-        sub: 'Wähle deinen Service — Null Kompromisse',
         s1: 'Zufriedene Kunden', s2: 'Zufriedenheitsrate', s3: 'Durchschnittliche Bewertung', s4: 'Erfahrung',
         t1: 'SSL', t2: '<24h', t3: 'Garantie 30d', t4: 'DSGVO', t5: 'Weltweit', t6: 'Expertise',
         d1: 'Vollautomatisierung deiner Gruppe', d2: 'Intelligenter Agent für deine Kunden',
@@ -681,7 +768,7 @@ const T = {
         dc6: 'Du hast ein spezifisches Projekt? <span class="hl">Sag uns, was du brauchst</span>.<br>✅ <span class="ok">Maßgeschneiderte Programmierung</span><br>✅ <span class="ok">Automatisierung</span><br>✅ <span class="ok">Beratung und Schulung</span><br>🎯 <span class="hl">Wenn du es träumen kannst, wir können es erschaffen</span>',
         urgence: 'Spezialangebot - Nur noch 3 Plätze diesen Monat',
         whatsappLabel: 'WhatsApp Direkt', whatsappSub: 'Antwort in 5min',
-        assistantLabel: 'KI-Assistent', assistantSub: 'Stelle deine Frage, er antwortet',
+        assistantLabel: 'KI-Assistent', assistantSub: 'Bald verfügbar',
         gtext: '100% Zufriedenheitsgarantie oder Geld zurück',
         gsub: 'Wenn du nicht zufrieden bist, erstatten wir dir den vollen Betrag.',
         l1: 'Vollständiger Name', l2: 'Land', l3: 'Stadt', l4: 'WhatsApp / Telefon',
@@ -705,7 +792,6 @@ const T = {
         f3a: '9-18 Uhr (Mo-Fr)', fb1: 'Alle Rechte vorbehalten', fb2: 'Letzte Aktualisierung'
     },
     pt: {
-        sub: 'Escolha o seu serviço — Zero compromissos',
         s1: 'Clientes satisfeitos', s2: 'Taxa de satisfação', s3: 'Avaliação média', s4: 'Experiência',
         t1: 'SSL', t2: '<24h', t3: 'Garantia 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiência',
         d1: 'Automatização completa do seu grupo', d2: 'Agente inteligente para seus clientes',
@@ -722,7 +808,7 @@ const T = {
         dc6: 'Tem um projeto específico? <span class="hl">Diga-nos o que precisa</span>.<br>✅ <span class="ok">Programação sob medida</span><br>✅ <span class="ok">Automação</span><br>✅ <span class="ok">Consultoria e formação</span><br>🎯 <span class="hl">Se você pode sonhar, nós podemos criar</span>',
         urgence: 'Oferta especial - Apenas 3 vagas este mês',
         whatsappLabel: 'WhatsApp Directo', whatsappSub: 'Resposta em 5min',
-        assistantLabel: 'Assistente IA', assistantSub: 'Faça sua pergunta, ele responde',
+        assistantLabel: 'Assistente IA', assistantSub: 'Em breve',
         gtext: '100% de satisfação garantida ou reembolso',
         gsub: 'Se não estiver satisfeito, reembolsamos integralmente.',
         l1: 'Nome completo', l2: 'País', l3: 'Cidade', l4: 'WhatsApp / Telefone',
@@ -746,7 +832,6 @@ const T = {
         f3a: '9h-18h (Seg-Sex)', fb1: 'Todos os direitos reservados', fb2: 'Última atualização'
     },
     ar: {
-        sub: 'اخْتَرْ خِدْمَتَكَ — صِفْرُ تَنَازُلَات',
         s1: 'عُمَلَاءُ رَاضُونَ', s2: 'مُعَدَّلُ الرِّضَى', s3: 'مُعَدَّلُ التَّقْيِيمِ', s4: 'خِبْرَة',
         t1: 'SSL', t2: '<24h', t3: 'ضَمَان 30ي', t4: 'RGPD', t5: 'عَالَمِي', t6: 'خِبْرَة',
         d1: 'أَتْمَتَةُ مَجْمُوعَتِكَ كَامِلَةً', d2: 'وَكِيلٌ ذَكِيٌّ لِعُمَلَائِكَ',
@@ -763,7 +848,7 @@ const T = {
         dc6: 'لَدَيْكَ مَشْرُوعٌ مُحَدَّدٌ؟ <span class="hl">أَخْبِرْنَا بِمَا تَحْتَاجُ</span>.<br>✅ <span class="ok">بَرْمَجَة حَسَبَ الطَّلَبِ</span><br>✅ <span class="ok">أَتْمَتَة</span><br>✅ <span class="ok">اسْتِشَارَة وَتَدْرِيب</span><br>🎯 <span class="hl">إِنِ اسْتَطَعْتَ تَخَيُّلَهُ، نَسْتَطِيعُ إِنْشَاؤُهُ</span>',
         urgence: 'عَرْضٌ خَاصٌّ - 3 مَقَاعِدَ فَقَطْ هَذَا الشَّهْرِ',
         whatsappLabel: 'وَاتْسَاب مُبَاشِر', whatsappSub: 'رَدٌّ فِي 5 دَقَائِق',
-        assistantLabel: 'مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', assistantSub: 'اسْأَلْ سُؤَالَكَ، يُجِيبُكَ',
+        assistantLabel: 'مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', assistantSub: 'قَرِيبًا',
         gtext: 'رِضًا مَضْمُونٌ 100% أَوِ اسْتِرْدَادُ الْمَالِ',
         gsub: 'إِذَا لَمْ تَكُنْ رَاضِيًا، سَنُعِيدُ لَكَ الْمَبْلَغَ كَامِلًا.',
         l1: 'الِاسْمُ وَاللَّقَبُ', l2: 'الْبَلَدُ', l3: 'الْمَدِينَةُ', l4: 'وَاتْسَاب / هَاتِف',
@@ -799,7 +884,6 @@ function switchLang(lang) {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
     
-    document.getElementById('mainSub').textContent = t.sub;
     document.getElementById('s1').textContent = t.s1;
     document.getElementById('s2').textContent = t.s2;
     document.getElementById('s3').textContent = t.s3;
