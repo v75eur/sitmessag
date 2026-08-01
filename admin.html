@@ -38,7 +38,7 @@
             color: #fff;
             font-size: 16px;
             margin-bottom: 12px;
-            transition: border 0.3s, box-shadow 0.3s;
+            transition: border .3s, box-shadow .3s;
         }
         .login-box input:focus { outline: none; border-color: #f0b90b; box-shadow: 0 0 20px rgba(240,185,11,0.1); }
         .login-box button {
@@ -51,7 +51,7 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform .3s, box-shadow .3s;
         }
         .login-box button:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(240,185,11,0.3); }
         .lock-msg { color: #ff5f56; text-align: center; margin-top: 10px; font-size: 14px; }
@@ -69,7 +69,7 @@
             padding: 16px;
             text-align: center;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform .3s, box-shadow .3s;
         }
         .stats .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
         .stats .card .number { font-size: 30px; font-weight: 900; color: #f0b90b; }
@@ -80,9 +80,9 @@
             padding: 16px 20px;
             margin-bottom: 12px;
             border-left: 4px solid #f0b90b;
-            transition: all 0.4s ease;
+            transition: all .4s ease;
             cursor: pointer;
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn .5s ease-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateX(-20px); }
@@ -104,7 +104,7 @@
             color: #e2e8f0;
             font-size: 14px;
             line-height: 1.6;
-            animation: expand 0.4s ease-out;
+            animation: expand .4s ease-out;
         }
         @keyframes expand {
             from { opacity: 0; transform: scale(0.95); }
@@ -119,7 +119,7 @@
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform .3s, box-shadow .3s;
         }
         .mail-item .mail-actions button:hover { transform: scale(1.05); }
         .btn-read { background: #10b981; color: #fff; }
@@ -144,7 +144,7 @@
             color: #fff;
             cursor: pointer;
             font-size: 13px;
-            transition: transform 0.3s, background 0.3s;
+            transition: transform .3s, background .3s;
         }
         .btn-back:hover { background: #475569; transform: scale(1.02); }
         .badge-expire {
@@ -156,11 +156,7 @@
         }
         .badge-expire.urgent { background: rgba(239,68,68,0.2); color: #ef4444; }
         .badge-expire.normal { background: rgba(100,116,139,0.2); color: #94a3b8; }
-        @media (max-width: 600px) {
-            .container { padding: 18px; }
-            .stats { flex-direction: column; }
-            .mail-item .mail-header { flex-direction: column; }
-        }
+        @media(max-width:600px){ .container{ padding: 18px; } .stats{ flex-direction: column; } .mail-item .mail-header{ flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -187,178 +183,165 @@
         🔒 Accès sécurisé • <a href="index.html">⬅ Retour au site</a>
     </div>
 </div>
-
 <script>
-const ADMIN_PASS = 'RickRoss1994@';
-const UNLOCK_PASS = 'RickRoss1994';
-let attempts = 0;
-let locked = false;
-let isLoggedIn = false;
-
-function login() {
-    if (locked) {
-        const input = document.getElementById('passInput').value;
-        if (input === UNLOCK_PASS) {
-            locked = false;
-            attempts = 0;
-            document.getElementById('lockMsg').textContent = '✅ Déverrouillé !';
+    const ADMIN_PASS = 'RickRoss1994@';
+    const UNLOCK_PASS = 'RickRoss1994';
+    let attempts = 0;
+    let locked = false;
+    let isLoggedIn = false;
+    function login() {
+        if (locked) {
+            const input = document.getElementById('passInput').value;
+            if (input === UNLOCK_PASS) {
+                locked = false;
+                attempts = 0;
+                document.getElementById('lockMsg').textContent = '✅ Déverrouillé !';
+                document.getElementById('passInput').value = '';
+                document.getElementById('lockMsg').style.color = '#22c55e';
+                setTimeout(() => { document.getElementById('lockMsg').textContent = ''; }, 2000);
+                return;
+            } else {
+                document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Entrez le code de déverrouillage.';
+                document.getElementById('lockMsg').style.color = '#ff5f56';
+                return;
+            }
+        }
+        const pwd = document.getElementById('passInput').value;
+        if (pwd === ADMIN_PASS) {
+            isLoggedIn = true;
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
             document.getElementById('passInput').value = '';
-            document.getElementById('lockMsg').style.color = '#22c55e';
-            setTimeout(() => { document.getElementById('lockMsg').textContent = ''; }, 2000);
-            return;
+            document.getElementById('lockMsg').textContent = '';
+            loadMessages();
         } else {
-            document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Entrez le code de déverrouillage.';
-            document.getElementById('lockMsg').style.color = '#ff5f56';
-            return;
+            attempts++;
+            if (attempts >= 3) {
+                locked = true;
+                document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Utilisez le code de déverrouillage.';
+                document.getElementById('lockMsg').style.color = '#ff5f56';
+            } else {
+                document.getElementById('lockMsg').textContent = '❌ Mot de passe incorrect (' + attempts + '/3)';
+                document.getElementById('lockMsg').style.color = '#ff5f56';
+            }
         }
     }
-    const pwd = document.getElementById('passInput').value;
-    if (pwd === ADMIN_PASS) {
-        isLoggedIn = true;
-        document.getElementById('loginBox').style.display = 'none';
-        document.getElementById('adminContent').style.display = 'block';
+    function logout() {
+        isLoggedIn = false;
+        document.getElementById('loginBox').style.display = 'block';
+        document.getElementById('adminContent').style.display = 'none';
         document.getElementById('passInput').value = '';
         document.getElementById('lockMsg').textContent = '';
-        loadMessages();
-    } else {
-        attempts++;
-        if (attempts >= 3) {
-            locked = true;
-            document.getElementById('lockMsg').textContent = '🔒 Compte bloqué. Utilisez le code de déverrouillage.';
-            document.getElementById('lockMsg').style.color = '#ff5f56';
-        } else {
-            document.getElementById('lockMsg').textContent = '❌ Mot de passe incorrect (' + attempts + '/3)';
-            document.getElementById('lockMsg').style.color = '#ff5f56';
-        }
     }
-}
-
-function logout() {
-    isLoggedIn = false;
-    document.getElementById('loginBox').style.display = 'block';
-    document.getElementById('adminContent').style.display = 'none';
-    document.getElementById('passInput').value = '';
-    document.getElementById('lockMsg').textContent = '';
-}
-
-function refreshMessages() { if (isLoggedIn) loadMessages(); }
-
-function loadMessages() {
-    const list = document.getElementById('messagesList');
-    list.innerHTML = '<div class="empty">⏳ Chargement...</div>';
-    fetch('https://sitmessag.onrender.com/api/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: ADMIN_PASS })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 'ok') {
-            renderMessages(data.messages || []);
-        } else {
-            list.innerHTML = '<div class="empty">❌ ' + (data.error || 'Erreur') + '</div>';
-        }
-    })
-    .catch(() => {
-        list.innerHTML = '<div class="empty">❌ Erreur de connexion.</div>';
-    });
-}
-
-function renderMessages(messages) {
-    const container = document.getElementById('messagesList');
-    const total = messages.length;
-    const unread = messages.filter(m => !m.vu).length;
-    const expiring = messages.filter(m => {
-        const daysLeft = (new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24);
-        return daysLeft <= 3 && daysLeft > 0;
-    }).length;
-    
-    document.getElementById('totalMessages').textContent = total;
-    document.getElementById('unreadMessages').textContent = unread;
-    document.getElementById('expiringSoon').textContent = expiring;
-    
-    if (messages.length === 0) {
-        container.innerHTML = '<div class="empty">📭 Aucun message reçu.</div>';
-        return;
-    }
-    
-    messages.sort((a, b) => new Date(b.date) - new Date(a.date));
-    let html = '';
-    messages.forEach((m) => {
-        const isUnread = !m.vu;
-        const daysLeft = Math.ceil((new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24));
-        const expireClass = daysLeft <= 3 ? 'urgent' : 'normal';
-        const expireMsg = daysLeft > 0 ? '⏳ ' + daysLeft + 'j' : '⚠️ Expiré';
-        const dateFormatted = new Date(m.date).toLocaleString('fr-FR', {
-            day: '2-digit', month: '2-digit', year: 'numeric',
-            hour: '2-digit', minute: '2-digit'
+    function refreshMessages() { if (isLoggedIn) loadMessages(); }
+    function loadMessages() {
+        const list = document.getElementById('messagesList');
+        list.innerHTML = '<div class="empty">⏳ Chargement...</div>';
+        fetch('https://sitmessag.onrender.com/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: ADMIN_PASS })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                renderMessages(data.messages || []);
+            } else {
+                list.innerHTML = '<div class="empty">❌ ' + (data.error || 'Erreur') + '</div>';
+            }
+        })
+        .catch(() => {
+            list.innerHTML = '<div class="empty">❌ Erreur de connexion.</div>';
         });
-        
-        html += `
-            <div class="mail-item ${isUnread ? 'unread' : ''}">
-                <div class="mail-header">
-                    <span class="mail-from">📩 ${m.nom || 'Anonyme'}</span>
-                    <span>
-                        <span class="mail-service">${m.service || 'Service'}</span>
-                        <span class="mail-date">📅 ${dateFormatted}</span>
-                        <span class="badge-expire ${expireClass}" style="margin-left:8px;">${expireMsg}</span>
-                    </span>
-                </div>
-                <div class="mail-header" style="font-size:13px;color:#94a3b8;">
-                    <span>📧 ${m.email || '-'} • 📱 ${m.whatsapp || '-'}</span>
-                    <span>🌍 ${m.pays || '-'} • 🏙️ ${m.ville || '-'}</span>
-                </div>
-                <div class="mail-subject" onclick="toggleBody('${m.id}')">
-                    📩 ${m.message ? m.message.substring(0, 60) + (m.message.length > 60 ? '...' : '') : 'Aucun message'}
-                </div>
-                <div class="mail-body" id="body_${m.id}">
-                    <div style="margin-bottom:6px;"><b>💬 Message complet :</b></div>
-                    ${m.message || 'Aucun message'}
-                    ${m.reseau ? `<div style="margin-top:6px;"><b>🔗 Réseaux :</b> ${m.reseau}</div>` : ''}
-                    <div style="margin-top:6px;font-size:12px;color:#64748b;">
-                        📅 Expire le : ${new Date(m.expire).toLocaleDateString('fr-FR')} à ${new Date(m.expire).toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}
+    }
+    function renderMessages(messages) {
+        const container = document.getElementById('messagesList');
+        const total = messages.length;
+        const unread = messages.filter(m => !m.vu).length;
+        const expiring = messages.filter(m => {
+            const daysLeft = (new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24);
+            return daysLeft <= 3 && daysLeft > 0;
+        }).length;
+        document.getElementById('totalMessages').textContent = total;
+        document.getElementById('unreadMessages').textContent = unread;
+        document.getElementById('expiringSoon').textContent = expiring;
+        if (messages.length === 0) {
+            container.innerHTML = '<div class="empty">📭 Aucun message reçu.</div>';
+            return;
+        }
+        messages.sort((a, b) => new Date(b.date) - new Date(a.date));
+        let html = '';
+        messages.forEach((m) => {
+            const isUnread = !m.vu;
+            const daysLeft = Math.ceil((new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24));
+            const expireClass = daysLeft <= 3 ? 'urgent' : 'normal';
+            const expireMsg = daysLeft > 0 ? '⏳ ' + daysLeft + 'j' : '⚠️ Expiré';
+            const dateFormatted = new Date(m.date).toLocaleString('fr-FR', {
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+            html += `
+                <div class="mail-item ${isUnread ? 'unread' : ''}">
+                    <div class="mail-header">
+                        <span class="mail-from">📩 ${m.nom || 'Anonyme'}</span>
+                        <span>
+                            <span class="mail-service">${m.service || 'Service'}</span>
+                            <span class="mail-date">📅 ${dateFormatted}</span>
+                            <span class="badge-expire ${expireClass}" style="margin-left:8px;">${expireMsg}</span>
+                        </span>
+                    </div>
+                    <div class="mail-header" style="font-size:13px;color:#94a3b8;">
+                        <span>📧 ${m.email || '-'} • 📱 ${m.whatsapp || '-'}</span>
+                        <span>🌍 ${m.pays || '-'} • 🏙️ ${m.ville || '-'}</span>
+                    </div>
+                    <div class="mail-subject" onclick="toggleBody('${m.id}')">
+                        📩 ${m.message ? m.message.substring(0, 60) + (m.message.length > 60 ? '...' : '') : 'Aucun message'}
+                    </div>
+                    <div class="mail-body" id="body_${m.id}">
+                        <div style="margin-bottom:6px;"><b>💬 Message complet :</b></div>
+                        ${m.message || 'Aucun message'}
+                        ${m.reseau ? `<div style="margin-top:6px;"><b>🔗 Réseaux :</b> ${m.reseau}</div>` : ''}
+                        <div style="margin-top:6px;font-size:12px;color:#64748b;">
+                            📅 Expire le : ${new Date(m.expire).toLocaleDateString('fr-FR')} à ${new Date(m.expire).toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}
+                        </div>
+                    </div>
+                    <div class="mail-actions">
+                        ${isUnread ? `<button class="btn-read" onclick="markAsRead('${m.id}')">✅ Marquer comme lu</button>` : ''}
+                        <button class="btn-delete" onclick="deleteMessage('${m.id}')">🗑️ Supprimer</button>
                     </div>
                 </div>
-                <div class="mail-actions">
-                    ${isUnread ? `<button class="btn-read" onclick="markAsRead('${m.id}')">✅ Marquer comme lu</button>` : ''}
-                    <button class="btn-delete" onclick="deleteMessage('${m.id}')">🗑️ Supprimer</button>
-                </div>
-            </div>
-        `;
-    });
-    container.innerHTML = html;
-}
-
-function toggleBody(id) {
-    const body = document.getElementById('body_' + id);
-    if (body) body.classList.toggle('open');
-}
-
-function deleteMessage(id) {
-    if (!confirm('🗑️ Supprimer ce message définitivement ?')) return;
-    fetch('https://sitmessag.onrender.com/api/delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id, password: ADMIN_PASS })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 'ok') loadMessages();
-        else alert('❌ Erreur lors de la suppression.');
-    });
-}
-
-function markAsRead(id) {
-    fetch('https://sitmessag.onrender.com/api/read', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id, password: ADMIN_PASS })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 'ok') loadMessages();
-    });
-}
+            `;
+        });
+        container.innerHTML = html;
+    }
+    function toggleBody(id) {
+        const body = document.getElementById('body_' + id);
+        if (body) body.classList.toggle('open');
+    }
+    function deleteMessage(id) {
+        if (!confirm('🗑️ Supprimer ce message définitivement ?')) return;
+        fetch('https://sitmessag.onrender.com/api/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, password: ADMIN_PASS })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') loadMessages();
+            else alert('❌ Erreur lors de la suppression.');
+        });
+    }
+    function markAsRead(id) {
+        fetch('https://sitmessag.onrender.com/api/read', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, password: ADMIN_PASS })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') loadMessages();
+        });
+    }
 </script>
 </body>
 </html>
