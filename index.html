@@ -5,262 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MESSAGERIE PRO</title>
     <style>
+        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             min-height: 100vh;
-            background: #0a0a1a;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f5f5f7;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .container {
-            max-width: 900px;
+            max-width: 920px;
             width: 100%;
-            background: rgba(255,255,255,0.03);
-            border-radius: 24px;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.06);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            animation: fadeIn 0.8s ease-out;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 40px 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+            animation: fadeIn 0.6s ease-out;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* ===== PYFIGLET ANIMÉ ===== */
-        .pyfiglet {
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            font-size: 28px;
-            font-weight: 900;
-            line-height: 1.1;
-            color: #fff;
-            margin-bottom: 4px;
-            letter-spacing: 2px;
-        }
-        .pyfiglet .line1 { color: #f0b90b; }
-        .pyfiglet .line2 { color: #4d96ff; }
-        .pyfiglet .line3 { color: #22c55e; }
-        
-        /* Animation des lettres */
-        .pyfiglet span {
+        /* ===== HEADER ===== */
+        .header { text-align: center; margin-bottom: 28px; }
+        .header .brand {
             display: inline-block;
-            animation: letterPop 0.5s ease-out forwards;
-            opacity: 0;
-        }
-        .pyfiglet .line1 span { animation-delay: calc(0.05s * var(--i, 0)); }
-        .pyfiglet .line2 span { animation-delay: calc(0.05s * var(--i, 0) + 0.3s); }
-        .pyfiglet .line3 span { animation-delay: calc(0.05s * var(--i, 0) + 0.6s); }
-        
-        @keyframes letterPop {
-            0% { opacity: 0; transform: translateY(-20px) scale(0.8); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        
-        /* Effet de survol des lettres */
-        .pyfiglet span:hover {
+            background: #0a0a1a;
             color: #f0b90b;
-            transform: scale(1.1) translateY(-2px);
-            transition: all 0.3s;
-        }
-        
-        .pyfiglet-sub {
-            text-align: center;
-            color: #94a3b8;
+            font-family: 'Courier New', monospace;
             font-size: 14px;
-            margin-top: -4px;
-            margin-bottom: 16px;
-            letter-spacing: 6px;
-            font-weight: 300;
-            animation: fadeIn 1s ease-out 0.8s both;
+            font-weight: 700;
+            padding: 6px 20px;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .header h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #0a0a1a;
+            line-height: 1.1;
+        }
+        .header h1 .accent { color: #f0b90b; }
+        .header p {
+            color: #6b7280;
+            font-size: 16px;
+            margin-top: 6px;
+            font-weight: 400;
         }
         
         /* ===== LANG SELECTOR ===== */
         .lang-selector {
             display: flex;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
-            margin: 12px 0 20px;
+            margin: 16px 0 24px;
         }
         .lang-selector button {
-            padding: 6px 14px;
-            border: 2px solid rgba(255,255,255,0.08);
-            border-radius: 8px;
+            padding: 5px 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
             background: transparent;
-            color: #94a3b8;
-            font-size: 13px;
+            color: #6b7280;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
-        .lang-selector button:hover { border-color: #f0b90b; color: #f0b90b; }
-        .lang-selector button.active { border-color: #f0b90b; background: rgba(240,185,11,0.1); color: #f0b90b; }
+        .lang-selector button:hover { border-color: #f0b90b; color: #0a0a1a; }
+        .lang-selector button.active { border-color: #f0b90b; background: #f0b90b; color: #0a0a1a; }
         
         /* ===== STATS ===== */
         .stats {
             display: grid;
             grid-template-columns: repeat(4,1fr);
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         .stats .item {
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            padding: 14px;
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.04);
-            transition: transform 0.3s;
+            border: 1px solid #f3f4f6;
+            transition: all 0.3s;
         }
-        .stats .item:hover { transform: translateY(-4px); }
-        .stats .item .number { font-size: 26px; font-weight: 900; color: #f0b90b; }
-        .stats .item .label { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+        .stats .item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .stats .item .number { font-size: 28px; font-weight: 800; color: #0a0a1a; }
+        .stats .item .label { font-size: 13px; color: #6b7280; margin-top: 2px; }
         
         /* ===== TRUST ===== */
         .trust {
             display: grid;
             grid-template-columns: repeat(6,1fr);
-            gap: 6px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 24px;
         }
         .trust .item {
             text-align: center;
-            padding: 8px 4px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.04);
+            padding: 10px 4px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border: 1px solid #f3f4f6;
+            transition: all 0.3s;
         }
-        .trust .item svg { width: 24px; height: 24px; display: block; margin: 0 auto 4px; fill: #22c55e; }
-        .trust .item .label { font-size: 10px; color: #22c55e; font-weight: 600; }
+        .trust .item:hover { transform: translateY(-2px); }
+        .trust .item svg { width: 22px; height: 22px; display: block; margin: 0 auto 4px; fill: #f0b90b; }
+        .trust .item .label { font-size: 10px; color: #0a0a1a; font-weight: 600; }
         
         /* ===== SERVICES ===== */
         .services {
             display: grid;
             grid-template-columns: repeat(3,1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
         .service-card {
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(255,255,255,0.05);
-            border-radius: 14px;
-            padding: 16px 10px;
+            background: #f9fafb;
+            border: 2px solid #f3f4f6;
+            border-radius: 16px;
+            padding: 20px 14px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
         }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(240,185,11,0.03), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        .service-card:hover::before { opacity: 1; }
-        .service-card:hover { border-color: #f0b90b; transform: translateY(-4px); }
-        .service-card.selected { border-color: #f0b90b; background: rgba(240,185,11,0.04); }
-        .service-card svg { width: 40px; height: 40px; display: block; margin: 0 auto 6px; fill: #4d96ff; }
-        .service-card .name { color: #fff; font-size: 14px; font-weight: 700; }
-        .service-card .desc { color: #94a3b8; font-size: 11px; margin-top: 4px; }
+        .service-card:hover { border-color: #f0b90b; transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+        .service-card.selected { border-color: #f0b90b; background: #fffbea; }
+        .service-card svg { width: 40px; height: 40px; display: block; margin: 0 auto 8px; fill: #f0b90b; }
+        .service-card .name { color: #0a0a1a; font-size: 14px; font-weight: 700; }
+        .service-card .desc { color: #6b7280; font-size: 12px; margin-top: 4px; line-height: 1.4; }
         .service-card .badge {
             display: inline-block;
             background: #f0b90b;
             color: #0a0a1a;
             font-size: 8px;
-            font-weight: 800;
-            padding: 2px 10px;
-            border-radius: 12px;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 20px;
             text-transform: uppercase;
-            margin-top: 4px;
+            margin-top: 8px;
         }
         
         /* ===== DETAIL BOX ===== */
         .detail-box {
-            background: rgba(255,255,255,0.02);
-            border-radius: 14px;
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 1px solid #f3f4f6;
             display: none;
             animation: slideDown 0.4s ease-out;
         }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .detail-box.active { display: block; border-color: rgba(240,185,11,0.15); background: rgba(240,185,11,0.02); }
-        .detail-box .title { color: #f0b90b; font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-        .detail-box .content { color: #cbd5e1; font-size: 13px; line-height: 1.7; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        .detail-box.active { display: block; border-color: #f0b90b; background: #fffbea; }
+        .detail-box .title { color: #0a0a1a; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .detail-box .content { color: #4b5563; font-size: 14px; line-height: 1.7; }
         .detail-box .content .hl { color: #f0b90b; font-weight: 600; }
-        .detail-box .content .ok { color: #22c55e; font-weight: 600; }
+        .detail-box .content .ok { color: #10b981; font-weight: 600; }
         
         /* ===== URGENCE ===== */
         .urgence {
-            background: rgba(239,68,68,0.04);
-            border: 2px solid rgba(239,68,68,0.1);
+            background: #fef2f2;
+            border: 1px solid #fecaca;
             border-radius: 12px;
             padding: 10px;
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
-        .urgence span { color: #ef4444; font-weight: 700; font-size: 14px; }
+        .urgence span { color: #dc2626; font-weight: 700; font-size: 14px; }
         
         /* ===== CONTACT ===== */
         .contact {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         .contact a {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 14px;
+            background: #f9fafb;
+            border: 1px solid #f3f4f6;
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
             text-decoration: none;
-            color: #fff;
+            color: #0a0a1a;
             transition: all 0.3s;
         }
-        .contact a:hover { border-color: #f0b90b; transform: translateY(-3px); }
-        .contact a svg { width: 32px; height: 32px; display: block; margin: 0 auto 4px; }
+        .contact a:hover { border-color: #f0b90b; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+        .contact a svg { width: 32px; height: 32px; display: block; margin: 0 auto 4px; fill: #f0b90b; }
         .contact a .label { font-size: 14px; font-weight: 600; }
-        .contact a .sub { font-size: 11px; color: #94a3b8; }
-        .contact .whatsapp { border-color: rgba(34,197,94,0.2); }
-        .contact .whatsapp:hover { border-color: #22c55e; }
-        .contact .whatsapp svg { fill: #22c55e; }
+        .contact a .sub { font-size: 12px; color: #6b7280; }
+        .contact .whatsapp svg { fill: #25D366; }
+        .contact .whatsapp:hover { border-color: #25D366; }
         
         /* ===== GARANTIE ===== */
         .guarantee {
-            background: rgba(240,185,11,0.04);
-            border-radius: 14px;
-            padding: 14px;
+            background: #fffbeb;
+            border-radius: 16px;
+            padding: 16px;
             text-align: center;
-            border: 2px solid rgba(240,185,11,0.08);
-            margin-bottom: 18px;
+            border: 1px solid #fde68a;
+            margin-bottom: 20px;
         }
-        .guarantee .text { color: #f0b90b; font-weight: 900; font-size: 17px; }
-        .guarantee .sub { color: #94a3b8; font-size: 12px; margin-top: 4px; }
+        .guarantee .text { color: #0a0a1a; font-weight: 700; font-size: 16px; }
+        .guarantee .sub { color: #6b7280; font-size: 13px; margin-top: 4px; }
         
         /* ===== FORM ===== */
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; color: #cbd5e1; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-        .form-group label .required { color: #ff5f56; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; color: #0a0a1a; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .form-group label .required { color: #dc2626; }
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px 16px;
             border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.06);
-            background: rgba(0,0,0,0.3);
-            color: #fff;
+            border: 2px solid #e5e7eb;
+            background: #f9fafb;
+            color: #0a0a1a;
             font-size: 14px;
             font-family: inherit;
             transition: border 0.3s;
         }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #f0b90b; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #f0b90b; background: #ffffff; }
         .form-group textarea { min-height: 80px; resize: vertical; }
-        .form-group .hint { color: #64748b; font-size: 11px; margin-top: 4px; }
+        .form-group .hint { color: #6b7280; font-size: 12px; margin-top: 4px; }
         .form-group .hint .hl { color: #f0b90b; font-weight: 600; }
         
         .btn {
@@ -268,16 +237,16 @@
             padding: 16px;
             border: none;
             border-radius: 14px;
-            background: linear-gradient(135deg,#f0b90b,#f59e0b);
+            background: #f0b90b;
             color: #0a0a1a;
-            font-size: 18px;
-            font-weight: 900;
+            font-size: 16px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
-        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 40px rgba(240,185,11,0.2); }
+        .btn:hover { background: #d4a000; transform: scale(1.01); box-shadow: 0 8px 24px rgba(240,185,11,0.25); }
         
         .toast {
             display: none;
@@ -288,8 +257,8 @@
             margin-top: 12px;
             text-align: center;
         }
-        .toast.success { display: block; background: rgba(16,185,129,0.1); border: 1px solid #10b981; color: #10b981; }
-        .toast.error { display: block; background: rgba(255,87,87,0.1); border: 1px solid #ff5f56; color: #ff5f56; }
+        .toast.success { display: block; background: #d1fae5; border: 1px solid #10b981; color: #065f46; }
+        .toast.error { display: block; background: #fee2e2; border: 1px solid #dc2626; color: #991b1b; }
         
         .loading {
             display: none;
@@ -301,90 +270,132 @@
         .loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
         
+        /* ===== COMING SOON ===== */
+        .coming-soon {
+            margin-top: 24px;
+            padding: 24px;
+            background: #f9fafb;
+            border-radius: 16px;
+            border: 1px solid #f3f4f6;
+            text-align: center;
+        }
+        .coming-soon .label {
+            font-size: 12px;
+            color: #f0b90b;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .coming-soon .title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0a0a1a;
+            margin: 4px 0;
+        }
+        .coming-soon .desc {
+            color: #6b7280;
+            font-size: 14px;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .coming-soon .tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .coming-soon .tags span {
+            padding: 4px 16px;
+            background: #ffffff;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #0a0a1a;
+            border: 1px solid #e5e7eb;
+            font-weight: 600;
+        }
+        
         /* ===== FAQ ===== */
         .faq {
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            padding-top: 16px;
+            margin-top: 24px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 20px;
         }
-        .faq h3 { color: #f0b90b; font-size: 16px; text-align: center; margin-bottom: 10px; }
+        .faq h3 { color: #0a0a1a; font-size: 16px; text-align: center; margin-bottom: 12px; }
         .faq-item {
-            background: rgba(255,255,255,0.02);
-            border-radius: 10px;
+            background: #f9fafb;
+            border-radius: 12px;
             padding: 12px 16px;
-            margin-bottom: 6px;
-            border: 1px solid rgba(255,255,255,0.04);
+            margin-bottom: 8px;
+            border: 1px solid #f3f4f6;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
-        .faq-item:hover { background: rgba(255,255,255,0.04); }
-        .faq-item .q { color: #cbd5e1; font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; }
+        .faq-item:hover { background: #ffffff; border-color: #e5e7eb; }
+        .faq-item .q { color: #0a0a1a; font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; }
         .faq-item .q .arrow { color: #f0b90b; transition: 0.3s; }
         .faq-item .q .arrow.open { transform: rotate(180deg); }
-        .faq-item .a { color: #94a3b8; font-size: 12px; line-height: 1.6; margin-top: 6px; display: none; }
+        .faq-item .a { color: #6b7280; font-size: 13px; line-height: 1.6; margin-top: 6px; display: none; }
         .faq-item .a.open { display: block; }
         
-        /* ===== FOOTER ===== */
-        .footer {
-            margin-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            padding-top: 14px;
-            text-align: center;
-            color: #64748b;
-            font-size: 11px;
-            line-height: 2;
-        }
-        .footer a { color: #4d96ff; text-decoration: none; }
-        .footer a:hover { color: #f0b90b; }
-        .footer .highlight { color: #f0b90b; font-weight: 600; }
-        .gear { cursor: pointer; font-size: 18px; color: #64748b; }
-        .gear:hover { color: #f0b90b; }
-        
+        /* ===== STATS BOTTOM ===== */
         .stats-bottom {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-top: 12px;
-            padding: 10px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 10px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 12px;
         }
         .stats-bottom .item { text-align: center; }
-        .stats-bottom .item .number { font-size: 18px; font-weight: 700; color: #22c55e; }
+        .stats-bottom .item .number { font-size: 18px; font-weight: 700; color: #0a0a1a; }
         .stats-bottom .item .number.total { color: #f0b90b; }
-        .stats-bottom .item .label { font-size: 11px; color: #64748b; }
+        .stats-bottom .item .label { font-size: 12px; color: #6b7280; }
         
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 20px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 16px;
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 2;
+        }
+        .footer a { color: #f0b90b; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .footer .highlight { color: #f0b90b; font-weight: 600; }
+        .gear { cursor: pointer; font-size: 16px; color: #6b7280; }
+        .gear:hover { color: #f0b90b; }
+        
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .container { padding: 18px; }
+            .container { padding: 24px 18px; }
             .services { grid-template-columns: 1fr 1fr; }
             .stats { grid-template-columns: 1fr 1fr; }
             .trust { grid-template-columns: repeat(3,1fr); }
             .contact { grid-template-columns: 1fr; }
-            .pyfiglet { font-size: 18px; }
+            .header h1 { font-size: 28px; }
+            .coming-soon .title { font-size: 22px; }
         }
         @media (max-width: 480px) {
             .services { grid-template-columns: 1fr; }
             .trust { grid-template-columns: repeat(2,1fr); }
             .stats { grid-template-columns: 1fr 1fr; }
-            .pyfiglet { font-size: 14px; }
+            .header h1 { font-size: 24px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- ===== PYFIGLET ANIMÉ ===== -->
-    <div class="pyfiglet">
-        <div class="line1">
-            <span style="--i:0">T</span><span style="--i:1">R</span><span style="--i:2">A</span><span style="--i:3">N</span><span style="--i:4">S</span><span style="--i:5">F</span><span style="--i:6">O</span><span style="--i:7">R</span><span style="--i:8">M</span><span style="--i:9">E</span>
-        </div>
-        <div class="line2">
-            <span style="--i:10">T</span><span style="--i:11">O</span><span style="--i:12">N</span>
-        </div>
-        <div class="line3">
-            <span style="--i:13">A</span><span style="--i:14">C</span><span style="--i:15">T</span><span style="--i:16">I</span><span style="--i:17">V</span><span style="--i:18">I</span><span style="--i:19">T</span><span style="--i:20">É</span>
-        </div>
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <span class="brand">✦ MESSAGERIE PRO</span>
+        <h1>Transforme <span class="accent">ton activité</span></h1>
+        <p>Choisis ton service — Zéro compromis</p>
     </div>
-    <div class="pyfiglet-sub">✦ SOLUTIONS DIGITALES ✦</div>
     
     <!-- ===== LANG SELECTOR ===== -->
     <div class="lang-selector">
@@ -406,30 +417,12 @@
     
     <!-- ===== TRUST ===== -->
     <div class="trust">
-        <div class="item">
-            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.18l7 3.12v4.7c0 4.83-3.93 9.11-7 10.12-3.07-1.01-7-5.29-7-10.12V6.3l7-3.12zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
-            <span class="label" id="t1">SSL</span>
-        </div>
-        <div class="item">
-            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-            <span class="label" id="t2">&lt;24h</span>
-        </div>
-        <div class="item">
-            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.18l7 3.12v4.7c0 4.83-3.93 9.11-7 10.12-3.07-1.01-7-5.29-7-10.12V6.3l7-3.12zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
-            <span class="label" id="t3">Garantie 30j</span>
-        </div>
-        <div class="item">
-            <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-            <span class="label" id="t4">RGPD</span>
-        </div>
-        <div class="item">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-            <span class="label" id="t5">Mondial</span>
-        </div>
-        <div class="item">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4-3h2v13h-2z"/></svg>
-            <span class="label" id="t6">Expertise</span>
-        </div>
+        <div class="item"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.18l7 3.12v4.7c0 4.83-3.93 9.11-7 10.12-3.07-1.01-7-5.29-7-10.12V6.3l7-3.12zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg><span class="label" id="t1">SSL</span></div>
+        <div class="item"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg><span class="label" id="t2">&lt;24h</span></div>
+        <div class="item"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 2.18l7 3.12v4.7c0 4.83-3.93 9.11-7 10.12-3.07-1.01-7-5.29-7-10.12V6.3l7-3.12zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg><span class="label" id="t3">Garantie 30j</span></div>
+        <div class="item"><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg><span class="label" id="t4">RGPD</span></div>
+        <div class="item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg><span class="label" id="t5">Mondial</span></div>
+        <div class="item"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4-3h2v13h-2z"/></svg><span class="label" id="t6">Expertise</span></div>
     </div>
     
     <!-- ===== SERVICES ===== -->
@@ -563,17 +556,14 @@
     <div id="toast" class="toast"></div>
     
     <!-- ===== COMING SOON ===== -->
-    <div id="comingSoon" style="margin-top:24px; padding:20px; background:rgba(240,185,11,0.03); border-radius:16px; border:1px solid rgba(240,185,11,0.08); text-align:center;">
-        <div style="font-size:14px; color:#f0b90b; font-weight:700; letter-spacing:4px; margin-bottom:4px;">✦ PROCHAINEMENT ✦</div>
-        <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">ASSISTANT IA</div>
-        <div style="color:#94a3b8; font-size:13px; max-width:400px; margin:0 auto; line-height:1.6;">
-            Un agent intelligent pour répondre à vos questions 24h/24.<br>
-            <span style="color:#f0b90b; font-weight:600;">Lien disponible très bientôt</span>
-        </div>
-        <div style="margin-top:10px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
-            <span style="padding:4px 16px; background:rgba(240,185,11,0.06); border-radius:20px; font-size:11px; color:#f0b90b; border:1px solid rgba(240,185,11,0.08);">⚡ 24h/24</span>
-            <span style="padding:4px 16px; background:rgba(240,185,11,0.06); border-radius:20px; font-size:11px; color:#f0b90b; border:1px solid rgba(240,185,11,0.08);">🧠 IA avancée</span>
-            <span style="padding:4px 16px; background:rgba(240,185,11,0.06); border-radius:20px; font-size:11px; color:#f0b90b; border:1px solid rgba(240,185,11,0.08);">💬 Multi-langues</span>
+    <div id="comingSoon" class="coming-soon">
+        <div class="label">✦ Prochainement ✦</div>
+        <div class="title">ASSISTANT IA</div>
+        <div class="desc">Un agent intelligent pour répondre à vos questions 24h/24.<br><span style="color:#f0b90b;font-weight:600;">Lien disponible très bientôt</span></div>
+        <div class="tags">
+            <span>⚡ 24h/24</span>
+            <span>🧠 IA avancée</span>
+            <span>💬 Multi-langues</span>
         </div>
     </div>
     
@@ -608,23 +598,23 @@
     <div class="footer">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;text-align:left;">
             <div>
-                <strong style="color:#f0b90b;">Sécurité</strong>
+                <strong style="color:#0a0a1a;">Sécurité</strong>
                 <p>✓ <span id="f1a">SSL sécurisé</span><br>✓ <span id="f1b">Données cryptées</span><br>✓ <span id="f1c">RGPD conforme</span></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;">Légal</strong>
+                <strong style="color:#0a0a1a;">Légal</strong>
                 <p><a href="#" id="f2a">Mentions légales</a><br><a href="#" id="f2b">Politique confidentialité</a><br><a href="#" id="f2c">CGV</a></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;">Contact</strong>
-                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;">+229 60 31 54 58</a><br>🕐 <span id="f3a">9h-18h (Lun-Ven)</span></p>
+                <strong style="color:#0a0a1a;">Contact</strong>
+                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#25D366;">+229 60 31 54 58</a><br>🕐 <span id="f3a">9h-18h (Lun-Ven)</span></p>
             </div>
         </div>
-        <div style="border-top:1px solid rgba(255,255,255,0.04);padding-top:12px;margin-top:12px;">
+        <div style="border-top:1px solid #f3f4f6;padding-top:12px;margin-top:12px;">
             <p>© 2026 Messagerie Pro — <span id="fb1">Tous droits réservés</span></p>
             <p><span id="fb2">Dernière mise à jour</span> : <span class="highlight">27 Juillet 2026</span></p>
             <span class="gear" onclick="window.location.href='admin.html'">⚙️</span>
-            <span style="color:#64748b;font-size:11px;"> Administration</span>
+            <span style="color:#6b7280;font-size:11px;"> Administration</span>
         </div>
     </div>
 </div>
