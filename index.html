@@ -6,218 +6,38 @@
     <title>🔥 RÉVOLUTION DIGITALE - Sans Pitié</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            min-height: 100vh;
-            background: #0a0a1a;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            padding: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            max-width: 950px;
-            width: 100%;
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 30px 28px;
-            border: 1px solid rgba(255,255,255,0.06);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-        }
-        
-        .flash-banner {
-            background: linear-gradient(135deg, #f0b90b, #f59e0b);
-            padding: 12px 20px;
-            text-align: center;
-            font-weight: 900;
-            color: #0a0a1a;
-            font-size: 16px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            animation: pulse 2s infinite;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 0 60px rgba(240,185,11,0.2);
-        }
+        body { min-height: 100vh; background: #0a0a1a; font-family: 'Segoe UI', system-ui, sans-serif; padding: 16px; display: flex; justify-content: center; align-items: center; }
+        .container { max-width: 950px; width: 100%; background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border-radius: 24px; padding: 30px 28px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+        .flash-banner { background: linear-gradient(135deg,#f0b90b,#f59e0b); padding: 12px 20px; text-align: center; font-weight: 900; color: #0a0a1a; font-size: 16px; border-radius: 12px; margin-bottom: 16px; animation: pulse 2s infinite; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 0 60px rgba(240,185,11,0.2); }
         @keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.02)} }
-        
-        .logo {
-            text-align: center;
-            font-size: 10px;
-            font-family: 'Courier New', monospace;
-            color: #4d96ff;
-            line-height: 1.2;
-            margin-bottom: 4px;
-        }
-        .logo-sub {
-            text-align: center;
-            font-size: 18px;
-            color: #f0b90b;
-            letter-spacing: 10px;
-            margin-top: -4px;
-            font-weight: 700;
-            text-shadow: 0 0 40px rgba(240,185,11,0.15);
-        }
-        h1 {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 4px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #f0b90b, #4d96ff, #f0b90b);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-        @keyframes gradientShift {
-            0%{background-position:0% 50%}
-            50%{background-position:100% 50%}
-            100%{background-position:0% 50%}
-        }
-        .subtitle {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 17px;
-            margin-bottom: 16px;
-            font-weight: 300;
-            letter-spacing: 3px;
-        }
-        
-        .lang-selector {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 10px 0 16px;
-            padding: 10px 16px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .lang-selector .lang-label {
-            color: #94a3b8;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            font-weight: 600;
-        }
-        .lang-selector button {
-            padding: 6px 14px;
-            border: 2px solid rgba(255,255,255,0.06);
-            border-radius: 8px;
-            background: rgba(255,255,255,0.03);
-            color: #94a3b8;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .lang-selector button:hover {
-            border-color: #f0b90b;
-            color: #f0b90b;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(240,185,11,0.1);
-        }
-        .lang-selector button.active {
-            border-color: #f0b90b;
-            background: rgba(240,185,11,0.08);
-            color: #f0b90b;
-            box-shadow: 0 0 30px rgba(240,185,11,0.05);
-        }
-        
-        .social-proof {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 16px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 16px;
-            margin: 10px 0 16px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .social-proof .stat {
-            text-align: center;
-            padding: 8px;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-        .social-proof .stat:hover {
-            background: rgba(255,255,255,0.03);
-            transform: translateY(-3px) scale(1.02);
-        }
-        .social-proof .stat .number {
-            font-size: 28px;
-            font-weight: 900;
-            display: block;
-        }
+        .logo { text-align: center; font-size: 10px; font-family: 'Courier New', monospace; color: #4d96ff; line-height: 1.2; margin-bottom: 4px; }
+        .logo-sub { text-align: center; font-size: 18px; color: #f0b90b; letter-spacing: 10px; margin-top: -4px; font-weight: 700; text-shadow: 0 0 40px rgba(240,185,11,0.15); }
+        h1 { text-align: center; font-size: 38px; margin-bottom: 4px; font-weight: 900; background: linear-gradient(135deg,#f0b90b,#4d96ff,#f0b90b); background-size: 200% 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: gradientShift 3s ease-in-out infinite; }
+        @keyframes gradientShift { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+        .subtitle { text-align: center; color: #94a3b8; font-size: 17px; margin-bottom: 16px; font-weight: 300; letter-spacing: 3px; }
+        .lang-selector { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 10px 0 16px; padding: 10px 16px; background: rgba(255,255,255,0.02); border-radius: 14px; border: 1px solid rgba(255,255,255,0.04); }
+        .lang-selector .lang-label { color: #94a3b8; font-size: 12px; display: flex; align-items: center; font-weight: 600; }
+        .lang-selector button { padding: 6px 14px; border: 2px solid rgba(255,255,255,0.06); border-radius: 8px; background: rgba(255,255,255,0.03); color: #94a3b8; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .lang-selector button:hover { border-color: #f0b90b; color: #f0b90b; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(240,185,11,0.1); }
+        .lang-selector button.active { border-color: #f0b90b; background: rgba(240,185,11,0.08); color: #f0b90b; box-shadow: 0 0 30px rgba(240,185,11,0.05); }
+        .social-proof { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; padding: 16px; background: rgba(255,255,255,0.02); border-radius: 16px; margin: 10px 0 16px; border: 1px solid rgba(255,255,255,0.04); }
+        .social-proof .stat { text-align: center; padding: 8px; border-radius: 10px; transition: all 0.3s; }
+        .social-proof .stat:hover { background: rgba(255,255,255,0.03); transform: translateY(-3px) scale(1.02); }
+        .social-proof .stat .number { font-size: 28px; font-weight: 900; display: block; }
         .social-proof .stat .number.gold { color: #f0b90b; }
         .social-proof .stat .number.green { color: #22c55e; }
         .social-proof .stat .number.blue { color: #4d96ff; }
         .social-proof .stat .number.purple { color: #8b5cf6; }
-        .social-proof .stat .label {
-            font-size: 11px;
-            color: #94a3b8;
-            margin-top: 3px;
-            display: block;
-        }
-        
-        .trust-banner {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 6px;
-            margin-bottom: 16px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 14px;
-            padding: 10px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-        .trust-banner .trust-item {
-            text-align: center;
-            font-size: 10px;
-            color: #94a3b8;
-            padding: 4px;
-            transition: all 0.3s;
-        }
-        .trust-banner .trust-item:hover {
-            transform: scale(1.08);
-            color: #f0b90b;
-        }
+        .social-proof .stat .label { font-size: 11px; color: #94a3b8; margin-top: 3px; display: block; }
+        .trust-banner { display: grid; grid-template-columns: repeat(6,1fr); gap: 6px; margin-bottom: 16px; background: rgba(255,255,255,0.02); border-radius: 14px; padding: 10px; border: 1px solid rgba(255,255,255,0.04); }
+        .trust-banner .trust-item { text-align: center; font-size: 10px; color: #94a3b8; padding: 4px; transition: all 0.3s; }
+        .trust-banner .trust-item:hover { transform: scale(1.08); color: #f0b90b; }
         .trust-banner .trust-item .icon { font-size: 20px; display: block; margin-bottom: 2px; }
         .trust-banner .trust-item .label { color: #22c55e; font-weight: 700; font-size: 10px; }
-        
-        .terminal {
-            background: rgba(10,10,26,0.9);
-            border-radius: 14px;
-            border: 2px solid rgba(240,185,11,0.15);
-            padding: 16px 20px;
-            margin-bottom: 18px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #22c55e;
-            min-height: 90px;
-            max-height: 140px;
-            overflow-y: auto;
-            box-shadow: 0 0 60px rgba(240,185,11,0.02);
-            backdrop-filter: blur(10px);
-        }
-        .terminal .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #f0b90b;
-            font-size: 11px;
-            margin-bottom: 5px;
-            border-bottom: 1px solid rgba(240,185,11,0.05);
-            padding-bottom: 5px;
-        }
+        .terminal { background: rgba(10,10,26,0.9); border-radius: 14px; border: 2px solid rgba(240,185,11,0.15); padding: 16px 20px; margin-bottom: 18px; font-family: 'Courier New', monospace; font-size: 13px; color: #22c55e; min-height: 90px; max-height: 140px; overflow-y: auto; box-shadow: 0 0 60px rgba(240,185,11,0.02); backdrop-filter: blur(10px); }
+        .terminal .header { display: flex; justify-content: space-between; align-items: center; color: #f0b90b; font-size: 11px; margin-bottom: 5px; border-bottom: 1px solid rgba(240,185,11,0.05); padding-bottom: 5px; }
         .terminal .header .dots { display: flex; gap: 6px; }
-        .terminal .header .dots span {
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
+        .terminal .header .dots span { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
         .terminal .header .dots .red { background: #ff5f56; }
         .terminal .header .dots .yellow { background: #ffbd2e; }
         .terminal .header .dots .green { background: #27c93f; }
@@ -228,208 +48,43 @@
         .terminal .line .highlight { color: #f0b90b; font-weight: 700; }
         .terminal .line .blink { animation: blink 1s infinite; }
         @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
-        
-        .services {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-        .service-card {
-            background: rgba(255,255,255,0.03);
-            border: 2px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 18px 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(240,185,11,0.04), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
+        .services { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 18px; }
+        .service-card { background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 18px 12px; text-align: center; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle,rgba(240,185,11,0.04),transparent 70%); opacity: 0; transition: opacity 0.4s; }
         .service-card:hover::before { opacity: 1; }
-        .service-card:hover {
-            border-color: #f0b90b;
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 15px 50px rgba(240,185,11,0.08);
-        }
-        .service-card.selected {
-            border-color: #f0b90b;
-            background: rgba(240,185,11,0.06);
-            box-shadow: 0 0 60px rgba(240,185,11,0.05);
-        }
-        .service-card .badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: linear-gradient(135deg, #f0b90b, #f59e0b);
-            color: #0a0a1a;
-            font-size: 8px;
-            font-weight: 800;
-            padding: 2px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            animation: pulse 2s infinite;
-            letter-spacing: 0.5px;
-        }
+        .service-card:hover { border-color: #f0b90b; transform: translateY(-6px) scale(1.03); box-shadow: 0 15px 50px rgba(240,185,11,0.08); }
+        .service-card.selected { border-color: #f0b90b; background: rgba(240,185,11,0.06); box-shadow: 0 0 60px rgba(240,185,11,0.05); }
+        .service-card .badge { position: absolute; top: 6px; right: 6px; background: linear-gradient(135deg,#f0b90b,#f59e0b); color: #0a0a1a; font-size: 8px; font-weight: 800; padding: 2px 10px; border-radius: 12px; text-transform: uppercase; animation: pulse 2s infinite; letter-spacing: 0.5px; }
         .service-card .icon { font-size: 38px; display: block; margin-bottom: 6px; }
         .service-card .name { color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 3px; }
         .service-card .desc { color: #94a3b8; font-size: 11px; line-height: 1.4; }
-        
-        .service-detail-banner {
-            background: rgba(255,255,255,0.02);
-            border-radius: 14px;
-            padding: 14px 18px;
-            margin-bottom: 14px;
-            border: 1px solid rgba(255,255,255,0.04);
-            display: none;
-            animation: slideDown 0.5s ease-out;
-        }
-        .service-detail-banner.active {
-            display: block;
-            border-color: rgba(240,185,11,0.2);
-            background: rgba(240,185,11,0.03);
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .service-detail-banner .sd-title {
-            font-size: 16px;
-            font-weight: 900;
-            color: #f0b90b;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
+        .service-detail-banner { background: rgba(255,255,255,0.02); border-radius: 14px; padding: 14px 18px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.04); display: none; animation: slideDown 0.5s ease-out; }
+        .service-detail-banner.active { display: block; border-color: rgba(240,185,11,0.2); background: rgba(240,185,11,0.03); }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .service-detail-banner .sd-title { font-size: 16px; font-weight: 900; color: #f0b90b; display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
         .service-detail-banner .sd-title .icon { font-size: 24px; }
-        .service-detail-banner .sd-content {
-            color: #cbd5e1;
-            font-size: 13px;
-            line-height: 1.8;
-        }
+        .service-detail-banner .sd-content { color: #cbd5e1; font-size: 13px; line-height: 1.8; }
         .service-detail-banner .sd-content .highlight { color: #f0b90b; font-weight: 700; }
         .service-detail-banner .sd-content .highlight-green { color: #22c55e; font-weight: 700; }
         .service-detail-banner .sd-content .highlight-blue { color: #4d96ff; font-weight: 700; }
         .service-detail-banner .sd-content .highlight-red { color: #ef4444; font-weight: 700; }
-        .service-detail-banner .sd-badge {
-            display: inline-block;
-            background: rgba(240,185,11,0.1);
-            border: 1px solid rgba(240,185,11,0.2);
-            border-radius: 20px;
-            padding: 2px 12px;
-            font-size: 10px;
-            font-weight: 700;
-            color: #f0b90b;
-            margin-right: 4px;
-        }
-        
+        .service-detail-banner .sd-badge { display: inline-block; background: rgba(240,185,11,0.1); border: 1px solid rgba(240,185,11,0.2); border-radius: 20px; padding: 2px 12px; font-size: 10px; font-weight: 700; color: #f0b90b; margin-right: 4px; }
         .form-group { margin-bottom: 12px; }
-        .form-group label {
-            display: block;
-            color: #cbd5e1;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
+        .form-group label { display: block; color: #cbd5e1; font-size: 13px; font-weight: 600; margin-bottom: 3px; }
         .form-group label .required { color: #ff5f56; }
-        .form-group label .important-badge {
-            display: inline-block;
-            background: #f0b90b;
-            color: #0a0a1a;
-            font-size: 9px;
-            font-weight: 700;
-            padding: 1px 10px;
-            border-radius: 20px;
-            margin-left: 5px;
-            text-transform: uppercase;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 2px solid rgba(255,255,255,0.06);
-            background: rgba(0,0,0,0.3);
-            color: #ffffff;
-            font-size: 14px;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #f0b90b;
-            box-shadow: 0 0 40px rgba(240,185,11,0.03);
-        }
+        .form-group label .important-badge { display: inline-block; background: #f0b90b; color: #0a0a1a; font-size: 9px; font-weight: 700; padding: 1px 10px; border-radius: 20px; margin-left: 5px; text-transform: uppercase; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px 16px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.3); color: #ffffff; font-size: 14px; font-family: inherit; transition: all 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #f0b90b; box-shadow: 0 0 40px rgba(240,185,11,0.03); }
         .form-group textarea { min-height: 80px; resize: vertical; }
-        .form-group .hint {
-            color: #64748b;
-            font-size: 11px;
-            margin-top: 3px;
-            line-height: 1.4;
-        }
+        .form-group .hint { color: #64748b; font-size: 11px; margin-top: 3px; line-height: 1.4; }
         .form-group .hint .highlight-text { color: #f0b90b; font-weight: 600; }
-        .form-group .info-box {
-            background: rgba(240,185,11,0.04);
-            border-left: 3px solid #f0b90b;
-            padding: 10px 14px;
-            border-radius: 10px;
-            color: #94a3b8;
-            font-size: 12px;
-            margin-top: 6px;
-            display: none;
-            line-height: 1.6;
-        }
+        .form-group .info-box { background: rgba(240,185,11,0.04); border-left: 3px solid #f0b90b; padding: 10px 14px; border-radius: 10px; color: #94a3b8; font-size: 12px; margin-top: 6px; display: none; line-height: 1.6; }
         .form-group .info-box b { color: #fff; }
-        
-        .urgence-box {
-            background: rgba(239,68,68,0.04);
-            border: 2px solid rgba(239,68,68,0.15);
-            border-radius: 14px;
-            padding: 12px;
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        .urgence-box span {
-            color: #ef4444;
-            font-weight: 700;
-            font-size: 14px;
-            animation: pulse 2s infinite;
-        }
-        
-        .contact-rapide {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-        .contact-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px;
-            padding: 14px 16px;
-            text-align: center;
-            transition: all 0.4s;
-            text-decoration: none;
-            color: #fff;
-        }
-        .contact-card:hover {
-            transform: translateY(-4px) scale(1.02);
-            border-color: #f0b90b;
-            box-shadow: 0 8px 30px rgba(240,185,11,0.08);
-        }
+        .urgence-box { background: rgba(239,68,68,0.04); border: 2px solid rgba(239,68,68,0.15); border-radius: 14px; padding: 12px; text-align: center; margin-bottom: 16px; }
+        .urgence-box span { color: #ef4444; font-weight: 700; font-size: 14px; animation: pulse 2s infinite; }
+        .contact-rapide { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+        .contact-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px; text-align: center; transition: all 0.4s; text-decoration: none; color: #fff; }
+        .contact-card:hover { transform: translateY(-4px) scale(1.02); border-color: #f0b90b; box-shadow: 0 8px 30px rgba(240,185,11,0.08); }
         .contact-card .icon { font-size: 30px; display: block; margin-bottom: 4px; }
         .contact-card .label { font-size: 14px; font-weight: 700; }
         .contact-card .sub { font-size: 11px; color: #94a3b8; }
@@ -437,217 +92,59 @@
         .contact-card.whatsapp:hover { border-color: #22c55e; box-shadow: 0 8px 30px rgba(34,197,94,0.1); }
         .contact-card.assistant { border-color: rgba(77,150,255,0.2); }
         .contact-card.assistant:hover { border-color: #4d96ff; }
-        
-        .guarantee-box {
-            background: rgba(240,185,11,0.04);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
-            border: 2px solid rgba(240,185,11,0.08);
-            margin-bottom: 18px;
-        }
-        .guarantee-box .guarantee-text {
-            color: #f0b90b;
-            font-weight: 900;
-            font-size: 18px;
-        }
-        .guarantee-box .guarantee-sub {
-            color: #94a3b8;
-            font-size: 12px;
-            margin-top: 3px;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 20px;
-            border: none;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #f0b90b, #f59e0b);
-            color: #0a0a1a;
-            font-size: 20px;
-            font-weight: 900;
-            cursor: pointer;
-            margin-top: 6px;
-            transition: all 0.4s;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            box-shadow: 0 0 60px rgba(240,185,11,0.15);
-        }
-        .btn:hover { 
-            transform: scale(1.02);
-            box-shadow: 0 8px 70px rgba(240,185,11,0.3);
-        }
+        .guarantee-box { background: rgba(240,185,11,0.04); border-radius: 14px; padding: 14px; text-align: center; border: 2px solid rgba(240,185,11,0.08); margin-bottom: 18px; }
+        .guarantee-box .guarantee-text { color: #f0b90b; font-weight: 900; font-size: 18px; }
+        .guarantee-box .guarantee-sub { color: #94a3b8; font-size: 12px; margin-top: 3px; }
+        .btn { width: 100%; padding: 20px; border: none; border-radius: 14px; background: linear-gradient(135deg,#f0b90b,#f59e0b); color: #0a0a1a; font-size: 20px; font-weight: 900; cursor: pointer; margin-top: 6px; transition: all 0.4s; text-transform: uppercase; letter-spacing: 3px; box-shadow: 0 0 60px rgba(240,185,11,0.15); }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 70px rgba(240,185,11,0.3); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        
-        .toast {
-            display: none;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 13px;
-            margin-top: 12px;
-            text-align: center;
-        }
+        .toast { display: none; padding: 12px 16px; border-radius: 12px; font-weight: 600; font-size: 13px; margin-top: 12px; text-align: center; }
         .toast.success { display: block; background: rgba(16,185,129,0.1); border: 1px solid #10b981; color: #10b981; }
         .toast.error { display: block; background: rgba(255,87,87,0.1); border: 1px solid #ff5f56; color: #ff5f56; }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            color: #f0b90b;
-            font-size: 13px;
-            margin-top: 6px;
-        }
+        .loading { display: none; text-align: center; color: #f0b90b; font-size: 13px; margin-top: 6px; }
         .loading .spinner { display: inline-block; animation: spin 0.8s linear infinite; }
         @keyframes spin { 0%{transform:rotate(0deg)}100%{transform:rotate(360deg)} }
-        
-        .stats-banner {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 12px;
-            padding: 10px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
+        .stats-banner { display: flex; justify-content: center; gap: 30px; margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.04); }
         .stats-banner .stat-item { text-align: center; }
-        .stats-banner .stat-item .number { 
-            font-size: 20px; 
-            font-weight: 700; 
-            color: #22c55e;
-        }
+        .stats-banner .stat-item .number { font-size: 20px; font-weight: 700; color: #22c55e; }
         .stats-banner .stat-item .number.total { color: #f0b90b; }
-        .stats-banner .stat-item .label { 
-            font-size: 11px; 
-            color: #64748b;
-        }
-        
-        .faq-section {
-            margin-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            padding-top: 16px;
-        }
-        .faq-section h3 {
-            color: #f0b90b;
-            font-size: 16px;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        .faq-item {
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
-            border: 1px solid rgba(255,255,255,0.04);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+        .stats-banner .stat-item .label { font-size: 11px; color: #64748b; }
+        .faq-section { margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px; }
+        .faq-section h3 { color: #f0b90b; font-size: 16px; margin-bottom: 10px; text-align: center; }
+        .faq-item { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px 16px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.04); cursor: pointer; transition: all 0.3s; }
         .faq-item:hover { background: rgba(255,255,255,0.04); border-color: rgba(240,185,11,0.08); }
-        .faq-item .question {
-            color: #cbd5e1;
-            font-weight: 600;
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .faq-item .question { color: #cbd5e1; font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
         .faq-item .question .arrow { color: #f0b90b; transition: transform 0.3s; }
         .faq-item .question .arrow.open { transform: rotate(180deg); }
-        .faq-item .answer {
-            color: #94a3b8;
-            font-size: 12px;
-            line-height: 1.6;
-            margin-top: 6px;
-            display: none;
-        }
+        .faq-item .answer { color: #94a3b8; font-size: 12px; line-height: 1.6; margin-top: 6px; display: none; }
         .faq-item .answer.open { display: block; }
-        
-        .footer {
-            margin-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            padding-top: 16px;
-            color: #64748b;
-            font-size: 11px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-        .footer-grid h4 {
-            color: #f0b90b;
-            font-size: 13px;
-            margin-bottom: 5px;
-        }
-        .footer-grid p {
-            color: #94a3b8;
-            font-size: 11px;
-            line-height: 1.8;
-        }
-        .footer-grid a {
-            color: #4d96ff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+        .footer { margin-top: 18px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px; color: #64748b; font-size: 11px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 14px; margin-bottom: 14px; }
+        .footer-grid h4 { color: #f0b90b; font-size: 13px; margin-bottom: 5px; }
+        .footer-grid p { color: #94a3b8; font-size: 11px; line-height: 1.8; }
+        .footer-grid a { color: #4d96ff; text-decoration: none; transition: color 0.3s; }
         .footer-grid a:hover { color: #f0b90b; }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            font-size: 11px;
-            color: #64748b;
-            line-height: 2;
-        }
+        .footer-bottom { text-align: center; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.04); font-size: 11px; color: #64748b; line-height: 2; }
         .footer-bottom .highlight { color: #f0b90b; font-weight: 600; }
-        .gear {
-            cursor: pointer;
-            color: #64748b;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
+        .gear { cursor: pointer; color: #64748b; font-size: 18px; transition: color 0.3s; }
         .gear:hover { color: #f0b90b; }
-        
-        @media (max-width: 768px) {
-            .container { padding: 18px 14px; }
-            .services { grid-template-columns: 1fr 1fr; }
-            h1 { font-size: 28px; }
-            .terminal { font-size: 11px; padding: 10px 12px; min-height: 70px; }
-            .btn { font-size: 17px; padding: 14px; }
-            .contact-rapide { grid-template-columns: 1fr; }
-            .trust-banner { grid-template-columns: repeat(3, 1fr); }
-            .social-proof { grid-template-columns: repeat(2, 1fr); }
-            .lang-selector { gap: 5px; padding: 8px 12px; }
-        }
-        @media (max-width: 480px) {
-            .services { grid-template-columns: 1fr; }
-            .trust-banner { grid-template-columns: repeat(2, 1fr); }
-            .social-proof { grid-template-columns: 1fr 1fr; }
-            h1 { font-size: 24px; }
-            .lang-selector button { font-size: 10px; padding: 4px 10px; }
-        }
+        @media (max-width:768px){ .container{padding:18px 14px}.services{grid-template-columns:1fr 1fr}h1{font-size:28px}.terminal{font-size:11px;padding:10px 12px;min-height:70px}.btn{font-size:17px;padding:14px}.contact-rapide{grid-template-columns:1fr}.trust-banner{grid-template-columns:repeat(3,1fr)}.social-proof{grid-template-columns:repeat(2,1fr)}.lang-selector{gap:5px;padding:8px 12px} }
+        @media (max-width:480px){ .services{grid-template-columns:1fr}.trust-banner{grid-template-columns:repeat(2,1fr)}.social-proof{grid-template-columns:1fr 1fr}h1{font-size:24px}.lang-selector button{font-size:10px;padding:4px 10px} }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="flash-banner">🔥 OFFRE LIMITÉE - 30% DE RÉDUCTION SUR LE PREMIER SERVICE 🔥</div>
-    
-    <div class="logo">
-        <pre>
+    <div class="logo"><pre>
   ███╗   ███╗███████╗███████╗███████╗ █████╗  ██████╗ ███████╗██████╗ ██╗███████╗
   ████╗ ████║██╔════╝██╔════╝██╔════╝██╔══██╗██╔════╝ ██╔════╝██╔══██╗██║██╔════╝
   ██╔████╔██║█████╗  ███████╗███████╗███████║██║  ███╗█████╗  ██████╔╝██║█████╗  
   ██║╚██╔╝██║██╔══╝  ╚════██║╚════██║██╔══██║██║   ██║██╔══╝  ██╔══██╗██║██╔══╝  
   ██║ ╚═╝ ██║███████╗███████║███████║██║  ██║╚██████╔╝███████╗██║  ██║██║███████╗
   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝
-        </pre>
-        <div class="logo-sub">✦ SANS PITIÉ ✦</div>
-    </div>
-    
+    </pre><div class="logo-sub">✦ SANS PITIÉ ✦</div></div>
     <h1>🔥 TRANSFORME TON ACTIVITÉ</h1>
     <p class="subtitle">Choisis ton arme secrète — Zéro compromis</p>
-    
     <div class="lang-selector" id="langSelector">
         <span class="lang-label">🌐</span>
         <button class="active" data-lang="fr" onclick="changeLanguage('fr')">🇫🇷 FR</button>
@@ -659,14 +156,12 @@
         <button data-lang="zh" onclick="changeLanguage('zh')">🇨🇳 中文</button>
         <button data-lang="ru" onclick="changeLanguage('ru')">🇷🇺 RU</button>
     </div>
-    
     <div class="social-proof">
         <div class="stat"><span class="number gold">+500</span><span class="label">👥 Clients satisfaits</span></div>
         <div class="stat"><span class="number green">98%</span><span class="label">⭐ Taux de satisfaction</span></div>
         <div class="stat"><span class="number blue">4.9/5</span><span class="label">📊 Note moyenne</span></div>
         <div class="stat"><span class="number purple">+5 ans</span><span class="label">🏆 D'expérience</span></div>
     </div>
-    
     <div class="trust-banner">
         <div class="trust-item"><span class="icon">🔒</span><span class="label">SSL</span></div>
         <div class="trust-item"><span class="icon">⏱️</span><span class="label"><24h</span></div>
@@ -675,571 +170,62 @@
         <div class="trust-item"><span class="icon">🌍</span><span class="label">Mondial</span></div>
         <div class="trust-item"><span class="icon">💎</span><span class="label">Expertise</span></div>
     </div>
-    
     <div class="terminal" id="terminal">
-        <div class="header">
-            <span>📟 TERMINAL PRO</span>
-            <div class="dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div>
-        </div>
-        <div id="terminalContent">
-            <div class="line"><span class="prompt">➜</span> Initialisation du terminal...</div>
-            <div class="line"><span class="prompt">➜</span> <span class="highlight">6 services révolutionnaires</span> disponibles</div>
-            <div class="line"><span class="prompt">➜</span> En attente de sélection <span class="blink">▊</span></div>
-        </div>
+        <div class="header"><span>📟 TERMINAL PRO</span><div class="dots"><span class="red"></span><span class="yellow"></span><span class="green"></span></div></div>
+        <div id="terminalContent"><div class="line"><span class="prompt">➜</span> Initialisation du terminal...</div><div class="line"><span class="prompt">➜</span> <span class="highlight">6 services révolutionnaires</span> disponibles</div><div class="line"><span class="prompt">➜</span> En attente de sélection <span class="blink">▊</span></div></div>
     </div>
-    
     <div class="services" id="services">
-        <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'🤖 Bot Telegram', 'telegram')">
-            <span class="badge">POPULAIRE</span>
-            <span class="icon">🤖</span>
-            <div class="name">⚡ BOT TELEGRAM</div>
-            <div class="desc">Automatise ton groupe • Modération • Réponses auto 24h/24</div>
-        </div>
-        <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'🧠 Assistant IA', 'ia')">
-            <span class="badge">NOUVEAU</span>
-            <span class="icon">🧠</span>
-            <div class="name">🤖 ASSISTANT IA</div>
-            <div class="desc">L'IA qui gère tes clients • Rendez-vous • Devis 24h/24</div>
-        </div>
-        <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'📊 Bot Trading', 'trading')">
-            <span class="badge">🔥 TOP</span>
-            <span class="icon">📊</span>
-            <div class="name">📈 BOT TRADING</div>
-            <div class="desc">Bot sur ta stratégie • Alertes précises • Signaux temps réel</div>
-        </div>
-        <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'📦 Pack Mails', 'mails')">
-            <span class="badge">💎 EXCLUSIF</span>
-            <span class="icon">📧</span>
-            <div class="name">📦 PACK MAILS</div>
-            <div class="desc">100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook</div>
-        </div>
-        <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'🌐 Création sites', 'sites')">
-            <span class="icon">🌐</span>
-            <div class="name">🌐 CRÉATION SITES</div>
-            <div class="desc">Vitrines • E-commerce • Landing pages • SEO • Hébergement</div>
-        </div>
-        <div class="service-card" data-service="AUTRES" onclick="selectService(this,'🛠️ Autres services', 'autres')">
-            <span class="icon">🛠️</span>
-            <div class="name">🛠️ AUTRES SERVICES</div>
-            <div class="desc">Programmation • Automatisation • Conseil • Formation</div>
-        </div>
+        <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'🤖 Bot Telegram','telegram')"><span class="badge">POPULAIRE</span><span class="icon">🤖</span><div class="name">⚡ BOT TELEGRAM</div><div class="desc">Automatise ton groupe • Modération • Réponses auto 24h/24</div></div>
+        <div class="service-card" data-service="ASSISTANT IA" onclick="selectService(this,'🧠 Assistant IA','ia')"><span class="badge">NOUVEAU</span><span class="icon">🧠</span><div class="name">🤖 ASSISTANT IA</div><div class="desc">L'IA qui gère tes clients • Rendez-vous • Devis 24h/24</div></div>
+        <div class="service-card" data-service="BOT TRADING" onclick="selectService(this,'📊 Bot Trading','trading')"><span class="badge">🔥 TOP</span><span class="icon">📊</span><div class="name">📈 BOT TRADING</div><div class="desc">Bot sur ta stratégie • Alertes précises • Signaux temps réel</div></div>
+        <div class="service-card" data-service="PACK MAILS" onclick="selectService(this,'📦 Pack Mails','mails')"><span class="badge">💎 EXCLUSIF</span><span class="icon">📧</span><div class="name">📦 PACK MAILS</div><div class="desc">100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook</div></div>
+        <div class="service-card" data-service="CRÉATION SITES" onclick="selectService(this,'🌐 Création sites','sites')"><span class="icon">🌐</span><div class="name">🌐 CRÉATION SITES</div><div class="desc">Vitrines • E-commerce • Landing pages • SEO • Hébergement</div></div>
+        <div class="service-card" data-service="AUTRES" onclick="selectService(this,'🛠️ Autres services','autres')"><span class="icon">🛠️</span><div class="name">🛠️ AUTRES SERVICES</div><div class="desc">Programmation • Automatisation • Conseil • Formation</div></div>
     </div>
-    
-    <!-- ===== BANNIÈRES DÉTAILLÉES ===== -->
-    
-    <div class="service-detail-banner" id="detail-telegram">
-        <div class="sd-title"><span class="icon">🤖</span> BOT TELEGRAM — AUTOMATISE TON GROUPE</div>
-        <div class="sd-content">
-            <span class="sd-badge">🔥 POPULAIRE</span>
-            Tu as un groupe ou canal Telegram et t'en as marre d'être toujours là ? <span class="highlight">Je te configure un bot qui gère tout comme toi</span>, selon tes désirs.<br>
-            ✅ <span class="highlight-green">Modération automatique</span> des messages<br>
-            ✅ <span class="highlight-green">Réponses automatiques</span> aux questions fréquentes<br>
-            ✅ <span class="highlight-green">Gestion des nouveaux membres</span> (bienvenue, vérification)<br>
-            ✅ <span class="highlight-green">Messages programmés</span> et statistiques<br>
-            ✅ <span class="highlight-green">Intégration avec ton assistant IA</span><br>
-            🎯 <span class="highlight">Plus besoin d'être connecté 24h/24</span> — Le bot travaille pour toi !
-        </div>
-    </div>
-    
-    <div class="service-detail-banner" id="detail-ia">
-        <div class="sd-title"><span class="icon">🧠</span> ASSISTANT IA — DEVIENS INDÉPENDANT</div>
-        <div class="sd-content">
-            <span class="sd-badge">💎 RÉVOLUTIONNAIRE</span>
-            Tu veux être indépendant et orienter les gens vers ton assistant sur un site IA qui gère tes services ou produits ? <span class="highlight">Je crée un assistant virtuel qui travaille pour toi 24h/24 !</span><br>
-            ✅ <span class="highlight-green">Chatbot intelligent</span> qui répond à tes clients<br>
-            ✅ <span class="highlight-green">Présentation automatique</span> de tes services<br>
-            ✅ <span class="highlight-green">Prise de rendez-vous</span> et génération de devis<br>
-            ✅ <span class="highlight-green">Interface personnalisée</span> à ton image<br>
-            ✅ <span class="highlight-green">Gestion des demandes</span> et des clients<br>
-            🎯 <span class="highlight">Test gratuit pendant 1 semaine</span> — Personnalisé selon tes besoins !
-        </div>
-    </div>
-    
-    <div class="service-detail-banner" id="detail-trading">
-        <div class="sd-title"><span class="icon">📊</span> BOT TRADING — LIBÈRE TON TEMPS</div>
-        <div class="sd-content">
-            <span class="sd-badge">🏆 PRÉCISION</span>
-            Tu fais du trading et ça prend du temps à être devant les graphiques ? <span class="highlight">Je crée un bot pour toi sur ta stratégie avec une précision chirurgicale !</span><br>
-            ✅ <span class="highlight-green">Alertes au bon moment</span> pour prendre tes positions<br>
-            ✅ <span class="highlight-green">Suivi automatique</span> des graphiques<br>
-            ✅ <span class="highlight-green">Signaux en temps réel</span> sur WhatsApp/Telegram<br>
-            ✅ <span class="highlight-green">Analyse technique automatisée</span><br>
-            ✅ <span class="highlight-green">Backtesting</span> de ta stratégie<br>
-            🎯 <span class="highlight">Tu n'as plus besoin de rester devant les écrans</span> — Le bot veille pour toi !
-        </div>
-    </div>
-    
-    <div class="service-detail-banner" id="detail-mails">
-        <div class="sd-title"><span class="icon">📧</span> PACK MAILS — L'ARME SECRÈTE</div>
-        <div class="sd-content">
-            <span class="sd-badge">💎 EXCLUSIF</span>
-            Tu as un service en ligne ou une boutique ? <span class="highlight">Je te vends des packs de mails vérifiés pour contourner les réseaux sociaux !</span><br>
-            ✅ <span class="highlight-green">Emails 100% vérifiés</span> (DNS + SMTP)<br>
-            ✅ <span class="highlight-green">Packs de 100, 300, 500 ou 1000</span> emails<br>
-            ✅ <span class="highlight-green">Contournement TikTok, Facebook, Instagram</span><br>
-            ✅ <span class="highlight-green">Stratégie secrète</span> incluse<br>
-            ✅ <span class="highlight-green">Livraison en 24h</span><br>
-            🎯 <span class="highlight">Au lieu de payer des promotions que tu ne comprends pas</span> — Utilise cette stratégie secrète !
-        </div>
-    </div>
-    
-    <div class="service-detail-banner" id="detail-sites">
-        <div class="sd-title"><span class="icon">🌐</span> CRÉATION DE SITES — TON ÉCRIN DIGITAL</div>
-        <div class="sd-content">
-            <span class="sd-badge">🎨 SUR MESURE</span>
-            Tu veux un site qui vend et qui convertit ? <span class="highlight">Je crée des sites vitrines, e-commerce, landing pages sur mesure !</span><br>
-            ✅ <span class="highlight-green">Design moderne et responsive</span><br>
-            ✅ <span class="highlight-green">Optimisation SEO</span> pour être visible<br>
-            ✅ <span class="highlight-green">Formulaire de contact</span> et intégration IA<br>
-            ✅ <span class="highlight-green">Hébergement inclus</span><br>
-            ✅ <span class="highlight-green">Maintenance et support</span><br>
-            🎯 <span class="highlight">Un site qui te ressemble</span> — Qui vend et qui convertit !
-        </div>
-    </div>
-    
-    <div class="service-detail-banner" id="detail-autres">
-        <div class="sd-title"><span class="icon">🛠️</span> AUTRES SERVICES — TOUT CE DONT TU AS BESOIN</div>
-        <div class="sd-content">
-            <span class="sd-badge">⚡ ULTIME</span>
-            Tu as un projet, une idée, un besoin spécifique ? <span class="highlight">Dis-moi ce dont tu as besoin, je le réalise !</span><br>
-            ✅ <span class="highlight-green">Programmation sur mesure</span><br>
-            ✅ <span class="highlight-green">Automatisation de tâches</span><br>
-            ✅ <span class="highlight-green">Conseil en stratégie digitale</span><br>
-            ✅ <span class="highlight-green">Formation personnalisée</span><br>
-            ✅ <span class="highlight-green">Assistance technique</span><br>
-            🎯 <span class="highlight">Si tu peux le rêver</span> — Je peux le créer !
-        </div>
-    </div>
-    
+    <div class="service-detail-banner" id="detail-telegram"><div class="sd-title"><span class="icon">🤖</span> BOT TELEGRAM — AUTOMATISE TON GROUPE</div><div class="sd-content"><span class="sd-badge">🔥 POPULAIRE</span>Tu as un groupe ou canal Telegram et t'en as marre d'être toujours là ? <span class="highlight">Je te configure un bot qui gère tout comme toi</span>, selon tes désirs.<br>✅ <span class="highlight-green">Modération automatique</span> des messages<br>✅ <span class="highlight-green">Réponses automatiques</span> aux questions fréquentes<br>✅ <span class="highlight-green">Gestion des nouveaux membres</span> (bienvenue, vérification)<br>✅ <span class="highlight-green">Messages programmés</span> et statistiques<br>✅ <span class="highlight-green">Intégration avec ton assistant IA</span><br>🎯 <span class="highlight">Plus besoin d'être connecté 24h/24</span> — Le bot travaille pour toi !</div></div>
+    <div class="service-detail-banner" id="detail-ia"><div class="sd-title"><span class="icon">🧠</span> ASSISTANT IA — DEVIENS INDÉPENDANT</div><div class="sd-content"><span class="sd-badge">💎 RÉVOLUTIONNAIRE</span>Tu veux être indépendant et orienter les gens vers ton assistant sur un site IA qui gère tes services ou produits ? <span class="highlight">Je crée un assistant virtuel qui travaille pour toi 24h/24 !</span><br>✅ <span class="highlight-green">Chatbot intelligent</span> qui répond à tes clients<br>✅ <span class="highlight-green">Présentation automatique</span> de tes services<br>✅ <span class="highlight-green">Prise de rendez-vous</span> et génération de devis<br>✅ <span class="highlight-green">Interface personnalisée</span> à ton image<br>✅ <span class="highlight-green">Gestion des demandes</span> et des clients<br>🎯 <span class="highlight">Test gratuit pendant 1 semaine</span> — Personnalisé selon tes besoins !</div></div>
+    <div class="service-detail-banner" id="detail-trading"><div class="sd-title"><span class="icon">📊</span> BOT TRADING — LIBÈRE TON TEMPS</div><div class="sd-content"><span class="sd-badge">🏆 PRÉCISION</span>Tu fais du trading et ça prend du temps à être devant les graphiques ? <span class="highlight">Je crée un bot pour toi sur ta stratégie avec une précision chirurgicale !</span><br>✅ <span class="highlight-green">Alertes au bon moment</span> pour prendre tes positions<br>✅ <span class="highlight-green">Suivi automatique</span> des graphiques<br>✅ <span class="highlight-green">Signaux en temps réel</span> sur WhatsApp/Telegram<br>✅ <span class="highlight-green">Analyse technique automatisée</span><br>✅ <span class="highlight-green">Backtesting</span> de ta stratégie<br>🎯 <span class="highlight">Tu n'as plus besoin de rester devant les écrans</span> — Le bot veille pour toi !</div></div>
+    <div class="service-detail-banner" id="detail-mails"><div class="sd-title"><span class="icon">📧</span> PACK MAILS — L'ARME SECRÈTE</div><div class="sd-content"><span class="sd-badge">💎 EXCLUSIF</span>Tu as un service en ligne ou une boutique ? <span class="highlight">Je te vends des packs de mails vérifiés pour contourner les réseaux sociaux !</span><br>✅ <span class="highlight-green">Emails 100% vérifiés</span> (DNS + SMTP)<br>✅ <span class="highlight-green">Packs de 100, 300, 500 ou 1000</span> emails<br>✅ <span class="highlight-green">Contournement TikTok, Facebook, Instagram</span><br>✅ <span class="highlight-green">Stratégie secrète</span> incluse<br>✅ <span class="highlight-green">Livraison en 24h</span><br>🎯 <span class="highlight">Au lieu de payer des promotions que tu ne comprends pas</span> — Utilise cette stratégie secrète !</div></div>
+    <div class="service-detail-banner" id="detail-sites"><div class="sd-title"><span class="icon">🌐</span> CRÉATION DE SITES — TON ÉCRIN DIGITAL</div><div class="sd-content"><span class="sd-badge">🎨 SUR MESURE</span>Tu veux un site qui vend et qui convertit ? <span class="highlight">Je crée des sites vitrines, e-commerce, landing pages sur mesure !</span><br>✅ <span class="highlight-green">Design moderne et responsive</span><br>✅ <span class="highlight-green">Optimisation SEO</span> pour être visible<br>✅ <span class="highlight-green">Formulaire de contact</span> et intégration IA<br>✅ <span class="highlight-green">Hébergement inclus</span><br>✅ <span class="highlight-green">Maintenance et support</span><br>🎯 <span class="highlight">Un site qui te ressemble</span> — Qui vend et qui convertit !</div></div>
+    <div class="service-detail-banner" id="detail-autres"><div class="sd-title"><span class="icon">🛠️</span> AUTRES SERVICES — TOUT CE DONT TU AS BESOIN</div><div class="sd-content"><span class="sd-badge">⚡ ULTIME</span>Tu as un projet, une idée, un besoin spécifique ? <span class="highlight">Dis-moi ce dont tu as besoin, je le réalise !</span><br>✅ <span class="highlight-green">Programmation sur mesure</span><br>✅ <span class="highlight-green">Automatisation de tâches</span><br>✅ <span class="highlight-green">Conseil en stratégie digitale</span><br>✅ <span class="highlight-green">Formation personnalisée</span><br>✅ <span class="highlight-green">Assistance technique</span><br>🎯 <span class="highlight">Si tu peux le rêver</span> — Je peux le créer !</div></div>
     <div class="urgence-box"><span>⏰ OFFRE SPÉCIALE - Plus que 3 places disponibles ce mois-ci !</span></div>
-    
-    <div class="contact-rapide">
-        <a href="https://wa.me/22960315458" target="_blank" class="contact-card whatsapp">
-            <span class="icon">💬</span>
-            <div class="label">📱 WhatsApp Direct</div>
-            <div class="sub">+229 60 31 54 58 • Réponse en 5min</div>
-        </a>
-        <div class="contact-card assistant" onclick="alert('🔗 Lien vers l\'assistant IA bientôt disponible !')">
-            <span class="icon">🤖</span>
-            <div class="label">🧠 Assistant IA</div>
-            <div class="sub">Pose ta question, il te répond</div>
-        </div>
-    </div>
-    
-    <div class="guarantee-box">
-        <div class="guarantee-text">💎 RÉVOLUTIONNAIRE - Satisfaction 100% garantie ou remboursé</div>
-        <div class="guarantee-sub">Nous nous engageons sur la qualité de nos services. Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
-    </div>
-    
+    <div class="contact-rapide"><a href="https://wa.me/22960315458" target="_blank" class="contact-card whatsapp"><span class="icon">💬</span><div class="label">📱 WhatsApp Direct</div><div class="sub">+229 60 31 54 58 • Réponse en 5min</div></a><div class="contact-card assistant" onclick="alert('🔗 Lien vers l\'assistant IA bientôt disponible !')"><span class="icon">🤖</span><div class="label">🧠 Assistant IA</div><div class="sub">Pose ta question, il te répond</div></div></div>
+    <div class="guarantee-box"><div class="guarantee-text">💎 RÉVOLUTIONNAIRE - Satisfaction 100% garantie ou remboursé</div><div class="guarantee-sub">Nous nous engageons sur la qualité de nos services. Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div></div>
     <form id="messageForm" onsubmit="sendMessage(event)">
-        <div class="form-group">
-            <label>👤 Nom et prénom <span class="required">*</span></label>
-            <input type="text" id="nom" placeholder="Jean Dupont" required>
-        </div>
-        <div class="form-group">
-            <label>🌍 Pays <span class="required">*</span></label>
-            <input type="text" id="pays" placeholder="Entrez votre pays" required>
-        </div>
-        <div class="form-group">
-            <label>🏙️ Ville <span class="required">*</span></label>
-            <input type="text" id="ville" placeholder="Entrez votre ville" required>
-        </div>
-        <div class="form-group">
-            <label>📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label>
-            <input type="tel" id="whatsapp" placeholder="+229 60 31 54 58" required>
-            <div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous recontacterons sur ce numéro.</div>
-        </div>
-        <div class="form-group">
-            <label>📧 Email <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label>
-            <input type="email" id="email" placeholder="jean.dupont@email.com" required>
-            <div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous enverrons une copie de votre message.</div>
-        </div>
-        <div class="form-group">
-            <label>📅 Âge <span class="required">*</span></label>
-            <input type="number" id="age" placeholder="25" min="18" max="99" required>
-            <div class="hint">📌 Minimum 18 ans.</div>
-        </div>
-        <div class="form-group">
-            <label>🔗 Réseaux sociaux (optionnel)</label>
-            <input type="text" id="reseau" placeholder="LinkedIn, Twitter, Instagram, etc.">
-        </div>
-        <div class="form-group">
-            <label>✉️ Votre demande <span class="required">*</span></label>
-            <textarea id="message" placeholder="Décrivez votre projet, votre stratégie, ou votre besoin de manière détaillée..." required></textarea>
-            <div class="info-box" id="infoTelegram">🤖 <b>BOT TELEGRAM :</b> Décris ce que tu veux que le bot fasse.<br>📌 Gestion des membres • Réponses auto • Messages programmés</div>
-            <div class="info-box" id="infoIA">🧠 <b>ASSISTANT IA :</b> Décris ton activité et ce que tu veux automatiser.<br>🎯 Chatbot • Rendez-vous • Devis • Réponses clients 24h/24</div>
-            <div class="info-box" id="infoTrading">📊 <b>BOT TRADING :</b> Décris ta stratégie en détail (indicateurs, conditions).<br>📈 Alertes précises • Signaux en temps réel • Backtesting</div>
-            <div class="info-box" id="infoMails">📦 <b>PACK MAILS :</b> Indique le nombre d'emails souhaité (100, 300, 500, 1000).<br>🎯 Stratégie secrète incluse pour contourner TikTok/Facebook</div>
-            <div class="info-box" id="infoSites">🌐 <b>CRÉATION DE SITES :</b> Décris le type de site et tes besoins.<br>📌 Vitrine • E-commerce • Landing page • Design • Hébergement • SEO</div>
-            <div class="info-box" id="infoAutres">🛠️ <b>AUTRES SERVICES :</b> Décris ce dont tu as besoin.<br>💻 Programmation • Automatisation • Conseil • Formation • Assistance</div>
-            <div class="hint">📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.</div>
-        </div>
+        <div class="form-group"><label>👤 Nom et prénom <span class="required">*</span></label><input type="text" id="nom" placeholder="Jean Dupont" required></div>
+        <div class="form-group"><label>🌍 Pays <span class="required">*</span></label><input type="text" id="pays" placeholder="Entrez votre pays" required></div>
+        <div class="form-group"><label>🏙️ Ville <span class="required">*</span></label><input type="text" id="ville" placeholder="Entrez votre ville" required></div>
+        <div class="form-group"><label>📱 WhatsApp / Téléphone <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label><input type="tel" id="whatsapp" placeholder="+229 60 31 54 58" required><div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous recontacterons sur ce numéro.</div></div>
+        <div class="form-group"><label>📧 Email <span class="required">*</span> <span class="important-badge">⚠️ OBLIGATOIRE</span></label><input type="email" id="email" placeholder="jean.dupont@email.com" required><div class="hint">📌 <span class="highlight-text">Très important :</span> Nous vous enverrons une copie de votre message.</div></div>
+        <div class="form-group"><label>📅 Âge <span class="required">*</span></label><input type="number" id="age" placeholder="25" min="18" max="99" required><div class="hint">📌 Minimum 18 ans.</div></div>
+        <div class="form-group"><label>🔗 Réseaux sociaux (optionnel)</label><input type="text" id="reseau" placeholder="LinkedIn, Twitter, Instagram, etc."></div>
+        <div class="form-group"><label>✉️ Votre demande <span class="required">*</span></label><textarea id="message" placeholder="Décrivez votre projet, votre stratégie, ou votre besoin de manière détaillée..." required></textarea><div class="info-box" id="infoTelegram">🤖 <b>BOT TELEGRAM :</b> Décris ce que tu veux que le bot fasse.<br>📌 Gestion des membres • Réponses auto • Messages programmés</div><div class="info-box" id="infoIA">🧠 <b>ASSISTANT IA :</b> Décris ton activité et ce que tu veux automatiser.<br>🎯 Chatbot • Rendez-vous • Devis • Réponses clients 24h/24</div><div class="info-box" id="infoTrading">📊 <b>BOT TRADING :</b> Décris ta stratégie en détail (indicateurs, conditions).<br>📈 Alertes précises • Signaux en temps réel • Backtesting</div><div class="info-box" id="infoMails">📦 <b>PACK MAILS :</b> Indique le nombre d'emails souhaité (100, 300, 500, 1000).<br>🎯 Stratégie secrète incluse pour contourner TikTok/Facebook</div><div class="info-box" id="infoSites">🌐 <b>CRÉATION DE SITES :</b> Décris le type de site et tes besoins.<br>📌 Vitrine • E-commerce • Landing page • Design • Hébergement • SEO</div><div class="info-box" id="infoAutres">🛠️ <b>AUTRES SERVICES :</b> Décris ce dont tu as besoin.<br>💻 Programmation • Automatisation • Conseil • Formation • Assistance</div><div class="hint">📌 Ces informations nous permettent de vous recontacter et de vous aider au mieux.</div></div>
         <button type="submit" class="btn" id="sendBtn">🔥 LANCER MON PROJET</button>
         <div class="loading" id="loading"><span class="spinner">⏳</span> Envoi en cours...</div>
     </form>
     <div id="toast" class="toast"></div>
-    
-    <div class="faq-section">
-        <h3>❓ Questions fréquentes</h3>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question">Comment fonctionne le Bot Telegram ?<span class="arrow">▼</span></div>
-            <div class="answer">Je configure un bot qui gère ton groupe ou canal comme toi. Il peut modérer les messages, répondre aux questions fréquentes, accueillir les nouveaux membres, envoyer des messages programmés et même interagir avec ton assistant IA.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question">Comment fonctionne l'Assistant IA ?<span class="arrow">▼</span></div>
-            <div class="answer">Je crée un site web avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous, génère des devis et peut même vendre tes produits.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question">Comment fonctionne le Bot Trading ?<span class="arrow">▼</span></div>
-            <div class="answer">Tu me donnes ta stratégie de trading et je programme un bot qui surveille les graphiques pour toi. Il t'envoie des alertes précises au bon moment pour prendre tes positions.</div>
-        </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="question">C'est quoi un Pack Mails vérifié ?<span class="arrow">▼</span></div>
-            <div class="answer">Ce sont des emails 100% vérifiés (DNS + SMTP) qui confirment l'existence d'un mail fonctionnel. Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
-        </div>
+    <div class="faq-section"><h3>❓ Questions fréquentes</h3>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="question">Comment fonctionne le Bot Telegram ?<span class="arrow">▼</span></div><div class="answer">Je configure un bot qui gère ton groupe ou canal comme toi. Il peut modérer les messages, répondre aux questions fréquentes, accueillir les nouveaux membres, envoyer des messages programmés et même interagir avec ton assistant IA.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="question">Comment fonctionne l'Assistant IA ?<span class="arrow">▼</span></div><div class="answer">Je crée un site web avec un chatbot intelligent qui gère tes clients automatiquement. Il présente tes services, répond aux questions, prend des rendez-vous, génère des devis et peut même vendre tes produits.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="question">Comment fonctionne le Bot Trading ?<span class="arrow">▼</span></div><div class="answer">Tu me donnes ta stratégie de trading et je programme un bot qui surveille les graphiques pour toi. Il t'envoie des alertes précises au bon moment pour prendre tes positions.</div></div>
+        <div class="faq-item" onclick="toggleFaq(this)"><div class="question">C'est quoi un Pack Mails vérifié ?<span class="arrow">▼</span></div><div class="answer">Ce sont des emails 100% vérifiés (DNS + SMTP) qui confirment l'existence d'un mail fonctionnel. Avec ces packs, tu peux contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div></div>
     </div>
-    
-    <div class="stats-banner">
-        <div class="stat-item"><div class="number" id="onlineCount">...</div><div class="label">👥 En ligne</div></div>
-        <div class="stat-item"><div class="number total" id="totalCount">...</div><div class="label">📊 Visiteurs total</div></div>
-    </div>
-    
-    <div class="footer">
-        <div class="footer-grid">
-            <div>
-                <h4>🔒 Sécurité & Confiance</h4>
-                <p>✓ SSL sécurisé<br>✓ Données cryptées<br>✓ RGPD conforme<br>✓ Garantie 30 jours</p>
-            </div>
-            <div>
-                <h4>📋 Informations légales</h4>
-                <p><a href="#mentions">Mentions légales</a><br><a href="#confidentialite">Politique confidentialité</a><br><a href="#cgv">CGV</a></p>
-            </div>
-            <div>
-                <h4>📞 Contactez-nous</h4>
-                <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;" target="_blank">+229 60 31 54 58</a> (WhatsApp)<br>🕐 9h-18h (Lun-Ven)<br>🌍 Bénin — Monde</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Messagerie Pro — Révolution Digitale — Tous droits réservés</p>
-            <p>🏢 Société immatriculée — SIRET : XX XXX XXX XXX</p>
-            <p>📅 Dernière mise à jour : <span class="highlight">27 Juillet 2026</span></p>
-            <br>
-            <span class="gear" onclick="window.location.href='admin.html'">⚙️</span>
-            <span style="color:#64748b;font-size:11px;"> Administration</span>
-        </div>
-    </div>
+    <div class="stats-banner"><div class="stat-item"><div class="number" id="onlineCount">...</div><div class="label">👥 En ligne</div></div><div class="stat-item"><div class="number total" id="totalCount">...</div><div class="label">📊 Visiteurs total</div></div></div>
+    <div class="footer"><div class="footer-grid"><div><h4>🔒 Sécurité & Confiance</h4><p>✓ SSL sécurisé<br>✓ Données cryptées<br>✓ RGPD conforme<br>✓ Garantie 30 jours</p></div><div><h4>📋 Informations légales</h4><p><a href="#mentions">Mentions légales</a><br><a href="#confidentialite">Politique confidentialité</a><br><a href="#cgv">CGV</a></p></div><div><h4>📞 Contactez-nous</h4><p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;" target="_blank">+229 60 31 54 58</a> (WhatsApp)<br>🕐 9h-18h (Lun-Ven)<br>🌍 Bénin — Monde</p></div></div><div class="footer-bottom"><p>© 2026 Messagerie Pro — Révolution Digitale — Tous droits réservés</p><p>🏢 Société immatriculée — SIRET : XX XXX XXX XXX</p><p>📅 Dernière mise à jour : <span class="highlight">27 Juillet 2026</span></p><br><span class="gear" onclick="window.location.href='admin.html'">⚙️</span><span style="color:#64748b;font-size:11px;"> Administration</span></div></div>
 </div>
-
 <script>
-// ============================================================
-// 1. GESTION DE LA LANGUE
-// ============================================================
-const translations = {
-    fr: {
-        clients: '👥 Clients satisfaits',
-        satisfaction: '⭐ Taux de satisfaction',
-        note: '📊 Note moyenne',
-        experience: '🏆 D\'expérience',
-        ssl: 'SSL',
-        response: '<24h',
-        garantie: 'Garantie 30j',
-        rgpd: 'RGPD',
-        mondial: 'Mondial',
-        expertise: 'Expertise',
-        init: 'Initialisation du terminal...',
-        services_available: '6 services révolutionnaires',
-        available: 'disponibles',
-        waiting: 'En attente de sélection',
-        popular: 'POPULAIRE',
-        new: 'NOUVEAU',
-        top: '🔥 TOP',
-        exclusif: '💎 EXCLUSIF',
-        desc_telegram: 'Automatise ton groupe • Modération • Réponses auto 24h/24',
-        desc_ia: 'L\'IA qui gère tes clients • Rendez-vous • Devis 24h/24',
-        desc_trading: 'Bot sur ta stratégie • Alertes précises • Signaux temps réel',
-        desc_mails: '100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook',
-        desc_sites: 'Vitrines • E-commerce • Landing pages • SEO • Hébergement',
-        desc_autres: 'Programmation • Automatisation • Conseil • Formation',
-        detail_telegram: '🤖 BOT TELEGRAM — AUTOMATISE TON GROUPE',
-        detail_ia: '🧠 ASSISTANT IA — DEVIENS INDÉPENDANT',
-        detail_trading: '📊 BOT TRADING — LIBÈRE TON TEMPS',
-        detail_mails: '📧 PACK MAILS — L\'ARME SECRÈTE',
-        detail_sites: '🌐 CRÉATION DE SITES — TON ÉCRIN DIGITAL',
-        detail_autres: '🛠️ AUTRES SERVICES — TOUT CE DONT TU AS BESOIN'
-    },
-    en: {
-        clients: '👥 Happy Clients',
-        satisfaction: '⭐ Satisfaction Rate',
-        note: '📊 Average Rating',
-        experience: '🏆 Experience',
-        ssl: 'SSL',
-        response: '<24h',
-        garantie: '30 Days Guarantee',
-        rgpd: 'GDPR',
-        mondial: 'Worldwide',
-        expertise: 'Expertise',
-        init: 'Initializing terminal...',
-        services_available: '6 revolutionary services',
-        available: 'available',
-        waiting: 'Waiting for selection',
-        popular: 'POPULAR',
-        new: 'NEW',
-        top: '🔥 TOP',
-        exclusif: '💎 EXCLUSIVE',
-        desc_telegram: 'Automate your group • Moderation • Auto-replies 24/7',
-        desc_ia: 'AI that manages your clients • Appointments • Quotes 24/7',
-        desc_trading: 'Bot on your strategy • Precise alerts • Real-time signals',
-        desc_mails: '100-500+ verified emails DNS+SMTP • Bypass TikTok/Facebook',
-        desc_sites: 'Showcases • E-commerce • Landing pages • SEO • Hosting',
-        desc_autres: 'Programming • Automation • Consulting • Training',
-        detail_telegram: '🤖 TELEGRAM BOT — AUTOMATE YOUR GROUP',
-        detail_ia: '🧠 AI ASSISTANT — BECOME INDEPENDENT',
-        detail_trading: '📊 TRADING BOT — FREE YOUR TIME',
-        detail_mails: '📧 EMAIL PACKS — THE SECRET WEAPON',
-        detail_sites: '🌐 WEBSITE CREATION — YOUR DIGITAL SHOWCASE',
-        detail_autres: '🛠️ OTHER SERVICES — EVERYTHING YOU NEED'
-    },
-    es: {
-        clients: '👥 Clientes satisfechos',
-        satisfaction: '⭐ Tasa de satisfacción',
-        note: '📊 Calificación promedio',
-        experience: '🏆 De experiencia',
-        ssl: 'SSL',
-        response: '<24h',
-        garantie: 'Garantía 30d',
-        rgpd: 'RGPD',
-        mondial: 'Mundial',
-        expertise: 'Experiencia',
-        init: 'Inicializando terminal...',
-        services_available: '6 servicios revolucionarios',
-        available: 'disponibles',
-        waiting: 'Esperando selección',
-        popular: 'POPULAR',
-        new: 'NUEVO',
-        top: '🔥 TOP',
-        exclusif: '💎 EXCLUSIVO',
-        desc_telegram: 'Automatiza tu grupo • Moderación • Respuestas automáticas 24/7',
-        desc_ia: 'IA que gestiona tus clientes • Citas • Presupuestos 24/7',
-        desc_trading: 'Bot en tu estrategia • Alertas precisas • Señales en tiempo real',
-        desc_mails: '100-500+ emails verificados DNS+SMTP • Evita TikTok/Facebook',
-        desc_sites: 'Vitrinas • E-commerce • Landing pages • SEO • Alojamiento',
-        desc_autres: 'Programación • Automatización • Consultoría • Formación',
-        detail_telegram: '🤖 BOT TELEGRAM — AUTOMATIZA TU GRUPO',
-        detail_ia: '🧠 ASISTENTE IA — VUELVETE INDEPENDIENTE',
-        detail_trading: '📊 BOT TRADING — LIBERA TU TIEMPO',
-        detail_mails: '📧 PACKS EMAILS — EL ARMA SECRETA',
-        detail_sites: '🌐 CREACIÓN DE SITIOS — TU ESCAPARATE DIGITAL',
-        detail_autres: '🛠️ OTROS SERVICIOS — TODO LO QUE NECESITAS'
-    }
-};
-
-let currentLang = 'fr';
-
-function changeLanguage(lang) {
-    currentLang = lang;
-    document.querySelectorAll('.lang-selector button').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-    });
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    document.querySelectorAll('.badge').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    document.querySelectorAll('.service-card .desc').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-        }
-    });
-    document.querySelectorAll('.sd-title').forEach(el => {
-        const key = el.dataset.key;
-        if (translations[lang] && translations[lang][key]) {
-            el.innerHTML = translations[lang][key];
-        }
-    });
-    localStorage.setItem('preferred_lang', lang);
-}
-
-// ============================================================
-// 2. GESTION DES SERVICES AVEC BANNIÈRES
-// ============================================================
-let selectedService = null;
-
-function updateTerminal(serviceName) {
-    document.getElementById('terminalContent').innerHTML = `
-        <div class="line"><span class="prompt">➜</span> Initialisation du terminal...</div>
-        <div class="line"><span class="prompt">➜</span> 📌 Service choisi : <span class="highlight">${serviceName}</span></div>
-        <div class="line"><span class="prompt">➜</span> <span class="success">✅ Terminal prêt. Veuillez remplir le formulaire.</span></div>
-    `;
-}
-
-function selectService(el, serviceName, detailId) {
-    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedService = el.dataset.service;
-    updateTerminal(serviceName);
-    
-    document.querySelectorAll('.service-detail-banner').forEach(b => b.classList.remove('active'));
-    if (detailId) {
-        const detail = document.getElementById('detail-' + detailId);
-        if (detail) detail.classList.add('active');
-    }
-    
-    document.querySelectorAll('.info-box').forEach(b => b.style.display = 'none');
-    const infoMap = {
-        'BOT TELEGRAM': 'infoTelegram',
-        'ASSISTANT IA': 'infoIA',
-        'BOT TRADING': 'infoTrading',
-        'PACK MAILS': 'infoMails',
-        'CRÉATION SITES': 'infoSites',
-        'AUTRES': 'infoAutres'
-    };
-    if (infoMap[selectedService]) {
-        document.getElementById(infoMap[selectedService]).style.display = 'block';
-    }
-}
-
-// ============================================================
-// 3. ENVOI DU MESSAGE
-// ============================================================
-function sendMessage(e) {
-    e.preventDefault();
-    if (!selectedService) {
-        showToast('Veuillez sélectionner un service.', 'error');
-        return;
-    }
-
-    const nom = document.getElementById('nom').value.trim();
-    const pays = document.getElementById('pays').value.trim();
-    const ville = document.getElementById('ville').value.trim();
-    const whatsapp = document.getElementById('whatsapp').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const age = document.getElementById('age').value.trim();
-    const reseau = document.getElementById('reseau').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    if (!nom || !pays || !ville || !whatsapp || !email || !age || !message) {
-        showToast('Tous les champs obligatoires doivent être remplis.', 'error');
-        return;
-    }
-
-    if (parseInt(age) < 18) {
-        showToast('❌ Vous devez avoir au moins 18 ans.', 'error');
-        return;
-    }
-
-    const btn = document.getElementById('sendBtn');
-    const loading = document.getElementById('loading');
-    btn.disabled = true;
-    loading.style.display = 'block';
-
-    document.getElementById('terminalContent').innerHTML += '<div class="line"><span class="prompt">➜</span> <span class="info">📤 Envoi en cours...</span></div>';
-
-    fetch('https://sitmessag.onrender.com/api/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-            service: selectedService, 
-            nom, pays, ville, whatsapp, email, age, reseau, message 
-        })
-    })
-    .then(res => res.json())
-    .then(data => {
-        btn.disabled = false;
-        loading.style.display = 'none';
-        if (data.status === 'ok') {
-            document.getElementById('terminalContent').innerHTML += '<div class="line"><span class="prompt">➜</span> <span class="success">✅ Message envoyé avec succès !</span></div>';
-            showToast('✅ Message envoyé avec succès !', 'success');
-            document.getElementById('messageForm').reset();
-            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-            document.querySelectorAll('.service-detail-banner').forEach(b => b.classList.remove('active'));
-            selectedService = null;
-            document.querySelectorAll('.info-box').forEach(b => b.style.display = 'none');
-        } else {
-            document.getElementById('terminalContent').innerHTML += '<div class="line"><span class="prompt">➜</span> <span style="color:#ff5f56;">❌ Erreur : ' + (data.error || 'Inconnue') + '</span></div>';
-            showToast('❌ Erreur : ' + (data.error || 'Inconnue'), 'error');
-        }
-    })
-    .catch(() => {
-        btn.disabled = false;
-        loading.style.display = 'none';
-        document.getElementById('terminalContent').innerHTML += '<div class="line"><span class="prompt">➜</span> <span style="color:#ff5f56;">❌ Erreur de connexion.</span></div>';
-        showToast('❌ Erreur de connexion au serveur.', 'error');
-    });
-}
-
-function showToast(msg, type) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.className = 'toast ' + type;
-    setTimeout(() => { toast.className = 'toast'; }, 5000);
-}
-
-// ============================================================
-// 4. FAQ - TOGGLE
-// ============================================================
-function toggleFaq(el) {
-    const answer = el.querySelector('.answer');
-    const arrow = el.querySelector('.arrow');
-    if (answer) {
-        answer.classList.toggle('open');
-        if (arrow) arrow.classList.toggle('open');
-    }
-}
-
-// ============================================================
-// 5. COMPTEURS DE VISITEURS
-// ============================================================
-function getIP() {
-    return new Promise((resolve) => {
-        fetch('https://api.ipify.org?format=json')
-            .then(r => r.json())
-            .then(data => resolve(data.ip))
-            .catch(() => resolve('unknown'));
-    });
-}
-
-function updateCounters() {
-    getIP().then(ip => {
-        fetch('https://sitmessag.onrender.com/api/visiteur', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ip: ip })
-        })
-        .then(r => r.json())
-        .then(data => {
-            if (data.online !== undefined) {
-                document.getElementById('onlineCount').textContent = data.online;
-            }
-            if (data.total !== undefined) {
-                document.getElementById('totalCount').textContent = data.total;
-            }
-        })
-        .catch(() => {
-            document.getElementById('onlineCount').textContent = '?';
-            document.getElementById('totalCount').textContent = '?';
-        });
-    });
-}
-
-// ============================================================
-// 6. INIT
-// ============================================================
-window.addEventListener('load', function() {
-    const savedLang = localStorage.getItem('preferred_lang');
-    if (savedLang && translations[savedLang]) {
-        changeLanguage(savedLang);
-    }
-    updateCounters();
-    setInterval(updateCounters, 30000);
-});
+const translations={fr:{clients:'👥 Clients satisfaits',satisfaction:'⭐ Taux de satisfaction',note:'📊 Note moyenne',experience:'🏆 D\'expérience',ssl:'SSL',response:'<24h',garantie:'Garantie 30j',rgpd:'RGPD',mondial:'Mondial',expertise:'Expertise',init:'Initialisation du terminal...',services_available:'6 services révolutionnaires',available:'disponibles',waiting:'En attente de sélection',popular:'POPULAIRE',new:'NOUVEAU',top:'🔥 TOP',exclusif:'💎 EXCLUSIF',desc_telegram:'Automatise ton groupe • Modération • Réponses auto 24h/24',desc_ia:'L\'IA qui gère tes clients • Rendez-vous • Devis 24h/24',desc_trading:'Bot sur ta stratégie • Alertes précises • Signaux temps réel',desc_mails:'100-500+ emails vérifiés DNS+SMTP • Contourne TikTok/Facebook',desc_sites:'Vitrines • E-commerce • Landing pages • SEO • Hébergement',desc_autres:'Programmation • Automatisation • Conseil • Formation',detail_telegram:'🤖 BOT TELEGRAM — AUTOMATISE TON GROUPE',detail_ia:'🧠 ASSISTANT IA — DEVIENS INDÉPENDANT',detail_trading:'📊 BOT TRADING — LIBÈRE TON TEMPS',detail_mails:'📧 PACK MAILS — L\'ARME SECRÈTE',detail_sites:'🌐 CRÉATION DE SITES — TON ÉCRIN DIGITAL',detail_autres:'🛠️ AUTRES SERVICES — TOUT CE DONT TU AS BESOIN'},en:{clients:'👥 Happy Clients',satisfaction:'⭐ Satisfaction Rate',note:'📊 Average Rating',experience:'🏆 Experience',ssl:'SSL',response:'<24h',garantie:'30 Days Guarantee',rgpd:'GDPR',mondial:'Worldwide',expertise:'Expertise',init:'Initializing terminal...',services_available:'6 revolutionary services',available:'available',waiting:'Waiting for selection',popular:'POPULAR',new:'NEW',top:'🔥 TOP',exclusif:'💎 EXCLUSIVE',desc_telegram:'Automate your group • Moderation • Auto-replies 24/7',desc_ia:'AI that manages your clients • Appointments • Quotes 24/7',desc_trading:'Bot on your strategy • Precise alerts • Real-time signals',desc_mails:'100-500+ verified emails DNS+SMTP • Bypass TikTok/Facebook',desc_sites:'Showcases • E-commerce • Landing pages • SEO • Hosting',desc_autres:'Programming • Automation • Consulting • Training',detail_telegram:'🤖 TELEGRAM BOT — AUTOMATE YOUR GROUP',detail_ia:'🧠 AI ASSISTANT — BECOME INDEPENDENT',detail_trading:'📊 TRADING BOT — FREE YOUR TIME',detail_mails:'📧 EMAIL PACKS — THE SECRET WEAPON',detail_sites:'🌐 WEBSITE CREATION — YOUR DIGITAL SHOWCASE',detail_autres:'🛠️ OTHER SERVICES — EVERYTHING YOU NEED'},es:{clients:'👥 Clientes satisfechos',satisfaction:'⭐ Tasa de satisfacción',note:'📊 Calificación promedio',experience:'🏆 De experiencia',ssl:'SSL',response:'<24h',garantie:'Garantía 30d',rgpd:'RGPD',mondial:'Mundial',expertise:'Experiencia',init:'Inicializando terminal...',services_available:'6 servicios revolucionarios',available:'disponibles',waiting:'Esperando selección',popular:'POPULAR',new:'NUEVO',top:'🔥 TOP',exclusif:'💎 EXCLUSIVO',desc_telegram:'Automatiza tu grupo • Moderación • Respuestas automáticas 24/7',desc_ia:'IA que gestiona tus clientes • Citas • Presupuestos 24/7',desc_trading:'Bot en tu estrategia • Alertas precisas • Señales en tiempo real',desc_mails:'100-500+ emails verificados DNS+SMTP • Evita TikTok/Facebook',desc_sites:'Vitrinas • E-commerce • Landing pages • SEO • Alojamiento',desc_autres:'Programación • Automatización • Consultoría • Formación',detail_telegram:'🤖 BOT TELEGRAM — AUTOMATIZA TU GRUPO',detail_ia:'🧠 ASISTENTE IA — VUELVETE INDEPENDIENTE',detail_trading:'📊 BOT TRADING — LIBERA TU TIEMPO',detail_mails:'📧 PACKS EMAILS — EL ARMA SECRETA',detail_sites:'🌐 CREACIÓN DE SITIOS — TU ESCAPARATE DIGITAL',detail_autres:'🛠️ OTROS SERVICIOS — TODO LO QUE NECESITAS'}};
+let currentLang='fr';
+function changeLanguage(lang){currentLang=lang;document.querySelectorAll('.lang-selector button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));document.querySelectorAll('[data-key]').forEach(el=>{const key=el.dataset.key;if(translations[lang]&&translations[lang][key])el.textContent=translations[lang][key];});document.querySelectorAll('.badge').forEach(el=>{const key=el.dataset.key;if(translations[lang]&&translations[lang][key])el.textContent=translations[lang][key];});document.querySelectorAll('.service-card .desc').forEach(el=>{const key=el.dataset.key;if(translations[lang]&&translations[lang][key])el.textContent=translations[lang][key];});document.querySelectorAll('.sd-title').forEach(el=>{const key=el.dataset.key;if(translations[lang]&&translations[lang][key])el.innerHTML=translations[lang][key];});localStorage.setItem('preferred_lang',lang);}
+let selectedService=null;
+function updateTerminal(n){document.getElementById('terminalContent').innerHTML='<div class="line"><span class="prompt">➜</span> Initialisation du terminal...</div><div class="line"><span class="prompt">➜</span> 📌 Service choisi : <span class="highlight">'+n+'</span></div><div class="line"><span class="prompt">➜</span> <span class="success">✅ Terminal prêt. Veuillez remplir le formulaire.</span></div>';}
+function selectService(el,n,id){document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');selectedService=el.dataset.service;updateTerminal(n);document.querySelectorAll('.service-detail-banner').forEach(b=>b.classList.remove('active'));if(id){const d=document.getElementById('detail-'+id);if(d)d.classList.add('active');}document.querySelectorAll('.info-box').forEach(b=>b.style.display='none');const map={'BOT TELEGRAM':'infoTelegram','ASSISTANT IA':'infoIA','BOT TRADING':'infoTrading','PACK MAILS':'infoMails','CRÉATION SITES':'infoSites','AUTRES':'infoAutres'};if(map[selectedService])document.getElementById(map[selectedService]).style.display='block';}
+function sendMessage(e){e.preventDefault();if(!selectedService){showToast('Veuillez sélectionner un service.','error');return;}const nom=document.getElementById('nom').value.trim();const pays=document.getElementById('pays').value.trim();const ville=document.getElementById('ville').value.trim();const whatsapp=document.getElementById('whatsapp').value.trim();const email=document.getElementById('email').value.trim();const age=document.getElementById('age').value.trim();const reseau=document.getElementById('reseau').value.trim();const message=document.getElementById('message').value.trim();if(!nom||!pays||!ville||!whatsapp||!email||!age||!message){showToast('Tous les champs obligatoires doivent être remplis.','error');return;}if(parseInt(age)<18){showToast('❌ Vous devez avoir au moins 18 ans.','error');return;}const btn=document.getElementById('sendBtn');const loading=document.getElementById('loading');btn.disabled=true;loading.style.display='block';document.getElementById('terminalContent').innerHTML+='<div class="line"><span class="prompt">➜</span> <span class="info">📤 Envoi en cours...</span></div>';fetch('https://sitmessag.onrender.com/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service:selectedService,nom,pays,ville,whatsapp,email,age,reseau,message})}).then(res=>res.json()).then(data=>{btn.disabled=false;loading.style.display='none';if(data.status==='ok'){document.getElementById('terminalContent').innerHTML+='<div class="line"><span class="prompt">➜</span> <span class="success">✅ Message envoyé avec succès !</span></div>';showToast('✅ Message envoyé avec succès !','success');document.getElementById('messageForm').reset();document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('selected'));document.querySelectorAll('.service-detail-banner').forEach(b=>b.classList.remove('active'));selectedService=null;document.querySelectorAll('.info-box').forEach(b=>b.style.display='none');}else{document.getElementById('terminalContent').innerHTML+='<div class="line"><span class="prompt">➜</span> <span style="color:#ff5f56;">❌ Erreur : '+(data.error||'Inconnue')+'</span></div>';showToast('❌ Erreur : '+(data.error||'Inconnue'),'error');}}).catch(()=>{btn.disabled=false;loading.style.display='none';document.getElementById('terminalContent').innerHTML+='<div class="line"><span class="prompt">➜</span> <span style="color:#ff5f56;">❌ Erreur de connexion.</span></div>';showToast('❌ Erreur de connexion au serveur.','error');});}
+function showToast(msg,type){const toast=document.getElementById('toast');toast.textContent=msg;toast.className='toast '+type;setTimeout(()=>{toast.className='toast';},5000);}
+function toggleFaq(el){const a=el.querySelector('.answer');const arrow=el.querySelector('.arrow');if(a){a.classList.toggle('open');if(arrow)arrow.classList.toggle('open');}}
+function getIP(){return new Promise((resolve)=>{fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(data=>resolve(data.ip)).catch(()=>resolve('unknown'));});}
+function updateCounters(){getIP().then(ip=>{fetch('https://sitmessag.onrender.com/api/visiteur',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ip:ip})}).then(r=>r.json()).then(data=>{if(data.online!==undefined)document.getElementById('onlineCount').textContent=data.online;if(data.total!==undefined)document.getElementById('totalCount').textContent=data.total;}).catch(()=>{document.getElementById('onlineCount').textContent='?';document.getElementById('totalCount').textContent='?';});});}
+window.addEventListener('load',function(){const saved=localStorage.getItem('preferred_lang');if(saved&&translations[saved])changeLanguage(saved);updateCounters();setInterval(updateCounters,30000);});
 </script>
 </body>
 </html>

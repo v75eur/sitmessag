@@ -94,7 +94,7 @@ def read():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000, threaded=True)
 
-# ===== COMPTEURS DE VISITEURS =====
+# COMPTEURS DE VISITEURS
 VISITEURS_FILE = "visiteurs.json"
 TOTAL_VISITEURS_FILE = "total_visiteurs.json"
 
