@@ -7,7 +7,6 @@ app = Flask(__name__)
 CORS(app)
 
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'RickRoss1994@')
-ADMIN_DEVERROUILLE = os.environ.get('ADMIN_DEVERROUILLE', 'RickRoss1994')
 MESSAGES_FILE = 'messages.json'
 
 def load_messages():
@@ -94,7 +93,7 @@ def read():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000, threaded=True)
 
-# COMPTEURS DE VISITEURS
+# VISITEURS
 VISITEURS_FILE = "visiteurs.json"
 TOTAL_VISITEURS_FILE = "total_visiteurs.json"
 
