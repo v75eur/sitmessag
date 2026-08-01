@@ -110,6 +110,56 @@
         .lang-selector button:hover { border-color: #f0b90b; color: #0a0a1a; }
         .lang-selector button.active { border-color: #f0b90b; background: #f0b90b; color: #0a0a1a; }
         
+        /* ===== FAQ EN HAUT ===== */
+        .faq-top {
+            background: #fffbeb;
+            border-radius: 16px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 2px solid #fde68a;
+            animation: blinkBorder 2s infinite;
+        }
+        @keyframes blinkBorder {
+            0%, 100% { border-color: #fde68a; }
+            50% { border-color: #f0b90b; box-shadow: 0 0 20px rgba(240,185,11,0.15); }
+        }
+        .faq-top h3 {
+            color: #0a0a1a;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .faq-top h3 .icon { font-size: 20px; }
+        .faq-top .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .faq-top .item {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px 14px;
+            border: 1px solid #f3f4f6;
+            font-size: 13px;
+            color: #0a0a1a;
+            line-height: 1.5;
+            transition: all 0.3s;
+        }
+        .faq-top .item:hover { border-color: #f0b90b; transform: translateY(-2px); }
+        .faq-top .item strong { color: #f0b90b; }
+        .faq-top .item .ex {
+            display: block;
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 3px;
+            padding: 4px 8px;
+            background: #f9fafb;
+            border-radius: 6px;
+        }
+        
         /* ===== TRUST ===== */
         .trust {
             display: grid;
@@ -221,7 +271,7 @@
         .form-group label .required { color: #dc2626; }
         .form-group label .badge-contact {
             display: inline-block;
-            background: #10b981;
+            background: #dc2626;
             color: #fff;
             font-size: 9px;
             font-weight: 700;
@@ -229,6 +279,11 @@
             border-radius: 20px;
             margin-left: 6px;
             text-transform: uppercase;
+            animation: blinkBadge 1.5s infinite;
+        }
+        @keyframes blinkBadge {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
         .form-group input, .form-group textarea {
             width: 100%;
@@ -331,13 +386,13 @@
             font-weight: 600;
         }
         
-        /* ===== FAQ ===== */
-        .faq {
+        /* ===== FAQ BOTTOM ===== */
+        .faq-bottom {
             margin-top: 24px;
             border-top: 1px solid #f3f4f6;
             padding-top: 20px;
         }
-        .faq h3 { color: #0a0a1a; font-size: 16px; text-align: center; margin-bottom: 12px; }
+        .faq-bottom h3 { color: #0a0a1a; font-size: 16px; text-align: center; margin-bottom: 12px; }
         .faq-item {
             background: #f9fafb;
             border-radius: 12px;
@@ -391,6 +446,7 @@
             .live-stats { grid-template-columns: 1fr 1fr; }
             .trust { grid-template-columns: repeat(3,1fr); }
             .contact { grid-template-columns: 1fr; }
+            .faq-top .grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 28px; }
             .coming-soon .title { font-size: 22px; }
         }
@@ -443,6 +499,29 @@
         <button data-lang="de" onclick="switchLang('de')">DE</button>
         <button data-lang="pt" onclick="switchLang('pt')">PT</button>
         <button data-lang="ar" onclick="switchLang('ar')">AR</button>
+    </div>
+    
+    <!-- ===== FAQ EN HAUT ===== -->
+    <div class="faq-top">
+        <h3><span class="icon">💡</span> Comprendre en 2 minutes — Exemples concrets</h3>
+        <div class="grid">
+            <div class="item">
+                <strong>🤖 Bot Telegram</strong> — Tu as un groupe avec 500 membres ?<br>
+                <span class="ex">📌 Exemple : "Je veux un bot qui accueille les nouveaux, supprime les spams et envoie des messages automatiques chaque matin à 8h."</span>
+            </div>
+            <div class="item">
+                <strong>🧠 Assistant IA</strong> — Tu reçois 50 messages par jour et tu n'arrives pas à répondre ?<br>
+                <span class="ex">📌 Exemple : "Je veux un chatbot sur mon site qui répond aux clients, prend des rendez-vous et envoie des devis automatiquement."</span>
+            </div>
+            <div class="item">
+                <strong>📊 Bot Trading</strong> — Tu passes 4h par jour devant les graphiques ?<br>
+                <span class="ex">📌 Exemple : "Je veux un bot qui surveille le Bitcoin et m'alerte quand il dépasse 65000$ avec des signaux précis."</span>
+            </div>
+            <div class="item">
+                <strong>📧 Pack Mails</strong> — Tu veux contourner TikTok/Facebook sans payer des pubs ?<br>
+                <span class="ex">📌 Exemple : "Je veux 500 emails vérifiés pour lancer ma campagne sur TikTok sans être bloqué."</span>
+            </div>
+        </div>
     </div>
     
     <!-- ===== TRUST ===== -->
@@ -556,12 +635,12 @@
         <div class="form-group">
             <label id="l4">Numéro WhatsApp <span class="required">*</span> <span class="badge-contact">📱 EXIGÉ</span></label>
             <input type="tel" id="whatsapp" placeholder="+229 60 31 54 58 (WhatsApp uniquement)" required>
-            <div class="hint"><span class="important">📌 Nous vous recontacterons sur ce numéro</span> — <span class="hl">Réponse garantie sous 24h</span></div>
+            <div class="hint"><span class="important">🔴 WhatsApp OBLIGATOIRE</span> — Un numéro WhatsApp valide est <span class="hl">EXIGÉ</span> pour être contacté</div>
         </div>
         <div class="form-group">
             <label id="l5">Email <span class="required">*</span> <span class="badge-contact">✉️ ACTIF</span></label>
             <input type="email" id="email" placeholder="jean.dupont@email.com" required>
-            <div class="hint"><span class="important">📌 Nous vous enverrons une copie de votre message</span> — <span class="hl">Confirmation immédiate</span></div>
+            <div class="hint">📧 <span class="hl">Copie envoyée à votre email</span> — Vérifiez vos spams si non reçu</div>
         </div>
         <div class="form-group">
             <label id="l6">Âge <span class="required">*</span></label>
@@ -594,24 +673,32 @@
         </div>
     </div>
     
-    <!-- ===== FAQ ===== -->
-    <div class="faq">
-        <h3 id="faqTitle">Questions fréquentes</h3>
+    <!-- ===== FAQ BOTTOM ===== -->
+    <div class="faq-bottom">
+        <h3 id="faqTitle">❓ Questions fréquentes — Détails</h3>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq1">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa1">Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.</div>
+            <div class="q"><span id="fq1">🤖 Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa1">Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA. <strong>Exemple :</strong> Un bot qui supprime les spams, envoie un message de bienvenue et répond automatiquement aux questions les plus posées.</div>
         </div>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq2">Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa2">Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis.</div>
+            <div class="q"><span id="fq2">🧠 Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa2">Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis. <strong>Exemple :</strong> Un chatbot sur votre site qui répond aux clients la nuit et prend leurs coordonnées.</div>
         </div>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq3">Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa3">Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.</div>
+            <div class="q"><span id="fq3">📊 Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa3">Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions. <strong>Exemple :</strong> Un bot qui surveille le cours de l'or et vous alerte quand il atteint un seuil défini.</div>
         </div>
         <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="q"><span id="fq4">C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
-            <div class="a" id="fa4">Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
+            <div class="q"><span id="fq4">📧 C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa4">Des emails 100% vérifiés (DNS + SMTP) qui confirment l'existence réelle d'une boîte mail. Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions. <strong>Exemple :</strong> 500 emails vérifiés pour lancer votre campagne sur TikTok sans être bloqué.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq5">⏱️ Quels sont les délais de livraison ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa5">Délais selon le service : Bot Telegram (48h), Assistant IA (5-7 jours), Bot Trading (72h), Pack Mails (24h), Création de sites (3-5 jours). <strong>Exemple :</strong> Vous commandez un Pack Mails aujourd'hui, vous le recevez demain.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="q"><span id="fq6">💰 Comment se passe le paiement ?</span><span class="arrow">▼</span></div>
+            <div class="a" id="fa6">Nous discutons d'abord de votre projet, puis nous vous faisons un devis personnalisé. Le paiement se fait après validation du devis, avant le début du travail. <strong>Exemple :</strong> Vous validez le devis de 150€ pour un Bot Telegram, vous payez et nous commençons le lendemain.</div>
         </div>
     </div>
     
@@ -649,44 +736,85 @@
 
 <script>
 // ============================================================
-// 1. COMPTEUR DE DEMANDES - BLUFF
+// 1. COMPTEUR DE DEMANDES - CROISSANT RÉALISTE
 // ============================================================
-let todayRequests = parseInt(localStorage.getItem('todayRequests')) || Math.floor(Math.random() * 16);
-let totalClients = 147;
+let todayRequests = parseInt(localStorage.getItem('todayRequests'));
+let requestHistory = JSON.parse(localStorage.getItem('requestHistory')) || [];
+
+function generateRealisticRequests() {
+    // Si c'est un nouveau jour ou pas encore initialisé
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem('lastDate');
+    
+    if (lastDate !== today) {
+        // Nouveau jour - réinitialiser avec une valeur réaliste
+        localStorage.setItem('lastDate', today);
+        
+        // Générer une valeur entre 0 et 10 avec tendance croissante
+        // Plus on avance dans la semaine, plus les demandes augmentent
+        const dayOfWeek = new Date().getDay(); // 0=dimanche, 6=samedi
+        let base = 0;
+        if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Lundi à Vendredi
+            base = Math.floor(Math.random() * 6) + 2; // 2 à 7
+        } else { // Week-end
+            base = Math.floor(Math.random() * 4); // 0 à 3
+        }
+        // Ajouter un peu de variabilité
+        todayRequests = Math.min(base + Math.floor(Math.random() * 3), 10);
+        
+        localStorage.setItem('todayRequests', todayRequests);
+        
+        // Sauvegarder l'historique
+        requestHistory.push({ date: today, value: todayRequests });
+        if (requestHistory.length > 30) requestHistory.shift();
+        localStorage.setItem('requestHistory', JSON.stringify(requestHistory));
+    } else {
+        // Même jour - petite variation réaliste (+1 ou -1)
+        const variation = Math.random() > 0.7 ? (Math.random() > 0.5 ? 1 : -1) : 0;
+        todayRequests = Math.min(Math.max(todayRequests + variation, 0), 10);
+        localStorage.setItem('todayRequests', todayRequests);
+    }
+    
+    return todayRequests;
+}
 
 function updateTodayRequests() {
-    // Variation aléatoire entre 0 et 16
-    const variation = Math.floor(Math.random() * 17);
-    todayRequests = variation;
-    localStorage.setItem('todayRequests', todayRequests);
-    document.getElementById('todayRequests').textContent = todayRequests;
+    const count = generateRealisticRequests();
+    document.getElementById('todayRequests').textContent = count;
     
-    // Statut en direct
+    // Statut en direct avec clignotement
     const statusEl = document.getElementById('todayStatus');
-    if (todayRequests > 10) {
+    if (count > 7) {
         statusEl.textContent = '🔥 Très actif';
         statusEl.style.color = '#10b981';
-    } else if (todayRequests > 5) {
+        statusEl.style.animation = 'blinkBadge 1s infinite';
+    } else if (count > 4) {
         statusEl.textContent = '📈 Activité moyenne';
         statusEl.style.color = '#f0b90b';
-    } else if (todayRequests > 0) {
+        statusEl.style.animation = 'none';
+    } else if (count > 0) {
         statusEl.textContent = '📩 Demandes en cours';
         statusEl.style.color = '#3b82f6';
+        statusEl.style.animation = 'none';
     } else {
         statusEl.textContent = '💤 Période calme';
         statusEl.style.color = '#6b7280';
+        statusEl.style.animation = 'none';
     }
 }
+
+// Initialiser au chargement
+generateRealisticRequests();
+updateTodayRequests();
 
 // Mettre à jour toutes les 30 secondes
 setInterval(updateTodayRequests, 30000);
 
 // ============================================================
-// 2. TRADUCTIONS
+// 2. TRADUCTIONS COMPLÈTES
 // ============================================================
 const T = {
     fr: {
-        s1: 'Clients satisfaits', s2: 'Taux de satisfaction', s3: 'Note moyenne', s4: "D'expérience",
         t1: 'SSL', t2: '<24h', t3: 'Garantie 30j', t4: 'RGPD', t5: 'Mondial', t6: 'Expertise',
         d1: 'Automatisation complète de votre groupe', d2: 'Agent intelligent pour vos clients',
         d3: 'Automatisation de votre stratégie', d4: 'Emails vérifiés DNS+SMTP',
@@ -704,26 +832,29 @@ const T = {
         assistantLabel: 'Assistant IA', assistantSub: 'Bientôt disponible',
         gtext: 'Satisfaction 100% garantie ou remboursé',
         gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
-        l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'WhatsApp / Téléphone',
+        l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'Numéro WhatsApp',
         l5: 'Email', l6: 'Âge', l7: 'Réseaux sociaux (optionnel)', l8: 'Votre demande',
         h3: 'Minimum 18 ans', h4: 'Ces informations nous permettent de vous aider au mieux',
         btn: 'Envoyer ma demande', loading: 'Envoi en cours...',
-        faqTitle: 'Questions fréquentes',
-        fq1: 'Comment fonctionne le Bot Telegram ?',
-        fa1: 'Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.',
-        fq2: 'Comment fonctionne l\'Assistant IA ?',
-        fa2: 'Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis.',
-        fq3: 'Comment fonctionne le Bot Trading ?',
-        fa3: 'Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.',
-        fq4: 'C\'est quoi un Pack Mails vérifié ?',
-        fa4: 'Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.',
+        faqTitle: '❓ Questions fréquentes — Détails',
+        fq1: '🤖 Comment fonctionne le Bot Telegram ?',
+        fa1: 'Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA. <strong>Exemple :</strong> Un bot qui supprime les spams, envoie un message de bienvenue et répond automatiquement aux questions les plus posées.',
+        fq2: '🧠 Comment fonctionne l\'Assistant IA ?',
+        fa2: 'Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis. <strong>Exemple :</strong> Un chatbot sur votre site qui répond aux clients la nuit et prend leurs coordonnées.',
+        fq3: '📊 Comment fonctionne le Bot Trading ?',
+        fa3: 'Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions. <strong>Exemple :</strong> Un bot qui surveille le cours de l\'or et vous alerte quand il atteint un seuil défini.',
+        fq4: '📧 C\'est quoi un Pack Mails vérifié ?',
+        fa4: 'Des emails 100% vérifiés (DNS + SMTP) qui confirment l\'existence réelle d\'une boîte mail. Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions. <strong>Exemple :</strong> 500 emails vérifiés pour lancer votre campagne sur TikTok sans être bloqué.',
+        fq5: '⏱️ Quels sont les délais de livraison ?',
+        fa5: 'Délais selon le service : Bot Telegram (48h), Assistant IA (5-7 jours), Bot Trading (72h), Pack Mails (24h), Création de sites (3-5 jours). <strong>Exemple :</strong> Vous commandez un Pack Mails aujourd\'hui, vous le recevez demain.',
+        fq6: '💰 Comment se passe le paiement ?',
+        fa6: 'Nous discutons d\'abord de votre projet, puis nous vous faisons un devis personnalisé. Le paiement se fait après validation du devis, avant le début du travail. <strong>Exemple :</strong> Vous validez le devis de 150€ pour un Bot Telegram, vous payez et nous commençons le lendemain.',
         online: 'En ligne', total: 'Visites totales',
         f1a: 'SSL sécurisé', f1b: 'Données cryptées', f1c: 'RGPD conforme',
         f2a: 'Mentions légales', f2b: 'Politique confidentialité', f2c: 'CGV',
         f3a: '9h-18h (Lun-Ven)', fb1: 'Tous droits réservés', fb2: 'Dernière mise à jour'
     },
     en: {
-        s1: 'Happy Clients', s2: 'Satisfaction Rate', s3: 'Average Rating', s4: 'Experience',
         t1: 'SSL', t2: '<24h', t3: '30 Days Guarantee', t4: 'GDPR', t5: 'Worldwide', t6: 'Expertise',
         d1: 'Full group automation', d2: 'Intelligent agent for your clients',
         d3: 'Strategy automation', d4: 'DNS+SMTP verified emails',
@@ -741,26 +872,29 @@ const T = {
         assistantLabel: 'AI Assistant', assistantSub: 'Coming soon',
         gtext: '100% satisfaction guaranteed or refunded',
         gsub: 'If you are not satisfied, we will refund you in full.',
-        l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp / Phone',
+        l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp Number',
         l5: 'Email', l6: 'Age', l7: 'Social networks (optional)', l8: 'Your request',
         h3: 'Minimum 18 years', h4: 'This information helps us help you better',
         btn: 'Send my request', loading: 'Sending...',
-        faqTitle: 'Frequently Asked Questions',
-        fq1: 'How does the Telegram Bot work?',
-        fa1: 'We configure a bot that manages your group like you. It moderates messages, answers questions, welcomes new members and interacts with your AI assistant.',
-        fq2: 'How does the AI Assistant work?',
-        fa2: 'We create a website with an intelligent chatbot that manages your clients automatically. It presents your services, answers questions, takes appointments and generates quotes.',
-        fq3: 'How does the Trading Bot work?',
-        fa3: 'You give us your strategy, we program a bot that monitors the charts. It sends you precise alerts at the right time to take your positions.',
-        fq4: 'What is a Verified Email Pack?',
-        fa4: '100% verified emails (DNS + SMTP). With these packs, you can bypass TikTok, Facebook and Instagram instead of paying for promotions.',
+        faqTitle: '❓ Frequently Asked Questions — Details',
+        fq1: '🤖 How does the Telegram Bot work?',
+        fa1: 'We configure a bot that manages your group like you. It moderates messages, answers questions, welcomes new members and interacts with your AI assistant. <strong>Example:</strong> A bot that removes spam, sends a welcome message and automatically answers the most asked questions.',
+        fq2: '🧠 How does the AI Assistant work?',
+        fa2: 'We create a website with an intelligent chatbot that manages your clients automatically. It presents your services, answers questions, takes appointments and generates quotes. <strong>Example:</strong> A chatbot on your site that answers clients at night and takes their contact details.',
+        fq3: '📊 How does the Trading Bot work?',
+        fa3: 'You give us your strategy, we program a bot that monitors the charts. It sends you precise alerts at the right time to take your positions. <strong>Example:</strong> A bot that monitors the gold price and alerts you when it reaches a defined threshold.',
+        fq4: '📧 What is a Verified Email Pack?',
+        fa4: '100% verified emails (DNS + SMTP) that confirm the real existence of a mailbox. With these packs, you can bypass TikTok, Facebook and Instagram instead of paying for promotions. <strong>Example:</strong> 500 verified emails to launch your campaign on TikTok without being blocked.',
+        fq5: '⏱️ What are the delivery times?',
+        fa5: 'Delivery times by service: Telegram Bot (48h), AI Assistant (5-7 days), Trading Bot (72h), Email Pack (24h), Website Creation (3-5 days). <strong>Example:</strong> You order an Email Pack today, you receive it tomorrow.',
+        fq6: '💰 How does payment work?',
+        fa6: 'We first discuss your project, then we give you a personalized quote. Payment is made after validation of the quote, before work begins. <strong>Example:</strong> You validate the quote of 150€ for a Telegram Bot, you pay and we start the next day.',
         online: 'Online', total: 'Total visits',
         f1a: 'SSL secured', f1b: 'Encrypted data', f1c: 'GDPR compliant',
         f2a: 'Legal notices', f2b: 'Privacy policy', f2c: 'Terms',
         f3a: '9am-6pm (Mon-Fri)', fb1: 'All rights reserved', fb2: 'Last update'
     },
     es: {
-        s1: 'Clientes satisfechos', s2: 'Tasa de satisfacción', s3: 'Calificación promedio', s4: 'Experiencia',
         t1: 'SSL', t2: '<24h', t3: 'Garantía 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiencia',
         d1: 'Automatización completa de tu grupo', d2: 'Agente inteligente para tus clientes',
         d3: 'Automatización de tu estrategia', d4: 'Emails verificados DNS+SMTP',
@@ -778,26 +912,29 @@ const T = {
         assistantLabel: 'Asistente IA', assistantSub: 'Próximamente',
         gtext: '100% de satisfacción garantizada o reembolso',
         gsub: 'Si no estás satisfecho, te reembolsamos íntegramente.',
-        l1: 'Nombre completo', l2: 'País', l3: 'Ciudad', l4: 'WhatsApp / Teléfono',
+        l1: 'Nombre completo', l2: 'País', l3: 'Ciudad', l4: 'Número WhatsApp',
         l5: 'Email', l6: 'Edad', l7: 'Redes sociales (opcional)', l8: 'Tu solicitud',
         h3: 'Mínimo 18 años', h4: 'Esta información nos ayuda a ayudarte mejor',
         btn: 'Enviar mi solicitud', loading: 'Enviando...',
-        faqTitle: 'Preguntas frecuentes',
-        fq1: '¿Cómo funciona el Bot de Telegram?',
-        fa1: 'Configuramos un bot que gestiona tu grupo como tú. Modera mensajes, responde preguntas, da la bienvenida a nuevos miembros e interactúa con tu asistente IA.',
-        fq2: '¿Cómo funciona el Asistente IA?',
-        fa2: 'Creamos un sitio con un chatbot inteligente que gestiona tus clientes automáticamente. Presenta tus servicios, responde preguntas, toma citas y genera presupuestos.',
-        fq3: '¿Cómo funciona el Bot de Trading?',
-        fa3: 'Nos das tu estrategia, programamos un bot que monitorea los gráficos. Te envía alertas precisas en el momento justo para tomar posiciones.',
-        fq4: '¿Qué es un Pack de Emails Verificados?',
-        fa4: 'Emails 100% verificados (DNS + SMTP). Con estos packs, puedes evitar TikTok, Facebook e Instagram en lugar de pagar promociones.',
+        faqTitle: '❓ Preguntas frecuentes — Detalles',
+        fq1: '🤖 ¿Cómo funciona el Bot de Telegram?',
+        fa1: 'Configuramos un bot que gestiona tu grupo como tú. Modera mensajes, responde preguntas, da la bienvenida a nuevos miembros e interactúa con tu asistente IA. <strong>Ejemplo:</strong> Un bot que elimina spam, envía un mensaje de bienvenida y responde automáticamente a las preguntas más frecuentes.',
+        fq2: '🧠 ¿Cómo funciona el Asistente IA?',
+        fa2: 'Creamos un sitio con un chatbot inteligente que gestiona tus clientes automáticamente. Presenta tus servicios, responde preguntas, toma citas y genera presupuestos. <strong>Ejemplo:</strong> Un chatbot en tu sitio que responde a clientes por la noche y toma sus datos.',
+        fq3: '📊 ¿Cómo funciona el Bot de Trading?',
+        fa3: 'Nos das tu estrategia, programamos un bot que monitorea los gráficos. Te envía alertas precisas en el momento justo para tomar posiciones. <strong>Ejemplo:</strong> Un bot que monitorea el precio del oro y te alerta cuando alcanza un umbral definido.',
+        fq4: '📧 ¿Qué es un Pack de Emails Verificados?',
+        fa4: 'Emails 100% verificados (DNS + SMTP) que confirman la existencia real de una cuenta de correo. Con estos packs, puedes evitar TikTok, Facebook e Instagram en lugar de pagar promociones. <strong>Ejemplo:</strong> 500 emails verificados para lanzar tu campaña en TikTok sin ser bloqueado.',
+        fq5: '⏱️ ¿Cuáles son los plazos de entrega?',
+        fa5: 'Plazos según el servicio: Bot Telegram (48h), Asistente IA (5-7 días), Bot Trading (72h), Pack Emails (24h), Creación de sitios (3-5 días). <strong>Ejemplo:</strong> Pides un Pack Emails hoy, lo recibes mañana.',
+        fq6: '💰 ¿Cómo funciona el pago?',
+        fa6: 'Primero discutimos tu proyecto, luego te hacemos un presupuesto personalizado. El pago se realiza después de la validación del presupuesto, antes de comenzar el trabajo. <strong>Ejemplo:</strong> Validas el presupuesto de 150€ para un Bot Telegram, pagas y comenzamos al día siguiente.',
         online: 'En línea', total: 'Visitas totales',
         f1a: 'SSL seguro', f1b: 'Datos encriptados', f1c: 'Cumple RGPD',
         f2a: 'Aviso legal', f2b: 'Política privacidad', f2c: 'Condiciones',
         f3a: '9h-18h (Lun-Vie)', fb1: 'Todos los derechos reservados', fb2: 'Última actualización'
     },
     de: {
-        s1: 'Zufriedene Kunden', s2: 'Zufriedenheitsrate', s3: 'Durchschnittliche Bewertung', s4: 'Erfahrung',
         t1: 'SSL', t2: '<24h', t3: 'Garantie 30d', t4: 'DSGVO', t5: 'Weltweit', t6: 'Expertise',
         d1: 'Vollautomatisierung deiner Gruppe', d2: 'Intelligenter Agent für deine Kunden',
         d3: 'Automatisierung deiner Strategie', d4: 'DNS+SMTP verifizierte Emails',
@@ -815,26 +952,29 @@ const T = {
         assistantLabel: 'KI-Assistent', assistantSub: 'Bald verfügbar',
         gtext: '100% Zufriedenheitsgarantie oder Geld zurück',
         gsub: 'Wenn du nicht zufrieden bist, erstatten wir dir den vollen Betrag.',
-        l1: 'Vollständiger Name', l2: 'Land', l3: 'Stadt', l4: 'WhatsApp / Telefon',
+        l1: 'Vollständiger Name', l2: 'Land', l3: 'Stadt', l4: 'WhatsApp Nummer',
         l5: 'Email', l6: 'Alter', l7: 'Soziale Netzwerke (optional)', l8: 'Deine Anfrage',
         h3: 'Mindestens 18 Jahre', h4: 'Diese Informationen helfen uns, dir besser zu helfen',
         btn: 'Meine Anfrage senden', loading: 'Senden...',
-        faqTitle: 'Häufig gestellte Fragen',
-        fq1: 'Wie funktioniert der Telegram Bot?',
-        fa1: 'Wir konfigurieren einen Bot, der deine Gruppe wie du verwaltet. Er moderiert Nachrichten, beantwortet Fragen, begrüßt neue Mitglieder und interagiert mit deinem KI-Assistenten.',
-        fq2: 'Wie funktioniert der KI-Assistent?',
-        fa2: 'Wir erstellen eine Website mit einem intelligenten Chatbot, der deine Kunden automatisch verwaltet. Er präsentiert deine Dienste, beantwortet Fragen, nimmt Termine entgegen und erstellt Angebote.',
-        fq3: 'Wie funktioniert der Trading Bot?',
-        fa3: 'Du gibst uns deine Strategie, wir programmieren einen Bot, der die Charts überwacht. Er sendet dir präzise Alarme zur richtigen Zeit, um Positionen zu eröffnen.',
-        fq4: 'Was ist ein verifiziertes Email-Pack?',
-        fa4: '100% verifizierte Emails (DNS + SMTP). Mit diesen Packs kannst du TikTok, Facebook und Instagram umgehen, anstatt für Werbung zu bezahlen.',
+        faqTitle: '❓ Häufig gestellte Fragen — Details',
+        fq1: '🤖 Wie funktioniert der Telegram Bot?',
+        fa1: 'Wir konfigurieren einen Bot, der deine Gruppe wie du verwaltet. Er moderiert Nachrichten, beantwortet Fragen, begrüßt neue Mitglieder und interagiert mit deinem KI-Assistenten. <strong>Beispiel:</strong> Ein Bot, der Spam entfernt, eine Begrüßungsnachricht sendet und automatisch die häufigsten Fragen beantwortet.',
+        fq2: '🧠 Wie funktioniert der KI-Assistent?',
+        fa2: 'Wir erstellen eine Website mit einem intelligenten Chatbot, der deine Kunden automatisch verwaltet. Er präsentiert deine Dienste, beantwortet Fragen, nimmt Termine entgegen und erstellt Angebote. <strong>Beispiel:</strong> Ein Chatbot auf deiner Website, der nachts Kunden antwortet und ihre Kontaktdaten aufnimmt.',
+        fq3: '📊 Wie funktioniert der Trading Bot?',
+        fa3: 'Du gibst uns deine Strategie, wir programmieren einen Bot, der die Charts überwacht. Er sendet dir präzise Alarme zur richtigen Zeit, um Positionen zu eröffnen. <strong>Beispiel:</strong> Ein Bot, der den Goldpreis überwacht und dich warnt, wenn er einen definierten Schwellenwert erreicht.',
+        fq4: '📧 Was ist ein verifiziertes Email-Pack?',
+        fa4: '100% verifizierte Emails (DNS + SMTP), die die reale Existenz eines Postfachs bestätigen. Mit diesen Packs kannst du TikTok, Facebook und Instagram umgehen, anstatt für Werbung zu bezahlen. <strong>Beispiel:</strong> 500 verifizierte Emails, um deine Kampagne auf TikTok zu starten, ohne blockiert zu werden.',
+        fq5: '⏱️ Was sind die Lieferzeiten?',
+        fa5: 'Lieferzeiten nach Service: Telegram Bot (48h), KI-Assistent (5-7 Tage), Trading Bot (72h), Email-Pack (24h), Website-Erstellung (3-5 Tage). <strong>Beispiel:</strong> Du bestellst heute ein Email-Pack, du erhältst es morgen.',
+        fq6: '💰 Wie läuft die Zahlung ab?',
+        fa6: 'Wir besprechen zuerst dein Projekt, dann erstellen wir ein persönliches Angebot. Die Zahlung erfolgt nach der Bestätigung des Angebots, vor Arbeitsbeginn. <strong>Beispiel:</strong> Du bestätigst das Angebot von 150€ für einen Telegram Bot, du zahlst und wir beginnen am nächsten Tag.',
         online: 'Online', total: 'Besuche gesamt',
         f1a: 'SSL-gesichert', f1b: 'Verschlüsselte Daten', f1c: 'DSGVO-konform',
         f2a: 'Impressum', f2b: 'Datenschutz', f2c: 'AGB',
         f3a: '9-18 Uhr (Mo-Fr)', fb1: 'Alle Rechte vorbehalten', fb2: 'Letzte Aktualisierung'
     },
     pt: {
-        s1: 'Clientes satisfeitos', s2: 'Taxa de satisfação', s3: 'Avaliação média', s4: 'Experiência',
         t1: 'SSL', t2: '<24h', t3: 'Garantia 30d', t4: 'RGPD', t5: 'Mundial', t6: 'Experiência',
         d1: 'Automatização completa do seu grupo', d2: 'Agente inteligente para seus clientes',
         d3: 'Automatização da sua estratégia', d4: 'Emails verificados DNS+SMTP',
@@ -852,26 +992,29 @@ const T = {
         assistantLabel: 'Assistente IA', assistantSub: 'Em breve',
         gtext: '100% de satisfação garantida ou reembolso',
         gsub: 'Se não estiver satisfeito, reembolsamos integralmente.',
-        l1: 'Nome completo', l2: 'País', l3: 'Cidade', l4: 'WhatsApp / Telefone',
+        l1: 'Nome completo', l2: 'País', l3: 'Cidade', l4: 'Número WhatsApp',
         l5: 'Email', l6: 'Idade', l7: 'Redes sociais (opcional)', l8: 'Sua solicitação',
         h3: 'Mínimo 18 anos', h4: 'Esta informação nos ajuda a ajudá-lo melhor',
         btn: 'Enviar minha solicitação', loading: 'Enviando...',
-        faqTitle: 'Perguntas frequentes',
-        fq1: 'Como funciona o Bot do Telegram?',
-        fa1: 'Configuramos um bot que gerencia seu grupo como você. Ele modera mensagens, responde perguntas, dá boas-vindas a novos membros e interage com seu assistente IA.',
-        fq2: 'Como funciona o Assistente IA?',
-        fa2: 'Criamos um site com um chatbot inteligente que gerencia seus clientes automaticamente. Apresenta seus serviços, responde perguntas, agenda compromissos e gera orçamentos.',
-        fq3: 'Como funciona o Bot de Trading?',
-        fa3: 'Você nos dá sua estratégia, programamos um bot que monitora os gráficos. Ele envia alertas precisos no momento certo para tomar posições.',
-        fq4: 'O que é um Pacote de Emails Verificados?',
-        fa4: 'Emails 100% verificados (DNS + SMTP). Com esses pacotes, você pode contornar TikTok, Facebook e Instagram em vez de pagar por promoções.',
+        faqTitle: '❓ Perguntas frequentes — Detalhes',
+        fq1: '🤖 Como funciona o Bot do Telegram?',
+        fa1: 'Configuramos um bot que gerencia seu grupo como você. Ele modera mensagens, responde perguntas, dá boas-vindas a novos membros e interage com seu assistente IA. <strong>Exemplo:</strong> Um bot que remove spam, envia uma mensagem de boas-vindas e responde automaticamente às perguntas mais frequentes.',
+        fq2: '🧠 Como funciona o Assistente IA?',
+        fa2: 'Criamos um site com um chatbot inteligente que gerencia seus clientes automaticamente. Apresenta seus serviços, responde perguntas, agenda compromissos e gera orçamentos. <strong>Exemplo:</strong> Um chatbot no seu site que responde a clientes à noite e coleta seus dados.',
+        fq3: '📊 Como funciona o Bot de Trading?',
+        fa3: 'Você nos dá sua estratégia, programamos um bot que monitora os gráficos. Ele envia alertas precisos no momento certo para tomar posições. <strong>Exemplo:</strong> Um bot que monitora o preço do ouro e te alerta quando atinge um limite definido.',
+        fq4: '📧 O que é um Pacote de Emails Verificados?',
+        fa4: 'Emails 100% verificados (DNS + SMTP) que confirmam a existência real de uma caixa postal. Com esses pacotes, você pode contornar TikTok, Facebook e Instagram em vez de pagar por promoções. <strong>Exemplo:</strong> 500 emails verificados para lançar sua campanha no TikTok sem ser bloqueado.',
+        fq5: '⏱️ Quais são os prazos de entrega?',
+        fa5: 'Prazos por serviço: Bot Telegram (48h), Assistente IA (5-7 dias), Bot Trading (72h), Pacote Emails (24h), Criação de sites (3-5 dias). <strong>Exemplo:</strong> Você pede um Pacote Emails hoje, recebe amanhã.',
+        fq6: '💰 Como funciona o pagamento?',
+        fa6: 'Primeiro discutimos seu projeto, depois fazemos um orçamento personalizado. O pagamento é feito após a validação do orçamento, antes do início do trabalho. <strong>Exemplo:</strong> Você valida o orçamento de 150€ para um Bot Telegram, paga e começamos no dia seguinte.',
         online: 'Online', total: 'Visitas totais',
         f1a: 'SSL seguro', f1b: 'Dados criptografados', f1c: 'RGPD conforme',
         f2a: 'Aviso legal', f2b: 'Política privacidade', f2c: 'Condições',
         f3a: '9h-18h (Seg-Sex)', fb1: 'Todos os direitos reservados', fb2: 'Última atualização'
     },
     ar: {
-        s1: 'عُمَلَاءُ رَاضُونَ', s2: 'مُعَدَّلُ الرِّضَى', s3: 'مُعَدَّلُ التَّقْيِيمِ', s4: 'خِبْرَة',
         t1: 'SSL', t2: '<24h', t3: 'ضَمَان 30ي', t4: 'RGPD', t5: 'عَالَمِي', t6: 'خِبْرَة',
         d1: 'أَتْمَتَةُ مَجْمُوعَتِكَ كَامِلَةً', d2: 'وَكِيلٌ ذَكِيٌّ لِعُمَلَائِكَ',
         d3: 'أَتْمَتَةُ إِسْتِرَاتِيجِيَّتِكَ', d4: 'بَرِيدٌ مُؤَكَّدٌ DNS+SMTP',
@@ -889,19 +1032,23 @@ const T = {
         assistantLabel: 'مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ', assistantSub: 'قَرِيبًا',
         gtext: 'رِضًا مَضْمُونٌ 100% أَوِ اسْتِرْدَادُ الْمَالِ',
         gsub: 'إِذَا لَمْ تَكُنْ رَاضِيًا، سَنُعِيدُ لَكَ الْمَبْلَغَ كَامِلًا.',
-        l1: 'الِاسْمُ وَاللَّقَبُ', l2: 'الْبَلَدُ', l3: 'الْمَدِينَةُ', l4: 'وَاتْسَاب / هَاتِف',
+        l1: 'الِاسْمُ وَاللَّقَبُ', l2: 'الْبَلَدُ', l3: 'الْمَدِينَةُ', l4: 'رَقْمُ وَاتْسَاب',
         l5: 'الْبَرِيدُ الإِلِكْتْرُونِيّ', l6: 'الْعُمْرُ', l7: 'شَبَكَاتٌ اجْتِمَاعِيَّة (اخْتِيَارِيّ)', l8: 'طَلَبُكَ',
         h3: 'الْحَدُّ الْأَدْنَى 18 سَنَةً', h4: 'هَذِهِ الْمَعْلُومَاتُ تُسَاعِدُنَا عَلَى مُسَاعَدَتِكَ بِشَكْلٍ أَفْضَل',
         btn: 'أَرْسِلْ طَلَبِي', loading: 'جَارِي الْإِرْسَالُ...',
-        faqTitle: 'أَسْئِلَةٌ شَائِعَةٌ',
-        fq1: 'كَيْفَ يَعْمَلُ بُوتُ تِلِغْرَامَ؟',
-        fa1: 'نُهَيِّئُ بُوتًا يَدِيرُ مَجْمُوعَتَكَ مِثْلَكَ. يَرَاقِبُ الرَّسَائِلَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يُرَحِّبُ بِالْأَعْضَاءِ الْجُدُدِ وَيَتَفَاعَلُ مَعَ مُسَاعِدِكَ الذَّكِيّ.',
-        fq2: 'كَيْفَ يَعْمَلُ مُسَاعِدُ الذَّكَاءِ الاصْطِنَاعِيّ؟',
-        fa2: 'نُنْشِئُ مَوْقِعًا مَعَ رَبُوتِ مُحَادَثَةٍ ذَكِيّ يُدِيرُ عُمَلَاءَكَ تِلْقَائِيًّا. يَعْرِضُ خِدْمَاتِكَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يَحْجِزُ الْمَوَاعِيدَ وَيُنْشِئُ التَّسْعِيرَاتِ.',
-        fq3: 'كَيْفَ يَعْمَلُ بُوتُ التَّدَاوُلِ؟',
-        fa3: 'تُعْطِينَا إِسْتِرَاتِيجِيَّتَكَ، نُبَرْمِجُ بُوتًا يُرَاقِبُ الرُّسُومَ الْبَيَانِيَّةَ. يُرْسِلُ لَكَ تَنْبِيهَاتٍ دَقِيقَةً فِي الْوَقْتِ الْمُنَاسِبِ لِاتِّخَاذِ الْوُضُوعَاتِ.',
-        fq4: 'مَا هِيَ حُزَمُ الْبَرِيدِ الْمُؤَكَّدَةُ؟',
-        fa4: 'بَرِيدٌ مُؤَكَّدٌ 100% (DNS+SMTP). بِهَذِهِ الْحُزَمِ، يُمْكِنُكَ تَجَاوُزُ تِيك توك، فَيْس بُوك وَإِنْسْتْغْرَام بِدَلَ الْإِعْلَانَاتِ.',
+        faqTitle: '❓ أَسْئِلَةٌ شَائِعَةٌ — تَفَاصِيل',
+        fq1: '🤖 كَيْفَ يَعْمَلُ بُوتُ تِلِغْرَامَ؟',
+        fa1: 'نُهَيِّئُ بُوتًا يَدِيرُ مَجْمُوعَتَكَ مِثْلَكَ. يَرَاقِبُ الرَّسَائِلَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يُرَحِّبُ بِالْأَعْضَاءِ الْجُدُدِ وَيَتَفَاعَلُ مَعَ مُسَاعِدِكَ الذَّكِيّ. <strong>مِثَال:</strong> بُوتٌ يُزِيلُ الرَّسَائِلَ الْمُزْعِجَةَ، يُرْسِلُ رِسَالَةَ تَرْحِيبٍ وَيُجِيبُ تِلْقَائِيًّا عَلَى الْأَسْئِلَةِ الْأَكْثَرِ طَرْحًا.',
+        fq2: '🧠 كَيْفَ يَعْمَلُ مُسَاعِدُ الذَّكَاءِ الاصْطِنَاعِيّ؟',
+        fa2: 'نُنْشِئُ مَوْقِعًا مَعَ رَبُوتِ مُحَادَثَةٍ ذَكِيّ يُدِيرُ عُمَلَاءَكَ تِلْقَائِيًّا. يَعْرِضُ خِدْمَاتِكَ، يُجِيبُ عَلَى الْأَسْئِلَةِ، يَحْجِزُ الْمَوَاعِيدَ وَيُنْشِئُ التَّسْعِيرَاتِ. <strong>مِثَال:</strong> رَبُوتُ مُحَادَثَةٍ عَلَى مَوْقِعِكَ يُجِيبُ الْعُمَلَاءَ لَيْلًا وَيَأْخُذُ بَيَانَاتِهِمْ.',
+        fq3: '📊 كَيْفَ يَعْمَلُ بُوتُ التَّدَاوُلِ؟',
+        fa3: 'تُعْطِينَا إِسْتِرَاتِيجِيَّتَكَ، نُبَرْمِجُ بُوتًا يُرَاقِبُ الرُّسُومَ الْبَيَانِيَّةَ. يُرْسِلُ لَكَ تَنْبِيهَاتٍ دَقِيقَةً فِي الْوَقْتِ الْمُنَاسِبِ لِاتِّخَاذِ الْوُضُوعَاتِ. <strong>مِثَال:</strong> بُوتٌ يُرَاقِبُ سِعْرَ الذَّهَبِ وَيُنَبِّهُكَ عِنْدَمَا يَصِلُ إِلَى حَدٍّ مُحَدَّدٍ.',
+        fq4: '📧 مَا هِيَ حُزَمُ الْبَرِيدِ الْمُؤَكَّدَةُ؟',
+        fa4: 'بَرِيدٌ مُؤَكَّدٌ 100% (DNS+SMTP) يُؤَكِّدُ الْوُجُودَ الْحَقِيقِيَّ لِصُنْدُوقِ بَرِيدٍ. بِهَذِهِ الْحُزَمِ، يُمْكِنُكَ تَجَاوُزُ تِيك توك، فَيْس بُوك وَإِنْسْتْغْرَام بِدَلَ الْإِعْلَانَاتِ. <strong>مِثَال:</strong> 500 بَرِيدًا مُؤَكَّدًا لِإِطْلَاقِ حَمْلَتِكَ عَلَى تِيك توك دُونَ أَنْ تَكُونَ مَحْظُورًا.',
+        fq5: '⏱️ مَا هِيَ مُدَدُ التَّسْلِيمِ؟',
+        fa5: 'مُدَدُ التَّسْلِيمِ حَسَبَ الْخِدْمَةِ: بُوت تِلِغْرَام (48 سَاعَة)، مُسَاعِد الذَّكَاءِ الاصْطِنَاعِيّ (5-7 أَيَّام)، بُوت التَّدَاوُلِ (72 سَاعَة)، حُزَم الْبَرِيدِ (24 سَاعَة)، إِنْشَاء الْمَوَاقِع (3-5 أَيَّام). <strong>مِثَال:</strong> تَطْلُبُ حُزْمَةَ بَرِيدٍ الْيَوْمَ، تَسْتَقْبِلُهَا غَدًا.',
+        fq6: '💰 كَيْفَ يَتِمُّ الدَّفْعُ؟',
+        fa6: 'نُنَاقِشُ مَشْرُوعَكَ أَوَّلًا، ثُمَّ نُعِدُّ لَكَ عَرْضَ سِعْرٍ مُخَصَّصًا. يَتِمُّ الدَّفْعُ بَعْدَ مُصَادَقَةِ الْعَرْضِ، قَبْلَ بَدْءِ الْعَمَلِ. <strong>مِثَال:</strong> تُصَادِقُ عَلَى عَرْضِ 150 يورو لِبُوت تِلِغْرَام، تَدْفَعُ وَنَبْدَأُ فِي الْيَوْمِ التَّالِي.',
         online: 'مُتَّصِل', total: 'الزِّيَارَاتُ الْإِجْمَالِيَّة',
         f1a: 'SSL مُؤَمَّن', f1b: 'بَيَانَاتٌ مُشَفَّرَةٌ', f1c: 'مُتَوَافِقٌ مَعَ RGPD',
         f2a: 'إِشْعَارَاتٌ قَانُونِيَّة', f2b: 'سِيَاسَةُ الْخُصُوصِيَّةِ', f2c: 'شُرُوط الْخِدْمَة',
@@ -920,10 +1067,6 @@ function switchLang(lang) {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
     
-    document.getElementById('s1').textContent = t.s1;
-    document.getElementById('s2').textContent = t.s2;
-    document.getElementById('s3').textContent = t.s3;
-    document.getElementById('s4').textContent = t.s4;
     document.getElementById('t1').textContent = t.t1;
     document.getElementById('t2').textContent = t.t2;
     document.getElementById('t3').textContent = t.t3;
@@ -961,7 +1104,7 @@ function switchLang(lang) {
     document.getElementById('l1').innerHTML = t.l1 + ' <span class="required">*</span>';
     document.getElementById('l2').innerHTML = t.l2 + ' <span class="required">*</span>';
     document.getElementById('l3').innerHTML = t.l3 + ' <span class="required">*</span>';
-    document.getElementById('l4').innerHTML = t.l4 + ' <span class="required">*</span> <span class="badge-contact">📱 ACTIF</span>';
+    document.getElementById('l4').innerHTML = t.l4 + ' <span class="required">*</span> <span class="badge-contact">📱 EXIGÉ</span>';
     document.getElementById('l5').innerHTML = t.l5 + ' <span class="required">*</span> <span class="badge-contact">✉️ ACTIF</span>';
     document.getElementById('l6').innerHTML = t.l6 + ' <span class="required">*</span>';
     document.getElementById('l7').textContent = t.l7;
@@ -979,6 +1122,10 @@ function switchLang(lang) {
     document.getElementById('fa3').textContent = t.fa3;
     document.getElementById('fq4').textContent = t.fq4;
     document.getElementById('fa4').textContent = t.fa4;
+    document.getElementById('fq5').textContent = t.fq5;
+    document.getElementById('fa5').textContent = t.fa5;
+    document.getElementById('fq6').textContent = t.fq6;
+    document.getElementById('fa6').textContent = t.fa6;
     document.getElementById('onlineLabel').textContent = t.online;
     document.getElementById('totalLabel').textContent = t.total;
     document.getElementById('f1a').textContent = t.f1a;
@@ -994,6 +1141,9 @@ function switchLang(lang) {
     localStorage.setItem('lang', lang);
 }
 
+// ============================================================
+// 3. GESTION DES SERVICES
+// ============================================================
 let selectedService = null;
 
 function selectService(el, id) {
@@ -1006,6 +1156,9 @@ function selectService(el, id) {
     if (detail) detail.classList.add('active');
 }
 
+// ============================================================
+// 4. ENVOI DU MESSAGE
+// ============================================================
 function sendMessage(e) {
     e.preventDefault();
     if (!selectedService) {
@@ -1051,7 +1204,7 @@ function sendMessage(e) {
             document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
             selectedService = null;
             // Incrémenter le compteur de demandes du jour
-            todayRequests = Math.min(todayRequests + 1, 16);
+            todayRequests = Math.min(todayRequests + 1, 10);
             localStorage.setItem('todayRequests', todayRequests);
             document.getElementById('todayRequests').textContent = todayRequests;
         } else {
@@ -1081,6 +1234,9 @@ function toggleFaq(el) {
     }
 }
 
+// ============================================================
+// 5. COMPTEURS DE VISITEURS
+// ============================================================
 function getIP() {
     return new Promise((resolve) => {
         fetch('https://api.ipify.org?format=json')
@@ -1117,14 +1273,14 @@ function updateCounters() {
     });
 }
 
+// ============================================================
+// 6. INIT
+// ============================================================
 window.addEventListener('load', function() {
     const saved = localStorage.getItem('lang');
     if (saved && T[saved]) switchLang(saved);
     
-    // Initialiser le compteur de demandes
     updateTodayRequests();
-    
-    // Mettre à jour les compteurs de visiteurs
     updateCounters();
     setInterval(updateCounters, 30000);
 });
