@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔒 Admin - Boîte de réception</title>
+    <title>🔒 Administration - Boîte de réception</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,7 +27,7 @@
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        h1 { color: #4d96ff; text-align: center; font-size: 28px; margin-bottom: 20px; }
+        h1 { color: #f0b90b; text-align: center; font-size: 28px; margin-bottom: 20px; }
         .login-box { max-width: 400px; margin: 0 auto; }
         .login-box input {
             width: 100%;
@@ -40,20 +40,20 @@
             margin-bottom: 12px;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .login-box input:focus { outline: none; border-color: #4d96ff; box-shadow: 0 0 20px rgba(77,150,255,0.1); }
+        .login-box input:focus { outline: none; border-color: #f0b90b; box-shadow: 0 0 20px rgba(240,185,11,0.1); }
         .login-box button {
             width: 100%;
             padding: 14px;
             border: none;
             border-radius: 12px;
-            background: linear-gradient(135deg, #4d96ff, #6366f1);
-            color: #ffffff;
+            background: linear-gradient(135deg, #f0b90b, #f59e0b);
+            color: #0a0a1a;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .login-box button:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(77,150,255,0.3); }
+        .login-box button:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(240,185,11,0.3); }
         .lock-msg { color: #ff5f56; text-align: center; margin-top: 10px; font-size: 14px; }
         .admin-content { display: none; }
         .stats {
@@ -72,15 +72,14 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .stats .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
-        .stats .card .number { font-size: 30px; font-weight: 900; color: #4d96ff; }
+        .stats .card .number { font-size: 30px; font-weight: 900; color: #f0b90b; }
         .stats .card .label { color: #94a3b8; font-size: 13px; }
-
         .mail-item {
             background: rgba(255,255,255,0.04);
             border-radius: 14px;
             padding: 16px 20px;
             margin-bottom: 12px;
-            border-left: 4px solid #4d96ff;
+            border-left: 4px solid #f0b90b;
             transition: all 0.4s ease;
             cursor: pointer;
             animation: fadeIn 0.5s ease-out;
@@ -94,10 +93,7 @@
             transform: translateX(4px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
-        .mail-item.unread { 
-            border-left-color: #f59e0b; 
-            background: rgba(245,158,11,0.04);
-        }
+        .mail-item.unread { border-left-color: #f59e0b; background: rgba(245,158,11,0.04); }
         .mail-item .mail-header {
             display: flex;
             justify-content: space-between;
@@ -106,7 +102,7 @@
             margin-bottom: 4px;
         }
         .mail-item .mail-from { color: #ffffff; font-weight: 700; font-size: 16px; }
-        .mail-item .mail-service { color: #4d96ff; font-size: 13px; font-weight: 600; }
+        .mail-item .mail-service { color: #f0b90b; font-size: 13px; font-weight: 600; }
         .mail-item .mail-date { color: #64748b; font-size: 13px; }
         .mail-item .mail-subject { color: #94a3b8; font-size: 14px; margin: 4px 0; }
         .mail-item .mail-body {
@@ -154,7 +150,7 @@
             border-top: 1px solid #1e293b;
             padding-top: 14px;
         }
-        .footer a { color: #4d96ff; text-decoration: none; }
+        .footer a { color: #f0b90b; text-decoration: none; }
         .btn-back {
             padding: 8px 20px;
             border: none;
@@ -175,14 +171,6 @@
         }
         .badge-expire.urgent { background: rgba(239,68,68,0.2); color: #ef4444; }
         .badge-expire.normal { background: rgba(100,116,139,0.2); color: #94a3b8; }
-        .refresh-spin {
-            display: inline-block;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         @media (max-width: 600px) { 
             .container { padding: 18px; } 
             .stats { flex-direction: column; }
@@ -191,45 +179,35 @@
     </style>
 </head>
 <body>
-
 <div class="container" id="app">
-    <h1>🔒 Admin — Boîte de réception</h1>
-
-    <!-- Login -->
+    <h1>🔒 Administration — Boîte de réception</h1>
     <div id="loginBox" class="login-box">
-        <input type="password" id="passInput" placeholder="Mot de passe admin" onkeypress="if(event.key==='Enter') login()">
+        <input type="password" id="passInput" placeholder="Mot de passe administrateur" onkeypress="if(event.key==='Enter') login()">
         <button onclick="login()">🔓 Accéder</button>
         <div id="lockMsg" class="lock-msg"></div>
     </div>
-
-    <!-- Admin content -->
     <div id="adminContent" class="admin-content">
         <div class="stats">
             <div class="card"><div class="number" id="totalMessages">0</div><div class="label">📩 Total</div></div>
             <div class="card"><div class="number" id="unreadMessages">0</div><div class="label">🆕 Non lus</div></div>
             <div class="card"><div class="number" id="expiringSoon">0</div><div class="label">⏳ Expire bientôt</div></div>
         </div>
-
         <div id="messagesList"></div>
-
         <div style="text-align:center;margin-top:15px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
             <button class="btn-back" onclick="refreshMessages()">🔄 Rafraîchir</button>
             <button class="btn-back" onclick="logout()">🚪 Déconnexion</button>
         </div>
     </div>
-
     <div class="footer">
         🔒 Accès sécurisé • <a href="index.html">⬅ Retour au site</a>
     </div>
 </div>
-
 <script>
     const ADMIN_PASS = 'RickRoss1994@';
     const UNLOCK_PASS = 'RickRoss1994';
     let attempts = 0;
     let locked = false;
     let isLoggedIn = false;
-
     function login() {
         if (locked) {
             const input = document.getElementById('passInput').value;
@@ -247,7 +225,6 @@
                 return;
             }
         }
-
         const pwd = document.getElementById('passInput').value;
         if (pwd === ADMIN_PASS) {
             isLoggedIn = true;
@@ -268,7 +245,6 @@
             }
         }
     }
-
     function logout() {
         isLoggedIn = false;
         document.getElementById('loginBox').style.display = 'block';
@@ -276,9 +252,7 @@
         document.getElementById('passInput').value = '';
         document.getElementById('lockMsg').textContent = '';
     }
-
     function refreshMessages() { if (isLoggedIn) loadMessages(); }
-
     function loadMessages() {
         const list = document.getElementById('messagesList');
         list.innerHTML = '<div class="empty">⏳ Chargement...</div>';
@@ -299,7 +273,6 @@
             list.innerHTML = '<div class="empty">❌ Erreur de connexion.</div>';
         });
     }
-
     function renderMessages(messages) {
         const container = document.getElementById('messagesList');
         const total = messages.length;
@@ -308,18 +281,14 @@
             const daysLeft = (new Date(m.expire) - new Date()) / (1000 * 60 * 60 * 24);
             return daysLeft <= 3 && daysLeft > 0;
         }).length;
-
         document.getElementById('totalMessages').textContent = total;
         document.getElementById('unreadMessages').textContent = unread;
         document.getElementById('expiringSoon').textContent = expiring;
-
         if (messages.length === 0) {
             container.innerHTML = '<div class="empty">📭 Aucun message reçu.</div>';
             return;
         }
-
         messages.sort((a, b) => new Date(b.date) - new Date(a.date));
-
         let html = '';
         messages.forEach((m) => {
             const isUnread = !m.vu;
@@ -330,7 +299,6 @@
                 day: '2-digit', month: '2-digit', year: 'numeric',
                 hour: '2-digit', minute: '2-digit'
             });
-
             html += `
                 <div class="mail-item ${isUnread ? 'unread' : ''}">
                     <div class="mail-header">
@@ -365,12 +333,10 @@
         });
         container.innerHTML = html;
     }
-
     function toggleBody(id) {
         const body = document.getElementById('body_' + id);
         if (body) body.classList.toggle('open');
     }
-
     function deleteMessage(id) {
         if (!confirm('🗑️ Supprimer ce message définitivement ?')) return;
         fetch('https://sitmessag.onrender.com/api/delete', {
@@ -384,7 +350,6 @@
             else alert('❌ Erreur lors de la suppression.');
         });
     }
-
     function markAsRead(id) {
         fetch('https://sitmessag.onrender.com/api/read', {
             method: 'POST',
