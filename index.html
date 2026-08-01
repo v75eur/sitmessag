@@ -900,24 +900,23 @@
             <span style="--i:14">S</span><span style="--i:15">O</span><span style="--i:16">L</span><span style="--i:17">U</span><span style="--i:18">T</span><span style="--i:19">I</span><span style="--i:20">O</span><span style="--i:21">N</span><span style="--i:22">S</span>
         </div>
     </div>
-    <div class="pyfiglet-sub">SOLUTIONS DIGITALES SUR MESURE</div>
+    <div class="pyfiglet-sub" id="pySub">SOLUTIONS DIGITALES SUR MESURE</div>
     
     <div class="dream-banner">
         <span class="big-icon">✦</span>
-        <div class="title">Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span></div>
-        <div class="sub">
+        <div class="title" id="dreamTitle">Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span></div>
+        <div class="sub" id="dreamSub">
             <span class="hl">QWANTUM</span> c'est l'allié de votre transformation digitale.<br>
             Des solutions sur mesure pour <span class="hl">automatiser</span>, <span class="hl">optimiser</span> et <span class="hl">révolutionner</span> votre activité.
         </div>
-        <div class="tags">
-            <span>Innovation</span>
-            <span>Intelligence Artificielle</span>
-            <span>Performance</span>
-            <span>Excellence</span>
+        <div class="tags" id="dreamTags">
+            <span id="tag1">Innovation</span>
+            <span id="tag2">Intelligence Artificielle</span>
+            <span id="tag3">Performance</span>
+            <span id="tag4">Excellence</span>
         </div>
     </div>
     
-    <!-- ===== FAQ EN HAUT ===== -->
     <div class="faq" style="margin-top:0; border-top:none; padding-top:0;">
         <h3 id="faqTitle">Questions fréquentes</h3>
         <div class="faq-item" onclick="toggleFaq(this)">
@@ -1021,7 +1020,7 @@
     <div class="guarantee">
         <div class="text" id="gtext">Satisfaction 100% garantie ou remboursé</div>
         <div class="sub" id="gsub">Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
-        <div class="sub" style="margin-top:8px; font-size:13px; color:#64748b; border-top:1px solid rgba(255,255,255,0.03); padding-top:8px;">
+        <div class="sub" style="margin-top:8px; font-size:13px; color:#64748b; border-top:1px solid rgba(255,255,255,0.03); padding-top:8px;" id="gsub2">
             Remplissez le formulaire, exposez votre problème, <span class="hl">nous verrons ce qu'il est possible de faire</span>.
         </div>
     </div>
@@ -1073,24 +1072,24 @@
         <div class="title" id="csTitle">ASSISTANT IA</div>
         <div class="desc" id="csDesc">Un agent intelligent pour répondre à vos questions 24h/24.<br><span style="color:#f0b90b;font-weight:600;" id="csLink">Lien disponible très bientôt</span></div>
         <div class="tags">
-            <span>24h/24</span>
-            <span>IA avancée</span>
-            <span>Multi-langues</span>
+            <span id="csTag1">24h/24</span>
+            <span id="csTag2">IA avancée</span>
+            <span id="csTag3">Multi-langues</span>
         </div>
     </div>
     
     <div class="footer">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;text-align:left;">
             <div>
-                <strong style="color:#f0b90b;">Sécurité</strong>
+                <strong style="color:#f0b90b;" id="fSec">Sécurité</strong>
                 <p><span id="f1a">SSL sécurisé</span><br><span id="f1b">Données cryptées</span><br><span id="f1c">RGPD conforme</span></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;">Légal</strong>
+                <strong style="color:#f0b90b;" id="fLeg">Légal</strong>
                 <p><a href="#" id="f2a">Mentions légales</a><br><a href="#" id="f2b">Politique confidentialité</a><br><a href="#" id="f2c">CGV</a></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;">Contact</strong>
+                <strong style="color:#f0b90b;" id="fCont">Contact</strong>
                 <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;">+229 60 31 54 58</a><br><span id="f3a">9h-18h (Lun-Ven)</span></p>
             </div>
         </div>
@@ -1154,6 +1153,10 @@ function closePopup() {
 
 const T = {
     fr: {
+        pySub: 'SOLUTIONS DIGITALES SUR MESURE',
+        dreamTitle: 'Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span>',
+        dreamSub: '<span class="hl">QWANTUM</span> c\'est l\'allié de votre transformation digitale.<br>Des solutions sur mesure pour <span class="hl">automatiser</span>, <span class="hl">optimiser</span> et <span class="hl">révolutionner</span> votre activité.',
+        tag1: 'Innovation', tag2: 'Intelligence Artificielle', tag3: 'Performance', tag4: 'Excellence',
         srv1: 'BOT TELEGRAM', srv2: 'ASSISTANT IA', srv3: 'BOT TRADING',
         srv4: 'PACK MAILS', srv5: 'CRÉATION SITES', srv6: 'AUTRES SERVICES',
         d1: 'Automatisation complète de votre groupe', d2: 'Agent intelligent pour vos clients',
@@ -1172,6 +1175,7 @@ const T = {
         assistantLabel: 'Assistant IA', assistantSub: 'Bientôt disponible',
         gtext: 'Satisfaction 100% garantie ou remboursé',
         gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
+        gsub2: 'Remplissez le formulaire, exposez votre problème, <span class="hl">nous verrons ce qu\'il est possible de faire</span>.',
         l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'WhatsApp / Téléphone',
         l5: 'Email', l6: 'Âge', l7: 'Réseaux sociaux (optionnel)', l8: 'Votre demande',
         h1: 'Important :', h1b: 'Nous vous recontacterons sur ce numéro',
@@ -1190,11 +1194,17 @@ const T = {
         csLabel: 'Prochainement', csTitle: 'ASSISTANT IA',
         csDesc: 'Un agent intelligent pour répondre à vos questions 24h/24.',
         csLink: 'Lien disponible très bientôt',
+        csTag1: '24h/24', csTag2: 'IA avancée', csTag3: 'Multi-langues',
+        fSec: 'Sécurité', fLeg: 'Légal', fCont: 'Contact',
         f1a: 'SSL sécurisé', f1b: 'Données cryptées', f1c: 'RGPD conforme',
         f2a: 'Mentions légales', f2b: 'Politique confidentialité', f2c: 'CGV',
         f3a: '9h-18h (Lun-Ven)', fb1: 'Tous droits réservés', fb2: 'Dernière mise à jour'
     },
     en: {
+        pySub: 'CUSTOM DIGITAL SOLUTIONS',
+        dreamTitle: 'Dream <span class="gold">big</span>, we make it <span class="gold">real</span>',
+        dreamSub: '<span class="hl">QWANTUM</span> is your ally for digital transformation.<br>Custom solutions to <span class="hl">automate</span>, <span class="hl">optimize</span> and <span class="hl">revolutionize</span> your business.',
+        tag1: 'Innovation', tag2: 'Artificial Intelligence', tag3: 'Performance', tag4: 'Excellence',
         srv1: 'TELEGRAM BOT', srv2: 'AI ASSISTANT', srv3: 'TRADING BOT',
         srv4: 'EMAIL PACKS', srv5: 'WEBSITE CREATION', srv6: 'OTHER SERVICES',
         d1: 'Full group automation', d2: 'Intelligent agent for your clients',
@@ -1213,6 +1223,7 @@ const T = {
         assistantLabel: 'AI Assistant', assistantSub: 'Coming soon',
         gtext: '100% satisfaction guaranteed or refunded',
         gsub: 'If you are not satisfied, we will refund you in full.',
+        gsub2: 'Fill out the form, explain your problem, <span class="hl">we will see what can be done</span>.',
         l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp / Phone',
         l5: 'Email', l6: 'Age', l7: 'Social networks (optional)', l8: 'Your request',
         h1: 'Important:', h1b: 'We will contact you on this number',
@@ -1231,6 +1242,8 @@ const T = {
         csLabel: 'Coming soon', csTitle: 'AI ASSISTANT',
         csDesc: 'An intelligent agent to answer your questions 24/7.',
         csLink: 'Link available very soon',
+        csTag1: '24/7', csTag2: 'Advanced AI', csTag3: 'Multi-language',
+        fSec: 'Security', fLeg: 'Legal', fCont: 'Contact',
         f1a: 'SSL secured', f1b: 'Encrypted data', f1c: 'GDPR compliant',
         f2a: 'Legal notices', f2b: 'Privacy policy', f2c: 'Terms',
         f3a: '9am-6pm (Mon-Fri)', fb1: 'All rights reserved', fb2: 'Last update'
@@ -1248,6 +1261,14 @@ function switchLang(lang) {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
     
+    document.getElementById('pySub').textContent = t.pySub;
+    document.getElementById('dreamTitle').innerHTML = t.dreamTitle;
+    document.getElementById('dreamSub').innerHTML = t.dreamSub;
+    document.getElementById('tag1').textContent = t.tag1;
+    document.getElementById('tag2').textContent = t.tag2;
+    document.getElementById('tag3').textContent = t.tag3;
+    document.getElementById('tag4').textContent = t.tag4;
+    
     document.getElementById('srv1').textContent = t.srv1;
     document.getElementById('srv2').textContent = t.srv2;
     document.getElementById('srv3').textContent = t.srv3;
@@ -1264,6 +1285,7 @@ function switchLang(lang) {
     document.getElementById('b2').textContent = t.b2;
     document.getElementById('b3').textContent = t.b3;
     document.getElementById('b4').textContent = t.b4;
+    
     document.getElementById('dt1').textContent = t.dt1;
     document.getElementById('dt2').textContent = t.dt2;
     document.getElementById('dt3').textContent = t.dt3;
@@ -1276,12 +1298,16 @@ function switchLang(lang) {
     document.getElementById('dc4').innerHTML = t.dc4;
     document.getElementById('dc5').innerHTML = t.dc5;
     document.getElementById('dc6').innerHTML = t.dc6;
+    
     document.getElementById('whatsappLabel').textContent = t.whatsappLabel;
     document.getElementById('whatsappSub').textContent = t.whatsappSub;
     document.getElementById('assistantLabel').textContent = t.assistantLabel;
     document.getElementById('assistantSub').textContent = t.assistantSub;
+    
     document.getElementById('gtext').textContent = t.gtext;
     document.getElementById('gsub').textContent = t.gsub;
+    document.getElementById('gsub2').innerHTML = t.gsub2;
+    
     document.getElementById('l1').innerHTML = t.l1 + ' <span class="required">*</span>';
     document.getElementById('l2').innerHTML = t.l2 + ' <span class="required">*</span>';
     document.getElementById('l3').innerHTML = t.l3 + ' <span class="required">*</span>';
@@ -1298,6 +1324,7 @@ function switchLang(lang) {
     document.getElementById('h4').textContent = t.h4;
     document.getElementById('sendBtn').textContent = t.btn;
     document.getElementById('loadingText').textContent = t.loading;
+    
     document.getElementById('faqTitle').textContent = t.faqTitle;
     document.getElementById('fq1').textContent = t.fq1;
     document.getElementById('fa1').textContent = t.fa1;
@@ -1307,9 +1334,17 @@ function switchLang(lang) {
     document.getElementById('fa3').textContent = t.fa3;
     document.getElementById('fq4').textContent = t.fq4;
     document.getElementById('fa4').textContent = t.fa4;
+    
     document.getElementById('csLabel').textContent = t.csLabel;
     document.getElementById('csTitle').textContent = t.csTitle;
     document.getElementById('csDesc').innerHTML = t.csDesc + '<br><span style="color:#f0b90b;font-weight:600;" id="csLink">' + t.csLink + '</span>';
+    document.getElementById('csTag1').textContent = t.csTag1;
+    document.getElementById('csTag2').textContent = t.csTag2;
+    document.getElementById('csTag3').textContent = t.csTag3;
+    
+    document.getElementById('fSec').textContent = t.fSec;
+    document.getElementById('fLeg').textContent = t.fLeg;
+    document.getElementById('fCont').textContent = t.fCont;
     document.getElementById('f1a').textContent = t.f1a;
     document.getElementById('f1b').textContent = t.f1b;
     document.getElementById('f1c').textContent = t.f1c;
