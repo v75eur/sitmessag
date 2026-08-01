@@ -5,76 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QWANTUM - Solutions Digitales</title>
     <style>
+        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             min-height: 100vh;
             background: #0a0a1a;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
+            line-height: 1.6;
+            color: #ffffff;
         }
         
-        .bg-animation {
+        /* ===== ANIMATIONS ARRIÈRE-PLAN ===== */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            overflow: hidden;
             pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 30s linear infinite;
         }
         
-        .bg-animation .orb {
-            position: absolute;
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+        
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            filter: blur(80px);
-            animation: floatOrb 25s ease-in-out infinite;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: glowFloat 20s ease-in-out infinite;
         }
         
-        .bg-animation .orb:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            top: -150px;
-            left: -150px;
-            background: rgba(240,185,11,0.04);
+        .bg-glow:nth-child(1) {
+            top: -200px;
+            right: -200px;
+            background: #f0b90b;
             animation-delay: 0s;
         }
-        .bg-animation .orb:nth-child(2) {
-            width: 400px;
-            height: 400px;
-            bottom: -100px;
-            right: -100px;
-            background: rgba(77,150,255,0.03);
-            animation-delay: -8s;
+        
+        .bg-glow:nth-child(2) {
+            bottom: -200px;
+            left: -200px;
+            background: #4d96ff;
+            animation-delay: -7s;
         }
-        .bg-animation .orb:nth-child(3) {
-            width: 300px;
-            height: 300px;
+        
+        .bg-glow:nth-child(3) {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(34,197,94,0.02);
-            animation-delay: -15s;
+            background: #22c55e;
+            animation-delay: -14s;
+            width: 400px;
+            height: 400px;
         }
         
-        @keyframes floatOrb {
+        @keyframes glowFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(40px, -40px) scale(1.1); }
-            66% { transform: translate(-30px, 30px) scale(0.9); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
         
-        .bg-animation .particle {
+        /* ===== PARTICULES ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(240,185,11,0.06);
+            width: 2px;
+            height: 2px;
+            background: rgba(240,185,11,0.15);
             border-radius: 50%;
-            animation: particleFloat 20s linear infinite;
+            animation: particleFloat 25s linear infinite;
         }
         
         @keyframes particleFloat {
@@ -84,180 +112,246 @@
             100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
         
+        /* ===== CONTAINER ===== */
         .container {
             position: relative;
             z-index: 1;
-            max-width: 960px;
+            max-width: 1000px;
             width: 100%;
             background: rgba(255,255,255,0.02);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 40px;
-            padding: 45px 40px;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 48px;
+            padding: 50px 45px;
             border: 1px solid rgba(255,255,255,0.04);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            animation: containerFade 1.2s ease-out;
+            box-shadow: 0 50px 120px rgba(0,0,0,0.5);
+            animation: containerIn 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        @keyframes containerFade {
-            from { opacity: 0; transform: translateY(40px) scale(0.96); }
+        @keyframes containerIn {
+            from { opacity: 0; transform: translateY(50px) scale(0.96); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
+        /* ===== PYFIGLET ===== */
         .pyfiglet {
             text-align: center;
             font-family: 'Courier New', monospace;
-            font-size: 30px;
+            font-size: 34px;
             font-weight: 900;
-            line-height: 1.15;
-            color: #ffffff;
-            margin-bottom: 4px;
+            line-height: 1.1;
+            margin-bottom: 2px;
             letter-spacing: 4px;
-            animation: pyfigletGlow 2s ease-in-out infinite;
+            animation: glowPulse 3s ease-in-out infinite;
         }
         
-        @keyframes pyfigletGlow {
-            0%, 100% { text-shadow: 0 0 20px rgba(240,185,11,0.1); }
-            50% { text-shadow: 0 0 40px rgba(240,185,11,0.3), 0 0 60px rgba(240,185,11,0.1); }
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 30px rgba(240,185,11,0.05); }
+            50% { text-shadow: 0 0 60px rgba(240,185,11,0.12), 0 0 80px rgba(240,185,11,0.05); }
         }
         
-        .pyfiglet .line1 { color: #f0b90b; }
-        .pyfiglet .line2 { color: #4d96ff; }
-        .pyfiglet .line3 { color: #22c55e; }
+        .pyfiglet .l1 { color: #f0b90b; }
+        .pyfiglet .l2 { color: #4d96ff; }
+        .pyfiglet .l3 { color: #22c55e; }
         
         .pyfiglet span {
             display: inline-block;
-            animation: letterPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: letterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
-        .pyfiglet .line1 span { animation-delay: calc(0.04s * var(--i, 0)); }
-        .pyfiglet .line2 span { animation-delay: calc(0.04s * var(--i, 0) + 0.3s); }
-        .pyfiglet .line3 span { animation-delay: calc(0.04s * var(--i, 0) + 0.6s); }
         
-        @keyframes letterPop {
-            0% { opacity: 0; transform: translateY(-25px) scale(0.7) rotate(-10deg); }
+        .pyfiglet .l1 span { animation-delay: calc(0.04s * var(--i, 0)); }
+        .pyfiglet .l2 span { animation-delay: calc(0.04s * var(--i, 0) + 0.3s); }
+        .pyfiglet .l3 span { animation-delay: calc(0.04s * var(--i, 0) + 0.6s); }
+        
+        @keyframes letterIn {
+            0% { opacity: 0; transform: translateY(-30px) scale(0.7) rotate(-8deg); }
             100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
         }
         
         .pyfiglet span:hover {
             color: #f0b90b;
-            transform: scale(1.15) translateY(-4px);
+            transform: scale(1.1) translateY(-3px);
             transition: all 0.3s ease;
             cursor: default;
         }
         
         .pyfiglet-sub {
             text-align: center;
-            color: #94a3b8;
-            font-size: 14px;
-            margin-top: -2px;
-            margin-bottom: 18px;
-            letter-spacing: 8px;
+            color: rgba(148, 163, 184, 0.6);
+            font-size: 13px;
+            letter-spacing: 10px;
             font-weight: 300;
-            animation: fadeInSub 1s ease-out 1s both;
+            margin-bottom: 28px;
+            animation: fadeUp 1s ease-out 1s both;
         }
         
-        @keyframes fadeInSub {
-            from { opacity: 0; transform: translateY(-10px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .dream-banner {
+        /* ===== HERO BANNER ===== */
+        .hero {
             text-align: center;
-            padding: 22px 24px;
-            margin-bottom: 28px;
+            padding: 28px 24px;
+            margin-bottom: 30px;
             background: linear-gradient(135deg, rgba(240,185,11,0.03), rgba(77,150,255,0.02));
-            border-radius: 20px;
-            border: 1px solid rgba(240,185,11,0.06);
-            animation: glowPulse 3s ease-in-out infinite;
+            border-radius: 24px;
+            border: 1px solid rgba(240,185,11,0.04);
         }
         
-        @keyframes glowPulse {
-            0%, 100% { border-color: rgba(240,185,11,0.06); box-shadow: 0 0 30px rgba(240,185,11,0); }
-            50% { border-color: rgba(240,185,11,0.12); box-shadow: 0 0 50px rgba(240,185,11,0.03); }
-        }
-        
-        .dream-banner .big-icon {
-            font-size: 48px;
+        .hero .icon {
+            font-size: 44px;
             display: block;
             margin-bottom: 8px;
-            animation: floatIcon 3s ease-in-out infinite;
+            animation: floatY 4s ease-in-out infinite;
         }
         
-        @keyframes floatIcon {
+        @keyframes floatY {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
         }
         
-        .dream-banner .title {
-            font-size: 22px;
+        .hero h2 {
+            font-size: 26px;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 6px;
         }
         
-        .dream-banner .title .gold { color: #f0b90b; }
+        .hero h2 .gold { color: #f0b90b; }
         
-        .dream-banner .sub {
+        .hero p {
             color: #94a3b8;
             font-size: 15px;
-            line-height: 1.7;
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
+            line-height: 1.7;
         }
         
-        .dream-banner .sub .hl { color: #f0b90b; font-weight: 600; }
+        .hero p .hl { color: #f0b90b; font-weight: 600; }
         
-        .dream-banner .tags {
+        .hero .tags {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             margin-top: 12px;
         }
         
-        .dream-banner .tags span {
-            padding: 4px 18px;
+        .hero .tags span {
+            padding: 4px 16px;
             background: rgba(255,255,255,0.03);
             border-radius: 20px;
             font-size: 11px;
             color: #94a3b8;
             border: 1px solid rgba(255,255,255,0.04);
-            font-weight: 600;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         
-        .lang-selector {
+        /* ===== FAQ TOP ===== */
+        .faq-top {
+            margin-bottom: 28px;
+        }
+        
+        .faq-top h3 {
+            color: #f0b90b;
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .faq-top .item {
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            padding: 14px 20px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(240,185,11,0.04);
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        
+        .faq-top .item:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(240,185,11,0.08);
+        }
+        
+        .faq-top .item .q {
+            color: #cbd5e1;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-top .item .q .arrow {
+            color: #f0b90b;
+            transition: transform 0.4s ease;
+            font-size: 12px;
+        }
+        
+        .faq-top .item .q .arrow.open {
+            transform: rotate(180deg);
+        }
+        
+        .faq-top .item .a {
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-top: 8px;
+            display: none;
+            animation: fadeSlide 0.4s ease-out;
+        }
+        
+        .faq-top .item .a.open {
+            display: block;
+        }
+        
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ===== LANG SELECTOR ===== */
+        .lang-bar {
             display: flex;
             justify-content: center;
             gap: 6px;
             flex-wrap: wrap;
-            margin: 16px 0 24px;
+            margin-bottom: 28px;
         }
         
-        .lang-selector button {
+        .lang-bar button {
             padding: 6px 18px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: 20px;
             background: rgba(255,255,255,0.02);
             color: #94a3b8;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: inherit;
         }
         
-        .lang-selector button:hover {
-            border-color: #f0b90b;
+        .lang-bar button:hover {
+            border-color: rgba(240,185,11,0.15);
             color: #f0b90b;
             transform: translateY(-2px);
         }
         
-        .lang-selector button.active {
+        .lang-bar button.active {
             border-color: #f0b90b;
             background: rgba(240,185,11,0.06);
             color: #f0b90b;
         }
         
+        /* ===== SERVICES ===== */
         .services {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -267,12 +361,12 @@
         
         .service-card {
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.03);
             border-radius: 20px;
-            padding: 24px 16px;
+            padding: 24px 14px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
@@ -284,7 +378,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(240,185,11,0.03), transparent);
+            background: linear-gradient(90deg, transparent, rgba(240,185,11,0.02), transparent);
             transition: left 0.8s ease;
         }
         
@@ -293,126 +387,98 @@
         }
         
         .service-card:hover {
-            border-color: rgba(240,185,11,0.15);
-            transform: translateY(-8px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            border-color: rgba(240,185,11,0.08);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
         
         .service-card.selected {
             border-color: #f0b90b;
-            background: rgba(240,185,11,0.03);
-            box-shadow: 0 0 80px rgba(240,185,11,0.02);
+            background: rgba(240,185,11,0.02);
+            box-shadow: 0 0 60px rgba(240,185,11,0.02);
         }
         
         .service-card .icon {
-            font-size: 42px;
+            font-size: 36px;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .service-card .name {
             color: #ffffff;
             font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-weight: 600;
+            margin-bottom: 3px;
         }
         
         .service-card .desc {
             color: #94a3b8;
             font-size: 12px;
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         .service-card .badge {
             display: inline-block;
             background: linear-gradient(135deg, #f0b90b, #f59e0b);
             color: #0a0a1a;
-            font-size: 8px;
+            font-size: 7px;
             font-weight: 800;
             padding: 2px 14px;
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-top: 8px;
+            margin-top: 6px;
         }
         
-        .detail-box {
+        /* ===== DETAIL ===== */
+        .detail {
             background: rgba(255,255,255,0.02);
             border-radius: 18px;
             padding: 22px 26px;
             margin-bottom: 24px;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.02);
             display: none;
-            animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        .detail-box.active {
+        .detail.active {
             display: block;
-            border-color: rgba(240,185,11,0.08);
-            background: rgba(240,185,11,0.02);
+            border-color: rgba(240,185,11,0.06);
+            background: rgba(240,185,11,0.01);
         }
         
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-15px); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-12px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .detail-box .title {
+        .detail .title {
             color: #f0b90b;
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
         }
         
-        .detail-box .content {
+        .detail .content {
             color: #cbd5e1;
             font-size: 14px;
             line-height: 1.9;
         }
         
-        .detail-box .content .hl { color: #f0b90b; font-weight: 600; }
-        .detail-box .content .ok { color: #22c55e; font-weight: 600; }
+        .detail .content .hl { color: #f0b90b; font-weight: 500; }
+        .detail .content .ok { color: #22c55e; font-weight: 500; }
         
-        .guarantee {
-            background: rgba(240,185,11,0.02);
-            border-radius: 18px;
-            padding: 18px 22px;
-            text-align: center;
-            border: 2px solid rgba(240,185,11,0.06);
-            margin-bottom: 22px;
-            animation: guaranteeBlink 2s ease-in-out infinite;
-            cursor: default;
-        }
-        
-        @keyframes guaranteeBlink {
-            0%, 100% { border-color: rgba(240,185,11,0.06); box-shadow: 0 0 20px rgba(240,185,11,0); }
-            50% { border-color: rgba(240,185,11,0.3); box-shadow: 0 0 40px rgba(240,185,11,0.05); }
-        }
-        
-        .guarantee .text {
-            color: #f0b90b;
-            font-weight: 700;
-            font-size: 16px;
-        }
-        
-        .guarantee .sub {
-            color: #94a3b8;
-            font-size: 13px;
-            margin-top: 4px;
-        }
-        
-        .guarantee .sub .hl { color: #f0b90b; font-weight: 600; }
-        
+        /* ===== CONTACT ===== */
         .contact {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
         
         .contact a {
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.03);
             border-radius: 18px;
             padding: 20px 16px;
             text-align: center;
@@ -422,35 +488,39 @@
         }
         
         .contact a:hover {
-            border-color: #f0b90b;
+            border-color: rgba(240,185,11,0.1);
             transform: translateY(-4px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
         
-        .contact a .icon {
-            font-size: 34px;
-            display: block;
-            margin-bottom: 4px;
+        .contact a .icon { font-size: 30px; display: block; margin-bottom: 4px; }
+        .contact a .label { font-size: 14px; font-weight: 600; }
+        .contact a .sub { font-size: 12px; color: #94a3b8; }
+        
+        .contact .wa { border-color: rgba(34,197,94,0.06); }
+        .contact .wa:hover { border-color: #22c55e; }
+        
+        /* ===== GARANTIE ===== */
+        .guarantee {
+            background: rgba(240,185,11,0.02);
+            border-radius: 18px;
+            padding: 18px 22px;
+            text-align: center;
+            border: 1px solid rgba(240,185,11,0.04);
+            margin-bottom: 24px;
+            animation: borderPulse 3s ease-in-out infinite;
         }
         
-        .contact a .label {
-            font-size: 14px;
-            font-weight: 600;
+        @keyframes borderPulse {
+            0%, 100% { border-color: rgba(240,185,11,0.04); }
+            50% { border-color: rgba(240,185,11,0.1); }
         }
         
-        .contact a .sub {
-            font-size: 12px;
-            color: #94a3b8;
-        }
+        .guarantee .text { color: #f0b90b; font-weight: 600; font-size: 15px; }
+        .guarantee .sub { color: #94a3b8; font-size: 13px; margin-top: 4px; }
+        .guarantee .sub .hl { color: #f0b90b; font-weight: 500; }
         
-        .contact .whatsapp {
-            border-color: rgba(34,197,94,0.08);
-        }
-        
-        .contact .whatsapp:hover {
-            border-color: #22c55e;
-        }
-        
+        /* ===== FORM ===== */
         .form-group {
             margin-bottom: 14px;
         }
@@ -459,7 +529,7 @@
             display: block;
             color: #cbd5e1;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 4px;
         }
         
@@ -470,8 +540,8 @@
             width: 100%;
             padding: 14px 20px;
             border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.05);
-            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.04);
+            background: rgba(0,0,0,0.25);
             color: #ffffff;
             font-size: 14px;
             font-family: inherit;
@@ -481,8 +551,9 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #f0b90b;
-            box-shadow: 0 0 40px rgba(240,185,11,0.02);
+            border-color: rgba(240,185,11,0.15);
+            box-shadow: 0 0 40px rgba(240,185,11,0.01);
+            background: rgba(0,0,0,0.35);
         }
         
         .form-group textarea {
@@ -496,8 +567,9 @@
             margin-top: 4px;
         }
         
-        .form-group .hint .hl { color: #f0b90b; font-weight: 600; }
+        .form-group .hint .hl { color: #f0b90b; font-weight: 500; }
         
+        /* ===== BTN ===== */
         .btn {
             width: 100%;
             padding: 20px;
@@ -505,14 +577,15 @@
             border-radius: 16px;
             background: linear-gradient(135deg, #f0b90b, #f59e0b);
             color: #0a0a1a;
-            font-size: 18px;
-            font-weight: 800;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.4s ease;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             position: relative;
             overflow: hidden;
+            font-family: inherit;
         }
         
         .btn::before {
@@ -522,7 +595,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             transition: left 0.8s ease;
         }
         
@@ -531,8 +604,8 @@
         }
         
         .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 50px rgba(240,185,11,0.15);
+            transform: scale(1.01);
+            box-shadow: 0 10px 50px rgba(240,185,11,0.1);
         }
         
         .btn:disabled {
@@ -541,11 +614,12 @@
             transform: none;
         }
         
+        /* ===== TOAST ===== */
         .toast {
             display: none;
             padding: 14px 20px;
             border-radius: 14px;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 14px;
             margin-top: 14px;
             text-align: center;
@@ -553,15 +627,15 @@
         
         .toast.success {
             display: block;
-            background: rgba(16,185,129,0.06);
-            border: 1px solid #10b981;
+            background: rgba(16,185,129,0.04);
+            border: 1px solid rgba(16,185,129,0.1);
             color: #10b981;
         }
         
         .toast.error {
             display: block;
-            background: rgba(239,68,68,0.06);
-            border: 1px solid #ef4444;
+            background: rgba(239,68,68,0.04);
+            border: 1px solid rgba(239,68,68,0.1);
             color: #ef4444;
         }
         
@@ -583,6 +657,7 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* ===== POPUP ===== */
         .popup-overlay {
             display: none;
             position: fixed;
@@ -590,20 +665,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 9999;
             justify-content: center;
             align-items: center;
-            animation: popupFade 0.3s ease-out;
+            animation: fadeIn 0.3s ease-out;
         }
         
         .popup-overlay.active {
             display: flex;
         }
         
-        @keyframes popupFade {
+        @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
@@ -611,37 +686,37 @@
         .popup-box {
             background: linear-gradient(160deg, #1a1a2e, #0f0f1a);
             border-radius: 32px;
-            padding: 50px 45px;
-            max-width: 450px;
+            padding: 48px 44px;
+            max-width: 440px;
             width: 90%;
             text-align: center;
-            border: 1px solid rgba(240,185,11,0.06);
-            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
-            animation: popupScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(240,185,11,0.04);
+            box-shadow: 0 60px 120px rgba(0,0,0,0.6);
+            animation: popScale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        @keyframes popupScale {
-            from { transform: scale(0.8); opacity: 0; }
+        @keyframes popScale {
+            from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
         
         .popup-box .check {
-            font-size: 72px;
+            font-size: 64px;
             display: block;
-            margin-bottom: 10px;
-            animation: checkPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-bottom: 8px;
+            animation: checkPop 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         @keyframes checkPop {
-            from { transform: scale(0) rotate(-30deg); }
+            from { transform: scale(0) rotate(-20deg); }
             to { transform: scale(1) rotate(0deg); }
         }
         
         .popup-box .title {
             color: #ffffff;
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 8px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
         
         .popup-box .title .gold { color: #f0b90b; }
@@ -659,26 +734,27 @@
             border-radius: 14px;
             background: linear-gradient(135deg, #f0b90b, #f59e0b);
             color: #0a0a1a;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: inherit;
         }
         
         .popup-box .btn-popup:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 40px rgba(240,185,11,0.15);
+            transform: scale(1.04);
+            box-shadow: 0 8px 40px rgba(240,185,11,0.1);
         }
         
         .popup-box .loader-ring {
             display: inline-block;
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(240,185,11,0.06);
+            width: 56px;
+            height: 56px;
+            border: 3px solid rgba(240,185,11,0.04);
             border-top: 3px solid #f0b90b;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         
         .popup-box .loader-text {
@@ -686,39 +762,40 @@
             font-size: 14px;
         }
         
-        .coming-soon {
+        /* ===== COMING SOON ===== */
+        .coming {
             margin-top: 30px;
             padding: 30px;
             background: rgba(255,255,255,0.02);
             border-radius: 18px;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.02);
             text-align: center;
         }
         
-        .coming-soon .label {
-            font-size: 12px;
+        .coming .label {
+            font-size: 11px;
             color: #f0b90b;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 8px;
             text-transform: uppercase;
         }
         
-        .coming-soon .title {
-            font-size: 32px;
+        .coming .title {
+            font-size: 30px;
             font-weight: 800;
             color: #ffffff;
-            margin: 6px 0;
+            margin: 4px 0;
         }
         
-        .coming-soon .desc {
+        .coming .desc {
             color: #94a3b8;
             font-size: 14px;
-            max-width: 450px;
+            max-width: 420px;
             margin: 0 auto;
             line-height: 1.8;
         }
         
-        .coming-soon .tags {
+        .coming .tags {
             display: flex;
             justify-content: center;
             gap: 10px;
@@ -726,90 +803,21 @@
             margin-top: 12px;
         }
         
-        .coming-soon .tags span {
+        .coming .tags span {
             padding: 4px 18px;
             background: rgba(255,255,255,0.02);
             border-radius: 20px;
             font-size: 11px;
             color: #94a3b8;
-            border: 1px solid rgba(255,255,255,0.03);
-            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.02);
+            font-weight: 500;
         }
         
-        .faq {
-            margin-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            padding-top: 24px;
-        }
-        
-        .faq h3 {
-            color: #f0b90b;
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 14px;
-        }
-        
-        .faq-item {
-            background: rgba(255,255,255,0.02);
-            border-radius: 14px;
-            padding: 14px 20px;
-            margin-bottom: 8px;
-            border: 2px solid rgba(240,185,11,0.06);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: faqBlink 2.5s ease-in-out infinite;
-        }
-        
-        @keyframes faqBlink {
-            0%, 100% { border-color: rgba(240,185,11,0.06); box-shadow: 0 0 10px rgba(240,185,11,0); }
-            50% { border-color: rgba(240,185,11,0.2); box-shadow: 0 0 25px rgba(240,185,11,0.04); }
-        }
-        
-        .faq-item:hover {
-            background: rgba(255,255,255,0.03);
-            border-color: rgba(240,185,11,0.15);
-        }
-        
-        .faq-item .q {
-            color: #cbd5e1;
-            font-weight: 600;
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .faq-item .q .arrow {
-            color: #f0b90b;
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-item .q .arrow.open {
-            transform: rotate(180deg);
-        }
-        
-        .faq-item .a {
-            color: #94a3b8;
-            font-size: 13px;
-            line-height: 1.8;
-            margin-top: 8px;
-            display: none;
-        }
-        
-        .faq-item .a.open {
-            display: block;
-            animation: fadeAnswer 0.4s ease-out;
-        }
-        
-        @keyframes fadeAnswer {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
+        /* ===== FOOTER ===== */
         .footer {
-            margin-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.03);
-            padding-top: 18px;
+            margin-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.02);
+            padding-top: 20px;
             text-align: center;
             color: #64748b;
             font-size: 12px;
@@ -828,12 +836,12 @@
         
         .footer .highlight {
             color: #f0b90b;
-            font-weight: 600;
+            font-weight: 500;
         }
         
         .gear {
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             color: #64748b;
             transition: color 0.3s ease;
         }
@@ -842,42 +850,58 @@
             color: #f0b90b;
         }
         
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px;
+            text-align: left;
+            margin-bottom: 14px;
+        }
+        
+        .footer-grid strong { color: #f0b90b; font-size: 13px; display: block; margin-bottom: 4px; }
+        .footer-grid p { color: #94a3b8; font-size: 12px; line-height: 2; }
+        .footer-grid a { color: #4d96ff; text-decoration: none; }
+        .footer-grid a:hover { color: #f0b90b; }
+        
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .container { padding: 28px 20px; }
+            .container { padding: 30px 22px; border-radius: 32px; }
             .services { grid-template-columns: 1fr 1fr; }
+            .pyfiglet { font-size: 22px; letter-spacing: 2px; }
             .contact { grid-template-columns: 1fr; }
-            .coming-soon .title { font-size: 24px; }
+            .hero h2 { font-size: 22px; }
+            .coming .title { font-size: 24px; }
             .popup-box { padding: 35px 25px; }
-            .popup-box .check { font-size: 54px; }
-            .dream-banner .title { font-size: 18px; }
-            .dream-banner .big-icon { font-size: 36px; }
-            .pyfiglet { font-size: 18px; }
+            .popup-box .check { font-size: 48px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
         }
         
         @media (max-width: 480px) {
+            .container { padding: 20px 14px; border-radius: 24px; }
             .services { grid-template-columns: 1fr; }
-            .container { padding: 20px 14px; }
-            .lang-selector button { font-size: 11px; padding: 4px 14px; }
-            .popup-box { padding: 28px 20px; }
-            .popup-box .check { font-size: 44px; }
-            .popup-box .title { font-size: 20px; }
-            .dream-banner .title { font-size: 16px; }
-            .dream-banner .big-icon { font-size: 28px; }
-            .pyfiglet { font-size: 14px; letter-spacing: 2px; }
-            .pyfiglet-sub { font-size: 11px; letter-spacing: 4px; }
+            .pyfiglet { font-size: 16px; letter-spacing: 1px; }
+            .pyfiglet-sub { font-size: 10px; letter-spacing: 4px; }
+            .hero h2 { font-size: 18px; }
+            .hero .icon { font-size: 32px; }
+            .lang-bar button { font-size: 11px; padding: 4px 14px; }
+            .popup-box { padding: 25px 18px; }
+            .popup-box .check { font-size: 38px; }
+            .popup-box .title { font-size: 18px; }
+            .coming .title { font-size: 20px; }
+            .coming { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-animation">
-    <div class="orb"></div>
-    <div class="orb"></div>
-    <div class="orb"></div>
-</div>
+<!-- ===== ARRIÈRE-PLAN ===== -->
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow"></div>
+<div class="particles" id="particles"></div>
 
-<div class="bg-animation" id="particles"></div>
-
+<!-- ===== POPUP ===== -->
 <div class="popup-overlay" id="popupOverlay">
     <div class="popup-box" id="popupBox">
         <div id="popupContent">
@@ -887,29 +911,32 @@
     </div>
 </div>
 
+<!-- ===== CONTAINER ===== -->
 <div class="container">
     
+    <!-- PYFIGLET -->
     <div class="pyfiglet">
-        <div class="line1">
+        <div class="l1">
             <span style="--i:0">Q</span><span style="--i:1">W</span><span style="--i:2">A</span><span style="--i:3">N</span><span style="--i:4">T</span><span style="--i:5">U</span><span style="--i:6">M</span>
         </div>
-        <div class="line2">
+        <div class="l2">
             <span style="--i:7">D</span><span style="--i:8">I</span><span style="--i:9">G</span><span style="--i:10">I</span><span style="--i:11">T</span><span style="--i:12">A</span><span style="--i:13">L</span>
         </div>
-        <div class="line3">
+        <div class="l3">
             <span style="--i:14">S</span><span style="--i:15">O</span><span style="--i:16">L</span><span style="--i:17">U</span><span style="--i:18">T</span><span style="--i:19">I</span><span style="--i:20">O</span><span style="--i:21">N</span><span style="--i:22">S</span>
         </div>
     </div>
     <div class="pyfiglet-sub" id="pySub">SOLUTIONS DIGITALES SUR MESURE</div>
     
-    <div class="dream-banner">
-        <span class="big-icon">✦</span>
-        <div class="title" id="dreamTitle">Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span></div>
-        <div class="sub" id="dreamSub">
+    <!-- HERO -->
+    <div class="hero">
+        <span class="icon">✦</span>
+        <h2 id="heroTitle">Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span></h2>
+        <p id="heroDesc">
             <span class="hl">QWANTUM</span> c'est l'allié de votre transformation digitale.<br>
             Des solutions sur mesure pour <span class="hl">automatiser</span>, <span class="hl">optimiser</span> et <span class="hl">révolutionner</span> votre activité.
-        </div>
-        <div class="tags" id="dreamTags">
+        </p>
+        <div class="tags">
             <span id="tag1">Innovation</span>
             <span id="tag2">Intelligence Artificielle</span>
             <span id="tag3">Performance</span>
@@ -917,31 +944,34 @@
         </div>
     </div>
     
-    <div class="faq" style="margin-top:0; border-top:none; padding-top:0;">
+    <!-- FAQ TOP -->
+    <div class="faq-top">
         <h3 id="faqTitle">Questions fréquentes</h3>
-        <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="item" onclick="toggleFaq(this)">
             <div class="q"><span id="fq1">Comment fonctionne le Bot Telegram ?</span><span class="arrow">▼</span></div>
             <div class="a" id="fa1">Nous configurons un bot qui gère votre groupe comme vous. Il modère les messages, répond aux questions, accueille les nouveaux membres et interagit avec votre assistant IA.</div>
         </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="item" onclick="toggleFaq(this)">
             <div class="q"><span id="fq2">Comment fonctionne l'Assistant IA ?</span><span class="arrow">▼</span></div>
             <div class="a" id="fa2">Nous créons un site avec un chatbot intelligent qui gère vos clients automatiquement. Il présente vos services, répond aux questions, prend des rendez-vous et génère des devis.</div>
         </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="item" onclick="toggleFaq(this)">
             <div class="q"><span id="fq3">Comment fonctionne le Bot Trading ?</span><span class="arrow">▼</span></div>
             <div class="a" id="fa3">Vous nous donnez votre stratégie, nous programmons un bot qui surveille les graphiques. Il vous envoie des alertes précises au bon moment pour prendre vos positions.</div>
         </div>
-        <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="item" onclick="toggleFaq(this)">
             <div class="q"><span id="fq4">C'est quoi un Pack Mails vérifié ?</span><span class="arrow">▼</span></div>
             <div class="a" id="fa4">Des emails 100% vérifiés (DNS + SMTP). Avec ces packs, vous pouvez contourner TikTok, Facebook et Instagram au lieu de payer des promotions.</div>
         </div>
     </div>
     
-    <div class="lang-selector">
+    <!-- LANG -->
+    <div class="lang-bar">
         <button class="active" data-lang="fr" onclick="switchLang('fr')">FR</button>
         <button data-lang="en" onclick="switchLang('en')">EN</button>
     </div>
     
+    <!-- SERVICES -->
     <div class="services">
         <div class="service-card" data-service="BOT TELEGRAM" onclick="selectService(this,'telegram')">
             <span class="icon">◈</span>
@@ -979,52 +1009,56 @@
         </div>
     </div>
     
-    <div class="detail-box" id="detail-telegram">
+    <!-- DETAIL -->
+    <div class="detail" id="detail-telegram">
         <div class="title" id="dt1">BOT TELEGRAM</div>
         <div class="content" id="dc1">Vous avez un groupe Telegram et vous en avez marre d'être toujours là ? <span class="hl">Nous configurons un bot qui gère tout comme vous</span>.<br><span class="ok">Modération automatique</span> des messages<br><span class="ok">Réponses automatiques</span> aux questions<br><span class="ok">Gestion des membres</span><br><span class="hl">Plus besoin d'être connecté 24h/24</span></div>
     </div>
-    <div class="detail-box" id="detail-ia">
+    <div class="detail" id="detail-ia">
         <div class="title" id="dt2">ASSISTANT IA</div>
         <div class="content" id="dc2">Vous voulez être indépendant ? <span class="hl">Nous créons un assistant virtuel qui travaille pour vous 24h/24</span>.<br><span class="ok">Chatbot intelligent</span> pour vos clients<br><span class="ok">Prise de rendez-vous</span> automatique<br><span class="ok">Génération de devis</span><br><span class="hl">Test gratuit 1 semaine</span></div>
     </div>
-    <div class="detail-box" id="detail-trading">
+    <div class="detail" id="detail-trading">
         <div class="title" id="dt3">BOT TRADING</div>
         <div class="content" id="dc3">Vous faites du trading et ça prend du temps ? <span class="hl">Nous créons un bot sur votre stratégie avec précision</span>.<br><span class="ok">Alertes au bon moment</span><br><span class="ok">Suivi automatique</span> des graphiques<br><span class="ok">Signaux en temps réel</span><br><span class="hl">Le bot veille pour vous</span></div>
     </div>
-    <div class="detail-box" id="detail-mails">
+    <div class="detail" id="detail-mails">
         <div class="title" id="dt4">PACK MAILS</div>
         <div class="content" id="dc4">Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br><span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br><span class="ok">Packs de 100 à 1000</span> emails<br><span class="ok">Contourne TikTok, Facebook</span><br><span class="hl">Stratégie secrète incluse</span></div>
     </div>
-    <div class="detail-box" id="detail-sites">
+    <div class="detail" id="detail-sites">
         <div class="title" id="dt5">CRÉATION DE SITES</div>
         <div class="content" id="dc5">Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br><span class="ok">Design moderne</span><br><span class="ok">Optimisation SEO</span><br><span class="ok">Hébergement inclus</span><br><span class="hl">Un site qui vous ressemble</span></div>
     </div>
-    <div class="detail-box" id="detail-autres">
+    <div class="detail" id="detail-autres">
         <div class="title" id="dt6">AUTRES SERVICES</div>
         <div class="content" id="dc6">Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br><span class="ok">Programmation sur mesure</span><br><span class="ok">Automatisation</span><br><span class="ok">Conseil et formation</span><br><span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span></div>
     </div>
     
+    <!-- CONTACT -->
     <div class="contact">
-        <a href="https://wa.me/22960315458" target="_blank" class="whatsapp">
+        <a href="https://wa.me/22960315458" target="_blank" class="wa">
             <span class="icon">◈</span>
-            <div class="label" id="whatsappLabel">WhatsApp Direct</div>
-            <div class="sub">+229 60 31 54 58 • <span id="whatsappSub">Réponse en 5min</span></div>
+            <div class="label" id="waLabel">WhatsApp Direct</div>
+            <div class="sub">+229 60 31 54 58 • <span id="waSub">Réponse en 5min</span></div>
         </a>
-        <a href="#" onclick="event.preventDefault(); document.getElementById('comingSoon').scrollIntoView({behavior:'smooth'});">
+        <a href="#" onclick="event.preventDefault(); document.getElementById('coming').scrollIntoView({behavior:'smooth'});">
             <span class="icon">◇</span>
-            <div class="label" id="assistantLabel">Assistant IA</div>
-            <div class="sub" id="assistantSub">Bientôt disponible</div>
+            <div class="label" id="aiLabel">Assistant IA</div>
+            <div class="sub" id="aiSub">Bientôt disponible</div>
         </a>
     </div>
     
+    <!-- GARANTIE -->
     <div class="guarantee">
-        <div class="text" id="gtext">Satisfaction 100% garantie ou remboursé</div>
-        <div class="sub" id="gsub">Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
-        <div class="sub" style="margin-top:8px; font-size:13px; color:#64748b; border-top:1px solid rgba(255,255,255,0.03); padding-top:8px;" id="gsub2">
+        <div class="text" id="gText">Satisfaction 100% garantie ou remboursé</div>
+        <div class="sub" id="gSub">Si vous n'êtes pas satisfait, nous vous remboursons intégralement.</div>
+        <div class="sub" id="gSub2" style="margin-top:8px; border-top:1px solid rgba(255,255,255,0.02); padding-top:8px;">
             Remplissez le formulaire, exposez votre problème, <span class="hl">nous verrons ce qu'il est possible de faire</span>.
         </div>
     </div>
     
+    <!-- FORM -->
     <form id="messageForm" onsubmit="sendMessage(event)">
         <div class="form-group">
             <label id="l1">Nom et prénom <span class="required">*</span></label>
@@ -1067,7 +1101,8 @@
     </form>
     <div id="toast" class="toast"></div>
     
-    <div id="comingSoon" class="coming-soon">
+    <!-- COMING SOON -->
+    <div id="coming" class="coming">
         <div class="label" id="csLabel">Prochainement</div>
         <div class="title" id="csTitle">ASSISTANT IA</div>
         <div class="desc" id="csDesc">Un agent intelligent pour répondre à vos questions 24h/24.<br><span style="color:#f0b90b;font-weight:600;" id="csLink">Lien disponible très bientôt</span></div>
@@ -1078,22 +1113,23 @@
         </div>
     </div>
     
+    <!-- FOOTER -->
     <div class="footer">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;text-align:left;">
+        <div class="footer-grid">
             <div>
-                <strong style="color:#f0b90b;" id="fSec">Sécurité</strong>
+                <strong id="fSec">Sécurité</strong>
                 <p><span id="f1a">SSL sécurisé</span><br><span id="f1b">Données cryptées</span><br><span id="f1c">RGPD conforme</span></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;" id="fLeg">Légal</strong>
+                <strong id="fLeg">Légal</strong>
                 <p><a href="#" id="f2a">Mentions légales</a><br><a href="#" id="f2b">Politique confidentialité</a><br><a href="#" id="f2c">CGV</a></p>
             </div>
             <div>
-                <strong style="color:#f0b90b;" id="fCont">Contact</strong>
+                <strong id="fCont">Contact</strong>
                 <p>📧 <a href="mailto:support@messagerie.com">support@messagerie.com</a><br>📱 <a href="https://wa.me/22960315458" style="color:#22c55e;">+229 60 31 54 58</a><br><span id="f3a">9h-18h (Lun-Ven)</span></p>
             </div>
         </div>
-        <div style="border-top:1px solid rgba(255,255,255,0.03);padding-top:14px;margin-top:14px;">
+        <div style="border-top:1px solid rgba(255,255,255,0.02);padding-top:14px;margin-top:14px;">
             <p>© 2026 QWANTUM — <span id="fb1">Tous droits réservés</span></p>
             <p><span id="fb2">Dernière mise à jour</span> : <span class="highlight">27 Juillet 2026</span></p>
             <span class="gear" onclick="window.location.href='admin.html'">⚙</span>
@@ -1103,22 +1139,23 @@
 </div>
 
 <script>
-function createParticles() {
+// ===== PARTICULES =====
+(function createParticles() {
     const container = document.getElementById('particles');
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDuration = (15 + Math.random() * 25) + 's';
-        particle.style.animationDelay = (Math.random() * 20) + 's';
-        particle.style.width = (2 + Math.random() * 4) + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.opacity = 0.1 + Math.random() * 0.2;
-        container.appendChild(particle);
+    for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (15 + Math.random() * 25) + 's';
+        p.style.animationDelay = (Math.random() * 20) + 's';
+        p.style.width = (1 + Math.random() * 3) + 'px';
+        p.style.height = p.style.width;
+        p.style.opacity = 0.1 + Math.random() * 0.15;
+        container.appendChild(p);
     }
-}
-createParticles();
+})();
 
+// ===== POPUP =====
 function showPopup(loading = true, success = false) {
     const overlay = document.getElementById('popupOverlay');
     const content = document.getElementById('popupContent');
@@ -1129,7 +1166,6 @@ function showPopup(loading = true, success = false) {
     
     if (loading) {
         ring.style.display = 'inline-block';
-        ring.style.animation = 'spin 0.8s linear infinite';
         text.textContent = currentLang === 'fr' ? 'Envoi en cours...' : 'Sending...';
     } else if (success) {
         ring.style.display = 'none';
@@ -1137,7 +1173,7 @@ function showPopup(loading = true, success = false) {
             <span class="check">✓</span>
             <div class="title">${currentLang === 'fr' ? 'Message <span class="gold">envoyé</span> !' : 'Message <span class="gold">sent</span> !'}</div>
             <div class="sub">${currentLang === 'fr' ? 'Nous vous répondrons dans les plus brefs délais.' : 'We will get back to you as soon as possible.'}</div>
-            <button class="btn-popup" onclick="closePopup()">${currentLang === 'fr' ? 'OK' : 'OK'}</button>
+            <button class="btn-popup" onclick="closePopup()">OK</button>
         `;
     }
 }
@@ -1151,11 +1187,12 @@ function closePopup() {
     `;
 }
 
+// ===== TRADUCTIONS =====
 const T = {
     fr: {
         pySub: 'SOLUTIONS DIGITALES SUR MESURE',
-        dreamTitle: 'Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span>',
-        dreamSub: '<span class="hl">QWANTUM</span> c\'est l\'allié de votre transformation digitale.<br>Des solutions sur mesure pour <span class="hl">automatiser</span>, <span class="hl">optimiser</span> et <span class="hl">révolutionner</span> votre activité.',
+        heroTitle: 'Rêvez <span class="gold">grand</span>, nous le <span class="gold">réalisons</span>',
+        heroDesc: '<span class="hl">QWANTUM</span> c\'est l\'allié de votre transformation digitale.<br>Des solutions sur mesure pour <span class="hl">automatiser</span>, <span class="hl">optimiser</span> et <span class="hl">révolutionner</span> votre activité.',
         tag1: 'Innovation', tag2: 'Intelligence Artificielle', tag3: 'Performance', tag4: 'Excellence',
         srv1: 'BOT TELEGRAM', srv2: 'ASSISTANT IA', srv3: 'BOT TRADING',
         srv4: 'PACK MAILS', srv5: 'CRÉATION SITES', srv6: 'AUTRES SERVICES',
@@ -1171,11 +1208,11 @@ const T = {
         dc4: 'Vous avez une boutique en ligne ? <span class="hl">Nous vous vendons des packs de mails vérifiés</span>.<br><span class="ok">Emails 100% vérifiés</span> (DNS + SMTP)<br><span class="ok">Packs de 100 à 1000</span> emails<br><span class="ok">Contourne TikTok, Facebook</span><br><span class="hl">Stratégie secrète incluse</span>',
         dc5: 'Vous voulez un site qui vend ? <span class="hl">Nous créons des sites sur mesure</span>.<br><span class="ok">Design moderne</span><br><span class="ok">Optimisation SEO</span><br><span class="ok">Hébergement inclus</span><br><span class="hl">Un site qui vous ressemble</span>',
         dc6: 'Vous avez un projet spécifique ? <span class="hl">Dites-nous ce dont vous avez besoin</span>.<br><span class="ok">Programmation sur mesure</span><br><span class="ok">Automatisation</span><br><span class="ok">Conseil et formation</span><br><span class="hl">Si vous pouvez le rêver, nous pouvons le créer</span>',
-        whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Réponse en 5min',
-        assistantLabel: 'Assistant IA', assistantSub: 'Bientôt disponible',
-        gtext: 'Satisfaction 100% garantie ou remboursé',
-        gsub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
-        gsub2: 'Remplissez le formulaire, exposez votre problème, <span class="hl">nous verrons ce qu\'il est possible de faire</span>.',
+        waLabel: 'WhatsApp Direct', waSub: 'Réponse en 5min',
+        aiLabel: 'Assistant IA', aiSub: 'Bientôt disponible',
+        gText: 'Satisfaction 100% garantie ou remboursé',
+        gSub: 'Si vous n\'êtes pas satisfait, nous vous remboursons intégralement.',
+        gSub2: 'Remplissez le formulaire, exposez votre problème, <span class="hl">nous verrons ce qu\'il est possible de faire</span>.',
         l1: 'Nom et prénom', l2: 'Pays', l3: 'Ville', l4: 'WhatsApp / Téléphone',
         l5: 'Email', l6: 'Âge', l7: 'Réseaux sociaux (optionnel)', l8: 'Votre demande',
         h1: 'Important :', h1b: 'Nous vous recontacterons sur ce numéro',
@@ -1202,8 +1239,8 @@ const T = {
     },
     en: {
         pySub: 'CUSTOM DIGITAL SOLUTIONS',
-        dreamTitle: 'Dream <span class="gold">big</span>, we make it <span class="gold">real</span>',
-        dreamSub: '<span class="hl">QWANTUM</span> is your ally for digital transformation.<br>Custom solutions to <span class="hl">automate</span>, <span class="hl">optimize</span> and <span class="hl">revolutionize</span> your business.',
+        heroTitle: 'Dream <span class="gold">big</span>, we make it <span class="gold">real</span>',
+        heroDesc: '<span class="hl">QWANTUM</span> is your ally for digital transformation.<br>Custom solutions to <span class="hl">automate</span>, <span class="hl">optimize</span> and <span class="hl">revolutionize</span> your business.',
         tag1: 'Innovation', tag2: 'Artificial Intelligence', tag3: 'Performance', tag4: 'Excellence',
         srv1: 'TELEGRAM BOT', srv2: 'AI ASSISTANT', srv3: 'TRADING BOT',
         srv4: 'EMAIL PACKS', srv5: 'WEBSITE CREATION', srv6: 'OTHER SERVICES',
@@ -1219,11 +1256,11 @@ const T = {
         dc4: 'You have an online store? <span class="hl">We sell you verified email packs</span>.<br><span class="ok">100% verified emails</span> (DNS + SMTP)<br><span class="ok">Packs from 100 to 1000</span> emails<br><span class="ok">Bypass TikTok, Facebook</span><br><span class="hl">Secret strategy included</span>',
         dc5: 'You want a website that sells? <span class="hl">We create custom websites</span>.<br><span class="ok">Modern design</span><br><span class="ok">SEO optimization</span><br><span class="ok">Hosting included</span><br><span class="hl">A website that looks like you</span>',
         dc6: 'You have a specific project? <span class="hl">Tell us what you need</span>.<br><span class="ok">Custom programming</span><br><span class="ok">Automation</span><br><span class="ok">Consulting and training</span><br><span class="hl">If you can dream it, we can create it</span>',
-        whatsappLabel: 'WhatsApp Direct', whatsappSub: 'Response in 5min',
-        assistantLabel: 'AI Assistant', assistantSub: 'Coming soon',
-        gtext: '100% satisfaction guaranteed or refunded',
-        gsub: 'If you are not satisfied, we will refund you in full.',
-        gsub2: 'Fill out the form, explain your problem, <span class="hl">we will see what can be done</span>.',
+        waLabel: 'WhatsApp Direct', waSub: 'Response in 5min',
+        aiLabel: 'AI Assistant', aiSub: 'Coming soon',
+        gText: '100% satisfaction guaranteed or refunded',
+        gSub: 'If you are not satisfied, we will refund you in full.',
+        gSub2: 'Fill out the form, explain your problem, <span class="hl">we will see what can be done</span>.',
         l1: 'Full Name', l2: 'Country', l3: 'City', l4: 'WhatsApp / Phone',
         l5: 'Email', l6: 'Age', l7: 'Social networks (optional)', l8: 'Your request',
         h1: 'Important:', h1b: 'We will contact you on this number',
@@ -1257,13 +1294,13 @@ function switchLang(lang) {
     const t = T[lang];
     if (!t) return;
     
-    document.querySelectorAll('.lang-selector button').forEach(b => {
+    document.querySelectorAll('.lang-bar button').forEach(b => {
         b.classList.toggle('active', b.dataset.lang === lang);
     });
     
     document.getElementById('pySub').textContent = t.pySub;
-    document.getElementById('dreamTitle').innerHTML = t.dreamTitle;
-    document.getElementById('dreamSub').innerHTML = t.dreamSub;
+    document.getElementById('heroTitle').innerHTML = t.heroTitle;
+    document.getElementById('heroDesc').innerHTML = t.heroDesc;
     document.getElementById('tag1').textContent = t.tag1;
     document.getElementById('tag2').textContent = t.tag2;
     document.getElementById('tag3').textContent = t.tag3;
@@ -1299,14 +1336,14 @@ function switchLang(lang) {
     document.getElementById('dc5').innerHTML = t.dc5;
     document.getElementById('dc6').innerHTML = t.dc6;
     
-    document.getElementById('whatsappLabel').textContent = t.whatsappLabel;
-    document.getElementById('whatsappSub').textContent = t.whatsappSub;
-    document.getElementById('assistantLabel').textContent = t.assistantLabel;
-    document.getElementById('assistantSub').textContent = t.assistantSub;
+    document.getElementById('waLabel').textContent = t.waLabel;
+    document.getElementById('waSub').textContent = t.waSub;
+    document.getElementById('aiLabel').textContent = t.aiLabel;
+    document.getElementById('aiSub').textContent = t.aiSub;
     
-    document.getElementById('gtext').textContent = t.gtext;
-    document.getElementById('gsub').textContent = t.gsub;
-    document.getElementById('gsub2').innerHTML = t.gsub2;
+    document.getElementById('gText').textContent = t.gText;
+    document.getElementById('gSub').textContent = t.gSub;
+    document.getElementById('gSub2').innerHTML = t.gSub2;
     
     document.getElementById('l1').innerHTML = t.l1 + ' <span class="required">*</span>';
     document.getElementById('l2').innerHTML = t.l2 + ' <span class="required">*</span>';
@@ -1358,6 +1395,7 @@ function switchLang(lang) {
     localStorage.setItem('lang', lang);
 }
 
+// ===== SERVICES =====
 let selectedService = null;
 
 function selectService(el, id) {
@@ -1365,11 +1403,22 @@ function selectService(el, id) {
     el.classList.add('selected');
     selectedService = el.dataset.service;
     
-    document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.detail').forEach(b => b.classList.remove('active'));
     const detail = document.getElementById('detail-' + id);
     if (detail) detail.classList.add('active');
 }
 
+// ===== FAQ =====
+function toggleFaq(el) {
+    const a = el.querySelector('.a');
+    const arrow = el.querySelector('.arrow');
+    if (a) {
+        a.classList.toggle('open');
+        if (arrow) arrow.classList.toggle('open');
+    }
+}
+
+// ===== ENVOI =====
 function sendMessage(e) {
     e.preventDefault();
     if (!selectedService) {
@@ -1414,7 +1463,7 @@ function sendMessage(e) {
             showPopup(false, true);
             document.getElementById('messageForm').reset();
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-            document.querySelectorAll('.detail-box').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.detail').forEach(b => b.classList.remove('active'));
             selectedService = null;
         } else {
             showPopup(false, true);
@@ -1438,15 +1487,7 @@ function showToast(msg, type) {
     setTimeout(() => { toast.className = 'toast'; }, 5000);
 }
 
-function toggleFaq(el) {
-    const a = el.querySelector('.a');
-    const arrow = el.querySelector('.arrow');
-    if (a) {
-        a.classList.toggle('open');
-        if (arrow) arrow.classList.toggle('open');
-    }
-}
-
+// ===== INIT =====
 window.addEventListener('load', function() {
     const saved = localStorage.getItem('lang');
     if (saved && T[saved]) switchLang(saved);
